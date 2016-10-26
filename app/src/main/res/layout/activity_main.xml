@@ -7,19 +7,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="8dp">
-  <View
-      android:layout_width="100dp"
+  <TextView
+      android:layout_width="0dp"
+      android:layout_weight="0.3"
       android:layout_height="100dp"
-      android:background="@drawable/circle"/>
-  <View
-      android:layout_width="100dp"
+      android:background="@drawable/circle"
+      android:text="One"
+      android:layout_margin="2dp"
+      />
+  <TextView
+      android:layout_width="0dp"
+      android:layout_weight="0.3"
       android:layout_height="100dp"
-      android:background="@drawable/circle"/>
-  <View
-      android:layout_width="100dp"
+      android:background="@drawable/circle"
+      android:text="Two"
+      android:layout_margin="2dp"
+      />
+  <TextView
+      android:layout_width="0dp"
+      android:layout_weight="0.3"
       android:layout_height="100dp"
-      android:background="@drawable/circle"/>
-</LinearLayout>
+      android:background="@drawable/circle"
+      android:text="Three"
+      android:layout_margin="2dp"
+      />
+  </LinearLayout>
 
 <!--
     android:paddingBottom="@dimen/activity_vertical_margin"
