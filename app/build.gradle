@@ -27,3 +27,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.0.0'
     testCompile 'junit:junit:4.12'
 }
+
+dependencies {
+    compile 'com.android.support:percent:23.3.0'
+}
