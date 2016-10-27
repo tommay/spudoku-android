@@ -17,39 +17,17 @@
       android:layout_weight="1"
       android:orientation="horizontal"
       android:weightSum="3" >
-    <ImageButton
+    <ImageView
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="1"
         android:src="@drawable/circle" />
-    <ImageButton
+    <ImageView
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="1"
         android:src="@drawable/circle" />
-    <ImageButton
-        android:layout_width="0dp"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:src="@drawable/circle" />
-  </LinearLayout>
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="0dp"
-      android:layout_weight="1"
-      android:orientation="horizontal"
-      android:weightSum="3" >
-    <ImageButton
-        android:layout_width="0dp"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:src="@drawable/circle" />
-    <ImageButton
-        android:layout_width="0dp"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:src="@drawable/circle" />
-    <ImageButton
+    <ImageView
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="1"
@@ -61,17 +39,39 @@
       android:layout_weight="1"
       android:orientation="horizontal"
       android:weightSum="3" >
-    <ImageButton
+    <ImageView
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="1"
         android:src="@drawable/circle" />
-    <ImageButton
+    <ImageView
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="1"
         android:src="@drawable/circle" />
-    <ImageButton
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:src="@drawable/circle" />
+  </LinearLayout>
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:orientation="horizontal"
+      android:weightSum="3" >
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:src="@drawable/circle" />
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:src="@drawable/circle" />
+    <ImageView
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="1"
