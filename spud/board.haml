@@ -2,8 +2,6 @@
 
 - puts '<?xml version="1.0" encoding="utf-8"?>'
 
-- counter = 0
-
 %LinearLayout(                            |
     xmlns:android="http://schemas.android.com/apk/res/android" |
     android:layout_width="match_parent"   |
@@ -11,14 +9,14 @@
     android:layout_weight="1"             |
     android:orientation="vertical"        |
     android:weightSum="3")                |
-  - 3.times do
+  - 3.times do |row|
     %LinearLayout(                            |
         android:layout_width="match_parent"   |
         android:layout_height="0dp"           |
         android:layout_weight="1"             |
         android:orientation="horizontal"      |
         android:weightSum="3")                |
-      - 3.times do
+      - 3.times do |col|
         %LinearLayout(                             |
             android:layout_width="0dp"             |
             android:layout_height="match_parent"   |
@@ -26,20 +24,20 @@
             android:layout_margin="6dp"            |
             android:orientation="vertical"         |
             android:weightSum="3")                 |
-          - 3.times do
+          - 3.times do |sub_row|
             %LinearLayout(                           |
                 android:layout_width="match_parent"  |
                 android:layout_height="0dp"          |
                 android:layout_weight="1"            |
                 android:orientation="horizontal"     |
                 android:weightSum="3")               |
-              - 3.times do
+              - 3.times do |sub_col|
+                - n = ((row*3)+sub_row)*9 + col*3 + sub_col
                 %ImageView(                            |
-                  android:tag="#{counter}"             |
+                  android:tag="#{n}"                   |
                   android:layout_width="0dp"           |
                   android:layout_height="match_parent" |
                   android:layout_weight="1"            |
                   android:layout_margin="1dp"          |
                   android:onClick="clicked"            |
                   android:src="@drawable/circle")      |
-                - counter += 1
