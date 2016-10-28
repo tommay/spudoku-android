@@ -1,83 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<android.support.percent.PercentFrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-<LinearLayout
-    app:layout_widthPercent="100%"
-    app:layout_aspectRatio="100%"
-    android:orientation="vertical"
-    android:weightSum="3" >
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="0dp"
-      android:layout_weight="1"
-      android:orientation="horizontal"
-      android:weightSum="3" >
-    <ImageView
-        android:layout_width="0dp"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:onClick="clicked"
-        android:src="@drawable/circle" />
-    <ImageView
-        android:layout_width="0dp"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:src="@drawable/circle" />
-    <ImageView
-        android:layout_width="0dp"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:src="@drawable/circle" />
+<android.support.percent.PercentFrameLayout android:id='@+id/grid' android:layout_height='match_parent' android:layout_width='match_parent' class='support percent PercentFrameLayout' xmlns:android='http://schemas.android.com/apk/res/android' xmlns:app='http://schemas.android.com/apk/res-auto'>
+  <LinearLayout android:layout_weight='1' android:orientation='vertical' android:weightSum='3' app:layout_aspectRatio='100%' app:layout_widthPercent='100%'>
+    <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+      <LinearLayout android:layout_height='match_parent' android:layout_margin='6dp' android:layout_weight='1' android:layout_width='0dp' android:orientation='vertical' android:weightSum='3'>
+        <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+        </LinearLayout>
+        <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+        </LinearLayout>
+        <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+        </LinearLayout>
+      </LinearLayout>
+      <LinearLayout android:layout_height='match_parent' android:layout_margin='6dp' android:layout_weight='1' android:layout_width='0dp' android:orientation='vertical' android:weightSum='3'>
+        <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+        </LinearLayout>
+        <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+        </LinearLayout>
+        <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+        </LinearLayout>
+      </LinearLayout>
+      <LinearLayout android:layout_height='match_parent' android:layout_margin='6dp' android:layout_weight='1' android:layout_width='0dp' android:orientation='vertical' android:weightSum='3'>
+        <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+        </LinearLayout>
+        <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+        </LinearLayout>
+        <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+        </LinearLayout>
+      </LinearLayout>
+    </LinearLayout>
+    <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+      <LinearLayout android:layout_height='match_parent' android:layout_margin='6dp' android:layout_weight='1' android:layout_width='0dp' android:orientation='vertical' android:weightSum='3'>
+        <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+        </LinearLayout>
+        <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+        </LinearLayout>
+        <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+        </LinearLayout>
+      </LinearLayout>
+      <LinearLayout android:layout_height='match_parent' android:layout_margin='6dp' android:layout_weight='1' android:layout_width='0dp' android:orientation='vertical' android:weightSum='3'>
+        <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+        </LinearLayout>
+        <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+        </LinearLayout>
+        <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+        </LinearLayout>
+      </LinearLayout>
+      <LinearLayout android:layout_height='match_parent' android:layout_margin='6dp' android:layout_weight='1' android:layout_width='0dp' android:orientation='vertical' android:weightSum='3'>
+        <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+        </LinearLayout>
+        <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+        </LinearLayout>
+        <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+        </LinearLayout>
+      </LinearLayout>
+    </LinearLayout>
+    <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+      <LinearLayout android:layout_height='match_parent' android:layout_margin='6dp' android:layout_weight='1' android:layout_width='0dp' android:orientation='vertical' android:weightSum='3'>
+        <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+        </LinearLayout>
+        <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+        </LinearLayout>
+        <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+        </LinearLayout>
+      </LinearLayout>
+      <LinearLayout android:layout_height='match_parent' android:layout_margin='6dp' android:layout_weight='1' android:layout_width='0dp' android:orientation='vertical' android:weightSum='3'>
+        <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+        </LinearLayout>
+        <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+        </LinearLayout>
+        <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+        </LinearLayout>
+      </LinearLayout>
+      <LinearLayout android:layout_height='match_parent' android:layout_margin='6dp' android:layout_weight='1' android:layout_width='0dp' android:orientation='vertical' android:weightSum='3'>
+        <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+        </LinearLayout>
+        <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+        </LinearLayout>
+        <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+          <ImageView android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:src='@drawable/circle'></ImageView>
+        </LinearLayout>
+      </LinearLayout>
+    </LinearLayout>
   </LinearLayout>
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="0dp"
-      android:layout_weight="1"
-      android:orientation="horizontal"
-      android:weightSum="3" >
-    <ImageView
-        android:layout_width="0dp"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:src="@drawable/circle" />
-    <ImageView
-        android:layout_width="0dp"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:src="@drawable/circle" />
-    <ImageView
-        android:layout_width="0dp"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:src="@drawable/circle" />
-  </LinearLayout>
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="0dp"
-      android:layout_weight="1"
-      android:orientation="horizontal"
-      android:weightSum="3" >
-    <ImageView
-        android:layout_width="0dp"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:src="@drawable/circle" />
-    <ImageView
-        android:layout_width="0dp"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:src="@drawable/circle" />
-    <ImageView
-        android:layout_width="0dp"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:src="@drawable/circle" />
-  </LinearLayout>
-</LinearLayout>
-
 </android.support.percent.PercentFrameLayout>
