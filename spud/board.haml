@@ -2,7 +2,8 @@
 
 - puts '<?xml version="1.0" encoding="utf-8"?>'
 
-- cell = 0
+- counter = 0
+
 %LinearLayout(                            |
     xmlns:android="http://schemas.android.com/apk/res/android" |
     android:layout_width="match_parent"   |
@@ -34,11 +35,11 @@
                 android:weightSum="3")               |
               - 3.times do
                 %ImageView(                            |
-                  android:id="@+id/cell#{cell}"        |
+                  android:tag="#{counter}"             |
                   android:layout_width="0dp"           |
                   android:layout_height="match_parent" |
                   android:layout_weight="1"            |
                   android:layout_margin="1dp"          |
                   android:onClick="clicked"            |
                   android:src="@drawable/circle")      |
-                - cell += 1
+                - counter += 1
