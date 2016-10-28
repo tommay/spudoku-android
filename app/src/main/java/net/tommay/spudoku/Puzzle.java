@@ -29,4 +29,8 @@ class Puzzle {
     Integer getColor(int  n) {
         return _cells[n].getColor();
     }
+
+    void flip(int n) {
+        _cells[n].flip();
+    }
 }
