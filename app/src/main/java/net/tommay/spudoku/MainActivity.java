@@ -1,6 +1,8 @@
 package net.tommay.spudoku;
 
-import android.graphics.PorterDuff;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +12,7 @@ import android.widget.ImageView;
 import net.tommay.spudoku.Puzzle;
 
 public class MainActivity extends AppCompatActivity {
+    private int _emptyCellColor;
 
     private Puzzle[] _puzzles = new Puzzle[] {
         new Puzzle(
@@ -28,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.i("Spudoku", "onCreate");
+        Resources res = getResources();
+        _emptyCellColor = res.getColor(R.color.emptyCell);
     }
 
     @Override
@@ -57,14 +62,12 @@ public class MainActivity extends AppCompatActivity {
 
     void colorCell(ImageView cell, Puzzle puzzle, int n)
     {
+        GradientDrawable drawable = (GradientDrawable)cell.getDrawable();
+        Log.i("Spudoku", "drawable: " + drawable);
+
         Integer color = puzzle.getColor(n);
-        if (color != null) {
-            cell.setColorFilter(0xFF000000 | color,
-                PorterDuff.Mode.SRC_ATOP);
-        }
-        else {
-            cell.setColorFilter(0xFF00FF00, PorterDuff.Mode.SRC_ATOP);
-        }
+        int c = color != null ? color : _emptyCellColor;
+        drawable.setColor(0xFF000000 | c);
     }
 
     public void clicked(View view) {
