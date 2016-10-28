@@ -17,4 +17,8 @@ public class MainActivity extends AppCompatActivity {
         String tag = (String)view.getTag();
         Log.i("Spudoku", "clicked " + tag);
     }
+
+    public void clickNew(View view) {
+        Log.i("Spudoku", "new");
+    }
 }
