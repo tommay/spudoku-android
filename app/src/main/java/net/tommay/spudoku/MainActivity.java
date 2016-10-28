@@ -1,5 +1,6 @@
 package net.tommay.spudoku;
 
+import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -50,13 +51,19 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < 81; i++) {
             ImageView cell =
                 (ImageView)view.findViewWithTag(Integer.toString(i));
-            Integer color = puzzle.getColor(i);
-            if (color != null) {
-                cell.setImageResource(R.drawable.circle);
-            }
-            else {
-                cell.setImageResource(R.drawable.empty);
-            }
+            colorCell(cell, puzzle, i);
+        }
+    }
+
+    void colorCell(ImageView cell, Puzzle puzzle, int n)
+    {
+        Integer color = puzzle.getColor(n);
+        if (color != null) {
+            cell.setColorFilter(0xFF000000 | color,
+                PorterDuff.Mode.SRC_ATOP);
+        }
+        else {
+            cell.setColorFilter(0xFF00FF00, PorterDuff.Mode.SRC_ATOP);
         }
     }
 
@@ -64,20 +71,12 @@ public class MainActivity extends AppCompatActivity {
         String tag = (String)view.getTag();
         Log.i("Spudoku", "clicked " + tag);
 
-        ImageView cell = (ImageView)view;
-
         Puzzle puzzle = _puzzles[_puzzle];
         int n = Integer.parseInt(tag);
 
         _puzzles[_puzzle].flip(n);
 
-        Integer color = puzzle.getColor(n);
-        if (color != null) {
-            cell.setImageResource(R.drawable.circle);
-        }
-        else {
-            cell.setImageResource(R.drawable.empty);
-        }
+        colorCell((ImageView)view, puzzle, n);
     }
 
     public void clickNew(View view) {
