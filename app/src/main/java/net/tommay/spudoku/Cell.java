@@ -20,6 +20,10 @@ class Cell {
         }
     }
 
+    void setSolved (boolean solved) {
+        _isSolved = solved;
+    }
+    
     void flip () {
         _isSolved = !_isSolved;
     }

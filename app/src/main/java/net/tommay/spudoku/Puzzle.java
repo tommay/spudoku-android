@@ -30,6 +30,20 @@ class Puzzle {
         return _cells[n].getColor();
     }
 
+    void setup() {
+        setSolved(false);
+    }
+
+    void solved() {
+        setSolved(true);
+    }
+
+    private void setSolved(boolean solved) {
+        for (Cell cell : _cells) {
+            cell.setSolved(solved);
+        }
+    }
+
     void flip(int n) {
         _cells[n].flip();
     }

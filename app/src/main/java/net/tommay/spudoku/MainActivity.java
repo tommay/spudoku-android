@@ -14,17 +14,20 @@ import net.tommay.spudoku.Puzzle;
 public class MainActivity extends AppCompatActivity {
     private int _emptyCellColor;
 
-    private Puzzle[] _puzzles = new Puzzle[] {
-        new Puzzle(
-            "579821463231467598684359217167235984342978651895146372456782139928613745713594826",
-            "001111000111111010011100111001100110011101110011001100111001110010111111000111100"),
+    private Puzzle _puzzle;
 
-        new Puzzle(
+    private static final String[][] _puzzleStrings = {
+        {
+            "579821463231467598684359217167235984342978651895146372456782139928613745713594826",
+            "001111000111111010011100111001100110011101110011001100111001110010111111000111100",
+        },
+        {
             "238915647156734982794628513682479351543162879917583426479256138861347295325891764",
-            "011100101011101011011011100010110111100010001111011010001110110110101110101001110"),
+            "011100101011101011011011100010110111100010001111011010001110110110101110101001110",
+        },
     };
 
-    private int _puzzle = 0;
+    private int _puzzleCounter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,24 +42,24 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Log.i("Spudoku", "onStart");
+        _puzzle = newPuzzle();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         Log.i("Spudoku", "onResume");
-        setup();
+        showBoard();
     }
 
     // This is pretty awful.
 
-    private void setup () {
-        Puzzle puzzle = _puzzles[_puzzle];
+    private void showBoard () {
         View view = findViewById(R.id.board);
         for (int i = 0; i < 81; i++) {
             ImageView cell =
                 (ImageView)view.findViewWithTag(Integer.toString(i));
-            colorCell(cell, puzzle, i);
+            colorCell(cell, _puzzle, i);
         }
     }
 
@@ -74,23 +77,33 @@ public class MainActivity extends AppCompatActivity {
         String tag = (String)view.getTag();
         Log.i("Spudoku", "clicked " + tag);
 
-        Puzzle puzzle = _puzzles[_puzzle];
         int n = Integer.parseInt(tag);
 
-        _puzzles[_puzzle].flip(n);
+        _puzzle.flip(n);
 
-        colorCell((ImageView)view, puzzle, n);
+        colorCell((ImageView)view, _puzzle, n);
     }
 
+    Puzzle newPuzzle() {
+        _puzzleCounter = (_puzzleCounter + 1) % _puzzleStrings.length;
+        return new Puzzle(
+            _puzzleStrings[_puzzleCounter][0],
+            _puzzleStrings[_puzzleCounter][1]);
+    }
+    
     public void clickNew(View view) {
         Log.i("Spudoku", "new");
+        _puzzle = newPuzzle();
+        showBoard();
     }
 
     public void clickSetup(View view) {
-        Log.i("Spudoku", "setup");
+        _puzzle.setup();
+        showBoard();
     }
 
     public void clickSolved(View view) {
-        Log.i("Spudoku", "solved");
+        _puzzle.solved();
+        showBoard();
     }
 }
