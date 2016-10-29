@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    void colorCell(ImageView cell, Puzzle puzzle, int n)
+    private void colorCell(ImageView cell, Puzzle puzzle, int n)
     {
         GradientDrawable drawable = (GradientDrawable)cell.getDrawable();
         Log.i("Spudoku", "drawable: " + drawable);
