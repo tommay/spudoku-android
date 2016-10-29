@@ -17,10 +17,25 @@
         <include layout="@layout/board"/>
     </FrameLayout>
 
-    <Button
+    <LinearLayout
         android:layout_below="@id/board"
-        android:text="New"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="clickNew"/>
+	android:orientation="horizontal">
+        <Button
+            android:text="New"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="clickNew"/>
+        <Button
+            android:text="Setup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="clickSetup"/>
+        <Button
+            android:text="Solved"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="clickSolved"/>
+    </LinearLayout>>
 </android.support.percent.PercentRelativeLayout>
