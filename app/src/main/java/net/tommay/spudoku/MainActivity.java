@@ -85,4 +85,12 @@ public class MainActivity extends AppCompatActivity {
     public void clickNew(View view) {
         Log.i("Spudoku", "new");
     }
+
+    public void clickSetup(View view) {
+        Log.i("Spudoku", "setup");
+    }
+
+    public void clickSolved(View view) {
+        Log.i("Spudoku", "solved");
+    }
 }
