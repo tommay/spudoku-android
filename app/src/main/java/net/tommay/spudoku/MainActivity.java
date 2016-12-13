@@ -1,5 +1,7 @@
 package net.tommay.spudoku;
 
+import java.lang.System;
+
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -10,24 +12,12 @@ import android.view.View;
 import android.widget.ImageView;
 
 import net.tommay.spudoku.Puzzle;
+import net.tommay.spudoku.Creater;
 
 public class MainActivity extends AppCompatActivity {
     private int _emptyCellColor;
 
     private Puzzle _puzzle;
-
-    private static final String[][] _puzzleStrings = {
-        {
-            "579821463231467598684359217167235984342978651895146372456782139928613745713594826",
-            "001111000111111010011100111001100110011101110011001100111001110010111111000111100",
-        },
-        {
-            "238915647156734982794628513682479351543162879917583426479256138861347295325891764",
-            "011100101011101011011011100010110111100010001111011010001110110110101110101001110",
-        },
-    };
-
-    private int _puzzleCounter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     private void colorCell(ImageView cell, Puzzle puzzle, int n)
     {
         GradientDrawable drawable = (GradientDrawable)cell.getDrawable();
-        Log.i("Spudoku", "drawable: " + drawable);
+        //Log.i("Spudoku", "drawable: " + drawable);
 
         Integer color = puzzle.getColor(n);
         int c = color != null ? color : _emptyCellColor;
@@ -84,11 +74,12 @@ public class MainActivity extends AppCompatActivity {
         colorCell((ImageView)view, _puzzle, n);
     }
 
-    Puzzle newPuzzle() {
-        _puzzleCounter = (_puzzleCounter + 1) % _puzzleStrings.length;
+    private Puzzle newPuzzle() {
+        int seed = (int) System.currentTimeMillis();
+        String[] puzzleStrings = Creater.create(seed, "classic");
         return new Puzzle(
-            _puzzleStrings[_puzzleCounter][0],
-            _puzzleStrings[_puzzleCounter][1]);
+            puzzleStrings[0],
+            puzzleStrings[1]);
     }
     
     public void clickNew(View view) {
@@ -98,11 +89,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clickSetup(View view) {
+        Log.i("Spudoku", "setup");
         _puzzle.setup();
         showBoard();
     }
 
     public void clickSolved(View view) {
+        Log.i("Spudoku", "solved");
         _puzzle.solved();
         showBoard();
     }

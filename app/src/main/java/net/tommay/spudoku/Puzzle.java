@@ -16,13 +16,13 @@ class Puzzle {
     private final Cell[] _cells = new Cell[81];
 
     /**
-     * solved is the solution
-     * editmask has a "0" for each fixed value
+     * Solved is the solution.
+     * Setup has a '-' for each cell to be solved.
      */
-    Puzzle (String solved, String editmask) {
+    Puzzle (String setup, String solved) {
         for (int i = 0, len =  _cells.length; i < len; i++) {
             int color = _colors[(int)(solved.charAt(i) - '0' - 1)];
-            _cells[i] = new Cell(color, editmask.charAt(i) == '0');
+            _cells[i] = new Cell(color, setup.charAt(i) != '-');
         }
     }
 
