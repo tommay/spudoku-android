@@ -31,3 +31,8 @@ dependencies {
 dependencies {
     compile 'com.android.support:percent:23.3.0'
 }
+
+dependencies {
+    compile fileTree(dir: 'libs', include: '*.jar')
+
+}
