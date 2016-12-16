@@ -5,31 +5,28 @@ import java.lang.System;
 import android.os.AsyncTask;
 
 import net.tommay.spudoku.Creater;
-import net.tommay.spudoku.Puzzle;
+import net.tommay.spudoku.RawPuzzle;
 import net.tommay.util.Consumer;
 
 // https://developer.android.com/reference/android/os/AsyncTask.html
 
 class AsyncCreater {
     private AsyncCreater () {
-        // No instatntiation.
+        // No instantiation.
     }
 
     public static void create(
-        final String layoutName, final Consumer<Puzzle> consumer)
+        final String layoutName, final Consumer<RawPuzzle> consumer)
     {
-        new AsyncTask<Void, Void, Puzzle>() {
+        new AsyncTask<Void, Void, RawPuzzle>() {
             @Override
-            public Puzzle doInBackground(Void[] v) {
+            public RawPuzzle doInBackground(Void[] v) {
                 int seed = (int) System.currentTimeMillis();
-                String[] puzzleStrings = Creater.create(seed, layoutName);
-                return new Puzzle(
-                    puzzleStrings[0],
-                    puzzleStrings[1]);
+                return Creater.create(seed, layoutName);
             }
 
             @Override
-            public void onPostExecute(Puzzle puzzle) {
+            public void onPostExecute(RawPuzzle puzzle) {
                 consumer.accept(puzzle);
             }
         }.execute();

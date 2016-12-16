@@ -11,27 +11,48 @@ import android.widget.ImageView;
 
 import net.tommay.spudoku.AsyncCreater;
 import net.tommay.spudoku.Puzzle;
+import net.tommay.spudoku.RawPuzzle;
 import net.tommay.util.Consumer;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String KEY_PUZZLE = "puzzle";
+    private static final String KEY_SOLUTION = "solution";
+
     private int _emptyCellColor;
 
-    private Puzzle _puzzle;
+    private RawPuzzle _rawPuzzle = null;
+    private Puzzle _puzzle = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         Log.i("Spudoku", "onCreate");
+        setContentView(R.layout.activity_main);
+
         Resources res = getResources();
         _emptyCellColor = res.getColor(R.color.emptyCell);
+
+        if (savedInstanceState != null) {
+            String puzzle = savedInstanceState.getString(KEY_PUZZLE);
+            String solution = savedInstanceState.getString(KEY_SOLUTION);
+            if (puzzle != null && solution != null) {
+                Log.i("Spudoku", "restoring from bundle");
+                _rawPuzzle = new RawPuzzle(puzzle, solution);
+                _puzzle = new Puzzle(_rawPuzzle.puzzle, _rawPuzzle.solution);
+            }
+        }
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         Log.i("Spudoku", "onStart");
-        _puzzle = null; // XXX
+    }
+
+    @Override
+    protected void onRestoreInstanceState (Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        Log.i("Spudoku", "onRestoreInstanceState");
     }
 
     @Override
@@ -39,6 +60,43 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         Log.i("Spudoku", "onResume");
         showBoard();
+    }
+
+    // Called before onStop, either before or after onPause.
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.i("Spudoku", "onSaveInstanceState");
+        if (_rawPuzzle != null) {
+            Log.i("Spudoku", "saving state to bundle");
+            outState.putString(KEY_PUZZLE, _rawPuzzle.puzzle);
+            outState.putString(KEY_SOLUTION, _rawPuzzle.solution);
+        }
+    }
+
+    @Override
+    protected void onPause () {
+        super.onPause();
+        Log.i("Spudoku", "onPause");
+    }
+
+    @Override
+    protected void onStop () {
+        super.onStop();
+        Log.i("Spudoku", "onStop");
+    }
+
+    // Called betweeb onStop and onStart.
+    @Override
+    protected void onRestart () {
+        super.onRestart();
+        Log.i("Spudoku", "onRestart");
+    }
+
+    @Override
+    protected void onDestroy () {
+        super.onDestroy();
+        Log.i("Spudoku", "onDestroy");
     }
 
     // This is pretty awful.
@@ -92,10 +150,11 @@ public class MainActivity extends AppCompatActivity {
         enableButtons(false);
         AsyncCreater.create(
             "classic",
-            new Consumer<Puzzle>() {
+            new Consumer<RawPuzzle>() {
                 @Override
-                public void accept(Puzzle puzzle) {
-                    _puzzle = puzzle;
+                public void accept(RawPuzzle rawPuzzle) {
+                    _rawPuzzle = rawPuzzle;
+                    _puzzle = new Puzzle(rawPuzzle.puzzle, rawPuzzle.solution);
                     showBoard();
                     enableButtons(true);
                 }
