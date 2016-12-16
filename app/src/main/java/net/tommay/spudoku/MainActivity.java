@@ -1,6 +1,6 @@
 package net.tommay.spudoku;
 
-import java.lang.System;
+import java.util.function.Consumer;
 
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -11,8 +11,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import net.tommay.spudoku.AsyncCreater;
 import net.tommay.spudoku.Puzzle;
-import net.tommay.spudoku.Creater;
 
 public class MainActivity extends AppCompatActivity {
     private int _emptyCellColor;
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Log.i("Spudoku", "onStart");
-        _puzzle = newPuzzle();
+        _puzzle = null; // XXX
     }
 
     @Override
@@ -45,11 +45,13 @@ public class MainActivity extends AppCompatActivity {
     // This is pretty awful.
 
     private void showBoard () {
-        View view = findViewById(R.id.board);
-        for (int i = 0; i < 81; i++) {
-            ImageView cell =
-                (ImageView)view.findViewWithTag(Integer.toString(i));
-            colorCell(cell, _puzzle, i);
+        if (_puzzle != null) {
+            View view = findViewById(R.id.board);
+            for (int i = 0; i < 81; i++) {
+                ImageView cell =
+                    (ImageView)view.findViewWithTag(Integer.toString(i));
+                colorCell(cell, _puzzle, i);
+            }
         }
     }
 
@@ -74,18 +76,18 @@ public class MainActivity extends AppCompatActivity {
         colorCell((ImageView)view, _puzzle, n);
     }
 
-    private Puzzle newPuzzle() {
-        int seed = (int) System.currentTimeMillis();
-        String[] puzzleStrings = Creater.create(seed, "classic");
-        return new Puzzle(
-            puzzleStrings[0],
-            puzzleStrings[1]);
-    }
-    
     public void clickNew(View view) {
         Log.i("Spudoku", "new");
-        _puzzle = newPuzzle();
-        showBoard();
+        AsyncCreater.create(
+            "classic",
+            new Consumer<Puzzle>() {
+                @Override
+                public void accept(Puzzle puzzle) {
+                    _puzzle = puzzle;
+                    showBoard();
+                }
+            }
+        );
     }
 
     public void clickSetup(View view) {
