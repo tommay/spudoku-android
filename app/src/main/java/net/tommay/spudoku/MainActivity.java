@@ -75,8 +75,21 @@ public class MainActivity extends AppCompatActivity {
         colorCell((ImageView)view, _puzzle, n);
     }
 
+    private void enableButtons(boolean enabled) {
+        int[] buttonIds = {
+            R.id.button_new,
+            R.id.button_setup,
+            R.id.button_solved,
+        };
+        for (int i = 0; i < buttonIds.length; i++) {
+            View view = findViewById(buttonIds[i]);
+            view.setEnabled(enabled);
+        }
+    }
+
     public void clickNew(View view) {
         Log.i("Spudoku", "new");
+        enableButtons(false);
         AsyncCreater.create(
             "classic",
             new Consumer<Puzzle>() {
@@ -84,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
                 public void accept(Puzzle puzzle) {
                     _puzzle = puzzle;
                     showBoard();
+                    enableButtons(true);
                 }
             }
         );
