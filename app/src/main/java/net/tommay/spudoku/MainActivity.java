@@ -1,7 +1,5 @@
 package net.tommay.spudoku;
 
-import java.util.function.Consumer;
-
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -13,6 +11,7 @@ import android.widget.ImageView;
 
 import net.tommay.spudoku.AsyncCreater;
 import net.tommay.spudoku.Puzzle;
+import net.tommay.util.Consumer;
 
 public class MainActivity extends AppCompatActivity {
     private int _emptyCellColor;

@@ -1,12 +1,12 @@
 package net.tommay.spudoku;
 
 import java.lang.System;
-import java.util.function.Consumer;
 
 import android.os.AsyncTask;
 
 import net.tommay.spudoku.Creater;
 import net.tommay.spudoku.Puzzle;
+import net.tommay.util.Consumer;
 
 // https://developer.android.com/reference/android/os/AsyncTask.html
 
