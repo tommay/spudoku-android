@@ -29,4 +29,8 @@ class PuzzleProducer implements Producer<RawPuzzle> {
             throw new RuntimeException(ex);
         }
     }
+
+    public RawPuzzle peek () {
+        return _aotProducer.peek();
+    }
 }

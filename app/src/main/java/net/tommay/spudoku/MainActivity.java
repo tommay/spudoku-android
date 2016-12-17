@@ -17,13 +17,25 @@ import net.tommay.util.Consumer;
 import net.tommay.util.Producer;
 
 public class MainActivity extends AppCompatActivity {
+    // Keys for Bundle values.
+
     private static final String KEY_PUZZLE = "puzzle";
     private static final String KEY_SOLUTION = "solution";
+    private static final String KEY_AOT_PUZZLE = "aot_puzzle";
+    private static final String KEY_AOT_SOLUTION = "aot_solution";
 
     private int _emptyCellColor;
 
     private RawPuzzle _rawPuzzle = null;
     private Puzzle _puzzle = null;
+
+    private PuzzleProducer _puzzleProducer = new PuzzleProducer(
+        "classic",
+        new RawPuzzle(
+            "----15-4-3-----56-5--6----98-5-436" +
+            "-------------752-9-47----4--2-51-----7-3-15----",
+            "6798152433124795685846327198259436" +
+            "71943761825167528934796384152451296387238157496"));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +47,23 @@ public class MainActivity extends AppCompatActivity {
         _emptyCellColor = res.getColor(R.color.emptyCell);
 
         if (savedInstanceState != null) {
-            String puzzle = savedInstanceState.getString(KEY_PUZZLE);
-            String solution = savedInstanceState.getString(KEY_SOLUTION);
-            if (puzzle != null && solution != null) {
-                Log.i("Spudoku", "restoring from bundle");
-                _rawPuzzle = new RawPuzzle(puzzle, solution);
-                _puzzle = new Puzzle(_rawPuzzle.puzzle, _rawPuzzle.solution);
+            {
+                String puzzle = savedInstanceState.getString(KEY_PUZZLE);
+                String solution = savedInstanceState.getString(KEY_SOLUTION);
+                if (puzzle != null && solution != null) {
+                    Log.i("Spudoku", "restoring from bundle");
+                    _rawPuzzle = new RawPuzzle(puzzle, solution);
+                    _puzzle = newPuzzle(_rawPuzzle);
+                }
+            }
+            {
+                String puzzle = savedInstanceState.getString(KEY_AOT_PUZZLE);
+                String solution = savedInstanceState.getString(KEY_AOT_SOLUTION);
+                if (puzzle != null && solution != null) {
+                    Log.i("Spudoku", "restoring AOT from bundle");
+                    RawPuzzle rawPuzzle = new RawPuzzle(puzzle, solution);
+                    _puzzleProducer = new PuzzleProducer("classic", rawPuzzle);
+                }
             }
         }
     }
@@ -73,6 +96,12 @@ public class MainActivity extends AppCompatActivity {
             Log.i("Spudoku", "saving state to bundle");
             outState.putString(KEY_PUZZLE, _rawPuzzle.puzzle);
             outState.putString(KEY_SOLUTION, _rawPuzzle.solution);
+
+            RawPuzzle aotPuzzle = _puzzleProducer.peek();
+            if (aotPuzzle != null) {
+                outState.putString(KEY_AOT_PUZZLE, aotPuzzle.puzzle);
+                outState.putString(KEY_AOT_SOLUTION, aotPuzzle.solution);
+            }
         }
     }
 
@@ -147,14 +176,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private final PuzzleProducer _puzzleProducer = new PuzzleProducer(
-        "classic",
-        new RawPuzzle(
-            "----15-4-3-----56-5--6----98-5-436" +
-            "-------------752-9-47----4--2-51-----7-3-15----",
-            "6798152433124795685846327198259436" +
-            "71943761825167528934796384152451296387238157496"));
-
     public void clickNew(View view) {
         Log.i("Spudoku", "new");
         enableButtons(false);
@@ -164,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void accept(RawPuzzle rawPuzzle) {
                     _rawPuzzle = rawPuzzle;
-                    _puzzle = new Puzzle(rawPuzzle.puzzle, rawPuzzle.solution);
+                    _puzzle = newPuzzle(_rawPuzzle);
                     showBoard();
                     enableButtons(true);
                 }
@@ -181,5 +202,9 @@ public class MainActivity extends AppCompatActivity {
         Log.i("Spudoku", "solved");
         _puzzle.solved();
         showBoard();
+    }
+
+    private static Puzzle newPuzzle(RawPuzzle rawPuzzle) {
+        return new Puzzle(rawPuzzle.puzzle, rawPuzzle.solution);
     }
 }

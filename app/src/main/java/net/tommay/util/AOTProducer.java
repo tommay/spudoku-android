@@ -5,6 +5,8 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeoutException;
+import java.util.concurrent.TimeUnit;
 
 import net.tommay.util.Producer;
 import net.tommay.util.ProducerException;
@@ -18,18 +20,22 @@ class AOTProducer<T> implements Producer {
 
     public AOTProducer (final T initial, final Producer<T> producer)
     {
-        _callable = new Callable<T>() {
-            @Override
-            public T call () throws ProducerException {
-                return producer.get();
-            }
-        };
+        // Start with a Future that returns initial (which may be
+        // null).  Each call to get will create a new Future that
+        // returns the result of producer.get via _callable.
 
         _future = _executor.submit(
             new Runnable () {
                 @Override public void run () {}
             },
             initial);
+
+        _callable = new Callable<T>() {
+            @Override
+            public T call () throws ProducerException {
+                return producer.get();
+            }
+        };
     }
 
     @Override
@@ -42,8 +48,22 @@ class AOTProducer<T> implements Producer {
             _future = _executor.submit(_callable);
             return result;
         }
-        catch (Throwable ex) {
+        catch (InterruptedException|ExecutionException ex) {
             throw new ProducerException(ex);
+        }
+    }
+
+    /**
+     * Return the object ready for get to return, or null if nothing
+     * is ready.  This is used to save state used to create a new
+     * AOTProducer in the future with the same AOT-created object.
+     */
+    public T peek () {
+        try {
+            return _future.get(0, TimeUnit.SECONDS);
+        }
+        catch (InterruptedException|ExecutionException|TimeoutException ex) {
+            return null;
         }
     }
 }
