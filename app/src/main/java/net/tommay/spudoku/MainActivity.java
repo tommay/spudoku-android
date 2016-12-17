@@ -11,8 +11,10 @@ import android.widget.ImageView;
 
 import net.tommay.spudoku.AsyncCreater;
 import net.tommay.spudoku.Puzzle;
+import net.tommay.spudoku.PuzzleProducer;
 import net.tommay.spudoku.RawPuzzle;
 import net.tommay.util.Consumer;
+import net.tommay.util.Producer;
 
 public class MainActivity extends AppCompatActivity {
     private static final String KEY_PUZZLE = "puzzle";
@@ -145,11 +147,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private final PuzzleProducer _puzzleProducer = new PuzzleProducer(
+        "classic",
+        new RawPuzzle(
+            "----15-4-3-----56-5--6----98-5-436" +
+            "-------------752-9-47----4--2-51-----7-3-15----",
+            "6798152433124795685846327198259436" +
+            "71943761825167528934796384152451296387238157496"));
+
     public void clickNew(View view) {
         Log.i("Spudoku", "new");
         enableButtons(false);
-        AsyncCreater.create(
-            "classic",
+        AsyncCreater.<RawPuzzle>create(
+            _puzzleProducer,
             new Consumer<RawPuzzle>() {
                 @Override
                 public void accept(RawPuzzle rawPuzzle) {
@@ -158,8 +168,7 @@ public class MainActivity extends AppCompatActivity {
                     showBoard();
                     enableButtons(true);
                 }
-            }
-        );
+            });
     }
 
     public void clickSetup(View view) {

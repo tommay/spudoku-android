@@ -1,33 +1,37 @@
 package net.tommay.spudoku;
 
-import java.lang.System;
-
 import android.os.AsyncTask;
 
-import net.tommay.spudoku.Creater;
-import net.tommay.spudoku.RawPuzzle;
 import net.tommay.util.Consumer;
+import net.tommay.util.Producer;
+import net.tommay.util.ProducerException;
 
 // https://developer.android.com/reference/android/os/AsyncTask.html
 
-class AsyncCreater {
+class AsyncCreater<T> {
     private AsyncCreater () {
         // No instantiation.
     }
 
-    public static void create(
-        final String layoutName, final Consumer<RawPuzzle> consumer)
+    public static <T> void create(
+        final Producer<T> producer, final Consumer<T> consumer)
     {
-        new AsyncTask<Void, Void, RawPuzzle>() {
+        new AsyncTask<Void, Void, T>() {
+            // Backround thread.
             @Override
-            public RawPuzzle doInBackground(Void[] v) {
-                int seed = (int) System.currentTimeMillis();
-                return Creater.create(seed, layoutName);
+            public T doInBackground(Void[] v) {
+                try {
+                    return producer.get();
+                }
+                catch (ProducerException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
 
+            // UI thread.
             @Override
-            public void onPostExecute(RawPuzzle puzzle) {
-                consumer.accept(puzzle);
+            public void onPostExecute(T result) {
+                consumer.accept(result);
             }
         }.execute();
     }
