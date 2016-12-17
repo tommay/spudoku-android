@@ -1,5 +1,6 @@
 package net.tommay.spudoku;
 
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import net.tommay.spudoku.AOTStateImpl;
 import net.tommay.spudoku.AsyncCreater;
 import net.tommay.spudoku.Puzzle;
 import net.tommay.spudoku.PuzzleProducer;
@@ -21,21 +23,13 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String KEY_PUZZLE = "puzzle";
     private static final String KEY_SOLUTION = "solution";
-    private static final String KEY_AOT_PUZZLE = "aot_puzzle";
-    private static final String KEY_AOT_SOLUTION = "aot_solution";
 
     private int _emptyCellColor;
 
     private RawPuzzle _rawPuzzle = null;
     private Puzzle _puzzle = null;
 
-    private PuzzleProducer _puzzleProducer = new PuzzleProducer(
-        "classic",
-        new RawPuzzle(
-            "----15-4-3-----56-5--6----98-5-436" +
-            "-------------752-9-47----4--2-51-----7-3-15----",
-            "6798152433124795685846327198259436" +
-            "71943761825167528934796384152451296387238157496"));
+    private PuzzleProducer _puzzleProducer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,24 +40,23 @@ public class MainActivity extends AppCompatActivity {
         Resources res = getResources();
         _emptyCellColor = res.getColor(R.color.emptyCell);
 
+        _puzzleProducer = new PuzzleProducer(
+            "classic",
+            AOTStateImpl.create(
+                getSharedPreferences("classic", 0),
+                new RawPuzzle(
+                    "----15-4-3-----56-5--6----98-5-436" +
+                    "-------------752-9-47----4--2-51-----7-3-15----",
+                    "6798152433124795685846327198259436" +
+                    "71943761825167528934796384152451296387238157496")));
+
         if (savedInstanceState != null) {
-            {
-                String puzzle = savedInstanceState.getString(KEY_PUZZLE);
-                String solution = savedInstanceState.getString(KEY_SOLUTION);
-                if (puzzle != null && solution != null) {
-                    Log.i("Spudoku", "restoring from bundle");
-                    _rawPuzzle = new RawPuzzle(puzzle, solution);
-                    _puzzle = newPuzzle(_rawPuzzle);
-                }
-            }
-            {
-                String puzzle = savedInstanceState.getString(KEY_AOT_PUZZLE);
-                String solution = savedInstanceState.getString(KEY_AOT_SOLUTION);
-                if (puzzle != null && solution != null) {
-                    Log.i("Spudoku", "restoring AOT from bundle");
-                    RawPuzzle rawPuzzle = new RawPuzzle(puzzle, solution);
-                    _puzzleProducer = new PuzzleProducer("classic", rawPuzzle);
-                }
+            String puzzle = savedInstanceState.getString(KEY_PUZZLE);
+            String solution = savedInstanceState.getString(KEY_SOLUTION);
+            if (puzzle != null && solution != null) {
+                Log.i("Spudoku", "restoring from bundle");
+                _rawPuzzle = new RawPuzzle(puzzle, solution);
+                _puzzle = newPuzzle(_rawPuzzle);
             }
         }
     }
@@ -96,12 +89,6 @@ public class MainActivity extends AppCompatActivity {
             Log.i("Spudoku", "saving state to bundle");
             outState.putString(KEY_PUZZLE, _rawPuzzle.puzzle);
             outState.putString(KEY_SOLUTION, _rawPuzzle.solution);
-
-            RawPuzzle aotPuzzle = _puzzleProducer.peek();
-            if (aotPuzzle != null) {
-                outState.putString(KEY_AOT_PUZZLE, aotPuzzle.puzzle);
-                outState.putString(KEY_AOT_SOLUTION, aotPuzzle.solution);
-            }
         }
     }
 
