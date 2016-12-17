@@ -5,44 +5,49 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     android:layout_width="match_parent">
-
-    <!-- It doesn't work to put the "100%" stuff in the main LinearLayout
-         of grid.xml, although it works when the code is inlined instead
-         of included.  Fortunately, it works to put the 100% stuff in
-         a FrameLayout here and include grid.xml into that.  -->
-    <FrameLayout
-        android:id="@+id/board"
-        app:layout_widthPercent="100%"
-        app:layout_aspectRatio="100%">
-        <include layout="@layout/board"/>
-    </FrameLayout>
-
+  
+  <!-- It doesn't work to put the "100%" stuff in the main LinearLayout
+       of grid.xml, although it works when the code is inlined instead
+       of included.  Fortunately, it works to put the 100% stuff in
+       a FrameLayout here and include grid.xml into that.  -->
+  <FrameLayout
+      android:id="@+id/board"
+      app:layout_widthPercent="100%"
+      app:layout_aspectRatio="100%">
+    <include layout="@layout/board"/>
+  </FrameLayout>
+  
+  <LinearLayout
+      android:layout_below="@id/board"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
     <LinearLayout
-        android:layout_below="@id/board"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 	android:orientation="horizontal">
-        <Button
-            android:id="@+id/button_new"
-            android:text="New"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="clickNew"/>
-        <Button
-            android:id="@+id/button_setup"
-            android:text="Setup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="clickSetup"/>
-        <Button
-            android:id="@+id/button_solved"
-            android:text="Solved"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="clickSolved"/>
-	<Spinner
-	    android:id="@+id/spinner_layout"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"/>
-    </LinearLayout>>
+      <Button
+          android:id="@+id/button_new"
+          android:text="New"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:onClick="clickNew"/>
+      <Button
+          android:id="@+id/button_setup"
+          android:text="Setup"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:onClick="clickSetup"/>
+      <Button
+          android:id="@+id/button_solved"
+          android:text="Solved"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:onClick="clickSolved"/>
+    </LinearLayout>
+    <Spinner
+	android:id="@+id/spinner_layout"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"/>
+  </LinearLayout>
 </android.support.percent.PercentRelativeLayout>
