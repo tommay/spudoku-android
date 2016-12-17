@@ -1,6 +1,7 @@
 package net.tommay.spudoku;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import android.content.SharedPreferences;
@@ -17,6 +18,7 @@ import android.widget.Spinner;
 
 import net.tommay.spudoku.AOTStateImpl;
 import net.tommay.spudoku.AsyncCreater;
+import net.tommay.spudoku.LayoutNames;
 import net.tommay.spudoku.Puzzle;
 import net.tommay.spudoku.PuzzleProducer;
 import net.tommay.spudoku.RawPuzzle;
@@ -45,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         Resources res = getResources();
         _emptyCellColor = res.getColor(R.color.emptyCell);
 
-        String[] layoutNames = { "classic", "spinny", };
+        List<String> layoutNames = LayoutNames.getLayoutNames();
 
         for (String layoutName : layoutNames) {
             PuzzleProducer puzzleProducer = new PuzzleProducer(
