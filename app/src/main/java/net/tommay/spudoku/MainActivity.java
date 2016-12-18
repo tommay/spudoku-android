@@ -1,5 +1,8 @@
 package net.tommay.spudoku;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -8,7 +11,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
 import net.tommay.spudoku.AOTStateImpl;
 import net.tommay.spudoku.AsyncCreater;
@@ -29,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private RawPuzzle _rawPuzzle = null;
     private Puzzle _puzzle = null;
 
-    private PuzzleProducer _puzzleProducer;
+    private final Map<String, PuzzleProducer> _producerMap = new HashMap();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,15 +45,27 @@ public class MainActivity extends AppCompatActivity {
         Resources res = getResources();
         _emptyCellColor = res.getColor(R.color.emptyCell);
 
-        _puzzleProducer = new PuzzleProducer(
-            "classic",
-            AOTStateImpl.create(
-                getSharedPreferences("classic", 0),
-                new RawPuzzle(
-                    "----15-4-3-----56-5--6----98-5-436" +
-                    "-------------752-9-47----4--2-51-----7-3-15----",
-                    "6798152433124795685846327198259436" +
-                    "71943761825167528934796384152451296387238157496")));
+        String[] layoutNames = { "classic", "spinny", };
+
+        for (String layoutName : layoutNames) {
+            PuzzleProducer puzzleProducer = new PuzzleProducer(
+                layoutName,
+                AOTStateImpl.create(
+                    getSharedPreferences(layoutName, 0),
+                    new RawPuzzle(
+                        "----15-4-3-----56-5--6----98-5-436" +
+                        "-------------752-9-47----4--2-51-----7-3-15----",
+                        "6798152433124795685846327198259436" +
+                        "71943761825167528934796384152451296387238157496")));
+            _producerMap.put(layoutName, puzzleProducer);
+        }
+
+        Spinner spinner = (Spinner) findViewById(R.id.spinner_layout);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+            this, android.R.layout.simple_spinner_item, layoutNames);
+        adapter.setDropDownViewResource(
+            android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
 
         if (savedInstanceState != null) {
             String puzzle = savedInstanceState.getString(KEY_PUZZLE);
@@ -165,9 +182,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void clickNew(View view) {
         Log.i("Spudoku", "new");
+
+        Spinner spinner = (Spinner) findViewById(R.id.spinner_layout);
+        String layoutName = (String) spinner.getSelectedItem();
+        PuzzleProducer puzzleProducer = _producerMap.get(layoutName);
+
         enableButtons(false);
         AsyncCreater.<RawPuzzle>create(
-            _puzzleProducer,
+            puzzleProducer,
             new Consumer<RawPuzzle>() {
                 @Override
                 public void accept(RawPuzzle rawPuzzle) {
