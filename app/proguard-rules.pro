@@ -16,8 +16,6 @@
 #   public *;
 #}
 
--dontwarn frege.**
-
 # Leave things unobfuscated so stack traces are nice.
 
 -dontobfuscate
