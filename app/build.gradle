@@ -1,5 +1,9 @@
 apply plugin: 'com.android.application'
 
+repositories {
+   jcenter()
+}
+
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.0"
@@ -42,11 +46,12 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
+// For android.support.percent.PercentRelativeLayout:
 dependencies {
     compile 'com.android.support:percent:23.3.0'
 }
 
+// The sudoku Puzzle create etc code is a separate scala project.
 dependencies {
-    compile fileTree(dir: 'libs', include: '*.jar')
-
+    compile project(':sudoku')
 }

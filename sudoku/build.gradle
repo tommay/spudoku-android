@@ -1,0 +1,41 @@
+// How to configure different scala versions, etc:
+// http://jesseyates.com/2015/06/18/dev-tip-using-gradle-without-hating-it.html
+
+apply plugin: 'scala'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'org.scala-lang:scala-library:2.12.1'
+}
+
+// http://stackoverflow.com/questions/27494428/running-a-jar-produce-from-gradle-build
+jar {
+    manifest {
+        attributes 'Main-Class': 'net.tommay.sudoku.Create'
+    }
+    /*
+    // This builds an uberjar:  Be nice to run it through proguard.
+    from {
+        configurations.compile.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+        configurations.runtime.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+    */
+}
+
+// Trying to figure out how to compile just one files.
+
+task compileOne (type: ScalaCompile) {
+    source = sourceSets.main.scala.srcDirs
+    include 'net/tommay/sudoku/Heuristic.scala'
+    classpath = sourceSets.main.compileClasspath
+    destinationDir = sourceSets.main.output.classesDir
+}
+
+compileOne.options.compilerArgs = ["-sourcepath", "$projectDir/src/main/scala"]
