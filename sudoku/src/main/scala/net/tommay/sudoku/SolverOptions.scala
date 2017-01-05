@@ -4,7 +4,7 @@ import net.tommay.sudoku.Heuristic._
 
 // EasyPeasy: An easy pattern to spot visually. where two rows or columns
 //   in a 3-stripe contain a digit and there is only one place in the
-//   remaining column where it can go.  This is a subset of Forced, but is
+//   remaining column where it can go.  This is a subset of Needed, but is
 //   easy to spot.
 // MissingOne: A set is missing only one digit.  This is a subset of
 //   both Needed and Forced, but is easier to spot.
