@@ -39,6 +39,19 @@ jar {
     */
 }
 
+task uberjar(type: Jar) {
+    appendix = "uber"
+    from sourceSets.main.output
+    from {
+        configurations.compile.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+        configurations.runtime.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+}
+
 // Trying to figure out how to compile just one files.
 
 task compileOne (type: ScalaCompile) {

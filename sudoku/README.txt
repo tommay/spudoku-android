@@ -11,4 +11,5 @@ requires the "scala" command to run scala 2.11, because that's what
 the jar is built with.
 
 An alternative would be to build in uberjar with scala classes baked
-in.
+in.  build.gradle has task uberjar to support this.  The classes can
+be run with java -cp sudoku-uber.jar <classname>.
