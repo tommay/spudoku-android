@@ -30,8 +30,6 @@ import net.tommay.spudoku.RawPuzzle;
 import net.tommay.util.Consumer;
 import net.tommay.util.Producer;
 
-import net.tommay.sudoku.Layout;
-
 public class MainActivity extends AppCompatActivity {
     // Keys for Bundle values.
 
@@ -54,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         Resources res = getResources();
         _emptyCellColor = res.getColor(R.color.emptyCell);
 
-        List<String> layoutNames = Layout.getLayoutNames();
+        List<String> layoutNames = LayoutNames.getLayoutNames();
 
         // If configured in build.gradle, log puzzle create rimes to
         // /data/data/net.tommay.spudoku/files/<CREATE_LOG>.
