@@ -41,7 +41,6 @@ jar {
 
 task uberjar(type: Jar) {
     appendix = "uber"
-    from sourceSets.main.output
     from {
         configurations.compile.collect {
             it.isDirectory() ? it : zipTree(it)
@@ -50,6 +49,7 @@ task uberjar(type: Jar) {
             it.isDirectory() ? it : zipTree(it)
         }
     }
+    with jar
 }
 
 // Trying to figure out how to compile just one files.
