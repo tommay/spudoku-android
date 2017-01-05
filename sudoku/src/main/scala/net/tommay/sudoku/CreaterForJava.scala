@@ -14,7 +14,7 @@ object CreaterForJava {
       case Some(layout) =>
         val (puzzle, solution) = Creater.createWithSolution(
           rnd, layout, Solver.solutions(SolverOptions.all))
-        (puzzle.toPuzzleString, solution.toPuzzleString)
+        (puzzle.toString, solution.toString)
     }
   }
 }
