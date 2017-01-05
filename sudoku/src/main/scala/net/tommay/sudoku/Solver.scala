@@ -6,7 +6,7 @@ case class Solver (
   options: SolverOptions,
   rnd: Option[Random],
   puzzle: Puzzle,
-  unknowns: Iterable[Unknown],
+  unknowns: Stream[Unknown],
   // steps is consed in reverse order.  It is reversed when
   // constructing a Solution.
   steps: List[Step],
@@ -30,7 +30,7 @@ case class Solver (
   // 
   def solutionsTop : Stream[Solution] = {
     unknowns match {
-      case Nil =>
+      case Stream.Empty  =>
         // No more unknowns, solved!
         Stream(Solution(puzzle, steps.reverse))
       case _ =>
@@ -157,7 +157,7 @@ case class Solver (
   }
 
   def findMissingOneInSet(set: ExclusionSet) : Stream[Next] = {
-    Solver.unknownsInSet(unknowns.toStream, set.cells) match {
+    Solver.unknownsInSet(unknowns, set.cells) match {
       case Stream(unknown) =>
         // Exactly one cell in the set is unknown.  Place a digit in
         // it.  Note that since this is the only unknown position in
@@ -179,7 +179,7 @@ case class Solver (
   }
 
   def findMissingTwoInSet(set: ExclusionSet) : Stream[Next] = {
-    Solver.unknownsInSet(unknowns.toStream, set.cells) match {
+    Solver.unknownsInSet(unknowns, set.cells) match {
       case unknowns@Stream(_, _) =>
         // Exactly two cells in the set are unknown.  Place digits in
         // them if they are forced.  A random one will be choden
@@ -202,14 +202,13 @@ case class Solver (
   def findNeededInSet(set: ExclusionSet) : Stream[Next] = {
     lazy val description = s"Needed in ${set.name}"
     Solver._1to9.flatMap(Solver.findNeededDigitInSet(
-      unknowns.toStream, set, description))
+      unknowns, set, description))
   }
 
   def findForced : Stream[Next] = {
-    // XXX Should unknowns be a Stream to begin with?
     // Currying is somewhat ugly in scala, but seems to be a smidge
     // faster,
-    unknowns.toStream.flatMap(findForcedForUnknown("Forced"))
+    unknowns.flatMap(findForcedForUnknown("Forced"))
   }
 
   // This can return either List or Stream.  But since it's going to be
@@ -255,7 +254,7 @@ object Solver {
     : Solver =
   {
     val (rnd1, rnd2) = maybeSplit(rnd)
-    val unknowns = maybeShuffle(rnd1, (0 to 80).map(Unknown(_)))
+    val unknowns = maybeShuffle(rnd1, (0 to 80).map(Unknown(_))).toStream
     val step = Step(puzzle, None, "Initial puzzle")
     val heuristicFunctions =
       options.heuristics.map(getHeuristicFunction).toStream

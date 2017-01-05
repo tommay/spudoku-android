@@ -34,7 +34,7 @@ object EasyPeasy {
 
   // Return a Stream of all possible easy peasy placements for the Puzzle.
 
-  def find(puzzle: Puzzle, unknowns: Iterable[Unknown]) : Stream[Next] = {
+  def find(puzzle: Puzzle, unknowns: Stream[Unknown]) : Stream[Next] = {
     stripes.flatMap(findForEasyPeasyStripe(puzzle, unknowns))
   }
 
@@ -42,7 +42,7 @@ object EasyPeasy {
   // are considered
 
   def findForEasyPeasyStripe
-    (puzzle: Puzzle, unknowns: Iterable[Unknown])
+    (puzzle: Puzzle, unknowns: Stream[Unknown])
     (stripe: Stripe)
     : Stream[Next] =
   {
@@ -55,13 +55,13 @@ object EasyPeasy {
   }
 
   def blah
-    (unknowns: Iterable[Unknown], digits: Stream[Int])
+    (unknowns: Stream[Unknown], digits: Stream[Int])
     (exclusionSet: ExclusionSet)
       : Stream[Next] =
   {
     lazy val description = s"Easy peasy in ${exclusionSet.name}"
     digits.flatMap(Solver.findNeededDigitInSet(
-      unknowns.toStream, exclusionSet, description))
+      unknowns, exclusionSet, description))
   }
 
   def countDigitsInSet(
