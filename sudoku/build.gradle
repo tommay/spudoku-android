@@ -7,8 +7,18 @@ repositories {
     jcenter()
 }
 
+// Android needs jvm 1.7.  So we need a scala version that can target
+// 1.7, and we need to target it.
+
 dependencies {
-    compile 'org.scala-lang:scala-library:2.12.1'
+    compile 'org.scala-lang:scala-library:2.11.8'
+}
+
+compileScala {
+    scalaCompileOptions.optimize = true
+    scalaCompileOptions.additionalParameters = [
+        '-target:jvm-1.7'
+    ]
 }
 
 // http://stackoverflow.com/questions/27494428/running-a-jar-produce-from-gradle-build
