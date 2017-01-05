@@ -46,8 +46,8 @@ object ExclusionSet {
 
   // All ExclusionSets.
 
-  val exclusionSets : Iterable[ExclusionSet] =
-    rows ++ columns ++ squares
+  val exclusionSets : Stream[ExclusionSet] =
+    (rows ++ columns ++ squares).toStream
 }
 
 

@@ -153,7 +153,7 @@ case class Solver (
 
   def findMissingOne : Stream[Next] = {
     // XXX should exclusionSets be a Stream?
-    ExclusionSet.exclusionSets.toStream.flatMap{findMissingOneInSet(_)}
+    ExclusionSet.exclusionSets.flatMap{findMissingOneInSet(_)}
   }
 
   def findMissingOneInSet(set: ExclusionSet) : Stream[Next] = {
@@ -175,7 +175,7 @@ case class Solver (
   // place one of the digits but the second will follow quickly.
 
   def findMissingTwo : Stream[Next] = {
-    ExclusionSet.exclusionSets.toStream.flatMap(findMissingTwoInSet(_))
+    ExclusionSet.exclusionSets.flatMap(findMissingTwoInSet(_))
   }
 
   def findMissingTwoInSet(set: ExclusionSet) : Stream[Next] = {
@@ -196,7 +196,7 @@ case class Solver (
   // set where it can possibly go.
 
   def findNeeded : Stream[Next] = {
-     ExclusionSet.exclusionSets.toStream.flatMap(findNeededInSet(_))
+     ExclusionSet.exclusionSets.flatMap(findNeededInSet(_))
   }
 
   def findNeededInSet(set: ExclusionSet) : Stream[Next] = {
