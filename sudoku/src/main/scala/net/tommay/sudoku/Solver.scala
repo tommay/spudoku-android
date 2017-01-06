@@ -203,8 +203,13 @@ case class Solver (
   }
 
   def findNeededInSet(set: ExclusionSet) : Stream[Next] = {
-    Solver._1to9.flatMap(Solver.findNeededDigitInSet(
-      unknowns, set, Heuristic.Needed, s"Needed in ${set.name}"))
+    val us = Solver.unknownsInSet(unknowns, set.cells)
+    val possible = us.foldLeft(0) {(accum, u) => accum | u.possible}
+    val possibleDigitList =  Unknown.getPossibleList(possible)
+    possibleDigitList
+      .toStream
+      .flatMap(Solver.findNeededDigitInSet(
+        unknowns, set, Heuristic.Needed, s"Needed in ${set.name}"))
   }
 
   def findForced : Stream[Next] = {
@@ -249,11 +254,6 @@ case class Solver (
 }
 
 object Solver {
-  // Having this pre-constructed makes a significant difference over
-  // calling toStream each time it's needed.
-
-  val _1to9 = (1 to 9).toStream
-
   def create(options: SolverOptions, rnd: Option[Random], puzzle: Puzzle)
     : Solver =
   {
