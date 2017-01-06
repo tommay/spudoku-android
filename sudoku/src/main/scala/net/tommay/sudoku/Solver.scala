@@ -99,9 +99,9 @@ case class Solver (
         Stream.empty
       case List(digit) =>
         // One possibility.  The choice is forced, no guessing.  But
-        // we only use the force if a) we're guessing, b) we're not
-        // using heuristics, because if we are then forcing is done by
-        // findForced.
+        // we only use the force if a) we're guessing, and b) we're
+        // not using heuristics, because if we are then forcing is
+        // done by Heuristic.Forced via findForced.
         if (options.useGuessing && !options.useHeuristics) {
           val next = Next(Heuristic.ForcedGuess, "Forced guess",
             Placement(cellNumber, digit))
@@ -184,12 +184,12 @@ case class Solver (
     Solver.unknownsInSet(unknowns, set.cells) match {
       case unknowns@Stream(_, _) =>
         // Exactly two cells in the set are unknown.  Place digits in
-        // them if they are forced.  A random one will be choden
+        // them if they are forced.  A random one will be chosen
         // upstream if necessary (and if we find anything to return).
         unknowns.flatMap(findForcedForUnknown(
           Heuristic.MissingTwo, s"Missing two in ${set.name}"))
       case _ =>
-        // Zero too many unknowns for humans to easiy handle.
+        // Zero or too many unknowns for humans to easiy handle.
         Stream.Empty
     }
   }
