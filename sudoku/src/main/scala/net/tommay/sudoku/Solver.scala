@@ -102,7 +102,8 @@ case class Solver (
         // using heuristics, because if we are then forcing is done by
         // findForced.
         if (options.useGuessing && !options.useHeuristics) {
-          val next = Next("Forced guess", Placement(cellNumber, digit))
+          val next = Next(Heuristic.ForcedGuess, "Forced guess",
+            Placement(cellNumber, digit))
           placeAndContinue(next)
         }
         else {
@@ -143,7 +144,7 @@ case class Solver (
     : Stream[Solution] =
   {
     digits.foldLeft(Stream.empty[Solution]) {(accum, digit) =>
-      val next = Next("Guess", Placement(cellNumber, digit))
+      val next = Next(Heuristic.Guess, "Guess", Placement(cellNumber, digit))
       accum #::: placeAndContinue(next)
     }
   }
@@ -164,7 +165,8 @@ case class Solver (
         // the set there should be exactly one possible digit
         // remaining.  But we may have made a wrong guess, which
         // leaves no possibilities.
-        findForcedForUnknown(s"Missing one in ${set.name}")(unknown)
+        findForcedForUnknown(
+          Heuristic.MissingOne, s"Missing one in ${set.name}")(unknown)
       case _ =>
         // Zero or multiple cells in the set are unknown.
         Stream.Empty
@@ -184,7 +186,8 @@ case class Solver (
         // Exactly two cells in the set are unknown.  Place digits in
         // them if they are forced.  A random one will be choden
         // upstream if necessary (and if we find anything to return).
-        unknowns.flatMap(findForcedForUnknown(s"Missing two in ${set.name}"))
+        unknowns.flatMap(findForcedForUnknown(
+          Heuristic.MissingTwo, s"Missing two in ${set.name}"))
       case _ =>
         // Zero too many unknowns for humans to easiy handle.
         Stream.Empty
@@ -202,25 +205,27 @@ case class Solver (
   def findNeededInSet(set: ExclusionSet) : Stream[Next] = {
     lazy val description = s"Needed in ${set.name}"
     Solver._1to9.flatMap(Solver.findNeededDigitInSet(
-      unknowns, set, description))
+      unknowns, set, Heuristic.Needed, description))
   }
 
   def findForced : Stream[Next] = {
     // Currying is somewhat ugly in scala, but seems to be a smidge
     // faster,
-    unknowns.flatMap(findForcedForUnknown("Forced"))
+    unknowns.flatMap(findForcedForUnknown(Heuristic.Forced, "Forced"))
   }
 
   // This can return either List or Stream.  But since it's going to be
   // flatMap'd by a Stream, returning Stream performs better.
 
-  def findForcedForUnknown(description: String)(unknown: Unknown) :
+  def findForcedForUnknown
+    (tjpe: Heuristic.Value, description: String)
+    (unknown: Unknown) :
     Stream[Next] =
   {
     unknown.numPossible match {
       case 1 =>
         val digit = unknown.getPossible.head
-        Stream(Next(description, Placement(unknown.cellNumber, digit)))
+        Stream(Next(tjpe, description, Placement(unknown.cellNumber, digit)))
       case _ =>
         Stream.empty
     }
@@ -324,14 +329,14 @@ object Solver {
 
   def findNeededDigitInSet
     (unknowns: Stream[Unknown], exclusionSet: ExclusionSet,
-      description: => String)
+      tjpe: Heuristic.Value, description: => String)
     (digit: Int)
     : Stream[Next] =
   {
     val unknownsFromSet = unknownsInSet(unknowns, exclusionSet.cells)
     unknownsFromSet.filter(_.isDigitPossible(digit)) match {
       case Stream(unknown) =>
-        Stream(Next(description, Placement(unknown.cellNumber, digit)))
+        Stream(Next(tjpe, description, Placement(unknown.cellNumber, digit)))
       case _ => Stream.empty
     }
   }

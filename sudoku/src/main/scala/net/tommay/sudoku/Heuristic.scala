@@ -10,5 +10,10 @@ object Heuristic extends Enumeration
     MissingTwo,
     Needed,
     Forced,
-    Tricky  = Value
+    Tricky,
+    // These are not heuristics, they're just used to type Next and
+    // Step.
+    Guess,
+    ForcedGuess
+  = Value
 }

@@ -59,7 +59,7 @@ object EasyPeasy {
   {
     lazy val description = s"Easy peasy in ${exclusionSet.name}"
     digits.flatMap(Solver.findNeededDigitInSet(
-      unknowns, exclusionSet, description))
+      unknowns, exclusionSet, Heuristic.EasyPeasy, description))
   }
 
   def countDigitsInSet(
