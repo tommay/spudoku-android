@@ -204,9 +204,8 @@ case class Solver (
   }
 
   def findNeededInSet(set: ExclusionSet) : Stream[Next] = {
-    lazy val description = s"Needed in ${set.name}"
     Solver._1to9.flatMap(Solver.findNeededDigitInSet(
-      unknowns, set, Heuristic.Needed, description))
+      unknowns, set, Heuristic.Needed, s"Needed in ${set.name}"))
   }
 
   def findForced : Stream[Next] = {
@@ -219,7 +218,7 @@ case class Solver (
   // flatMap'd by a Stream, returning Stream performs better.
 
   def findForcedForUnknown
-    (tjpe: Heuristic.Value, description: String)
+    (tjpe: Heuristic.Value, description: => String)
     (unknown: Unknown) :
     Stream[Next] =
   {
