@@ -8,8 +8,6 @@ package net.tommay.sudoku
 case class Stripe(
   cells: Set[Int],
   exclusionSets: Stream[ExclusionSet])
-{
-}
 
 object EasyPeasy {
   // Easy peasies are found by using stripes of three rows or columns.

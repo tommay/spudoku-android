@@ -9,8 +9,6 @@ package net.tommay.sudoku
 case class ExclusionSet(
   name: String,
   cells: Set[Int])
-{
-}
 
 object ExclusionSet {
   // An ExclusionSet for each row.

@@ -4,5 +4,3 @@ case class Step(
   puzzle: Puzzle,
   placementOption: Option[Placement],
   description: String)
-{
-}
