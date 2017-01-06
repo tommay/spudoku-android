@@ -271,7 +271,7 @@ object Solver {
   // hint).  Using a Stream makes it ok either way since we'll only
   // compute what we need.
 
-  def getHeuristicFunction(heuristic: Heuristic.Heuristic)
+  def getHeuristicFunction(heuristic: Heuristic.Value)
       : Solver => Stream[Next] = {
     heuristic match {
       case Heuristic.EasyPeasy => {_.findEasyPeasy}

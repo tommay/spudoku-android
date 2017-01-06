@@ -1,7 +1,5 @@
 package net.tommay.sudoku
 
-import net.tommay.sudoku.Heuristic._
-
 // EasyPeasy: An easy pattern to spot visually. where two rows or columns
 //   in a 3-stripe contain a digit and there is only one place in the
 //   remaining column where it can go.  This is a subset of Needed, but is
@@ -35,11 +33,11 @@ import net.tommay.sudoku.Heuristic._
 
 case class SolverOptions(
   useHeuristics: Boolean,
-  heuristics: Iterable[Heuristic],
+  heuristics: Iterable[Heuristic.Value],
   usePermanentTrickySets: Boolean,
   useGuessing: Boolean)
 {
-  def this(heuristics: Iterable[Heuristic],
+  def this(heuristics: Iterable[Heuristic.Value],
            usePermanentTrickySets: Boolean,
            useGuessing: Boolean)
   {
@@ -54,5 +52,5 @@ object SolverOptions {
   // are redundant with Forced.  EasyPeasy is redundant with Needed.
 
   val noGuessing = new SolverOptions(
-    List(Forced, Needed, Tricky), false, false)
+    List(Heuristic.Forced, Heuristic.Needed, Heuristic.Tricky), false, false)
 }
