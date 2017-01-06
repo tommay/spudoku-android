@@ -208,8 +208,8 @@ case class Solver (
     val possibleDigitList =  Unknown.getPossibleList(possible)
     possibleDigitList
       .toStream
-      .flatMap(Solver.findNeededDigitInSet(
-        unknowns, set, Heuristic.Needed, s"Needed in ${set.name}"))
+      .flatMap(Solver.findNeededDigitInUnknowns(
+        us, Heuristic.Needed, s"Needed in ${set.name}"))
   }
 
   def findForced : Stream[Next] = {
@@ -326,6 +326,18 @@ object Solver {
     unknowns.filter(u => set.contains(u.cellNumber))
   }
 
+  def findNeededDigitInUnknowns
+    (unknowns: Stream[Unknown], tjpe: Heuristic.Value, description: => String)
+    (digit: Int)
+    : Stream[Next] =
+  {
+    unknowns.filter(_.isDigitPossible(digit)) match {
+      case Stream(unknown) =>
+        Stream(Next(tjpe, description, Placement(unknown.cellNumber, digit)))
+      case _ => Stream.empty
+    }
+  }
+
   def findNeededDigitInSet
     (unknowns: Stream[Unknown], exclusionSet: ExclusionSet,
       tjpe: Heuristic.Value, description: => String)
@@ -333,11 +345,7 @@ object Solver {
     : Stream[Next] =
   {
     val unknownsFromSet = unknownsInSet(unknowns, exclusionSet.cells)
-    unknownsFromSet.filter(_.isDigitPossible(digit)) match {
-      case Stream(unknown) =>
-        Stream(Next(tjpe, description, Placement(unknown.cellNumber, digit)))
-      case _ => Stream.empty
-    }
+    findNeededDigitInUnknowns(unknownsFromSet, tjpe, description)(digit)
   }
 
   def maybeShuffle[T](rnd: Option[Random], list: Iterable[T]) : Iterable[T] = {
