@@ -13,6 +13,7 @@ object Heuristic extends Enumeration
     Tricky,
     // These are not heuristics, they're just used to type Next and
     // Step.
+    Initial,
     Guess,
     ForcedGuess
   = Value

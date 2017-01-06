@@ -73,7 +73,8 @@ case class Solver (
   def placeAndContinue(next: Next) : Stream[Solution] = {
     val placement = next.placement
     val newSolver = place(placement.cellNumber, placement.digit)
-    val step = Step(newSolver.puzzle, Some(placement), next.description)
+    val step = Step(
+      newSolver.puzzle, Some(placement), next.tjpe, next.description)
     val newSteps = step :: steps
     val newSolver2 = newSolver.copy(steps = newSteps)
     newSolver2.solutionsTop
@@ -260,7 +261,7 @@ object Solver {
   {
     val (rnd1, rnd2) = maybeSplit(rnd)
     val unknowns = maybeShuffle(rnd1, (0 to 80).map(Unknown(_))).toStream
-    val step = Step(puzzle, None, "Initial puzzle")
+    val step = Step(puzzle, None, Heuristic.Initial, "Initial puzzle")
     val heuristicFunctions =
       options.heuristics.map(getHeuristicFunction).toStream
     val solver = new Solver(
