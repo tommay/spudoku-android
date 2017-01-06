@@ -154,7 +154,6 @@ case class Solver (
   // cell.
 
   def findMissingOne : Stream[Next] = {
-    // XXX should exclusionSets be a Stream?
     ExclusionSet.exclusionSets.flatMap{findMissingOneInSet(_)}
   }
 
