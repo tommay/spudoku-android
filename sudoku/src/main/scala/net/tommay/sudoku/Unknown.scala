@@ -42,22 +42,7 @@ case class Unknown(
   // creation, wtf.
 
   def getPossible : List[Int] = {
-    getPossibleList(possible, 1)
-  }
-
-  def getPossibleList(p: Int, digit: Int) : List[Int] = {
-    if (p == 0) {
-      List()
-    }
-    else {
-      val rest = getPossibleList(p >> 1, digit + 1)
-      if ((p & 1) != 0) {
-        digit :: rest
-      }
-      else {
-        rest
-      }
-    }
+    Unknown.getPossibleList(possible)
   }
 
   // Returns true if this and Other are in the same row, column, or
@@ -98,5 +83,20 @@ object Unknown {
       col = col,
       square = square,
       possible = 0x1FF)
+  }
+
+  def getPossibleList(p: Int, digit: Int = 1) : List[Int] = {
+    if (p == 0) {
+      List()
+    }
+    else {
+      val rest = getPossibleList(p >> 1, digit + 1)
+      if ((p & 1) != 0) {
+        digit :: rest
+      }
+      else {
+        rest
+      }
+    }
   }
 }
