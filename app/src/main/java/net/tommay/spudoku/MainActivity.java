@@ -1,5 +1,7 @@
 package net.tommay.spudoku;
 
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,6 +52,17 @@ public class MainActivity extends AppCompatActivity {
         List<String> layoutNames = LayoutNames.getLayoutNames();
 
         for (String layoutName : layoutNames) {
+            PrintStream log;
+            try {
+                log = new PrintStream(
+                    openFileOutput("create.log",
+                        MODE_PRIVATE | MODE_APPEND),
+                    true /* autoflush */);
+            }
+            catch (FileNotFoundException ex) {
+                // WTF.
+                log = null;
+            }
             PuzzleProducer puzzleProducer = new PuzzleProducer(
                 layoutName,
                 AOTStateImpl.create(
@@ -58,7 +71,8 @@ public class MainActivity extends AppCompatActivity {
                         "----15-4-3-----56-5--6----98-5-436" +
                         "-------------752-9-47----4--2-51-----7-3-15----",
                         "6798152433124795685846327198259436" +
-                        "71943761825167528934796384152451296387238157496")));
+                        "71943761825167528934796384152451296387238157496")),
+                log);
             _producerMap.put(layoutName, puzzleProducer);
         }
 
