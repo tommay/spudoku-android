@@ -36,21 +36,37 @@ public class MainActivity extends AppCompatActivity {
     private static final String KEY_PUZZLE = "puzzle";
     private static final String KEY_SOLUTION = "solution";
 
+    // Context-dependent "constants".
+
+    // This comes from main/res/values/colors.xml.  We have to wait to
+    // ge it until an instance method is called so we have a Context
+    // to find it in.
+
     private int _emptyCellColor;
+
+    // Map from layout names to the PuzzleProducer for that layout.
+    // To fill te Map in we need our context.
+
+    private final Map<String, PuzzleProducer> _producerMap = new HashMap();
+
+    // True variables for state.
 
     private RawPuzzle _rawPuzzle = null;
     private Puzzle _puzzle = null;
-
-    private final Map<String, PuzzleProducer> _producerMap = new HashMap();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i("Spudoku", "onCreate");
+
         setContentView(R.layout.activity_main);
+
+        // Initialize Context-dependent _emptyCellColor.
 
         Resources res = getResources();
         _emptyCellColor = res.getColor(R.color.emptyCell);
+
+        // Initialize Context-dependent _producerMap.
 
         List<String> layoutNames = LayoutNames.getLayoutNames();
 
@@ -84,12 +100,16 @@ public class MainActivity extends AppCompatActivity {
             _producerMap.put(layoutName, puzzleProducer);
         }
 
+        // Initialize the layout spinner with the layout names.
+
         Spinner spinner = (Spinner) findViewById(R.id.spinner_layout);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
             this, android.R.layout.simple_spinner_item, layoutNames);
         adapter.setDropDownViewResource(
             android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+
+        // Restore stuff from savedInstanceState.
 
         if (savedInstanceState != null) {
             String puzzle = savedInstanceState.getString(KEY_PUZZLE);
@@ -181,6 +201,10 @@ public class MainActivity extends AppCompatActivity {
         drawable.setColor(0xFF000000 | c);
     }
 
+    // clicked is called from the circle images in
+    // main/res/layout/board.xml.  Then a circle is clicked, we flip
+    // it between its solved and setup colors.
+
     public void clicked(View view) {
         String tag = (String)view.getTag();
         Log.i("Spudoku", "clicked " + tag);
@@ -198,20 +222,32 @@ public class MainActivity extends AppCompatActivity {
             R.id.button_setup,
             R.id.button_solved,
         };
-        for (int i = 0; i < buttonIds.length; i++) {
-            View view = findViewById(buttonIds[i]);
+        for (int buttonId : buttonIds) {
+            View view = findViewById(buttonId);
             view.setEnabled(enabled);
         }
     }
 
+    // The new button was clicked.  Set up a callback for when we have
+    // a Puzzle.
+
     public void clickNew(View view) {
         Log.i("Spudoku", "new");
+
+        // Retrieve the select layout from the layout spinner, and get
+        // the corrresponding puzzleProducer.
 
         Spinner spinner = (Spinner) findViewById(R.id.spinner_layout);
         String layoutName = (String) spinner.getSelectedItem();
         PuzzleProducer puzzleProducer = _producerMap.get(layoutName);
 
+        // Disable the buttons until we have a puzzle.  They are
+        // re-enabled in the callback.
+
         enableButtons(false);
+
+        // Set up a callback for when we have a Puzzle.
+
         AsyncCreater.<RawPuzzle>create(
             puzzleProducer,
             new Consumer<RawPuzzle>() {
@@ -225,17 +261,24 @@ public class MainActivity extends AppCompatActivity {
             });
     }
 
+    // The setup button was clicked.  Show the setup colors.
+
     public void clickSetup(View view) {
         Log.i("Spudoku", "setup");
         _puzzle.setup();
         showBoard();
     }
 
+    // The solved button was clicked.  Show the solved colors.
+
     public void clickSolved(View view) {
         Log.i("Spudoku", "solved");
         _puzzle.solved();
         showBoard();
     }
+
+    // Create a Puzzle from a RawPuzzle.  This is the only code that
+    // knows about both classes.
 
     private static Puzzle newPuzzle(RawPuzzle rawPuzzle) {
         return new Puzzle(rawPuzzle.puzzle, rawPuzzle.solution);
