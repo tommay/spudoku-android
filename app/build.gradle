@@ -4,14 +4,28 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.0"
     defaultConfig {
+        // These go into fields in the generated  BuildConfig java class:
         applicationId "net.tommay.spudoku"
-        minSdkVersion 15
-        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
+        buildConfigField "String", "CREATE_LOG", "null"
+
+        minSdkVersion 15
+        targetSdkVersion 25
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        // These things become gradle tasks "assembleDev", etc.
+        dev {
+            // Create puzzles with a consistent seed and log create times to
+	    // /data/data/net.tommay.spudoku/files/create.log.
+            buildConfigField "String", "CREATE_LOG", '"create.log"'
+            // This minify stuff can't go in defaultConfig because the
+	    // minifyEnabled method isn't available there.
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'

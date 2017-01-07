@@ -21,7 +21,9 @@ class PuzzleProducer implements Producer<RawPuzzle> {
                 public RawPuzzle get() {
                     long start = System.currentTimeMillis();
                     try {
-                        int seed = (int) start;
+                        // If we're logging create times then always
+                        // use the same seed for consistency.
+                        int seed = (log == null) ? (int) start : 2;
                         return Creater.create(seed, layoutName);
                     }
                     finally {

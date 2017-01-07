@@ -18,6 +18,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+// Auto-generated from aoo/build.gradle settings.
+import net.tommay.spudoku.BuildConfig;
+
 import net.tommay.spudoku.AOTStateImpl;
 import net.tommay.spudoku.AsyncCreater;
 import net.tommay.spudoku.LayoutNames;
@@ -51,18 +54,23 @@ public class MainActivity extends AppCompatActivity {
 
         List<String> layoutNames = LayoutNames.getLayoutNames();
 
-        for (String layoutName : layoutNames) {
-            PrintStream log;
+        // If configured in build.gradle, log puzzle create rimes to
+        // /data/data/net.tommay.spudoku/files/<CREATE_LOG>.
+
+        PrintStream log = null;
+        if (BuildConfig.CREATE_LOG != null) {
             try {
                 log = new PrintStream(
-                    openFileOutput("create.log",
+                    openFileOutput(BuildConfig.CREATE_LOG,
                         MODE_PRIVATE | MODE_APPEND),
                     true /* autoflush */);
             }
             catch (FileNotFoundException ex) {
                 // WTF.
-                log = null;
             }
+        }
+
+        for (String layoutName : layoutNames) {
             PuzzleProducer puzzleProducer = new PuzzleProducer(
                 layoutName,
                 AOTStateImpl.create(
