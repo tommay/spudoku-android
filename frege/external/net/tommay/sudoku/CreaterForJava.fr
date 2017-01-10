@@ -1,0 +1,24 @@
+module net.tommay.sudoku.CreaterForJava where
+
+-- Provide a "create" function intended to be called from Java that
+-- does all the heavy lifting like StdGen creation and Layout lookup
+-- in Frege so it can interface with Java scalars.
+
+import net.tommay.sudoku.Creater ()
+import net.tommay.sudoku.Layout ()
+import net.tommay.sudoku.Puzzle ()
+import net.tommay.sudoku.Solver ()
+import net.tommay.sudoku.SolverOptions ()
+
+import System.Random as Random ()
+
+create :: Int -> String -> (String, String)
+create randomSeed layoutName =
+  let rnd = Random.mkStdGen randomSeed
+  in case Layout.getLayout layoutName of
+        Nothing -> ("", "")
+        Just layout ->
+          let (puzzle, solution) = Creater.createWithSolution rnd layout $
+                Solver.solutions SolverOptions.all
+              toString = packed . Puzzle.toString
+          in (toString puzzle, toString solution)

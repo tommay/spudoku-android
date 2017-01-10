@@ -1,0 +1,130 @@
+module net.tommay.sudoku.Layout where
+
+import Data.HashMap as Map (HashMap)
+type Map = HashMap
+
+private layouts =
+  [
+    ("classic", classic),
+    ("leftRight", leftRight),
+    ("leftRightUpDown", leftRightUpDown),
+    ("identicalSquares", identicalSquares),
+    ("spinny", spinny),
+    ("random", random),
+    ("diagonal", diagonal),
+    ("doubleDiagonal", doubleDiagonal),
+    ("wtf", wtf),
+    ("wtf2", wtf2)
+  ]
+
+private classic :: Int -> [Int]
+private classic n =
+  [n, 80 - n]
+
+private reflectLeftRight :: Int -> Int
+private reflectLeftRight n =
+  let (_, col) = rowcol n
+  in n - col + 8 - col
+
+private leftRight :: Int -> [Int]
+private leftRight n =
+  [n, reflectLeftRight n]
+
+private reflectUpDown :: Int -> Int
+private reflectUpDown n =
+  let (row, _) = rowcol n
+      rowish = row * 9
+  in n - rowish + 72 - rowish
+
+private leftRightUpDown :: Int -> [Int]
+private leftRightUpDown n =
+  let leftRightSets = leftRight n
+  in leftRightSets ++ map reflectUpDown leftRightSets
+
+private identicalSquares :: Int -> [Int]
+private identicalSquares n =
+  let col = n `mod` 3
+      row = (n `div` 9) `mod` 3
+      base = row*9 + col
+  in map (base +) [0, 3, 6, 27, 30, 33, 54, 57, 60]
+
+private spinny :: Int -> [Int]
+private spinny n =
+  spinny' n []
+
+private spinny' :: Int -> [Int] -> [Int]
+private spinny' n result =
+  if n `elem` result
+    then result
+    else
+      let (row, col) = rowcol(n)
+          row' = col
+          col' = 8 - row
+      in spinny' ((row' * 9) + col') (n : result)
+
+private random :: Int -> [Int]
+private random n = [n]
+
+private reflectDiagonally :: Int -> Int
+private reflectDiagonally n =
+  let (row, col) = rowcol n
+      row' = col
+      col' = row
+  in row' * 9 + col'
+
+private diagonal :: Int -> [Int]
+private diagonal n = 
+  [n, reflectDiagonally n]
+
+private reflectDiagonally' :: Int -> Int
+private reflectDiagonally' n =
+  let (row, col) = rowcol n
+      row' = 8 - col
+      col' = 8 - row
+  in row' * 9 + col'
+
+private doubleDiagonal :: Int -> [Int]
+private doubleDiagonal n =
+  let diagonalSets = diagonal n
+  in diagonalSets ++ map reflectDiagonally' diagonalSets
+
+private wtf :: Int -> [Int]
+private wtf n = 
+  let (row, col) = rowcol n
+      row' = 8 - col
+      col' = row
+  in [n, row' * 9 + col']
+
+private wtf2 :: Int -> [Int]
+private wtf2 n = 
+  let (row, col) = rowcol (80 - n)
+      row' = col
+      col' = row
+  in [n, row' * 9 + col']
+
+private toLower :: String -> String
+private toLower =
+  String.toLowerCase
+
+getLayout :: String -> Maybe [[Int]]
+getLayout style =
+  let layoutMap = Map.fromList $ [(toLower name, func) | (name, func) <- layouts]
+      maybeFunc = Map.lookup (toLower style) layoutMap
+  in case maybeFunc of
+       Nothing -> Nothing
+       Just func -> Just $ uniqBy minimum $ map (uniq . func) [0..80]
+
+getLayoutStrings :: [String]
+getLayoutStrings =
+  map fst layouts
+
+private rowcol :: Int -> (Int, Int)
+private rowcol n =
+  (n `div` 9, n `mod` 9)
+
+private uniq :: Ord a => [a] -> [a]
+private uniq = uniqBy id
+
+private uniqBy :: Ord b => (a -> b) -> [a] -> [a]
+private uniqBy func list =
+  Map.values $ Map.fromList [(func e, e) | e <- list]

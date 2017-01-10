@@ -1,0 +1,97 @@
+module net.tommay.sudoku.Puzzle where
+
+import frege.Prelude hiding (empty)
+
+import net.tommay.sudoku.Digit (Digit)
+import net.tommay.sudoku.Util ()
+
+import Data.Char as Char ()
+import Data.List as List ()
+import Data.HashMap as Map (HashMap)
+type Map = HashMap
+
+-- cellNumber -> Digit
+
+abstract data Puzzle = Puzzle {
+  placed :: Map Int Digit
+}
+
+-- Returns a new Puzzle with nothing placed.
+--
+empty :: Puzzle
+empty =
+  Puzzle.Puzzle {
+    placed = Map.empty
+  }
+
+each :: Puzzle -> [(Int, Digit)]
+each this =
+  Map.each $ Puzzle.placed this
+
+place :: Puzzle -> Int -> Digit -> Puzzle
+place this cellNumber digit =
+  this.{
+    placed = Map.insert cellNumber digit $ Puzzle.placed this
+  }
+
+remove :: Puzzle -> [Int] -> Puzzle
+remove this cellNumbers =
+  let remaining = foldr
+        (\ cellNumber map -> Map.delete cellNumber map)
+        (Puzzle.placed this)
+        cellNumbers
+  in this.{ placed = remaining }
+
+-- Returns the number of placed digits.
+--
+size :: Puzzle -> Int
+size this =
+  Map.size $ Puzzle.placed this
+
+-- Returns a new Puzzle with each Cell initialized according to
+-- Setup, which is a string of 81 digits or dashes.
+--
+fromString :: String -> Puzzle
+fromString setup =
+  let digits = toDigits setup
+      zipped = zip [0..80] digits
+  in foldr (\ (cellNumber, digit) this ->
+             case digit of
+               Nothing -> this
+               Just digit -> Puzzle.place this cellNumber digit
+           )
+       empty
+       zipped
+
+-- Given a Setup string, returns a list of Maybe Digit for
+-- each cell.
+--
+private toDigits :: String -> [Maybe Digit]
+private toDigits setup =
+  [case char of
+    '-' -> Nothing
+    _ -> Just $ Char.digitToInt char
+   | char <- setup]
+
+-- The opposite of fromString.  Given a Puzzle, create a string of 81
+-- digits or dashes.  Creates two lists of (cellNumber, Char), one for
+-- placed cells and one for unplaced cells, then sorts them together and
+-- extracts the Chars in order.
+--
+toString :: Puzzle -> [Char]
+toString this =
+  let p = map (\ (k, v) -> (k, Char.intToDigit v)) $ each this
+      unknownNumbers = (List.\\) [0..80] $ Map.keys $ Puzzle.placed this
+      u = zip unknownNumbers $ repeat '-'
+  in map snd $ List.sort $ p ++ u
+
+-- Returns a string that prints out as a grid of digits.
+--
+toPuzzleString :: Puzzle -> String
+toPuzzleString this =
+  unlines $
+    map (\puzzles ->
+          unlines $
+            map (\row -> unwords $ map packed $ Util.slices 3 row) $
+              Util.slices 9 puzzles) $
+      Util.slices 27 $ Puzzle.toString this
