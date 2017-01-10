@@ -1,0 +1,7 @@
+end :: [a] -> a
+end list =
+  foldr1 (\a accum -> accum) list
+
+end2 :: [a] -> a
+end2 [a] = a
+end2 (h:t) = end2 t

@@ -1,0 +1,9 @@
+main = return ()
+
+is5 :: Int -> Bool
+is5 n =
+  n == 5
+
+notIs5 :: Int -> Bool
+notIs5 =
+  not . is5

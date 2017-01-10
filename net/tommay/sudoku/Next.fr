@@ -1,0 +1,10 @@
+module net.tommay.sudoku.Next where
+
+import net.tommay.sudoku.Digit (Digit)
+import net.tommay.sudoku.Placement (Placement (Placement))
+
+data Next = Next Placement String
+
+new :: String -> Digit -> Int -> Next
+new description !digit !cellNumber =
+  Next.Next (Placement cellNumber digit) description

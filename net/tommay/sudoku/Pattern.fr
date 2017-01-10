@@ -1,0 +1,60 @@
+module net.tommay.sudoku.Pattern where
+
+import net.tommay.sudoku.Creater ()
+import net.tommay.sudoku.Digit (Digit)
+import net.tommay.sudoku.Puzzle (Puzzle)
+import net.tommay.sudoku.Solution (Solution)
+import net.tommay.sudoku.Solver ()
+import net.tommay.sudoku.SolverOptions ()
+
+import frege.java.util.Regex as Regex ()
+import Data.List as List ()
+import Data.HashMap as Map (HashMap)
+type Map = HashMap
+import System.Random as Random ()
+
+type FilePath = String
+
+main (filename:_) = do
+  layout <- getLayout filename
+  let size = 81 - (length $ head layout)
+  rnd <- Random.getStdGen
+  let puzzle = head
+        $ filter ((== size) . Puzzle.size)
+        $ Creater.createList rnd layout
+        $ Solver.solutions SolverOptions.noGuessing
+  putStrLn $ Puzzle.toPuzzleString puzzle
+  putStrLn $ unlines $ map packed $ map (flip replicate $ '*') $ List.sort
+    $ Map.values $ count puzzle
+
+getLayout :: FilePath -> IO [[Int]]
+getLayout filename = do
+  pattern <- getPattern filename
+  return $ toLayout pattern
+
+-- Returns the contents of Filename as an IO String with "#" comments
+-- and whitespace deleted.  The result should be a string of 81 dashes
+-- and non-dashes, where the non-dashes will be cells to place numbers.
+--
+getPattern :: FilePath -> IO String
+getPattern filename = do
+  raw <- readFile filename
+  let
+    noComments = Regex.substituteFirst raw '#.*' ""
+    setup = Regex.substituteAll noComments '\s+' ""
+  return setup
+
+-- Converts a pattern string to a list of cells to create.
+--
+toLayout :: String -> [[Int]]
+toLayout string =
+  let zipped = zip [0..] $ unpacked string
+      cells =  map fst $ filter (\ (_, char) -> char == '-') zipped
+  in [cells]
+
+count :: Puzzle -> Map Digit Int
+count puzzle =
+  foldr (\ (cellNumber, digit) ->
+          Map.insertWith (+) digit 1)
+        Map.empty
+        $ Puzzle.each puzzle

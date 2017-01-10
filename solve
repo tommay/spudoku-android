@@ -1,0 +1,3 @@
+#!/bin/sh
+
+exec java -Xss10m -cp build:$(echo fregec*.jar) net.tommay.sudoku.Solve "$@"
