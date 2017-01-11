@@ -53,5 +53,5 @@ dependencies {
 
 // The sudoku Puzzle create etc code is a separate scala project.
 dependencies {
-    compile project(':sudoku')
+    compile project(':scala')
 }
