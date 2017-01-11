@@ -1,3 +1,4 @@
 rootProject.name = "Spudoku"
 include ':app'
 include ':scala'
+include ':frege'

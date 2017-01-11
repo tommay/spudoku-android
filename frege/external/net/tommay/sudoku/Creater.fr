@@ -1,0 +1,54 @@
+module net.tommay.sudoku.Creater where
+
+import net.tommay.sudoku.Puzzle (Puzzle)
+import net.tommay.sudoku.Solution (Solution)
+import net.tommay.sudoku.Solver ()
+import net.tommay.sudoku.Util ()
+
+import System.Random as Random ()
+
+-- Returns (puzzle, solvedPuzzle)
+--
+createWithSolution :: Random.StdGen -> [[Int]] -> (Puzzle -> [Solution]) ->
+  (Puzzle, Puzzle)
+createWithSolution rnd layout solver =
+  let (rnd1, rnd2) = Random.split rnd
+      solvedPuzzle = randomSolvedPuzzle rnd1
+      layout' = Util.shuffle rnd2 layout
+      puzzle = create' solvedPuzzle layout' solver
+  in (puzzle, solvedPuzzle)
+
+create :: Random.StdGen -> [[Int]] -> (Puzzle -> [Solution]) -> Puzzle
+create rnd layout solver =
+  fst $ createWithSolution rnd layout solver
+
+private create' :: Puzzle -> [[Int]] -> (Puzzle -> [Solution]) -> Puzzle
+private create' puzzle cellNumberLists solver =
+  foldr
+    (\ list accum ->
+      -- We know accum has only one solution.
+      -- Remove more stuff and check if that's still true.
+      let newPuzzle = Puzzle.remove accum list
+      in case solver newPuzzle of
+        [_] ->
+          -- newPuzzle has only one solution, go with it.
+          newPuzzle
+        _ ->
+          -- Ooops, removed too much, stick with the original.
+          accum
+    )
+    puzzle
+    cellNumberLists
+
+createList :: Random.StdGen -> [[Int]] -> (Puzzle -> [Solution]) -> [Puzzle]
+createList rnd layout solvable =
+  let (rnd1, rnd2) = Random.split rnd
+      puzzle = create rnd1 layout solvable
+  in puzzle : (createList rnd2 layout solvable)
+
+private randomSolvedPuzzle :: Random.StdGen -> Puzzle
+private randomSolvedPuzzle rnd =
+  let emptyPuzzle = Puzzle.empty
+      randomSolution = head $ Solver.allRandomSolutions rnd emptyPuzzle
+      randomPuzzle = Solution.puzzle randomSolution
+  in randomPuzzle

@@ -1,0 +1,9 @@
+import Data.List as List
+
+number :: [a] -> [(Int, a)]
+number [] = []
+number (head:tail) =
+  List.scanr
+    (\ a (count, _) -> (count + 1, a))
+    (0, head)
+    tail

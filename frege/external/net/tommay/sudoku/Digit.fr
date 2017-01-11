@@ -1,0 +1,3 @@
+module net.tommay.sudoku.Digit where
+
+type Digit = Int

@@ -1,0 +1,81 @@
+import qualified Creater
+import qualified Layout
+import qualified Puzzle
+import           Puzzle (Puzzle)
+import qualified Solution
+import           Solution (Solution)
+import qualified Solver
+import qualified SolverOptions
+import           SolverOptions (SolverOptions, Heuristic (..))
+import qualified Stats
+import qualified Util
+
+import qualified System.IO as IO
+import qualified Data.List as List
+import qualified System.Random as Random
+import qualified System.Environment
+
+data Test = Test String SolverOptions
+
+-- kitchenSink has all the unique heuristics and permanent tricky
+-- sets.  It can solve the most puzzles.  But are there any puzzles it
+-- can't solve that can be solved with other heuristics?  Of course
+-- nor.  It's a superset.  The kitchen sink.
+--
+--kitchenSink = SolverOptions.new [Forced, Needed, Tricky] True False
+kitchenSink = SolverOptions.new [Needed, Forced] False False
+
+tests :: [Test]
+xtests = [
+--  Test "  Guess" $ SolverOptions.new [] False True,
+  Test "  Tricky" $ SolverOptions.new [Tricky] False False,
+  Test "* Tricky" $ SolverOptions.new [Tricky] True False,
+  Test "  Needed" $ SolverOptions.new [Needed] False False,
+  Test "* Needed" $ SolverOptions.new [Needed] True False,
+  Test "  A" $ SolverOptions.new [EasyPeasy, Tricky] False False,
+  Test "* A" $ SolverOptions.new [EasyPeasy, Tricky] True False,
+  Test "  B" $ SolverOptions.new [EasyPeasy, MissingOne, Tricky] False False,
+  Test "* B" $ SolverOptions.new [EasyPeasy, MissingOne, Tricky] True False,
+  Test "  C" $ SolverOptions.new [Forced] False False,
+  Test "* C" $ SolverOptions.new [Forced] True False,
+  Test "  D" $ SolverOptions.new [Forced, Needed, Tricky] False False
+--  Test "* D" $ SolverOptions.new [Forced, Needed, Tricky] True False
+  ]
+
+tests = [
+  Test "  Tricky" $ SolverOptions.new [Tricky] False False
+--  Test "  Forced" $ SolverOptions.new [Forced] False False
+--  Test "  Needed" $ SolverOptions.new [Needed] False False
+  ]
+
+main = do
+  args <- System.Environment.getArgs
+  case args of
+    [style] ->
+      case Layout.getLayout style of
+        Just layout -> tryHeuristicsWithLayout layout
+        Nothing -> showLayouts
+    _ -> showLayouts
+
+showLayouts = do
+  putStrLn $
+    "Valid layouts:\n" ++ (List.intercalate " " Layout.getLayoutStrings)
+
+tryHeuristicsWithLayout :: [[Int]] -> IO ()
+tryHeuristicsWithLayout layout = do
+  rnd <- Random.getStdGen
+  let hardPuzzles = filter (not . Solver.isSolvableWith kitchenSink)
+        $ Creater.createList rnd layout
+      (puzzle, name) = head $ concat $ map solvePuzzle hardPuzzles
+  putStrLn $ "Solved by " ++ name ++ ":"
+  putStrLn $ Puzzle.toPuzzleString puzzle
+
+solvePuzzle :: Puzzle -> [(Puzzle, String)]
+solvePuzzle puzzle =
+  concat $ map (tryToSolve puzzle) tests
+
+tryToSolve :: Puzzle -> Test -> [(Puzzle, String)]
+tryToSolve puzzle (Test name options) =
+  if Solver.isSolvableWith options puzzle
+    then [(puzzle, name)]
+    else []
