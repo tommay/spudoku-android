@@ -13,6 +13,7 @@ dependencies {
 }
 
 compileFrege {
+  source = "external"
   optimize = true
   target = "1.7"
 }

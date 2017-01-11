@@ -53,5 +53,10 @@ dependencies {
 
 // The sudoku Puzzle create etc code is a separate scala project.
 dependencies {
-    compile project(':scala')
+    if (project.hasProperty("frege")) {
+        compile project(':frege')
+    }
+    else {
+        compile project(':scala')
+    }
 }
