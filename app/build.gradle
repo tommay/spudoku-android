@@ -35,6 +35,23 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    // Build either the scala glue code or the frege glue code that provides
+    // the java dode a uniform API to the scala/frege code.  This is the
+    // only way I could figure out how to do this, by putting it in its own
+    // directory tree and coditionally adding the tree to the main java
+    // sourceSet.
+
+    sourceSets {
+        main {
+            if (project.hasProperty("frege")) {
+                java.srcDirs += "glue/frege"
+            }
+            else {
+                java.srcDirs += "glue/scala"
+            }
+        }
+    }
 }
 
 dependencies {
@@ -47,11 +64,13 @@ dependencies {
 }
 
 // For android.support.percent.PercentRelativeLayout:
+
 dependencies {
     compile 'com.android.support:percent:23.3.0'
 }
 
-// The sudoku Puzzle create etc code is a separate scala project.
+// The sudoku Puzzle create etc code is a separate scala or frege project.
+
 dependencies {
     if (project.hasProperty("frege")) {
         compile project(':frege')
