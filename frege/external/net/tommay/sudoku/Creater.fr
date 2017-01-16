@@ -7,6 +7,10 @@ import net.tommay.sudoku.Util ()
 
 import System.Random as Random ()
 
+create :: Random.StdGen -> [[Int]] -> (Puzzle -> [Solution]) -> Puzzle
+create rnd layout solver =
+  fst $ createWithSolution rnd layout solver
+
 -- Returns (puzzle, Solution)
 --
 createWithSolution :: Random.StdGen -> [[Int]] -> (Puzzle -> [Solution]) ->
@@ -16,10 +20,6 @@ createWithSolution rnd layout solver =
       solvedPuzzle = randomSolvedPuzzle rnd1
       layout' = Util.shuffle rnd2 layout
   in create' solvedPuzzle layout' solver
-
-create :: Random.StdGen -> [[Int]] -> (Puzzle -> [Solution]) -> Puzzle
-create rnd layout solver =
-  fst $ createWithSolution rnd layout solver
 
 private create' :: Puzzle -> [[Int]] -> (Puzzle -> [Solution]) ->
   (Puzzle, Solution)
