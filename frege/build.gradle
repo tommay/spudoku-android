@@ -2,6 +2,11 @@ plugins {
   id "org.frege-lang" version "0.8"
 }
 
+// The gradle frege plugin doesn't support sourcesets.  No matter what
+// anything is set to, it just compiles the code in src/main/frege.  So
+// that directory is symlinked to "external" which has the source code.
+// No other source directories can be added which sucks a huge rock.
+
 // Android needs jvm 1.7.  I'm using a frege version built from
 // https://github.com/Frege/frege commit
 // fdd68d0ca13119522da245cf6747f0be8498239e
@@ -13,7 +18,6 @@ dependencies {
 }
 
 compileFrege {
-  source = "external"
   optimize = true
   target = "1.7"
 }
