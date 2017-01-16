@@ -7,6 +7,7 @@ module net.tommay.sudoku.CreaterForJava where
 import net.tommay.sudoku.Creater ()
 import net.tommay.sudoku.Layout ()
 import net.tommay.sudoku.Puzzle ()
+import net.tommay.sudoku.Solution (Solution)
 import net.tommay.sudoku.Solver ()
 import net.tommay.sudoku.SolverOptions ()
 
@@ -21,4 +22,4 @@ create randomSeed layoutName =
           let (puzzle, solution) = Creater.createWithSolution rnd layout $
                 Solver.solutions SolverOptions.all
               toString = packed . Puzzle.toString
-          in (toString puzzle, toString solution)
+          in (toString puzzle, toString $ Solution.puzzle solution)

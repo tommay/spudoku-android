@@ -7,37 +7,37 @@ import net.tommay.sudoku.Util ()
 
 import System.Random as Random ()
 
--- Returns (puzzle, solvedPuzzle)
+-- Returns (puzzle, Solution)
 --
 createWithSolution :: Random.StdGen -> [[Int]] -> (Puzzle -> [Solution]) ->
-  (Puzzle, Puzzle)
+  (Puzzle, Solution)
 createWithSolution rnd layout solver =
   let (rnd1, rnd2) = Random.split rnd
       solvedPuzzle = randomSolvedPuzzle rnd1
       layout' = Util.shuffle rnd2 layout
-      puzzle = create' solvedPuzzle layout' solver
-  in (puzzle, solvedPuzzle)
+  in create' solvedPuzzle layout' solver
 
 create :: Random.StdGen -> [[Int]] -> (Puzzle -> [Solution]) -> Puzzle
 create rnd layout solver =
   fst $ createWithSolution rnd layout solver
 
-private create' :: Puzzle -> [[Int]] -> (Puzzle -> [Solution]) -> Puzzle
+private create' :: Puzzle -> [[Int]] -> (Puzzle -> [Solution]) ->
+  (Puzzle, Solution)
 private create' puzzle cellNumberLists solver =
   foldr
     (\ list accum ->
-      -- We know accum has only one solution.
+      -- We know accum's Puzzle has only one solution.
       -- Remove more stuff and check if that's still true.
-      let newPuzzle = Puzzle.remove accum list
+      let newPuzzle = Puzzle.remove (fst accum) list
       in case solver newPuzzle of
-        [_] ->
+        [solution] ->
           -- newPuzzle has only one solution, go with it.
-          newPuzzle
+          (newPuzzle, solution)
         _ ->
           -- Ooops, removed too much, stick with the original.
           accum
     )
-    puzzle
+    (puzzle, Solution.new puzzle [])
     cellNumberLists
 
 createList :: Random.StdGen -> [[Int]] -> (Puzzle -> [Solution]) -> [Puzzle]
