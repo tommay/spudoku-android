@@ -11,8 +11,9 @@ import net.tommay.util.ProducerException;
 class PuzzleProducer implements Producer<RawPuzzle> {
     private final AOTProducer<RawPuzzle> _aotProducer;
 
-    public PuzzleProducer (final String layoutName, AOTState aotState,
-        final PrintStream log)
+    public PuzzleProducer (
+        final PuzzleCreater puzzleCreater, final String layoutName,
+        AOTState aotState, final PrintStream log)
     {
         _aotProducer = new AOTProducer<RawPuzzle> (
             aotState,
@@ -24,7 +25,7 @@ class PuzzleProducer implements Producer<RawPuzzle> {
                         // If we're logging create times then always
                         // use the same seed for consistency.
                         int seed = (log == null) ? (int) start : 2;
-                        return Creater.create(seed, layoutName);
+                        return puzzleCreater.create(seed, layoutName);
                     }
                     finally {
                         if (log != null) {

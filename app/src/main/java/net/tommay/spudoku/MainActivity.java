@@ -36,6 +36,17 @@ public class MainActivity extends AppCompatActivity {
     private static final String KEY_PUZZLE = "puzzle";
     private static final String KEY_SOLUTION = "solution";
 
+    // Difficulty ratings for creating puzzles, and associated
+    // PuzzleCreater.
+
+    private final Map<String, PuzzleCreater> _ratingsMap =
+        new HashMap(){{
+            put("Easy", new EasyCreater());
+        }};
+    private static final String[] _ratings = {
+        "Easy",
+    };
+
     // Context-dependent "constants".
 
     // This comes from main/res/values/colors.xml.  We have to wait to
@@ -44,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
 
     private int _emptyCellColor;
 
-    // Map from layout names to the PuzzleProducer for that layout.
-    // To fill te Map in we need our context.
+    // Map from layout names + ratings to the PuzzleProducer for that
+    // layout.  To fill the Map in we need our context.
 
     private final Map<String, PuzzleProducer> _producerMap = new HashMap();
 
@@ -70,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
         List<String> layoutNames = LayoutNames.getLayoutNames();
 
-        // If configured in build.gradle, log puzzle create rimes to
+        // If configured in build.gradle, log puzzle create times to
         // /data/data/net.tommay.spudoku/files/<CREATE_LOG>.
 
         PrintStream log = null;
@@ -86,18 +97,25 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        for (String layoutName : layoutNames) {
-            PuzzleProducer puzzleProducer = new PuzzleProducer(
-                layoutName,
-                AOTStateImpl.create(
-                    getSharedPreferences(layoutName, 0),
-                    new RawPuzzle(
-                        "----15-4-3-----56-5--6----98-5-436" +
-                        "-------------752-9-47----4--2-51-----7-3-15----",
-                        "6798152433124795685846327198259436" +
-                        "71943761825167528934796384152451296387238157496")),
-                log);
-            _producerMap.put(layoutName, puzzleProducer);
+        for (Map.Entry<String,PuzzleCreater> entry : _ratingsMap.entrySet()) {
+            String rating = entry.getKey();
+            PuzzleCreater puzzleCreater = entry.getValue();
+            
+            for (String layoutName : layoutNames) {
+                String producerName = makeProducerName(rating, layoutName);
+                PuzzleProducer puzzleProducer = new PuzzleProducer(
+                    puzzleCreater,
+                    layoutName,
+                    AOTStateImpl.create(
+                        getSharedPreferences(producerName, 0),
+                        new RawPuzzle(
+                            "----15-4-3-----56-5--6----98-5-436-------" +
+                            "------752-9-47----4--2-51-----7-3-15----",
+                            "67981524331247956858463271982594367194376" +
+                            "1825167528934796384152451296387238157496")),
+                    log);
+                _producerMap.put(producerName, puzzleProducer);
+            }
         }
 
         // Initialize the layout spinner with the layout names.
@@ -117,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
             Spinner spinner = (Spinner) findViewById(R.id.spinner_rating);
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_item,
-                new String[] { "Easy", "Medium", "Hard", "Wicked" });
+                _ratings);
             adapter.setDropDownViewResource(
                 android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(adapter);
@@ -251,9 +269,10 @@ public class MainActivity extends AppCompatActivity {
         // Retrieve the select layout from the layout spinner, and get
         // the corrresponding puzzleProducer.
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner_layout);
-        String layoutName = (String) spinner.getSelectedItem();
-        PuzzleProducer puzzleProducer = _producerMap.get(layoutName);
+        String layoutName = getSpinnerItem(R.id.spinner_layout);
+        String rating = getSpinnerItem(R.id.spinner_rating);
+        PuzzleProducer puzzleProducer =
+            _producerMap.get(makeProducerName(rating, layoutName));
 
         // Disable the buttons until we have a puzzle.  They are
         // re-enabled in the callback.
@@ -273,6 +292,15 @@ public class MainActivity extends AppCompatActivity {
                     enableButtons(true);
                 }
             });
+    }
+
+    private String getSpinnerItem(int viewId) {
+        Spinner spinner = (Spinner) findViewById(viewId);
+        return (String) spinner.getSelectedItem();
+    }
+
+    private static String makeProducerName(String rating, String layoutName) {
+        return rating + "-" + layoutName;
     }
 
     // The setup button was clicked.  Show the setup colors.

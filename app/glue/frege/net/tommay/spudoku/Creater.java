@@ -10,8 +10,8 @@ import frege.prelude.PreludeBase.TTuple2;
 import frege.run7.Thunk;
 
 class Creater {
-    public static RawPuzzle create(int seed, String layoutName) {
-        TTuple2<String,String> t = CreaterForJava.create(
+    public static RawPuzzle createEasy(int seed, String layoutName) {
+        TTuple2<String,String> t = CreaterForJava.createEasy(
             Thunk.<Integer>lazy(seed), layoutName);
         String puzzle = PreludeBase.<String, String>fst(t);
         String solution = PreludeBase.<String, String>snd(t);

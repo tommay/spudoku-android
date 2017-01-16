@@ -9,17 +9,25 @@ import net.tommay.sudoku.Layout ()
 import net.tommay.sudoku.Puzzle ()
 import net.tommay.sudoku.Solution (Solution)
 import net.tommay.sudoku.Solver ()
-import net.tommay.sudoku.SolverOptions ()
+import net.tommay.sudoku.SolverOptions (SolverOptions)
+import net.tommay.sudoku.SolverOptions (Heuristic)
 
 import System.Random as Random ()
 
-create :: Int -> String -> (String, String)
-create randomSeed layoutName =
+createEasy :: Int -> String -> (String, String)
+createEasy randomSeed layoutName =
+  -- XXX EasyPeasy and MissingOne are both subsets of Needed, but they
+  -- are the easiest subsets of Needed to find visually.
+  create randomSeed layoutName
+    $ SolverOptions.new [EasyPeasy, MissingOne] False False
+
+private create :: Int -> String -> SolverOptions -> (String, String)
+private create randomSeed layoutName options =
   let rnd = Random.mkStdGen randomSeed
   in case Layout.getLayout layoutName of
         Nothing -> ("", "")
         Just layout ->
           let (puzzle, solution) = Creater.createWithSolution rnd layout $
-                Solver.solutions SolverOptions.all
+                Solver.solutions options
               toString = packed . Puzzle.toString
           in (toString puzzle, toString $ Solution.puzzle solution)
