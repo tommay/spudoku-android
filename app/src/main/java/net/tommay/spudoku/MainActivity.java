@@ -102,12 +102,26 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize the layout spinner with the layout names.
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner_layout);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-            this, android.R.layout.simple_spinner_item, layoutNames);
-        adapter.setDropDownViewResource(
-            android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        {
+            Spinner spinner = (Spinner) findViewById(R.id.spinner_layout);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item, layoutNames);
+            adapter.setDropDownViewResource(
+                android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(adapter);
+        }
+
+        // Initialize the rating spinner.
+
+        {
+            Spinner spinner = (Spinner) findViewById(R.id.spinner_rating);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item,
+                new String[] { "Easy", "Medium", "Hard", "Wicked" });
+            adapter.setDropDownViewResource(
+                android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(adapter);
+        }
 
         // Restore stuff from savedInstanceState.
 
