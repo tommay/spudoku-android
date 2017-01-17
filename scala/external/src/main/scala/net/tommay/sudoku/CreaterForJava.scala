@@ -5,7 +5,17 @@ package net.tommay.sudoku
 // in Scala.
 
 object CreaterForJava {
-  def create(randomSeed: Int, layoutName: String)
+  def createEasy(randomSeed: Int, layoutName: String)
+      : (String, String) =
+  {
+    // XXX EasyPeasy and MissingOne are both subsets of Needed, but they
+    // are the easiest subsets of Needed to find visually.
+    val options = new SolverOptions(
+      List(Heuristic.EasyPeasy, Heuristic.MissingOne), false, false)
+    create(randomSeed, layoutName, options)
+  }
+
+  def create(randomSeed: Int, layoutName: String, options: SolverOptions)
       : (String, String) =
   {
     val rnd = new scala.util.Random(randomSeed)
@@ -13,8 +23,8 @@ object CreaterForJava {
       case None => ("", "")
       case Some(layout) =>
         val (puzzle, solution) = Creater.createWithSolution(
-          rnd, layout, Solver.solutions(SolverOptions.all))
-        (puzzle.toString, solution.toString)
+          rnd, layout, Solver.solutions(options))
+        (puzzle.toString, solution.puzzle.toString)
     }
   }
 }

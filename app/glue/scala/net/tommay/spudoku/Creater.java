@@ -4,8 +4,8 @@ import net.tommay.spudoku.RawPuzzle;
 import net.tommay.sudoku.CreaterForJava;
 
 class Creater {
-    public static RawPuzzle create (int seed, String layoutName) {
-        scala.Tuple2 result = CreaterForJava.create(
+    public static RawPuzzle createEasy (int seed, String layoutName) {
+        scala.Tuple2 result = CreaterForJava.createEasy(
             seed, layoutName);
         return new RawPuzzle((String)result._1, (String)result._2);
     }
