@@ -1,30 +1,31 @@
 package net.tommay.spudoku;
 
 class Cell {
-    private final int _color;
+    private final int _digit;
     private final boolean _isSetup;
-    private boolean _isSolved;
+    private boolean _isPlaced;
 
-    Cell (int color, boolean isSetup) {
-        _color = color;
+    Cell (int digit, boolean isSetup) {
+        _digit = digit;
         _isSetup = isSetup;
-        _isSolved = false;
+        _isPlaced = isSetup;
     }
 
-    Integer getColor () {
-        if (_isSetup || _isSolved) {
-            return _color;
-        }
-        else {
-            return null;
-        }
+    Integer getSetup() {
+        return _isSetup ? _digit : null;
     }
 
-    void setSolved (boolean solved) {
-        _isSolved = solved;
+    Integer getSolved() {
+        return _digit;
     }
-    
-    void flip () {
-        _isSolved = !_isSolved;
+
+    Integer getPlaced() {
+        return _isPlaced ? _digit : null;
+    }
+
+    void togglePlaced() {
+        if (!_isSetup) {
+            _isPlaced = !_isPlaced;
+        }
     }
 }

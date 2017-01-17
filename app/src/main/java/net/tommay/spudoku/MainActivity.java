@@ -31,10 +31,26 @@ import net.tommay.util.Consumer;
 import net.tommay.util.Producer;
 
 public class MainActivity extends AppCompatActivity {
+    private enum Showing {
+        SETUP, SOLVED, PLACED,
+    };
+
     // Keys for Bundle values.
 
     private static final String KEY_PUZZLE = "puzzle";
     private static final String KEY_SOLUTION = "solution";
+
+    private static final int[] _colors = new int[] {
+        0xff0000,               // red
+        0xff9900,               // orange
+        0xffff00,               // yellow
+        0x33cc33,               // light green
+        0x005900,               // dark green
+        0x6db5f9,               // light blue
+        0x0000cc,               // dark blue
+        0xed82ed,               // lavender
+        0x660082,               // purple
+    };
 
     // Difficulty ratings for creating puzzles, and associated
     // PuzzleCreater.
@@ -50,13 +66,13 @@ public class MainActivity extends AppCompatActivity {
     // Context-dependent "constants".
 
     // This comes from main/res/values/colors.xml.  We have to wait to
-    // ge it until an instance method is called so we have a Context
-    // to find it in.
+    // get it until this object has been constructed to give us a
+    // Context for accessing resources.
 
     private int _emptyCellColor;
 
-    // Map from layout names + ratings to the PuzzleProducer for that
-    // layout.  To fill the Map in we need our context.
+    // Map from ratings + layout names to the PuzzleProducer for that
+    // combination.  To fill the Map in we need our Context.
 
     private final Map<String, PuzzleProducer> _producerMap = new HashMap();
 
@@ -64,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RawPuzzle _rawPuzzle = null;
     private Puzzle _puzzle = null;
+    private Showing _showing;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,10 +93,6 @@ public class MainActivity extends AppCompatActivity {
 
         Resources res = getResources();
         _emptyCellColor = res.getColor(R.color.emptyCell);
-
-        // Initialize Context-dependent _producerMap.
-
-        List<String> layoutNames = LayoutNames.getLayoutNames();
 
         // If configured in build.gradle, log puzzle create times to
         // /data/data/net.tommay.spudoku/files/<CREATE_LOG>.
@@ -96,6 +109,10 @@ public class MainActivity extends AppCompatActivity {
                 // WTF.
             }
         }
+
+        List<String> layoutNames = LayoutNames.getLayoutNames();
+
+        // Initialize Context-dependent _producerMap.
 
         for (Map.Entry<String,PuzzleCreater> entry : _ratingsMap.entrySet()) {
             String rating = entry.getKey();
@@ -140,6 +157,8 @@ public class MainActivity extends AppCompatActivity {
                 android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(adapter);
         }
+
+        _showing = Showing.PLACED;
 
         // Restore stuff from savedInstanceState.
 
@@ -210,42 +229,50 @@ public class MainActivity extends AppCompatActivity {
         Log.i("Spudoku", "onDestroy");
     }
 
-    // This is pretty awful.
-
     private void showBoard () {
         if (_puzzle != null) {
-            View view = findViewById(R.id.board);
+            View boardView = findViewById(R.id.board);
             for (int i = 0; i < 81; i++) {
-                ImageView cell =
-                    (ImageView)view.findViewWithTag(Integer.toString(i));
-                colorCell(cell, _puzzle, i);
+                ImageView cellView =
+                    (ImageView)boardView.findViewWithTag(Integer.toString(i));
+                showCell(cellView, _puzzle.getCell(i));
             }
         }
     }
 
-    private void colorCell(ImageView cell, Puzzle puzzle, int n)
-    {
-        GradientDrawable drawable = (GradientDrawable)cell.getDrawable();
-        //Log.i("Spudoku", "drawable: " + drawable);
+    private void showCell(ImageView cellView, Cell cell) {
+        // It would be nicer to use an interface with a getCellColor
+        // method but it's painfully verbose so just live with switch.
+        Integer digit = null;
+        switch (_showing) {
+          case SETUP:
+            digit = cell.getSetup();
+            break;
+          case SOLVED:
+            digit = cell.getSolved();
+            break;
+          case PLACED:
+            digit = cell.getPlaced();
+            break;
+        }
+        int color = digit != null ? _colors[digit] : _emptyCellColor;
 
-        Integer color = puzzle.getColor(n);
-        int c = color != null ? color : _emptyCellColor;
-        drawable.setColor(0xFF000000 | c);
+        GradientDrawable drawable = (GradientDrawable)cellView.getDrawable();
+        drawable.setColor(0xFF000000 | color);
     }
 
     // clicked is called from the circle images in
-    // main/res/layout/board.xml.  Then a circle is clicked, we flip
-    // it between its solved and setup colors.
+    // main/res/layout/board.xml.  When a circle is clicked, we toggle
+    // its cell between its solved and setup colors.
 
-    public void clicked(View view) {
-        String tag = (String)view.getTag();
+    public void clicked(View cellView) {
+        String tag = (String)cellView.getTag();
         Log.i("Spudoku", "clicked " + tag);
 
         int n = Integer.parseInt(tag);
-
-        _puzzle.flip(n);
-
-        colorCell((ImageView)view, _puzzle, n);
+        Cell cell = _puzzle.getCell(n);
+        cell.togglePlaced();
+        showCell((ImageView)cellView, cell);
     }
 
     private void enableButtons(boolean enabled) {
@@ -307,15 +334,30 @@ public class MainActivity extends AppCompatActivity {
 
     public void clickSetup(View view) {
         Log.i("Spudoku", "setup");
-        _puzzle.setup();
+
+        if (_showing != Showing.SETUP) {
+            _showing = Showing.SETUP;
+        }
+        else {
+            _showing = Showing.PLACED;
+        }
+
         showBoard();
     }
 
-    // The solved button was clicked.  Show the solved colors.
+    // The solved button was clicked.  Toggle between the user state
+    // and the solved state.
 
     public void clickSolved(View view) {
         Log.i("Spudoku", "solved");
-        _puzzle.solved();
+
+        if (_showing != Showing.SOLVED) {
+            _showing = Showing.SOLVED;
+        }
+        else {
+            _showing = Showing.PLACED;
+        }
+
         showBoard();
     }
 
