@@ -54,11 +54,13 @@
     <Spinner
 	android:id="@+id/spinner_layout"
 	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"/>
+	android:layout_height="wrap_content"
+        android:textSize="40sp"/>
     <Spinner
 	android:id="@+id/spinner_rating"
 	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"/>
+	android:layout_height="wrap_content"
+        android:textSize="40sp"/>
     <TextView
         android:id="@+id/hint_text"
         android:layout_width="wrap_content"
