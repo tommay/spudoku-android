@@ -344,7 +344,7 @@ public class MainActivity extends AppCompatActivity {
                 public void accept(RawPuzzle rawPuzzle) {
                     _rawPuzzle = rawPuzzle;
                     _puzzle = newPuzzle(_rawPuzzle);
-                    showBoard();
+                    showPlaced();
                     enableButtons(true);
                 }
             });
