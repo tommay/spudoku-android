@@ -194,6 +194,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         Log.i("Spudoku", "onResume");
         showBoard();
+        clearHint();
     }
 
     // Called before onStop, either before or after onPause.
@@ -393,24 +394,27 @@ public class MainActivity extends AppCompatActivity {
         _showing = Showing.SETUP;
         highlightButton(R.id.button_setup);
         showBoard();
+        clearHint();
     }
 
     private void showSolved() {
         _showing = Showing.SOLVED;
         highlightButton(R.id.button_solved);
         showBoard();
+        clearHint();
     }
 
     private void showPlaced() {
         _showing = Showing.PLACED;
         highlightButton(-1); 
         showBoard();
+        clearHint();
     }
 
     public void clickHint(View view) {
         String puzzleString = getPuzzleString();
         String hint = Hinter.getHintEasy(0, puzzleString); // XXX randomSeed
-        setHint(hint);
+        showHint(hint);
     }
 
     private String getPuzzleString() {
@@ -428,9 +432,13 @@ public class MainActivity extends AppCompatActivity {
         return sb.toString();
     }
 
-    private void setHint(String hint) {
+    private void showHint(String hint) {
         TextView textView = (TextView) findViewById(R.id.hint_text);
         textView.setText(hint);
+    }
+
+    private void clearHint() {
+        showHint("");
     }
 
     // Create a Puzzle from a RawPuzzle.  This is the only code that
