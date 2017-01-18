@@ -32,6 +32,8 @@ import net.tommay.spudoku.RawPuzzle;
 import net.tommay.util.Consumer;
 import net.tommay.util.Producer;
 
+import net.tommay.spudoku.Hinter;
+
 public class MainActivity extends AppCompatActivity {
     private enum Showing {
         SETUP, SOLVED, PLACED,
@@ -48,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
         0xffff00,               // yellow
         0x33cc33,               // light green
         0x005900,               // dark green
-        0x6db5f9,               // light blue
         0x0000cc,               // dark blue
+        0x6db5f9,               // light blue
         0xed82ed,               // lavender
         0x660082,               // purple
     };
@@ -406,7 +408,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clickHint(View view) {
-        setHint("No hints yet.");
+        String puzzleString = getPuzzleString();
+        String hint = Hinter.getHintEasy(0, puzzleString); // XXX randomSeed
+        setHint(hint);
+    }
+
+    private String getPuzzleString() {
+        StringBuilder sb = new StringBuilder(81);
+        for (int i = 0; i < 81; i++) {
+            Cell cell = _puzzle.getCell(i);
+            Integer digit = cell.getPlacedDigit();
+            if (digit != null) {
+                sb.append(digit + 1);
+            }
+            else {
+                sb.append('-');
+            }
+        }
+        return sb.toString();
     }
 
     private void setHint(String hint) {
