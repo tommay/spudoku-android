@@ -296,6 +296,7 @@ public class MainActivity extends AppCompatActivity {
             R.id.button_new,
             R.id.button_setup,
             R.id.button_solved,
+            R.id.button_hint,
         };
         for (int buttonId : buttonIds) {
             View view = findViewById(buttonId);
