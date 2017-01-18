@@ -289,6 +289,8 @@ public class MainActivity extends AppCompatActivity {
             showPlaced();
             break;
         }
+
+        clearHint();
     }
 
     private void enableButtons(boolean enabled) {
