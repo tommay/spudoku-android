@@ -6,10 +6,11 @@ package net.tommay.sudoku
 
 object HinterForJava {
   def getHintEasy(randomSeed: Int, puzzleString: String) : String = {
-    // XXX EasyPeasy and MissingOne are both subsets of Needed, but they
-    // are the easiest subsets of Needed to find visually.
+    // EasyPeasy and MissingOne are both subsets of Needed, but they
+    // are the easiest subsets of Needed to find visually.  Npt sure
+    // which to try first. XXX
     val options = new SolverOptions(
-      List(Heuristic.EasyPeasy, Heuristic.MissingOne), false, false)
+      List(Heuristic.MissingOne, Heuristic.EasyPeasy), false, false)
     getHint(randomSeed, puzzleString, options)
   }
 
