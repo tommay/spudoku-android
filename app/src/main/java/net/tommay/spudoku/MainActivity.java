@@ -45,15 +45,15 @@ public class MainActivity extends AppCompatActivity {
     private static final String KEY_SOLUTION = "solution";
 
     private static final int[] _colors = new int[] {
-        0xff0000,               // red
-        0xff9900,               // orange
-        0xffff00,               // yellow
-        0x33cc33,               // light green
-        0x005900,               // dark green
-        0x0000cc,               // dark blue
+        0xee0000,               // red
+        0xdc9b40,               // orange
+        0xf9f911,               // yellow
+        0x3bee33,               // light green
+        0x1a691a,               // dark green
+        0x2929cc,               // dark blue
         0x6db5f9,               // light blue
         0xed82ed,               // lavender
-        0x660082,               // purple
+        0x710091,               // purple
     };
 
     // Difficulty ratings for creating puzzles, and associated
