@@ -8,10 +8,13 @@ object CreaterForJava {
   def createEasy(randomSeed: Int, layoutName: String)
       : (String, String) =
   {
-    // XXX EasyPeasy and MissingOne are both subsets of Needed, but they
-    // are the easiest subsets of Needed to find visually.
+    // EasyPeasy and MissingOne are both subsets of Needed, but they
+    // are the easiest subsets of Needed to find visually.  The same
+    // puzzles will be created no matter what the order is, but put
+    // MissingOne first because it's faster.a
+
     val options = new SolverOptions(
-      List(Heuristic.EasyPeasy, Heuristic.MissingOne), false, false)
+      List(Heuristic.MissingOne, Heuristic.EasyPeasy), false, false)
     create(randomSeed, layoutName, options)
   }
 
