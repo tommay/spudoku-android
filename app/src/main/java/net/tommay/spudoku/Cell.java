@@ -11,16 +11,22 @@ class Cell {
         _isPlaced = isSetup;
     }
 
-    Integer getSetup() {
+    Integer getSetupDigit() {
         return _isSetup ? _digit : null;
     }
 
-    Integer getSolved() {
+    Integer getSolvedDigit() {
         return _digit;
     }
 
-    Integer getPlaced() {
+    Integer getPlacedDigit() {
         return _isPlaced ? _digit : null;
+    }
+
+    void setPlaced() {
+        if (!_isSetup) {
+            _isPlaced = true;
+        }
     }
 
     void togglePlaced() {

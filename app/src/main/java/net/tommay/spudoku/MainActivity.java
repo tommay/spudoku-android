@@ -8,6 +8,7 @@ import java.util.Map;
 
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.LightingColorFilter;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v7.app.AppCompatActivity;
@@ -246,13 +247,13 @@ public class MainActivity extends AppCompatActivity {
         Integer digit = null;
         switch (_showing) {
           case SETUP:
-            digit = cell.getSetup();
+            digit = cell.getSetupDigit();
             break;
           case SOLVED:
-            digit = cell.getSolved();
+            digit = cell.getSolvedDigit();
             break;
           case PLACED:
-            digit = cell.getPlaced();
+            digit = cell.getPlacedDigit();
             break;
         }
         int color = digit != null ? _colors[digit] : _emptyCellColor;
@@ -271,8 +272,19 @@ public class MainActivity extends AppCompatActivity {
 
         int n = Integer.parseInt(tag);
         Cell cell = _puzzle.getCell(n);
-        cell.togglePlaced();
-        showCell((ImageView)cellView, cell);
+        switch (_showing) {
+          case PLACED:
+            cell.togglePlaced();
+            showCell((ImageView)cellView, cell);
+            break;
+          case SETUP:
+            cell.setPlaced();
+            showPlaced();
+            break;
+          case SOLVED:
+            showPlaced();
+            break;
+        }
     }
 
     private void enableButtons(boolean enabled) {
@@ -284,6 +296,23 @@ public class MainActivity extends AppCompatActivity {
         for (int buttonId : buttonIds) {
             View view = findViewById(buttonId);
             view.setEnabled(enabled);
+        }
+    }
+
+    private void highlightButton(int highlightButtonId) {
+        int[] buttonIds = {
+            R.id.button_setup,
+            R.id.button_solved,
+        };
+        for (int buttonId : buttonIds) {
+            View view = findViewById(buttonId);
+            if (buttonId == highlightButtonId) {
+                view.getBackground().setColorFilter(
+                    new LightingColorFilter(0xFF808080, 0xFF008000));
+            }
+            else {
+                view.getBackground().clearColorFilter();
+            }
         }
     }
 
@@ -336,13 +365,11 @@ public class MainActivity extends AppCompatActivity {
         Log.i("Spudoku", "setup");
 
         if (_showing != Showing.SETUP) {
-            _showing = Showing.SETUP;
+            showSetup();
         }
         else {
-            _showing = Showing.PLACED;
+            showPlaced();
         }
-
-        showBoard();
     }
 
     // The solved button was clicked.  Toggle between the user state
@@ -352,14 +379,30 @@ public class MainActivity extends AppCompatActivity {
         Log.i("Spudoku", "solved");
 
         if (_showing != Showing.SOLVED) {
-            _showing = Showing.SOLVED;
+            showSolved();
         }
         else {
-            _showing = Showing.PLACED;
+            showPlaced();
         }
+    }
 
+    private void showSetup() {
+        _showing = Showing.SETUP;
+        highlightButton(R.id.button_setup);
         showBoard();
     }
+
+    private void showSolved() {
+        _showing = Showing.SOLVED;
+        highlightButton(R.id.button_solved);
+        showBoard();
+    }
+
+    private void showPlaced() {
+        _showing = Showing.PLACED;
+        highlightButton(-1); 
+        showBoard();
+   }
 
     // Create a Puzzle from a RawPuzzle.  This is the only code that
     // knows about both classes.
