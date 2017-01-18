@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 // Auto-generated from aoo/build.gradle settings.
 import net.tommay.spudoku.BuildConfig;
@@ -402,7 +403,16 @@ public class MainActivity extends AppCompatActivity {
         _showing = Showing.PLACED;
         highlightButton(-1); 
         showBoard();
-   }
+    }
+
+    public void clickHint(View view) {
+        setHint("No hints yet.");
+    }
+
+    private void setHint(String hint) {
+        TextView textView = (TextView) findViewById(R.id.hint_text);
+        textView.setText(hint);
+    }
 
     // Create a Puzzle from a RawPuzzle.  This is the only code that
     // knows about both classes.

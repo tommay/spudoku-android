@@ -44,6 +44,12 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:onClick="clickSolved"/>
+      <Button
+          android:id="@+id/button_hint"
+          android:text="Hint"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:onClick="clickHint"/>
     </LinearLayout>
     <Spinner
 	android:id="@+id/spinner_layout"
@@ -53,5 +59,10 @@
 	android:id="@+id/spinner_rating"
 	android:layout_width="wrap_content"
 	android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/hint_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"/>
   </LinearLayout>
 </android.support.percent.PercentRelativeLayout>
