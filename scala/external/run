@@ -1,0 +1,6 @@
+#!/bin/sh
+
+class="$1"
+shift
+
+exec scala -cp build/libs/*.jar net.tommay.sudoku.$class "$@"
