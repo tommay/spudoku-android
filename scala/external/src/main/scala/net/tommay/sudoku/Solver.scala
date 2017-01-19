@@ -41,8 +41,12 @@ case class Solver (
   }
 
   def isFinished : Boolean = {
-    if (options.solveCompletely) {
-      unknowns.isEmpty
+    // If therw are no more Unknowns we're always finished.
+    if (unknowns.isEmpty) {
+      true
+    }
+    else if (options.solveCompletely) {
+      false
     }
     else {
       // We just need a hint.  We can stop when there's a Step
