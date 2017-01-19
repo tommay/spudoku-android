@@ -418,8 +418,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clickHint(View view) {
+        int seed = (int) System.currentTimeMillis();
         String puzzleString = getPuzzleString();
-        String hint = Hinter.getHintEasy(0, puzzleString); // XXX randomSeed
+        String hint = Hinter.getHintEasy(seed, puzzleString);
         showHint(hint);
     }
 
