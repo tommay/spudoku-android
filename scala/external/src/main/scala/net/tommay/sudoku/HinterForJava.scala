@@ -39,7 +39,8 @@ object HinterForJava {
       s"Easy peasy ${placement.digit} ${placement}"
     }
     else {
-      step.description // XXX
+      val placement = step.placementOption.get
+      s"${step.description} ${placement}" // XXX
     }
   }
 }
