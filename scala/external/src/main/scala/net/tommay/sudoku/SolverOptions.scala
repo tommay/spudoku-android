@@ -35,13 +35,25 @@ case class SolverOptions(
   useHeuristics: Boolean,
   heuristics: Iterable[Heuristic.Value],
   usePermanentTrickySets: Boolean,
-  useGuessing: Boolean)
+  useGuessing: Boolean,
+  solveCompletely: Boolean)
 {
   def this(heuristics: Iterable[Heuristic.Value],
            usePermanentTrickySets: Boolean,
            useGuessing: Boolean)
   {
-    this(heuristics.nonEmpty, heuristics, usePermanentTrickySets, useGuessing)
+    this(heuristics.nonEmpty, heuristics, usePermanentTrickySets, useGuessing,
+      true)
+  }
+
+  def this(
+    heuristics: Iterable[Heuristic.Value],
+    usePermanentTrickySets: Boolean,
+    useGuessing: Boolean,
+    solveCompletely: Boolean)
+  {
+    this(heuristics.nonEmpty, heuristics, usePermanentTrickySets, useGuessing,
+      solveCompletely)
   }
 }
 

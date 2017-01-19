@@ -70,13 +70,20 @@ case class Solver (
   }
 
   def placeAndContinue(next: Next) : Stream[Solution] = {
-    val placement = next.placement
-    val newSolver = place(placement.cellNumber, placement.digit)
-    val step = Step(
-      newSolver.puzzle, Some(placement), next.tjpe, next.description)
-    val newSteps = step :: steps
-    val newSolver2 = newSolver.copy(steps = newSteps)
-    newSolver2.solutionsTop
+    if (options.solveCompletely) {
+      val placement = next.placement
+      val newSolver = place(placement.cellNumber, placement.digit)
+      val step = Step(
+        newSolver.puzzle, Some(placement), next.tjpe, next.description)
+      val newSteps = step :: steps
+      val newSolver2 = newSolver.copy(steps = newSteps)
+      newSolver2.solutionsTop
+    }
+    else {
+      val placement = next.placement
+      val step = Step(puzzle, Some(placement), next.tjpe, next.description)
+      Stream(Solution(puzzle, List(step)))
+    }
   }
 
   def solutionsStuck : Stream[Solution] = {

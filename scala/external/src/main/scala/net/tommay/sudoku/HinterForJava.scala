@@ -16,7 +16,7 @@ object HinterForJava {
         Heuristic.MissingTwo,
         Heuristic.Tricky,
         Heuristic.Forced),
-      false, true)
+      false, true, false)
     getHint(randomSeed, puzzleString, options)
   }
 
