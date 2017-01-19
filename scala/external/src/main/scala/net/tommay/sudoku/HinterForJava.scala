@@ -43,4 +43,13 @@ object HinterForJava {
       s"${step.description} ${placement}" // XXX
     }
   }
+
+  // Load a puzzle from the given file and print its randomized hint.
+
+  def main(args: Array[String]) {
+    val filename = args(0)
+    val puzzleString = Solve.getSetup(filename)
+    val seed = System.currentTimeMillis.toInt
+    println(getHintEasy(seed, puzzleString))
+  }
 }
