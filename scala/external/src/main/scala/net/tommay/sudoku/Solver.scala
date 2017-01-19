@@ -29,13 +29,25 @@ case class Solver (
   // scala.util.control.TailCalls
   // 
   def solutionsTop : Stream[Solution] = {
-    unknowns match {
-      case Stream.Empty  =>
-        // No more unknowns, solved!
-        Stream(Solution(puzzle, steps.reverse))
-      case _ =>
-        // Carry on with solutionsHeuristic
-        solutionsHeuristic
+    if (isFinished) {
+      // We're finished, for some definition of finished.  Return the
+      // Solution.
+      Stream(Solution(puzzle, steps.reverse))
+    }
+    else {
+      // Carry on with solutionsHeuristic
+      solutionsHeuristic
+    }
+  }
+
+  def isFinished : Boolean = {
+    if (options.solveCompletely) {
+      unknowns.isEmpty
+    }
+    else {
+      // We just need a hint.  We can stop when there's a Step
+      // suitable for a hint.
+      steps.exists(_.placementOption.isDefined)
     }
   }
 
@@ -70,20 +82,13 @@ case class Solver (
   }
 
   def placeAndContinue(next: Next) : Stream[Solution] = {
-    if (options.solveCompletely) {
-      val placement = next.placement
-      val newSolver = place(placement.cellNumber, placement.digit)
-      val step = Step(
-        newSolver.puzzle, Some(placement), next.tjpe, next.description)
-      val newSteps = step :: steps
-      val newSolver2 = newSolver.copy(steps = newSteps)
-      newSolver2.solutionsTop
-    }
-    else {
-      val placement = next.placement
-      val step = Step(puzzle, Some(placement), next.tjpe, next.description)
-      Stream(Solution(puzzle, List(step)))
-    }
+    val placement = next.placement
+    val newSolver = place(placement.cellNumber, placement.digit)
+    val step = Step(
+      newSolver.puzzle, Some(placement), next.tjpe, next.description)
+    val newSteps = step :: steps
+    val newSolver2 = newSolver.copy(steps = newSteps)
+    newSolver2.solutionsTop
   }
 
   def solutionsStuck : Stream[Solution] = {
