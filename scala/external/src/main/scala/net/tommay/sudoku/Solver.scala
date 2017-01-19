@@ -58,9 +58,8 @@ case class Solver (
         case Stream.Empty =>
           // All heuristics returned empty lists.
           solutionsStuck
-        case nextList =>
+        case (next #:: _) =>
           val nextSolver = this.copy(rnd = rnd2)
-          val next = nextList.head
           nextSolver.placeAndContinue(next)
       }
     }
