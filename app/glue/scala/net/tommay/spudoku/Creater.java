@@ -9,4 +9,10 @@ class Creater {
             seed, layoutName);
         return new RawPuzzle((String)result._1, (String)result._2);
     }
+
+    public static RawPuzzle createWicked (int seed, String layoutName) {
+        scala.Tuple2 result = CreaterForJava.createWicked(
+            seed, layoutName);
+        return new RawPuzzle((String)result._1, (String)result._2);
+    }
 }

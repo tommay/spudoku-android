@@ -32,6 +32,8 @@ import net.tommay.spudoku.RawPuzzle;
 import net.tommay.util.Consumer;
 import net.tommay.util.Producer;
 
+import net.tommay.spudoku.EasyCreater;
+import net.tommay.spudoku.WickedCreater;
 import net.tommay.spudoku.Hinter;
 
 public class MainActivity extends AppCompatActivity {
@@ -62,9 +64,10 @@ public class MainActivity extends AppCompatActivity {
     private final Map<String, PuzzleCreater> _ratingsMap =
         new HashMap(){{
             put("Easy", new EasyCreater());
+            put("Wicked", new WickedCreater());
         }};
     private static final String[] _ratings = {
-        "Easy",
+        "Easy", "Wicked",
     };
 
     // Context-dependent "constants".
