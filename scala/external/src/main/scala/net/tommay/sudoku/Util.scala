@@ -18,7 +18,7 @@ object Util {
     val minEnhanced = enhanced.tail.foldLeft(enhanced.head) {
       case (a@(na, _), b@(nb, _)) =>
         // xxx choose a or b on ==?
-        if (na < nb) a else b
+        if (na <= nb) a else b
     }
     minEnhanced._2
   }
