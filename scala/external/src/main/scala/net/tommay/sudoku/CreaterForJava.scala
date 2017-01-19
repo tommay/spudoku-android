@@ -13,41 +13,48 @@ object CreaterForJava {
     // EasyPeasy and MissingOne are both subsets of Needed, but they
     // are the easiest subsets of Needed to find visually.  The same
     // puzzles will be created no matter what the order is, but put
-    // MissingOne first because it's faster.a
+    // MissingOne first because it's faster.
 
     val options = new SolverOptions(
       List(Heuristic.MissingOne, Heuristic.EasyPeasy), false, false)
-    create(randomSeed, layoutName, options)
+    createFiltered(randomSeed, layoutName, options)
   }
 
-  def create(randomSeed: Int, layoutName: String, options: SolverOptions)
-      : (String, String) =
-  {
-    val rnd = new scala.util.Random(randomSeed)
-    Layout.getLayout(layoutName) match {
-      case None => ("", "")
-      case Some(layout) =>
-        val (puzzle, solution) = Creater.createWithSolution(
-          rnd, layout, Solver.solutions(options))
-        (puzzle.toString, solution.puzzle.toString)
-    }
+  // Vicious puzzles have Forced cells but no Guessing.
+
+  def createVicious(randomSeed: Int, layoutName: String) : (String, String) = {
+    val options = new SolverOptions(
+      List(Heuristic.Forced, Heuristic.Needed, Heuristic.Tricky), false, false)
+    createFiltered(randomSeed, layoutName, options,
+      solution => solution.steps.exists(_.tjpe == Heuristic.Forced))
   }
 
-  def createWicked(randomSeed: Int, layoutName: String)
+  // Wicked puzzles require Guessing.
+
+  def createWicked(randomSeed: Int, layoutName: String) : (String, String) = {
+    val options = new SolverOptions(
+      List(Heuristic.Forced, Heuristic.Needed, Heuristic.Tricky), false, true)
+    createFiltered(randomSeed, layoutName, options,
+      solution => solution.steps.exists(_.tjpe == Heuristic.Guess))
+  }
+
+  def createFiltered(
+    randomSeed: Int,
+    layoutName: String,
+    options: SolverOptions,
+    pred: Solution => Boolean = (solution => true))
       : (String, String) =
   {
     val rnd = new Random(randomSeed)
-    val options = new SolverOptions(
-      List(Heuristic.Forced, Heuristic.Needed, Heuristic.Tricky), false, true)
     val solveFunc = Solver.solutions(options)(_)
     Layout.getLayout(layoutName) match {
       case None => ("", "")
       case Some(layout) =>
         val puzzles = createStreamWithSolution(rnd, layout, solveFunc)
-        val puzzlesRequiringGuessing = puzzles.filter{case (_, solution) =>
-          solution.steps.exists(_.tjpe == Heuristic.Guess)
+        val filteredPuzzles = puzzles.filter{case (_, solution) =>
+          pred(solution)
         }
-        val (puzzle, solution) = puzzlesRequiringGuessing.head
+        val (puzzle, solution) = filteredPuzzles.head
         (puzzle.toString, solution.puzzle.toString)
     }
   }

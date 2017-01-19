@@ -35,6 +35,7 @@ import net.tommay.util.Consumer;
 import net.tommay.util.Producer;
 
 import net.tommay.spudoku.EasyCreater;
+import net.tommay.spudoku.ViciousCreater;
 import net.tommay.spudoku.WickedCreater;
 import net.tommay.spudoku.Hinter;
 
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
     private final Map<String, PuzzleCreater> _ratingsMap =
         new LinkedHashMap(){{
             put("Easy", new EasyCreater());
+            put("Vicious", new ViciousCreater());
             put("Wicked", new WickedCreater());
         }};
 
