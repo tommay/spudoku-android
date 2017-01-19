@@ -52,3 +52,8 @@ task compileOne (type: ScalaCompile) {
 }
 
 compileOne.options.compilerArgs = ["-sourcepath", "$projectDir/src/main/scala"]
+
+// Delete anything we may have built while in "external".
+clean {
+    delete "external/build"
+}

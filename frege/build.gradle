@@ -36,3 +36,8 @@ jar {
         }
     }
 }
+
+// Delete anything we may have built while in "external".
+clean {
+    delete "external/build"
+}
