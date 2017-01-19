@@ -20,7 +20,11 @@ object CreaterForJava {
     createFiltered(randomSeed, layoutName, options)
   }
 
-  // Vicious puzzles have Forced cells but no Guessing.
+  // Vicious puzzles have Forced cells but no Guessing.  XXX This
+  // doesn't work.  Just because one Solution requires Forced doesn't
+  // mean there are Solutions that don't need it.  To make sure, we'd
+  // need to try to solve without Forced and if it fails then Forced
+  // is required.
 
   def createVicious(randomSeed: Int, layoutName: String) : (String, String) = {
     val options = new SolverOptions(
