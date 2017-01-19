@@ -2,7 +2,9 @@ package net.tommay.spudoku;
 
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -62,13 +64,10 @@ public class MainActivity extends AppCompatActivity {
     // PuzzleCreater.
 
     private final Map<String, PuzzleCreater> _ratingsMap =
-        new HashMap(){{
+        new LinkedHashMap(){{
             put("Easy", new EasyCreater());
             put("Wicked", new WickedCreater());
         }};
-    private static final String[] _ratings = {
-        "Easy", "Wicked",
-    };
 
     // Context-dependent "constants".
 
@@ -159,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
             Spinner spinner = (Spinner) findViewById(R.id.spinner_rating);
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_item,
-                _ratings);
+                new ArrayList(_ratingsMap.keySet()));
             adapter.setDropDownViewResource(
                 android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(adapter);
