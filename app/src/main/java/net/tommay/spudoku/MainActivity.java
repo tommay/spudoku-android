@@ -424,6 +424,9 @@ public class MainActivity extends AppCompatActivity {
         String puzzleString = getPuzzleString();
         Hint hint = Hinter.getHint(seed, puzzleString);
 
+        showPlaced();
+        clearHint();
+
         showHint(hint.tjpe.toString());
 
         View boardView = findViewById(R.id.board);
