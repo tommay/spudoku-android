@@ -242,8 +242,10 @@ case class Solver (
   {
     unknown.numPossible match {
       case 1 =>
+        val cellNumber = unknown.cellNumber
         val digit = unknown.getPossible.head
-        Stream(Next(tjpe, Placement(unknown.cellNumber, digit), cells))
+        val cells2 = if (cells.nonEmpty) cells else List(cellNumber)
+        Stream(Next(tjpe, Placement(cellNumber, digit), cells2))
       case _ =>
         Stream.empty
     }
