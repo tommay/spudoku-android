@@ -433,7 +433,7 @@ public class MainActivity extends AppCompatActivity {
         for (int cell : hint.cells) {
             ImageView cellView =
                 (ImageView) boardView.findViewWithTag(Integer.toString(cell));
-            cellView.setBackgroundColor(0xFF808080);
+            cellView.setBackgroundColor(0xFF989898);
         }
     }
 
