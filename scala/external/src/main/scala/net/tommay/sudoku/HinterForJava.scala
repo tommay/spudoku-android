@@ -5,7 +5,7 @@ package net.tommay.sudoku
 // information out of the Solution in Scala.
 
 object HinterForJava {
-  def getHintEasy(randomSeed: Int, puzzleString: String) : String = {
+  def getHint(randomSeed: Int, puzzleString: String) : Option[Hint] = {
     // Heuristics are listed here from easiest for humans to do, to
     // hardest.
     val options = new SolverOptions(
@@ -17,30 +17,14 @@ object HinterForJava {
         Heuristic.Tricky,
         Heuristic.Forced),
       false, true, false)
-    getHint(randomSeed, puzzleString, options)
-  }
-
-  def getHint(randomSeed: Int, puzzleString: String, options: SolverOptions)
-      : String =
-  {
     val rnd = new scala.util.Random(randomSeed)
     val puzzle = Puzzle.fromString(puzzleString)
     val solution = Solver.randomSolutions(options, rnd)(puzzle).head
     val stepsWithPlacement = solution.steps.filter(_.placementOption.isDefined)
     stepsWithPlacement match {
-      case (step :: _) => makeHintString(step)
-      case _ => "Solved!"
-    }
-  }
-
-  def makeHintString(step: Step) : String = {
-    if (step.tjpe == Heuristic.EasyPeasy) {
-      val placement = step.placementOption.get
-      s"Easy peasy ${placement.digit} ${placement}"
-    }
-    else {
-      val placement = step.placementOption.get
-      s"${step.description} ${placement}" // XXX
+      case (step :: _) =>
+        Some(Hint(step.tjpe, step.placementOption.get, step.cells))
+      case _ => None
     }
   }
 
@@ -50,6 +34,6 @@ object HinterForJava {
     val filename = args(0)
     val puzzleString = Solve.getSetup(filename)
     val seed = System.currentTimeMillis.toInt
-    println(getHintEasy(seed, puzzleString))
+    println(getHint(seed, puzzleString))
   }
 }

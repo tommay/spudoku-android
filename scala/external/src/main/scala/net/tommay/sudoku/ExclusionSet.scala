@@ -47,5 +47,3 @@ object ExclusionSet {
   val exclusionSets : Stream[ExclusionSet] =
     (rows ++ columns ++ squares).toStream
 }
-
-

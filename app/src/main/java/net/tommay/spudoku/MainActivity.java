@@ -27,6 +27,7 @@ import net.tommay.spudoku.BuildConfig;
 
 import net.tommay.spudoku.AOTStateImpl;
 import net.tommay.spudoku.AsyncCreater;
+import net.tommay.spudoku.Hint;
 import net.tommay.spudoku.LayoutNames;
 import net.tommay.spudoku.Puzzle;
 import net.tommay.spudoku.PuzzleProducer;
@@ -421,8 +422,8 @@ public class MainActivity extends AppCompatActivity {
     public void clickHint(View view) {
         int seed = (int) System.currentTimeMillis();
         String puzzleString = getPuzzleString();
-        String hint = Hinter.getHintEasy(seed, puzzleString);
-        showHint(hint);
+        Hint hint = Hinter.getHint(seed, puzzleString);
+        showHint("XXX");
     }
 
     private String getPuzzleString() {
