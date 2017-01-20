@@ -427,13 +427,17 @@ public class MainActivity extends AppCompatActivity {
         showPlaced();
         clearHint();
 
-        showHint(hint.tjpe.toString());
-
-        View boardView = findViewById(R.id.board);
-        for (int cell : hint.cells) {
-            ImageView cellView =
-                (ImageView) boardView.findViewWithTag(Integer.toString(cell));
-            cellView.setBackgroundColor(0xFF989898);
+        if (hint != null) {
+            showHint(hint.tjpe.toString());
+            View boardView = findViewById(R.id.board);
+            for (int cell : hint.cells) {
+                ImageView cellView = (ImageView)
+                    boardView.findViewWithTag(Integer.toString(cell));
+                cellView.setBackgroundColor(0xFF989898);
+            }
+        }
+        else {
+            showHint("Solved!");
         }
     }
 
