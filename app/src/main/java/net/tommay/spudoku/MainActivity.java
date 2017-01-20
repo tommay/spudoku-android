@@ -423,7 +423,15 @@ public class MainActivity extends AppCompatActivity {
         int seed = (int) System.currentTimeMillis();
         String puzzleString = getPuzzleString();
         Hint hint = Hinter.getHint(seed, puzzleString);
-        showHint("XXX");
+
+        showHint(hint.tjpe.toString());
+
+        View boardView = findViewById(R.id.board);
+        for (int cell : hint.cells) {
+            ImageView cellView =
+                (ImageView) boardView.findViewWithTag(Integer.toString(cell));
+            cellView.setBackgroundColor(0xFF808080);
+        }
     }
 
     private String getPuzzleString() {
@@ -448,6 +456,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void clearHint() {
         showHint("");
+        View boardView = findViewById(R.id.board);
+        for (int i = 0; i < 81; i++) {
+            ImageView cellView =
+                (ImageView) boardView.findViewWithTag(Integer.toString(i));
+            cellView.setBackgroundColor(0xFFD0D0D0);
+        }
     }
 
     // Create a Puzzle from a RawPuzzle.  This is the only code that
