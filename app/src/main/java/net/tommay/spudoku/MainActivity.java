@@ -27,6 +27,7 @@ import net.tommay.spudoku.BuildConfig;
 
 import net.tommay.spudoku.AOTStateImpl;
 import net.tommay.spudoku.AsyncCreater;
+import net.tommay.spudoku.Heuristic;
 import net.tommay.spudoku.Hint;
 import net.tommay.spudoku.LayoutNames;
 import net.tommay.spudoku.Puzzle;
@@ -60,6 +61,10 @@ public class MainActivity extends AppCompatActivity {
         0x6db5f9,               // light blue
         0xed82ed,               // lavender
         0x710091,               // purple
+    };
+    private static final String[] _colorNames = new String[] {
+        "red", "orange", "yellow", "light green", "dark green",
+        "dark blue", "light blue", "lavender", "purple"
     };
 
     // Difficulty ratings for creating puzzles, and associated
@@ -428,12 +433,17 @@ public class MainActivity extends AppCompatActivity {
         clearHint();
 
         if (hint != null) {
-            showHint(hint.tjpe.toString());
-            View boardView = findViewById(R.id.board);
-            for (int cell : hint.cells) {
-                ImageView cellView = (ImageView)
-                    boardView.findViewWithTag(Integer.toString(cell));
-                cellView.setBackgroundColor(0xFF989898);
+            if (hint.tjpe == Heuristic.EasyPeasy) {
+                showHint("Easy peasy " + _colorNames[hint.digit - 1]);
+            }
+            else {
+                showHint(hint.tjpe.toString());
+                View boardView = findViewById(R.id.board);
+                for (int cell : hint.cells) {
+                    ImageView cellView = (ImageView)
+                        boardView.findViewWithTag(Integer.toString(cell));
+                    cellView.setBackgroundColor(0xFF989898);
+                }
             }
         }
         else {
