@@ -18,6 +18,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -178,6 +179,10 @@ public class MainActivity extends AppCompatActivity {
 
         _showing = Showing.PLACED;
 
+        // Set up drag listeners.
+
+        
+
         // Restore stuff from savedInstanceState.
 
         if (savedInstanceState != null) {
@@ -212,7 +217,6 @@ public class MainActivity extends AppCompatActivity {
         clearHint();
     }
 
-
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
 
@@ -227,9 +231,10 @@ public class MainActivity extends AppCompatActivity {
             // Get the size of the first circle on the board.
 
             View boardView = findViewById(R.id.board);
-            ImageView cellView = (ImageView) boardView.findViewWithTag("0");
-            int width = cellView.getWidth();
-            int height = cellView.getHeight();
+            ImageView firstCellView =
+                (ImageView) boardView.findViewWithTag("0");
+            int width = firstCellView.getWidth();
+            int height = firstCellView.getHeight();
 
             // Get the first/only circle in the row and set its size.
 
@@ -257,10 +262,17 @@ public class MainActivity extends AppCompatActivity {
 
             // Set up drag stuff.
 
+            for (int cellNumber = 0; cellNumber < 81; cellNumber++) {
+                View cellView = boardView.findViewWithTag(
+                    Integer.toString(cellNumber));
+                cellView.setOnDragListener(
+                    new CircleOnDragListener(cellNumber));
+            }
+
             for (int i = 0, n = layout.getChildCount(); i < n; i++) {
                 View view = layout.getChildAt(i);
 
-                final int digit = i + 1;
+                final int digit = i;
 
                 // Use a touch listener instead of a long click listener
                 // to make the drag shadow appear immediately.
@@ -272,15 +284,14 @@ public class MainActivity extends AppCompatActivity {
                         Log.i("Spudoku", "view: " + v + " digit: " + digit);
                         if (event.getActionMasked() == MotionEvent.ACTION_DOWN)
                         {
-
                             // Just pass the digit via the local state.
-                            // XXX This method was deprecated in API level
-                            // 24. Use startDragAndDrop() for newer
-                            // platform versions.
+                            // XXX This method was deprecated in API
+                            // level 24.  Use startDragAndDrop() for
+                            // newer platform versions.
                             v.startDrag(
                                 null, // data
                                 new CircleDragShadowBuilder(
-                                    (ImageView)v, _colors[digit - 1]),
+                                    (ImageView)v, _colors[digit]),
                                 new Integer(digit),
                                 0); // flags
                             return true;
@@ -635,6 +646,45 @@ public class MainActivity extends AppCompatActivity {
         public void onDrawShadow(Canvas canvas) {
             Log.i("Spudoku", "onDrawShadow");
             drawable.draw(canvas);
+        }
+    }
+
+    private class CircleOnDragListener implements View.OnDragListener {
+        private final int cellNumber;
+
+        public CircleOnDragListener(int cellNumber) {
+            this.cellNumber = cellNumber;
+        }
+
+        @Override
+        public boolean onDrag(View v, DragEvent event) {
+            switch (event.getAction()) {
+              case DragEvent.ACTION_DRAG_STARTED:
+                // Accept all drags in this Activity, if this cell is
+                // not placed.
+                return !_puzzle.getCell(cellNumber).isPlaced();
+              case DragEvent.ACTION_DRAG_ENTERED:
+              case DragEvent.ACTION_DRAG_EXITED:
+                return true;    // Ignored.
+              case DragEvent.ACTION_DROP:
+                int digit = (Integer)event.getLocalState();
+                int solvedDigit = _puzzle.getCell(cellNumber).getSolvedDigit();
+                Log.i("Spudoku", cellNumber + " got " + digit);
+                if (digit == solvedDigit) {
+                    Log.i("Spudoku", cellNumber + " got " + digit + ", ok");
+                    clicked(v);
+                    return true;    // Success, not that it matters.
+                }
+                else {
+                    Log.i("Spudoku", cellNumber + " got " + digit +
+                        " not " + solvedDigit);
+                    return false;
+                }
+              case DragEvent.ACTION_DRAG_ENDED:
+                return true;
+              default:
+                return false;   // Ignored or useless.
+            }
         }
     }
 }

@@ -23,6 +23,10 @@ class Cell {
         return _isPlaced ? _digit : null;
     }
 
+    boolean isPlaced() {
+        return _isPlaced;
+    }
+
     void setPlaced() {
         if (!_isSetup) {
             _isPlaced = true;
