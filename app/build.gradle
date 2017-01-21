@@ -63,12 +63,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
-// For android.support.percent.PercentRelativeLayout:
-
-dependencies {
-    compile 'com.android.support:percent:23.3.0'
-}
-
 // The sudoku Puzzle create etc code is a separate scala or frege project.
 
 dependencies {

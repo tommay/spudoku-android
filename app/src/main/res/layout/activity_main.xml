@@ -1,70 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.percent.PercentRelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_width="match_parent">
-  
-  <!-- It doesn't work to put the "100%" stuff in the main LinearLayout
-       of board.xml, although it works when the code is inlined instead
-       of included.  Fortunately, it works to put the 100% stuff in
-       a FrameLayout here and include board.xml into that.  -->
+    android:orientation="vertical">
+
+  <!-- The only purpose of this FrameLayout is to give the board an id.
+       This is a better place to do it than down in board.xml.  -->
   <FrameLayout
       android:id="@+id/board"
-      app:layout_widthPercent="100%"
-      app:layout_aspectRatio="100%">
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
     <include layout="@layout/board"/>
   </FrameLayout>
   
   <LinearLayout
-      android:layout_below="@id/board"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:orientation="vertical">
-    <LinearLayout
+      android:orientation="horizontal">
+    <Button
+        android:id="@+id/button_new"
+        android:text="New"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-	android:orientation="horizontal">
-      <Button
-          android:id="@+id/button_new"
-          android:text="New"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:onClick="clickNew"/>
-      <Button
-          android:id="@+id/button_setup"
-          android:text="Setup"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:onClick="clickSetup"/>
-      <Button
-          android:id="@+id/button_solved"
-          android:text="Solved"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:onClick="clickSolved"/>
-      <Button
-          android:id="@+id/button_hint"
-          android:text="Hint"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:onClick="clickHint"/>
-    </LinearLayout>
-    <Spinner
-	android:id="@+id/spinner_layout"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-        android:textSize="40sp"/>
-    <Spinner
-	android:id="@+id/spinner_rating"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-        android:textSize="40sp"/>
-    <TextView
-        android:id="@+id/hint_text"
+        android:onClick="clickNew"/>
+    <Button
+        android:id="@+id/button_setup"
+        android:text="Setup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"/>
+        android:onClick="clickSetup"/>
+    <Button
+        android:id="@+id/button_solved"
+        android:text="Solved"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="clickSolved"/>
+    <Button
+        android:id="@+id/button_hint"
+        android:text="Hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="clickHint"/>
   </LinearLayout>
-</android.support.percent.PercentRelativeLayout>
+  <Spinner
+      android:id="@+id/spinner_layout"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textSize="40sp"/>
+  <Spinner
+      android:id="@+id/spinner_rating"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textSize="40sp"/>
+  <TextView
+      android:id="@+id/hint_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textSize="20sp"/>
+</LinearLayout>
