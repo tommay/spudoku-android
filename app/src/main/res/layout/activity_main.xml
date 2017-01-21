@@ -7,9 +7,9 @@
     android:layout_width="match_parent">
   
   <!-- It doesn't work to put the "100%" stuff in the main LinearLayout
-       of grid.xml, although it works when the code is inlined instead
+       of board.xml, although it works when the code is inlined instead
        of included.  Fortunately, it works to put the 100% stuff in
-       a FrameLayout here and include grid.xml into that.  -->
+       a FrameLayout here and include board.xml into that.  -->
   <FrameLayout
       android:id="@+id/board"
       app:layout_widthPercent="100%"
