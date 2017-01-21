@@ -11,11 +11,14 @@ import java.util.Map;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.LightingColorFilter;
+import android.graphics.Canvas;
+import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -251,6 +254,45 @@ public class MainActivity extends AppCompatActivity {
                 ImageView view = (ImageView) layout.getChildAt(i);
                 setCircleColor(view, _colors[i]);
             }
+
+            // Set up drag stuff.
+
+            for (int i = 0, n = layout.getChildCount(); i < n; i++) {
+                View view = layout.getChildAt(i);
+
+                final int digit = i + 1;
+
+                // Use a touch listener instead of a long click listener
+                // to make the drag shadow appear immediately.
+
+                View.OnTouchListener listener =
+                    new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        Log.i("Spudoku", "view: " + v + " digit: " + digit);
+                        if (event.getActionMasked() == MotionEvent.ACTION_DOWN)
+                        {
+
+                            // Just pass the digit via the local state.
+                            // XXX This method was deprecated in API level
+                            // 24. Use startDragAndDrop() for newer
+                            // platform versions.
+                            v.startDrag(
+                                null, // data
+                                new CircleDragShadowBuilder(
+                                    (ImageView)v, _colors[digit - 1]),
+                                new Integer(digit),
+                                0); // flags
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    }
+                };
+
+                view.setOnTouchListener(listener);
+            }
         }
     }
 
@@ -342,6 +384,10 @@ public class MainActivity extends AppCompatActivity {
 
     private static void setCircleColor(ImageView cellView, int color) {
         GradientDrawable drawable = (GradientDrawable)cellView.getDrawable();
+        setCircleColor(drawable, color);
+    }
+
+    private static void setCircleColor(GradientDrawable drawable, int color) {
         drawable.setColor(0xFF000000 | color);
     }
 
@@ -555,5 +601,40 @@ public class MainActivity extends AppCompatActivity {
 
     private static Puzzle newPuzzle(RawPuzzle rawPuzzle) {
         return new Puzzle(rawPuzzle.puzzle, rawPuzzle.solution);
+    }
+
+    private static class CircleDragShadowBuilder
+        extends View.DragShadowBuilder
+    {
+        private final int width;
+        private final int height;
+        private final Drawable drawable;
+
+        public CircleDragShadowBuilder(ImageView v, int color) {
+            super(v);
+            width = v.getWidth() * 2;
+            height = v.getHeight() * 2;
+            drawable = v.getDrawable().getConstantState().newDrawable();
+            // Make the Drawable scale up to the size we want.
+            drawable.setBounds(0, 0, width, height);
+            setCircleColor((GradientDrawable)drawable, color);
+            Log.i("Spudoku", "width: " + width + " height: " + height);
+        }
+
+        @Override
+        public void onProvideShadowMetrics (Point size, Point touch) {
+            Log.i("Spudoku", "onProvideShadowMetrics");
+            size.set(width, height);
+            touch.set(width / 2, height * 5 / 8);
+        }
+
+        // Defines a callback that draws the drag shadow in a Canvas that
+        // the system constructs from the dimensions passed in
+        // onProvideShadowMetrics().
+        @Override
+        public void onDrawShadow(Canvas canvas) {
+            Log.i("Spudoku", "onDrawShadow");
+            drawable.draw(canvas);
+        }
     }
 }
