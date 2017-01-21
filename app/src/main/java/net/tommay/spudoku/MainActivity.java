@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -203,8 +204,73 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Log.i("Spudoku", "onResume");
+
         showBoard();
         clearHint();
+    }
+
+
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+
+        // If we haven't yet created the circles in the bottom row, do
+        // it now.  We wait until onWindowFocusChanged because that's
+        // when we know the initial layout has been done and we can
+        // get the size of things.
+
+        LinearLayout layout = (LinearLayout) findViewById(R.id.bottom_row);
+
+        if (layout.getChildCount() == 1) {
+            // Get the size of the first circle on the board.
+
+            View boardView = findViewById(R.id.board);
+            ImageView cellView = (ImageView) boardView.findViewWithTag("0");
+            int width = cellView.getWidth();
+            int height = cellView.getHeight();
+
+            // Get the first/only circle in the row and set its size.
+
+            ImageView iv = (ImageView) layout.getChildAt(0);
+            LinearLayout.LayoutParams layoutParams =
+                (LinearLayout.LayoutParams) iv.getLayoutParams();
+            layoutParams.width = width;
+            layoutParams.height = height;
+
+            // Add a circle for each color.
+
+            for (int i = 1; i < _colors.length; i++) {
+                ImageView newIv = copyImageView(iv);
+                layout.addView(newIv);
+            }
+
+            layout.requestLayout();
+
+            // Set the circle colors.
+
+            for (int i = 0, n = layout.getChildCount(); i < n; i++) {
+                ImageView view = (ImageView) layout.getChildAt(i);
+                setCircleColor(view, _colors[i]);
+            }
+        }
+    }
+
+    private ImageView copyImageView(ImageView iv) {
+        // ImageView isn't cloneable, so the android platform
+        // developers have put the burden on us to copy the relevant
+        // stuff.  Hopefully this is correct, now and in the future.
+        // Thanks Android platform developers.
+
+        ImageView newIv = new ImageView(iv.getContext());
+        // Need this incantation to get a new Drawable so the color
+        // can be changed without changing all the other circles.
+        newIv.setImageDrawable(
+             iv.getDrawable().getConstantState().newDrawable());
+        newIv.setScaleType(iv.getScaleType());
+        newIv.setPadding(iv.getPaddingLeft(), iv.getPaddingTop(),
+            iv.getPaddingRight(), iv.getPaddingBottom());
+        newIv.setLayoutParams(iv.getLayoutParams());
+
+        return newIv;
     }
 
     // Called before onStop, either before or after onPause.
@@ -271,7 +337,10 @@ public class MainActivity extends AppCompatActivity {
             break;
         }
         int color = digit != null ? _colors[digit] : _emptyCellColor;
+        setCircleColor(cellView, color);
+    }
 
+    private static void setCircleColor(ImageView cellView, int color) {
         GradientDrawable drawable = (GradientDrawable)cellView.getDrawable();
         drawable.setColor(0xFF000000 | color);
     }

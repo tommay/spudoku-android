@@ -7,6 +7,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+  <!-- The game board.  -->
+
   <!-- The only purpose of this FrameLayout is to give the board an id.
        This is a better place to do it than down in board.xml.  -->
   <FrameLayout
@@ -15,6 +17,8 @@
       android:layout_height="wrap_content">
     <include layout="@layout/board"/>
   </FrameLayout>
+
+  <!-- The buttons.  -->
   
   <LinearLayout
       android:layout_width="wrap_content"
@@ -45,6 +49,9 @@
         android:layout_height="wrap_content"
         android:onClick="clickHint"/>
   </LinearLayout>
+
+  <!-- Puzzle type selection spinners.  -->
+
   <Spinner
       android:id="@+id/spinner_layout"
       android:layout_width="wrap_content"
@@ -55,9 +62,48 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:textSize="40sp"/>
+
+  <!-- A row of colored circles, centered horizontally.  -->
+
+  <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:layout_gravity="center">
+    <!-- There's no way I'm writing out nine ImageViews here.  So I just
+	 make one and clone the rest in MainActivity.java.
+	 The size here dodesn't matter.  MainActivity#onResume will
+         make the all the same size as the board ImageViews.  -->
+    <!-- Padding reduces the size of the circles, margin increase the
+         spacing.  These are tweaked to where I like the look.  -->
+    <LinearLayout
+        android:id="@+id/bottom_row"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+      <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="0dp"
+          android:layout_marginRight="0dp"
+          android:layout_marginTop="0dp"
+          android:layout_marginBottom="0dp"
+          android:paddingLeft="3dp"
+          android:paddingRight="3dp"
+          android:paddingTop="0dp"
+          android:paddingBottom="0dp"
+          android:adjustViewBounds="true"
+          android:scaleType="fitCenter"
+          android:src="@drawable/circle"/>
+    </LinearLayout>
+  </LinearLayout>
+
+  <!-- The hint.  -->
+
   <TextView
       android:id="@+id/hint_text"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:textSize="20sp"/>
+
 </LinearLayout>
