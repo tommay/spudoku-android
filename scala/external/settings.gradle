@@ -1,0 +1,4 @@
+// When running ggradle from this directory to build the jar for standalone
+// use/testing, set the project name here to create "sudoku.jar".
+
+rootProject.name = "sudoku"
