@@ -1,3 +1,7 @@
 #!/bin/sh
 
-exec scala -cp build/libs/sudoku.jar net.tommay.sudoku.Create "$@"
+if [ -f build/libs/sudoku-uber.jar ]; then
+  exec java -cp build/libs/sudoku-uber.jar net.tommay.sudoku.Create "$@"
+else
+  exec scala -cp build/libs/sudoku.jar net.tommay.sudoku.Create "$@"
+fi

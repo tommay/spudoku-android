@@ -3,21 +3,6 @@ package net.tommay.sudoku
 import scala.util.Random
 
 object Creater {
-  // Returns (puzzle, solvedPuzzle)
-
-  def createWithSolution(
-    rnd: Random,
-    layout: Iterable[Iterable[Int]],
-    solveFunc: Puzzle => Stream[Solution])
-      : (Puzzle, Puzzle) =
-  {
-    val (rnd1, rnd2) = Util.split(rnd)
-    val solvedPuzzle = randomSolvedPuzzle(rnd1)
-    val shuffledLayout = Util.shuffle(layout, rnd2)
-    val puzzle = createFromSolved(solvedPuzzle, shuffledLayout, solveFunc)
-    (puzzle, solvedPuzzle)
-  }
-
   def create(
     rnd: Random,
     layout: Iterable[Iterable[Int]],
@@ -25,6 +10,18 @@ object Creater {
       : Puzzle =
   {
     createWithSolution(rnd, layout, solveFunc)._1
+  }
+
+  def createWithSolution(
+    rnd: Random,
+    layout: Iterable[Iterable[Int]],
+    solveFunc: Puzzle => Stream[Solution])
+      : (Puzzle, Solution) =
+  {
+    val (rnd1, rnd2) = Util.split(rnd)
+    val solvedPuzzle = randomSolvedPuzzle(rnd1)
+    val shuffledLayout = Util.shuffle(layout, rnd2)
+    createFromSolved(solvedPuzzle, shuffledLayout, solveFunc)
   }
 
   // Start with a solved Puzzle and remove sets of cells (that will
@@ -35,19 +32,21 @@ object Creater {
     puzzle: Puzzle,
     cellNumberLists: Iterable[Iterable[Int]],
     solveFunc: Puzzle => Stream[Solution])
-      : Puzzle =
+      : (Puzzle, Solution) =
   {
-    cellNumberLists.foldLeft(puzzle) {case (accumPuzzle, cellNumbers) =>
-      // We know accumPuzzle has only one solution.  Remove
+    val initAccum = (puzzle, Solution(puzzle, Iterable.empty))
+    cellNumberLists.foldLeft(initAccum) {case (accum, cellNumbers) =>
+      // We know accum's puzzle has only one solution.  Remove
       // cellNumbers and check whether that's still true.
-      val newPuzzle = accumPuzzle.remove(cellNumbers)
+      val oldPuzzle = accum._1
+      val newPuzzle = oldPuzzle.remove(cellNumbers)
       solveFunc(newPuzzle) match {
-        case Stream(_) =>
+        case Stream(solution) =>
           // newPuzzle has only one solution, go with it.
-          newPuzzle
+          (newPuzzle, solution)
         case _ =>
           // Ooops, removed too much, stick with the original.
-          accumPuzzle
+          accum
       }
     }
   }

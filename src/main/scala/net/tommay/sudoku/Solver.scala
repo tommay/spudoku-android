@@ -29,13 +29,29 @@ case class Solver (
   // scala.util.control.TailCalls
   // 
   def solutionsTop : Stream[Solution] = {
-    unknowns match {
-      case Stream.Empty  =>
-        // No more unknowns, solved!
-        Stream(Solution(puzzle, steps.reverse))
-      case _ =>
-        // Carry on with solutionsHeuristic
-        solutionsHeuristic
+    if (isFinished) {
+      // We're finished, for some definition of finished.  Return the
+      // Solution.
+      Stream(Solution(puzzle, steps.reverse))
+    }
+    else {
+      // Carry on with solutionsHeuristic
+      solutionsHeuristic
+    }
+  }
+
+  def isFinished : Boolean = {
+    // If therw are no more Unknowns we're always finished.
+    if (unknowns.isEmpty) {
+      true
+    }
+    else if (options.solveCompletely) {
+      false
+    }
+    else {
+      // We just need a hint.  We can stop when there's a Step
+      // suitable for a hint.
+      steps.exists(_.placementOption.isDefined)
     }
   }
 
@@ -58,9 +74,8 @@ case class Solver (
         case Stream.Empty =>
           // All heuristics returned empty lists.
           solutionsStuck
-        case nextList =>
+        case (next #:: _) =>
           val nextSolver = this.copy(rnd = rnd2)
-          val next = nextList.head
           nextSolver.placeAndContinue(next)
       }
     }
@@ -74,7 +89,7 @@ case class Solver (
     val placement = next.placement
     val newSolver = place(placement.cellNumber, placement.digit)
     val step = Step(
-      newSolver.puzzle, Some(placement), next.tjpe, next.description)
+      newSolver.puzzle, next.tjpe, Some(placement), next.cells)
     val newSteps = step :: steps
     val newSolver2 = newSolver.copy(steps = newSteps)
     newSolver2.solutionsTop
@@ -87,7 +102,7 @@ case class Solver (
     // fewest possibilities remaining, which is also the best cell to
     // make a guess for.
 
-    // I tried using unknowns.minBy but ig was slower, wtf.
+    // I tried using unknowns.minBy but it was slower, wtf.
     val minUnknown = Util.minBy(unknowns, {x: Unknown => x.numPossible})
     val cellNumber = minUnknown.cellNumber
     // I tried matching on minUnknown.getPossible and only binding
@@ -103,8 +118,8 @@ case class Solver (
         // not using heuristics, because if we are then forcing is
         // done by Heuristic.Forced via findForced.
         if (options.useGuessing && !options.useHeuristics) {
-          val next = Next(Heuristic.ForcedGuess, "Forced guess",
-            Placement(cellNumber, digit))
+          val next = Next(Heuristic.ForcedGuess, Placement(cellNumber, digit),
+            List(cellNumber))
           placeAndContinue(next)
         }
         else {
@@ -145,7 +160,8 @@ case class Solver (
     : Stream[Solution] =
   {
     digits.foldLeft(Stream.empty[Solution]) {(accum, digit) =>
-      val next = Next(Heuristic.Guess, "Guess", Placement(cellNumber, digit))
+      val next = Next(Heuristic.Guess, Placement(cellNumber, digit),
+        List(cellNumber))
       accum #::: placeAndContinue(next)
     }
   }
@@ -165,8 +181,7 @@ case class Solver (
         // the set there should be exactly one possible digit
         // remaining.  But we may have made a wrong guess, which
         // leaves no possibilities.
-        findForcedForUnknown(
-          Heuristic.MissingOne, s"Missing one in ${set.name}")(unknown)
+        findForcedForUnknown(Heuristic.MissingOne, set.cells)(unknown)
       case _ =>
         // Zero or multiple cells in the set are unknown.
         Stream.Empty
@@ -186,8 +201,7 @@ case class Solver (
         // Exactly two cells in the set are unknown.  Place digits in
         // them if they are forced.  A random one will be chosen
         // upstream if necessary (and if we find anything to return).
-        unknowns.flatMap(findForcedForUnknown(
-          Heuristic.MissingTwo, s"Missing two in ${set.name}"))
+        unknowns.flatMap(findForcedForUnknown(Heuristic.MissingTwo, set.cells))
       case _ =>
         // Zero or too many unknowns for humans to easiy handle.
         Stream.Empty
@@ -209,27 +223,29 @@ case class Solver (
     possibleDigitList
       .toStream
       .flatMap(Solver.findNeededDigitInUnknowns(
-        us, Heuristic.Needed, s"Needed in ${set.name}"))
+        us, Heuristic.Needed, set.cells))
   }
 
   def findForced : Stream[Next] = {
     // Currying is somewhat ugly in scala, but seems to be a smidge
     // faster,
-    unknowns.flatMap(findForcedForUnknown(Heuristic.Forced, "Forced"))
+    unknowns.flatMap(findForcedForUnknown(Heuristic.Forced, List.empty))
   }
 
   // This can return either List or Stream.  But since it's going to be
   // flatMap'd by a Stream, returning Stream performs better.
 
   def findForcedForUnknown
-    (tjpe: Heuristic.Value, description: => String)
+    (tjpe: Heuristic.Value, cells: Iterable[Int])
     (unknown: Unknown) :
     Stream[Next] =
   {
     unknown.numPossible match {
       case 1 =>
+        val cellNumber = unknown.cellNumber
         val digit = unknown.getPossible.head
-        Stream(Next(tjpe, description, Placement(unknown.cellNumber, digit)))
+        val cells2 = if (cells.nonEmpty) cells else List(cellNumber)
+        Stream(Next(tjpe, Placement(cellNumber, digit), cells2))
       case _ =>
         Stream.empty
     }
@@ -249,7 +265,7 @@ case class Solver (
   }
 
   def findTricky : Stream[Next] = {
-    Stream.empty
+    Stream.empty // XXX
   }
 }
 
@@ -259,7 +275,7 @@ object Solver {
   {
     val (rnd1, rnd2) = maybeSplit(rnd)
     val unknowns = maybeShuffle(rnd1, (0 to 80).map(Unknown(_))).toStream
-    val step = Step(puzzle, None, Heuristic.Initial, "Initial puzzle")
+    val step = Step(puzzle, Heuristic.Initial)
     val heuristicFunctions =
       options.heuristics.map(getHeuristicFunction).toStream
     val solver = new Solver(
@@ -327,25 +343,24 @@ object Solver {
   }
 
   def findNeededDigitInUnknowns
-    (unknowns: Stream[Unknown], tjpe: Heuristic.Value, description: => String)
+    (unknowns: Stream[Unknown], tjpe: Heuristic.Value, cells: Iterable[Int])
     (digit: Int)
     : Stream[Next] =
   {
     unknowns.filter(_.isDigitPossible(digit)) match {
       case Stream(unknown) =>
-        Stream(Next(tjpe, description, Placement(unknown.cellNumber, digit)))
+        Stream(Next(tjpe, Placement(unknown.cellNumber, digit), cells))
       case _ => Stream.empty
     }
   }
 
   def findNeededDigitInSet
-    (unknowns: Stream[Unknown], exclusionSet: ExclusionSet,
-      tjpe: Heuristic.Value, description: => String)
+    (unknowns: Stream[Unknown], set: Set[Int], tjpe: Heuristic.Value)
     (digit: Int)
     : Stream[Next] =
   {
-    val unknownsFromSet = unknownsInSet(unknowns, exclusionSet.cells)
-    findNeededDigitInUnknowns(unknownsFromSet, tjpe, description)(digit)
+    val unknownsFromSet = unknownsInSet(unknowns, set)
+    findNeededDigitInUnknowns(unknownsFromSet, tjpe, set)(digit)
   }
 
   def maybeShuffle[T](rnd: Option[Random], list: Iterable[T]) : Iterable[T] = {

@@ -10,7 +10,7 @@ object Layout {
       "spinny" -> spinny(List.empty),
       "random" -> random,
       "diagonal" -> diagonal,
-      "doubleDiagonanl" -> doubleDiagonal,
+      "doubleDiagonal" -> doubleDiagonal,
       "wtf" -> wtf,
       "wtf2" -> wtf
     )

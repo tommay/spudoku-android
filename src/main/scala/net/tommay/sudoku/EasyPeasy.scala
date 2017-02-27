@@ -57,9 +57,8 @@ object EasyPeasy {
     (exclusionSet: ExclusionSet)
       : Stream[Next] =
   {
-    lazy val description = s"Easy peasy in ${exclusionSet.name}"
     digits.flatMap(Solver.findNeededDigitInSet(
-      unknowns, exclusionSet, Heuristic.EasyPeasy, description))
+      unknowns, exclusionSet.cells, Heuristic.EasyPeasy))
   }
 
   def countDigitsInSet(

@@ -7,8 +7,7 @@ repositories {
     jcenter()
 }
 
-// Android needs jvm 1.7.  So we need a scala version that can target
-// 1.7, and we need to target it.
+// This just uses 2.11.8 to be compatible with the spudoku-android build.
 
 dependencies {
     compile 'org.scala-lang:scala-library:2.11.8'
@@ -16,9 +15,6 @@ dependencies {
 
 compileScala {
     scalaCompileOptions.optimize = true
-    scalaCompileOptions.additionalParameters = [
-        '-target:jvm-1.7'
-    ]
 }
 
 // http://stackoverflow.com/questions/27494428/running-a-jar-produce-from-gradle-build
@@ -26,17 +22,6 @@ jar {
     manifest {
         attributes 'Main-Class': 'net.tommay.sudoku.Create'
     }
-    /*
-    // This builds an uberjar:  Be nice to run it through proguard.
-    from {
-        configurations.compile.collect {
-            it.isDirectory() ? it : zipTree(it)
-        }
-        configurations.runtime.collect {
-            it.isDirectory() ? it : zipTree(it)
-        }
-    }
-    */
 }
 
 task uberjar(type: Jar) {

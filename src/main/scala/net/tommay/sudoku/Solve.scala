@@ -52,7 +52,7 @@ object Solve {
   }
 
   def showStep(step: Step) : String = {
-    step.description + (step.placementOption match {
+    step.tjpe.toString + (step.placementOption match {
       case Some(placement) =>
         val (row, col) = rowcol(placement.cellNumber)
         s": ($row, $col) ${placement.digit}"
