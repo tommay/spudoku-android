@@ -11,5 +11,5 @@ jarsigner \
   app/build/outputs/apk/app-${type}-unsigned.apk \
   androiddebugkey
 
-~/Android/Sdk/platform-tools/adb install -r \
+adb install -r \
   app/build/outputs/apk/app-${type}-unsigned.apk
