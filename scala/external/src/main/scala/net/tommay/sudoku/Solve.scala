@@ -24,7 +24,11 @@ object Solve {
     println(s"There are $count solutions.")
   }
 
-  val heuristics = List(Heuristic.Needed, Heuristic.Forced)
+  // The heuristics, if any, to use.  If useGuessing is true in
+  // options then heuristics, if non-empty, should usually include
+  // Forced otherwise guesses with only one possibility won't be used.
+
+  val heuristics = List(Heuristic.EasyPeasy, Heuristic.Forced)
 
   val options = new SolverOptions(
     heuristics = heuristics,
