@@ -47,6 +47,8 @@ object EasyPeasy {
     : Stream[Next] =
   {
     val placed = puzzle.placed
+    // This foldLeft is faster than the straightforward
+    // flatMap(cellNumber => placed.get(cellNumber)), ridiculous.
     val allDigits =
       stripe.cells.foldLeft(List.empty[Int]) {case (accum, cellNumber) =>
         placed.get(cellNumber) match {
