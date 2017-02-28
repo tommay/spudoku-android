@@ -15,7 +15,7 @@ case class Solver (
   def place(cellNumber: Int, digit: Int) : Solver = {
     val newPuzzle = puzzle.place(cellNumber, digit)
     val newUnknowns = unknowns
-      .filter(_.cellNumber != cellNumber)
+      .withFilter(_.cellNumber != cellNumber)
       .map(_.place(cellNumber, digit))
     this.copy(puzzle = newPuzzle, unknowns = newUnknowns)
   }

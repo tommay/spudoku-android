@@ -47,7 +47,7 @@ object EasyPeasy {
     val doubleDigits =
       countDigitsInSet(puzzle, stripe.cells)
         .toStream
-        .filter{case (_, list) => list.size == 2}
+        .withFilter{case (_, list) => list.size == 2}
         .map{case (digit, _) => digit}
     stripe.exclusionSets.flatMap(blah(unknowns, doubleDigits))
   }
@@ -66,7 +66,7 @@ object EasyPeasy {
     : Map[Int, Iterable[Int]] =
   {
     val digitsInSet = puzzle.each
-      .filter{case (cellNumber, _) => cells.contains(cellNumber)}
+      .withFilter{case (cellNumber, _) => cells.contains(cellNumber)}
       .map{case (_, digit) => digit}
     digitsInSet.groupBy(identity)
   }
