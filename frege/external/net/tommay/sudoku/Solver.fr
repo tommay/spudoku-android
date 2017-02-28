@@ -149,15 +149,15 @@ private solutionsStuck this =
         then let next = Next.new "Forced guess" digit cellNumber
              in placeAndContinue this next
         else -- There is a forced guess but we're not configured to
-             -- use it.  See if we can apply a TrickySet to create
-             -- an opportunity.
+             -- use it.  See if we can permanently apply a TrickySet
+             -- to create an opportunity.
              case applyOneTrickySetIfAllowed this of
                Just newSolver -> solutionsTop newSolver
                Nothing -> []
     _ ->
       -- Multiple possibilities.  Before we guess, see if it's possible
-      -- to permanently apply a TrickySet to create possibiities for
-      -- heurisstics.
+      -- to permanently apply a TrickySet to create possibilities for
+      -- heuristics.
       case applyOneTrickySetIfAllowed this of
         Just newSolver -> solutionsTop newSolver
         Nothing -> if SolverOptions.useGuessing options
@@ -185,7 +185,7 @@ private findEasyPeasy :: Solver -> [Next]
 private findEasyPeasy this =
   EasyPeasy.find (Solver.puzzle this) (Solver.unknowns this)
 
--- Try to place a digit where a set has only one unplaced cell.
+-- Try to place a digit where a set has only one Unknown.
 --
 private findMissingOne :: Solver -> [Next]
 private findMissingOne this =
@@ -229,12 +229,14 @@ private findNeeded :: Solver -> [Next]
 private findNeeded this =
   concat $ map (findNeededInSet this) ExclusionSet.exclusionSets
 
+-- XXX update from Haskell version.
 private findNeededInSet :: Solver -> ExclusionSet -> [Next]
 private findNeededInSet this set =
   let ExclusionSet name cellNumbers = set
       unknowns = SolverUtil.unknownsInSet (Solver.unknowns this) cellNumbers
   in concat $ map (findNeededDigitInSet unknowns name) [1..9]
 
+-- XXX update name from Haskell version.
 private findNeededDigitInSet :: [Unknown] -> String -> Digit -> [Next]
 private findNeededDigitInSet unknowns name digit =
   case filter (Unknown.isDigitPossible digit) unknowns of
@@ -247,11 +249,15 @@ private findForced :: Solver -> [Next]
 private findForced this =
   concat $ map (findForcedForUnknown "Forced") $ Solver.unknowns this
 
+-- XXX update to use numPossible ala Haskell version.
 private findForcedForUnknown :: String -> Unknown -> [Next]
 private findForcedForUnknown description unknown =
   case Unknown.getPossible unknown of
     [digit] -> [Next.new description digit (Unknown.cellNumber unknown)]
     _ -> []
+
+-- XXX finish working on TrickySets in Haskell the port the work to
+-- Frege and Scala.
 
 private findTricky :: Solver -> [Next]
 private findTricky this =

@@ -25,6 +25,11 @@ abstract data TrickySet = TrickySet {
 -- in the same row/col, then the digit can be removed from the
 -- possibilities for the rest of the Unknowns in that row/col.
 --
+-- In terms of the TrickySet datatype, if a digit is possible in one
+-- of the common cells (intersection of a square and a row/col) but
+-- not one of the rest cells, then it can be eliminated as a possibility
+-- for the eliminated cells (square minus common cells).
+--
 -- The reverse of the situation is also true.  In a given row or
 -- column if it is only possible to place a given digit within a
 -- single square, then the digit can be eliminated from the other

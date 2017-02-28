@@ -58,6 +58,7 @@ isDigitPossible :: Digit -> Unknown -> Bool
 isDigitPossible digit this =
   Bits.testBit (Unknown.possible this) (digit - 1)
 
+-- XXX reconcile this with the Haskell version.
 removeDigitFromPossible :: Digit -> Unknown -> Unknown
 removeDigitFromPossible digit this =
   this.{ possible = Bits.clearBit (Unknown.possible this) (digit - 1) }
