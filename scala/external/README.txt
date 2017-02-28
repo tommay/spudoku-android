@@ -10,6 +10,17 @@ The code can be run with the "create" and "solve" scripts.  This
 requires the "scala" command to run scala 2.11, because that's what
 the jar is built with.
 
-An alternative would be to build in uberjar with scala classes baked
+An alternative would be to build an uberjar with scala classes baked
 in.  build.gradle has task uberjar to support this.  The classes can
 be run with java -cp sudoku-uber.jar <classname>.
+
+-----
+
+To test performance or whatever:
+
+Edit Solve.scala and make sure the desired heuristics are used.
+
+gradle uberjar
+  Builds ./build/libs/sudoku-uber.jar
+
+time ./solve puzzle-x.jar
