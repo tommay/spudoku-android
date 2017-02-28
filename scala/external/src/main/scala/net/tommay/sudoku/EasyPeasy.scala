@@ -44,11 +44,19 @@ object EasyPeasy {
     (stripe: Stripe)
     : Stream[Next] =
   {
-    val doubleDigits =
-      countDigitsInSet(puzzle, stripe.cells)
-        .toStream
-        .withFilter{case (_, list) => list.size == 2}
-        .map{case (digit, _) => digit}
+    val placed = puzzle.placed
+    val allDigits =
+      stripe.cells.foldLeft(List.empty[Int]) {case (accum, cellNumber) =>
+        placed.get(cellNumber) match {
+          case None => accum
+          case Some(digit) => digit :: accum
+        }
+      }
+    val doubleDigits = allDigits
+      .groupBy(identity)
+      .toStream
+      .withFilter{case (_, list) => list.size == 2}
+      .map{case (digit, _) => digit}
     stripe.exclusionSets.flatMap(blah(unknowns, doubleDigits))
   }
 
@@ -59,15 +67,5 @@ object EasyPeasy {
   {
     digits.flatMap(Solver.findNeededDigitInSet(
       unknowns, exclusionSet.cells, Heuristic.EasyPeasy))
-  }
-
-  def countDigitsInSet(
-    puzzle: Puzzle, cells: Set[Int])
-    : Map[Int, Iterable[Int]] =
-  {
-    val digitsInSet = puzzle.each
-      .withFilter{case (cellNumber, _) => cells.contains(cellNumber)}
-      .map{case (_, digit) => digit}
-    digitsInSet.groupBy(identity)
   }
 }
