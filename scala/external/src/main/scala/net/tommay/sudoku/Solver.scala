@@ -111,7 +111,7 @@ case class Solver (
     possible match {
       case Nil =>
         // Failed.  No solutions.
-        Stream.empty
+        Stream.Empty
       case List(digit) =>
         // One possibility.  The choice is forced, no guessing.  But
         // we only use the force if a) we're guessing, and b) we're
@@ -128,7 +128,7 @@ case class Solver (
           // opportunity.
           applyOneTrickySetIfAllowed match {
             case Some(newSolver) => newSolver.solutionsTop
-            case _ => Stream.empty
+            case _ => Stream.Empty
           }
         }
       case  _ =>
@@ -147,7 +147,7 @@ case class Solver (
               doGuesses(cellNumber, shuffledPossible)
             }
             else {
-              Stream.empty
+              Stream.Empty
             }
         }
     }
@@ -232,8 +232,8 @@ case class Solver (
     unknowns.flatMap(findForcedForUnknown(Heuristic.Forced, List.empty))
   }
 
-  // This can return either List or Stream.  But since it's going to be
-  // flatMap'd by a Stream, returning Stream performs better.
+  // This can return either Stream, List, Option, or any concrete
+  // Iterable.  But it performs best returning Stream.
 
   def findForcedForUnknown
     (tjpe: Heuristic.Value, cells: Iterable[Int])
@@ -247,7 +247,7 @@ case class Solver (
         val cells2 = if (cells.nonEmpty) cells else List(cellNumber)
         Stream(Next(tjpe, Placement(cellNumber, digit), cells2))
       case _ =>
-        Stream.empty
+        Stream.Empty
     }
   }
 
@@ -265,7 +265,7 @@ case class Solver (
   }
 
   def findTricky : Stream[Next] = {
-    Stream.empty // XXX
+    Stream.Empty // XXX
   }
 }
 
@@ -350,7 +350,7 @@ object Solver {
     unknowns.filter(_.isDigitPossible(digit)) match {
       case Stream(unknown) =>
         Stream(Next(tjpe, Placement(unknown.cellNumber, digit), cells))
-      case _ => Stream.empty
+      case _ => Stream.Empty
     }
   }
 
