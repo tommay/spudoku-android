@@ -5,8 +5,10 @@ package net.tommay.sudoku
 // digit with two occurences, check col0/col1/col2 to see if there's
 // only one Unknown where the digit is possible.
 
+// List performs better than Vector for cells.
+
 case class Stripe(
-  cells: Set[Int],
+  cells: List[Int],
   exclusionSets: Stream[ExclusionSet])
 
 object EasyPeasy {
@@ -26,7 +28,7 @@ object EasyPeasy {
   def makeStripe(exclusionSets: Stream[ExclusionSet]) : Stripe = {
     val allCells = exclusionSets.foldLeft(Set.empty[Int]){
       case (accum, exclusionSet) => accum ++ exclusionSet.cells
-    }
+    }.toList
     Stripe(allCells, exclusionSets)
   }
 
