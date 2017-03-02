@@ -28,6 +28,18 @@ object CreaterForJava {
     createFiltered(randomSeed, layoutName, options)
   }
 
+  // XXX See the note on createVicious about why we need a more
+  // complex predicate to get truly medium/vicious puzzles.
+  def createMedium(randomSeed: Int, layoutName: String)
+      : (String, String) =
+  {
+    val options = new SolverOptions(
+      List(Heuristic.Needed, Heuristic.MissingOne, Heuristic.EasyPeasy),
+      false, false)
+    createFiltered(randomSeed, layoutName, options,
+      solution => solution.steps.exists(_.tjpe == Heuristic.Needed))
+  }
+
   // Vicious puzzles have Forced cells but no Guessing.  XXX This
   // doesn't work.  Just because one Solution requires Forced doesn't
   // mean there are Solutions that don't need it.  To make sure, we'd
@@ -85,8 +97,8 @@ object CreaterForJava {
   // CreaterForJava can be run independently for testing.
 
   def main(args: Array[String]) {
-    val seed = System.currentTimeMillis.toInt
-    val (puzzle, solved) = createEasyPeasy(seed, "classic")
+    val seed = 1 // System.currentTimeMillis.toInt
+    val (puzzle, solved) = createMedium(seed, args(0))
     println(s"$puzzle $solved")
   }
 }

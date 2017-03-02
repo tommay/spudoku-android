@@ -16,6 +16,12 @@ class Creater {
         return new RawPuzzle((String)result._1, (String)result._2);
     }
 
+    public static RawPuzzle createMedium (int seed, String layoutName) {
+        scala.Tuple2 result = CreaterForJava.createMedium(
+            seed, layoutName);
+        return new RawPuzzle((String)result._1, (String)result._2);
+    }
+
     public static RawPuzzle createVicious (int seed, String layoutName) {
         scala.Tuple2 result = CreaterForJava.createVicious(
             seed, layoutName);

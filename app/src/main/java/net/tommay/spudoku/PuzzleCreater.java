@@ -5,6 +5,7 @@ import net.tommay.spudoku.Creater;
 enum PuzzleCreater {
     EasyPeasy("EasyPeasy", new IPuzzleCreater.EasyPeasy()),
     Easy("Easy", new IPuzzleCreater.Easy()),
+    Medium("Medium", new IPuzzleCreater.Medium()),
     Vicious("Vicious", new IPuzzleCreater.Vicious()),
     Wicked("Wicked", new IPuzzleCreater.Wicked());
 
@@ -34,6 +35,13 @@ enum PuzzleCreater {
             @Override
             public RawPuzzle create(int seed, String layoutName) {
                 return Creater.createEasy(seed, layoutName);
+            }
+        }
+
+        public class Medium implements IPuzzleCreater {
+            @Override
+            public RawPuzzle create(int seed, String layoutName) {
+                return Creater.createMedium(seed, layoutName);
             }
         }
 
