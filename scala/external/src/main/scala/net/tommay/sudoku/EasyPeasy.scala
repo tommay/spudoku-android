@@ -66,10 +66,10 @@ object EasyPeasy {
       .toStream
       .withFilter{case (_, list) => list.size == 2}
       .map{case (digit, _) => digit}
-    stripe.exclusionSets.flatMap(blah(unknowns, doubleDigits))
+    stripe.exclusionSets.flatMap(findOnePossible(unknowns, doubleDigits))
   }
 
-  def blah
+  def findOnePossible
     (unknowns: Stream[Unknown], digits: Stream[Int])
     (exclusionSet: ExclusionSet)
       : Stream[Next] =
