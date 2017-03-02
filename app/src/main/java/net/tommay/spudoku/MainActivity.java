@@ -36,14 +36,12 @@ import net.tommay.spudoku.Heuristic;
 import net.tommay.spudoku.Hint;
 import net.tommay.spudoku.LayoutNames;
 import net.tommay.spudoku.Puzzle;
+import net.tommay.spudoku.PuzzleCreater;
 import net.tommay.spudoku.PuzzleProducer;
 import net.tommay.spudoku.RawPuzzle;
 import net.tommay.util.Consumer;
 import net.tommay.util.Producer;
 
-import net.tommay.spudoku.EasyCreater;
-import net.tommay.spudoku.ViciousCreater;
-import net.tommay.spudoku.WickedCreater;
 import net.tommay.spudoku.Hinter;
 
 public class MainActivity extends AppCompatActivity {
@@ -77,9 +75,9 @@ public class MainActivity extends AppCompatActivity {
 
     private final Map<String, PuzzleCreater> _ratingsMap =
         new LinkedHashMap(){{
-            put("Easy", new EasyCreater());
-            put("Vicious", new ViciousCreater());
-            put("Wicked", new WickedCreater());
+            put("Easy", new PuzzleCreater.Easy());
+            put("Vicious", new PuzzleCreater.Vicious());
+            put("Wicked", new PuzzleCreater.Wicked());
         }};
 
     // Context-dependent "constants".
