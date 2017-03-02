@@ -1,9 +1,11 @@
 package net.tommay.sudoku
 
-// Given a Stripe pf three columns (or rows) col0, col1, and col2.
-// Count the occurences of each digit in the entire Stripe.  For each
-// digit with two occurences, check col0/col1/col2 to see if there's
-// only one Unknown where the digit is possible.
+// Each Stripe has three ExclusionSet rows or columns.  It has a Set
+// of all column numbers in the Stripe, and a Stream of the three
+// ExclusionSets.  To find an EasyPeasy, count the occurences of each
+// digit in the entire Stripe.  For each digit with two occurences,
+// check for an ExclusionSet with only one Unknown where the digit is
+// possible.
 
 // List performs better than Vector for cells.
 
@@ -12,11 +14,8 @@ case class Stripe(
   exclusionSets: Stream[ExclusionSet])
 
 object EasyPeasy {
-  // Easy peasies are found by using stripes of three rows or columns.
-  // The first item in the tuple is the set we're looking to place a
-  // digit in.  The Iterable has the other two rows/columns in the
-  // stripe.  Here we build all the possible stripes so they can be
-  // searched for easy peasies.
+  // Build all the possible Stripes so they can be searched for easy
+  // peasies.
 
   val stripes : Stream[Stripe] = {
     Util.slices(3, (ExclusionSet.rows ++ ExclusionSet.columns))
@@ -25,6 +24,10 @@ object EasyPeasy {
       .map(makeStripe)
   }
 
+  // Take a stripe of three ExclusionSets in a Stream and create a
+  // Stripe with rhe combined Set of all the cell numbers, and the
+  // ExclusionSets.
+  //
   def makeStripe(exclusionSets: Stream[ExclusionSet]) : Stripe = {
     val allCells = exclusionSets.foldLeft(Set.empty[Int]){
       case (accum, exclusionSet) => accum ++ exclusionSet.cells
@@ -49,6 +52,8 @@ object EasyPeasy {
     val placed = puzzle.placed
     // This foldLeft is faster than the straightforward
     // flatMap(cellNumber => placed.get(cellNumber)), ridiculous.
+    // And it's much fasterto generate allDigits and do the groupBy than it
+    // is to tally the counts into a Map to begin with.
     val allDigits =
       stripe.cells.foldLeft(List.empty[Int]) {case (accum, cellNumber) =>
         placed.get(cellNumber) match {
