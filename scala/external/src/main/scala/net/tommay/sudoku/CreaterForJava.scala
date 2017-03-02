@@ -74,9 +74,11 @@ object CreaterForJava {
       createStreamWithSolution(rnd2, layout, solveFunc)
   }
 
+  // CreaterForJava can be run independently for testing.
+
   def main(args: Array[String]) {
     val seed = System.currentTimeMillis.toInt
-    val (puzzle, solved) = createWicked(seed, "classic")
+    val (puzzle, solved) = createEasyPeasy(seed, "classic")
     println(s"$puzzle $solved")
   }
 }
