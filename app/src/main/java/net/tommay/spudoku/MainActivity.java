@@ -75,9 +75,9 @@ public class MainActivity extends AppCompatActivity {
 
     private final Map<String, PuzzleCreater> _ratingsMap =
         new LinkedHashMap(){{
-            put("Easy", new PuzzleCreater.Easy());
-            put("Vicious", new PuzzleCreater.Vicious());
-            put("Wicked", new PuzzleCreater.Wicked());
+            for (PuzzleCreater puzzleCreater : PuzzleCreater.values()) {
+                put(puzzleCreater.name, puzzleCreater);
+            }
         }};
 
     // Context-dependent "constants".
