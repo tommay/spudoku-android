@@ -7,6 +7,14 @@ import scala.util.Random
 // in Scala.
 
 object CreaterForJava {
+  def createEasyPeasy(randomSeed: Int, layoutName: String)
+      : (String, String) =
+  {
+    val options = new SolverOptions(
+      List(Heuristic.EasyPeasy), false, false)
+    createFiltered(randomSeed, layoutName, options)
+  }
+
   def createEasy(randomSeed: Int, layoutName: String)
       : (String, String) =
   {

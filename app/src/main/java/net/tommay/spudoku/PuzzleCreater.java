@@ -3,7 +3,8 @@ package net.tommay.spudoku;
 import net.tommay.spudoku.Creater;
 
 enum PuzzleCreater {
-    EasyPeasy("Easy", new IPuzzleCreater.Easy()),
+    EasyPeasy("EasyPeasy", new IPuzzleCreater.EasyPeasy()),
+    Easy("Easy", new IPuzzleCreater.Easy()),
     Vicious("Vicious", new IPuzzleCreater.Vicious()),
     Wicked("Wicked", new IPuzzleCreater.Wicked());
 
@@ -21,6 +22,13 @@ enum PuzzleCreater {
 
     private interface IPuzzleCreater {
         public RawPuzzle create(int seed, String layoutName);
+
+        public class EasyPeasy implements IPuzzleCreater {
+            @Override
+            public RawPuzzle create(int seed, String layoutName) {
+                return Creater.createEasyPeasy(seed, layoutName);
+            }
+        }
 
         public class Easy implements IPuzzleCreater {
             @Override
