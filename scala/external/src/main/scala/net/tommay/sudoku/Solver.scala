@@ -282,10 +282,8 @@ case class Solver (
     // 1:
     val applicableTrickySets = findApplicableTrickySets
     applicableTrickySets.flatMap{case (digit, trickySet) =>
-      // 2:
-      val tmpUnknowns = eliminateWithTrickySet(digit, trickySet)
       // 3:
-      findNeededDigitInTrickySet(tmpUnknowns, digit, trickySet)
+      findNeededDigitInTrickySet(digit, trickySet)
     }
   }
 
@@ -322,8 +320,7 @@ case class Solver (
   //    exactly one Unknown where the digit is possible, and if so then
   //    include the Unknown in the result.
   //
-  def findNeededDigitInTrickySet(
-    unknowns: Stream[Unknown], digit: Int, trickySet: TrickySet)
+  def findNeededDigitInTrickySet(digit: Int, trickySet: TrickySet)
       : Stream[Next] =
   {
     val unknownForEachNeededSet = trickySet.checkNeeded.flatMap{

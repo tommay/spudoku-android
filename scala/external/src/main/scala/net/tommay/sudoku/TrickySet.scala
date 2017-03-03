@@ -83,7 +83,8 @@ object TrickySet {
             common = common.toStream,
             rest = restOfSquare.toStream,
             eliminate = restOfRow.toStream,
-            checkNeeded = getSquaresIncluding(restOfRow))
+            checkNeeded = getSquaresIncluding(restOfRow)
+              .map(_ -- restOfRow))
         }
         else {
           TrickySet(
@@ -91,7 +92,8 @@ object TrickySet {
             common = common.toStream,
             rest = restOfRow.toStream,
             eliminate = restOfSquare.toStream,
-            checkNeeded = getSetsIncluding(restOfSquare))
+            checkNeeded = getSetsIncluding(restOfSquare)
+              .map(_ -- restOfSquare))
         }
       )
     }
