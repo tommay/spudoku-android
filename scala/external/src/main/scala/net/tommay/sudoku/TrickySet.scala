@@ -17,8 +17,11 @@ case class TrickySet (
 // It's also not something I do.
 
 // Within a square, if the only possible places for a given digit are
-// in the same row/col, then the digit can be removed from the
-// possibilities for the rest of the Unknowns in that row/col.
+// in the same row/col (i.e., in "common" but not in "rest"), then the
+// digit can be removed from the possibilities for the rest of the
+// Unknowns in that row/col ("eliminate").  This may cause the digit
+// to be Forced in one of the squares containing the eliminate set
+// ("checkNeeded").
 //
 // The reverse of the situation is also true.  In a given row or
 // column if it is only possible to place a given digit within a
