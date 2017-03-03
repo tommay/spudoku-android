@@ -28,7 +28,7 @@ object Solve {
   // options then heuristics, if non-empty, should usually include
   // Forced otherwise guesses with only one possibility won't be used.
 
-  val heuristics = List(Heuristic.EasyPeasy, Heuristic.Forced)
+  val heuristics = List(Heuristic.Tricky, Heuristic.Forced)
 
   val options = new SolverOptions(
     heuristics = heuristics,

@@ -2,8 +2,8 @@ package net.tommay.sudoku
 
 case class TrickySet (
   name: String,
-  common: Stream[Int],
-  rest: Stream[Int],
+  common: Stream[Int],  // XXX Set?
+  rest: Stream[Int],    // XXX Set?
   eliminate: Stream[Int],
   checkNeeded: Stream[Set[Int]])
 
@@ -43,6 +43,10 @@ object TrickySet {
 
   val inverseTrickySets: Stream[TrickySet] = {
     createTrickySets(true)
+  }
+
+  val allTrickySets = {
+    trickySets ++ inverseTrickySets
   }
 
   def createTrickySets(inverse: Boolean) : Stream[TrickySet] = {

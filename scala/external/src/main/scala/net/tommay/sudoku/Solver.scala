@@ -264,8 +264,106 @@ case class Solver (
     EasyPeasy.find(puzzle, unknowns)
   }
 
+  // Return a list of all possible TrickySet placements for the Puzzle.
+  //
+  // 1. Find (Digit, TrickySet) pairs where Digit is possible
+  //    in common but not rest.
+  // 2. Remove the Digit from the Unknowns in eliminate.
+  // 3. If there is only one Unknown in any checkNeeded list where Digit
+  //    is possible then we have found a placement.
+  //
+  // We could also check for new forced digits in the eliminate
+  // positions.  We could remove the digit from the possibilities
+  // permanently, but that's not something a person would remember
+  // unless they're using paper.  So just remove locally while we see if
+  // that creates a new placement.
+  //
   def findTricky : Stream[Next] = {
-    Stream.Empty // XXX
+    // 1:
+    val applicableTrickySets = findApplicableTrickySets
+    applicableTrickySets.flatMap{case (digit, trickySet) =>
+      // 2:
+      val tmpUnknowns = eliminateWithTrickySet(digit, trickySet)
+      // 3:
+      findNeededDigitInTrickySet(tmpUnknowns, digit, trickySet)
+    }
+  }
+
+  // 1. Return all the (Dight, TrickySet) pairs where Digit is possible
+  //    in TrickySet.common but not in TrickySet.rest.
+  //
+  def findApplicableTrickySets : Stream[(Int, TrickySet)] = {
+    for (digit <- allDigits; trickySet <- TrickySet.allTrickySets;
+      if trickySetMatchesForDigit(digit, trickySet))
+    yield (digit, trickySet)
+  }
+
+  val allDigits = (1 to 9).toStream
+
+  // 2. Return a new set of Unknowns where Digit has been removed from
+  //    TrickySet.eliminate.
+  //
+  def eliminateWithTrickySet(digit: Int, trickySet: TrickySet)
+      : Stream[Unknown] =
+  {
+    val cellNumbers = trickySet.eliminate
+    unknowns.map{unknown =>
+      if (cellNumbers.contains(unknown.cellNumber)) {
+        unknown.removeDigitFromPossible(digit)
+      }
+      else {
+        unknown
+      }
+    }
+  }
+
+  // 3. Given the set of Unknowns with the TrickySet/Digit eliminated,
+  //    look through the checkNeeded sets to see if any of them now have
+  //    exactly one Unknown where the digit is possible, and if so then
+  //    include the Unknown in the result.
+  //
+  def findNeededDigitInTrickySet(
+    unknowns: Stream[Unknown], digit: Int, trickySet: TrickySet)
+      : Stream[Next] =
+  {
+    val unknownForEachNeededSet = trickySet.checkNeeded.flatMap{
+      findUnknownWhereDigitIsNeeded(unknowns, digit, _)
+    }
+    unknownForEachNeededSet.map{unknown =>
+      Next(Heuristic.Tricky, Placement(unknown.cellNumber, digit),
+        trickySet.common)
+    }
+  }
+
+  def trickySetMatchesForDigit(digit: Int, trickySet: TrickySet) : Boolean = {
+    isDigitPossibleInSet(digit, trickySet.common) &&
+    !isDigitPossibleInSet(digit, trickySet.rest)
+  }
+
+  // XXX is Set good?
+  def findUnknownWhereDigitIsNeeded(
+    unknowns: Stream[Unknown], digit: Int, set: Set[Int])
+      : Stream[Unknown] =
+  {
+    // Filters can be in either order but this order is way faster.
+    // XXX is that true?
+    val unknowns2 = unknowns.filter(unknown =>
+      unknown.isDigitPossible(digit) && set.contains(unknown.cellNumber))
+    unknowns2 match {
+      case Stream(_) => unknowns2
+      case _ => Stream.Empty
+    }
+  }
+
+  def isDigitPossibleInSet(digit: Int, cellNumbers :Stream[Int])
+      : Boolean =
+  {
+    // Filters can be in either order but this order is way faster.
+    // XXX is that true?
+    val possibleUnknowns = unknowns.filter(unknown =>
+      unknown.isDigitPossible(digit) &&
+        cellNumbers.contains(unknown.cellNumber))
+    possibleUnknowns.nonEmpty
   }
 }
 
