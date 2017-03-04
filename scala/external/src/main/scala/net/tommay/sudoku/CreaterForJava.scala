@@ -6,67 +6,87 @@ import scala.util.Random
 // does all the heavy lifting like Random creation and Layout lookup
 // in Scala.
 
+// It's not enough to create puzzles with the right Hruristics.  We
+// also need to ensure the puzzles can't be solved without using the
+// heuristics tht give them their difficulty level.
+
 object CreaterForJava {
+  // EasyPeasy puzzles can be solved using only Heuristic.EasyPeasy.
+  // 0m38.704s
+
   def createEasyPeasy(randomSeed: Int, layoutName: String)
       : (String, String) =
   {
-    val options = new SolverOptions(
+    val createOptions = new SolverOptions(
       List(Heuristic.EasyPeasy), false, false)
-    createFiltered(randomSeed, layoutName, options)
+    createFiltered(randomSeed, layoutName, createOptions)
   }
+
+  // EasyPeasy and MissingOne are both subsets of Needed, but they
+  // are the easiest subsets of Needed to find visually.  The same
+  // puzzles will be created no matter what the order is, but put
+  // MissingOne first because it's faster.
+  // 0m31.961s
 
   def createEasy(randomSeed: Int, layoutName: String)
       : (String, String) =
   {
-    // EasyPeasy and MissingOne are both subsets of Needed, but they
-    // are the easiest subsets of Needed to find visually.  The same
-    // puzzles will be created no matter what the order is, but put
-    // MissingOne first because it's faster.
-
-    val options = new SolverOptions(
+    val createOptions = new SolverOptions(
       List(Heuristic.MissingOne, Heuristic.EasyPeasy), false, false)
-    createFiltered(randomSeed, layoutName, options)
+    createFiltered(randomSeed, layoutName, createOptions)
   }
 
-  // XXX See the note on createVicious about why we need a more
-  // complex predicate to get truly medium/vicious puzzles.
+  // Medium puzzles require Heuristic.Needed.
+  // 0m20.618s
+
   def createMedium(randomSeed: Int, layoutName: String)
       : (String, String) =
   {
-    val options = new SolverOptions(
+    val createOptions = new SolverOptions(
       List(Heuristic.Needed, Heuristic.MissingOne, Heuristic.EasyPeasy),
       false, false)
-    createFiltered(randomSeed, layoutName, options,
-      solution => solution.steps.exists(_.tjpe == Heuristic.Needed))
+    val solveOptions = new SolverOptions(
+      List(Heuristic.MissingOne, Heuristic.EasyPeasy),
+      false, false)
+    createFiltered(randomSeed, layoutName, createOptions,
+      (puzzle, solution) =>
+      // Checking for Heuristic.Needed here is a tiny win.
+      solution.steps.exists(_.tjpe == Heuristic.Needed) &&
+        !solvableWith(puzzle, solveOptions))
   }
 
-  // Vicious puzzles have Forced cells but no Guessing.  XXX This
-  // doesn't work.  Just because one Solution requires Forced doesn't
-  // mean there are Solutions that don't need it.  To make sure, we'd
-  // need to try to solve without Forced and if it fails then Forced
-  // is required.
+  // Vicious puzzles have Forced cells but no Guessing.
+  // 2m11.172s
 
   def createVicious(randomSeed: Int, layoutName: String) : (String, String) = {
-    val options = new SolverOptions(
+    val createOptions = new SolverOptions(
       List(Heuristic.Forced, Heuristic.Needed, Heuristic.Tricky), false, false)
-    createFiltered(randomSeed, layoutName, options,
-      solution => solution.steps.exists(_.tjpe == Heuristic.Forced))
+    val solveOptions = new SolverOptions(
+      List(Heuristic.Needed, Heuristic.Tricky), false, false)
+    createFiltered(randomSeed, layoutName, createOptions,
+      (puzzle, solution) =>
+      // Checking for Heuristic.Forced here is a small win.
+      solution.steps.exists(_.tjpe == Heuristic.Forced) &&
+        !solvableWith(puzzle, solveOptions))
   }
 
-  // Wicked puzzles require Guessing.
+  // Wicked puzzles require Guessing, even with all our heuristics.
+  // 1m6.223s
 
   def createWicked(randomSeed: Int, layoutName: String) : (String, String) = {
-    val options = new SolverOptions(
-      List(Heuristic.Forced, Heuristic.Needed, Heuristic.Tricky), false, true)
-    createFiltered(randomSeed, layoutName, options,
-      solution => solution.steps.exists(_.tjpe == Heuristic.Guess))
+    val createOptions = new SolverOptions(
+      List(), false, true)
+    val solveOptions = new SolverOptions(
+      List(Heuristic.Forced, Heuristic.Needed, Heuristic.Tricky), false, false)
+    createFiltered(randomSeed, layoutName, createOptions,
+      (puzzle, solution) => !solvableWith(puzzle, solveOptions))
   }
 
   def createFiltered(
     randomSeed: Int,
     layoutName: String,
     options: SolverOptions,
-    pred: Solution => Boolean = (solution => true))
+    pred: (Puzzle, Solution) => Boolean = (_, _) => true)
       : (String, String) =
   {
     val rnd = new Random(randomSeed)
@@ -75,18 +95,22 @@ object CreaterForJava {
       case None => ("", "")
       case Some(layout) =>
         val puzzles = Creater.createStreamWithSolution(rnd, layout, solveFunc)
-        val filteredPuzzles = puzzles.filter{case (_, solution) =>
-          pred(solution)}
+        val filteredPuzzles = puzzles.filter{case (puzzle, solution) =>
+          pred(puzzle, solution)}  //.drop(1000) // For testing.  XXX!!!
         val (puzzle, solution) = filteredPuzzles.head
         (puzzle.toString, solution.puzzle.toString)
     }
+  }
+
+  def solvableWith(puzzle: Puzzle, options: SolverOptions) : Boolean = {
+    Solver.solutions(options)(puzzle).nonEmpty
   }
 
   // CreaterForJava can be run independently for testing.
 
   def main(args: Array[String]) {
     val seed = 1 // System.currentTimeMillis.toInt
-    val (puzzle, solved) = createMedium(seed, args(0))
+    val (puzzle, solved) = createWicked(seed, args(0))
     println(s"$puzzle $solved")
   }
 }
