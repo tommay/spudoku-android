@@ -18,10 +18,21 @@ object Creater {
     solveFunc: Puzzle => Stream[Solution])
       : (Puzzle, Solution) =
   {
-    val (rnd1, rnd2) = Util.split(rnd)
+    createStreamWithSolution(rnd, layout, solveFunc).head
+  }
+
+  def createStreamWithSolution(
+    rnd: Random,
+    layout: Iterable[Iterable[Int]],
+    solveFunc: Puzzle => Stream[Solution])
+      : Stream[(Puzzle, Solution)] =
+  {
+    val (rndThis, rndNext) = Util.split(rnd)
+    val (rnd1, rnd2) = Util.split(rndThis)
     val solvedPuzzle = randomSolvedPuzzle(rnd1)
     val shuffledLayout = Util.shuffle(layout, rnd2)
-    createFromSolved(solvedPuzzle, shuffledLayout, solveFunc)
+    createFromSolved(solvedPuzzle, shuffledLayout, solveFunc) #::
+      createStreamWithSolution(rndNext, layout, solveFunc)
   }
 
   // Start with a solved Puzzle and remove sets of cells (that will
@@ -49,16 +60,6 @@ object Creater {
           accum
       }
     }
-  }
-
-  def createStream(
-    rnd: Random,
-    layout: Iterable[Iterable[Int]],
-    solveFunc: Puzzle => Stream[Solution])
-      : Stream[Puzzle] =
-  {
-    val (rnd1, rnd2) = Util.split(rnd)
-    create(rnd1, layout, solveFunc) #:: createStream(rnd2, layout, solveFunc)
   }
 
   def randomSolvedPuzzle(rnd: Random) : Puzzle = {

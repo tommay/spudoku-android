@@ -74,24 +74,12 @@ object CreaterForJava {
     Layout.getLayout(layoutName) match {
       case None => ("", "")
       case Some(layout) =>
-        val puzzles = createStreamWithSolution(rnd, layout, solveFunc)
+        val puzzles = Creater.createStreamWithSolution(rnd, layout, solveFunc)
         val filteredPuzzles = puzzles.filter{case (_, solution) =>
-          pred(solution)
-        }
+          pred(solution)}
         val (puzzle, solution) = filteredPuzzles.head
         (puzzle.toString, solution.puzzle.toString)
     }
-  }
-
-  def createStreamWithSolution(
-    rnd: Random,
-    layout: Iterable[Iterable[Int]],
-    solveFunc: Puzzle => Stream[Solution])
-      : Stream[(Puzzle, Solution)] =
-  {
-    val (rnd1, rnd2) = Util.split(rnd)
-    Creater.createWithSolution(rnd1, layout, solveFunc) #::
-      createStreamWithSolution(rnd2, layout, solveFunc)
   }
 
   // CreaterForJava can be run independently for testing.
