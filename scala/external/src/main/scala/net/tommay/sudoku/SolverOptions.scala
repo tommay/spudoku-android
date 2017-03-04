@@ -19,9 +19,9 @@ package net.tommay.sudoku
 // Forced: A cell has only one possibility, all others having been eliminated.
 //   This is most tedious to spot.
 //
-// Of the heurisrics, only Needed, Tricky, and Forced are capable of
-// solving some puzzles when used on their own, and none is a subset
-// of any other nor the combination of the others.
+// Of the heurisyics, only Needed, Tricky, and Forced are independent:
+// none is a subset of any other nor the combination of the others.  They
+// can all find placements the others can't.
 //
 // Whereas the Tricky heuristic removes possibilities only while checking
 // for needed digits, the usePermanentTrickySets option will eliminate
