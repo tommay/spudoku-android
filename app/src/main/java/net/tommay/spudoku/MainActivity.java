@@ -403,6 +403,13 @@ public class MainActivity extends AppCompatActivity {
     // its cell between its solved and setup colors.
 
     public void clicked(View cellView) {
+        // XXX Would be better to enable this handler only when we
+        // have a puzzle.  That would be nicer logic-wise and would
+        // turn off the click.
+        if (!havePuzzle()) {
+            return;
+        }
+
         String tag = (String)cellView.getTag();
         Log.i("Spudoku", "clicked " + tag);
 
