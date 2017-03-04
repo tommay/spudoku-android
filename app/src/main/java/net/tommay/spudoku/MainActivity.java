@@ -177,10 +177,6 @@ public class MainActivity extends AppCompatActivity {
 
         _showing = Showing.PLACED;
 
-        // Set up drag listeners.
-
-        
-
         // Restore stuff from savedInstanceState.
 
         if (savedInstanceState != null) {
@@ -192,6 +188,8 @@ public class MainActivity extends AppCompatActivity {
                 _puzzle = newPuzzle(_rawPuzzle);
             }
         }
+
+        enableButtons(true);
     }
 
     @Override
@@ -436,7 +434,12 @@ public class MainActivity extends AppCompatActivity {
         };
         for (int buttonId : buttonIds) {
             View view = findViewById(buttonId);
-            view.setEnabled(enabled);
+            if (buttonId == R.id.button_new) {
+                view.setEnabled(enabled);
+            }
+            else {
+                view.setEnabled(enabled && havePuzzle());
+            }
         }
     }
 
@@ -455,6 +458,10 @@ public class MainActivity extends AppCompatActivity {
                 view.getBackground().clearColorFilter();
             }
         }
+    }
+
+    private boolean havePuzzle() {
+        return _rawPuzzle != null;
     }
 
     // The new button was clicked.  Set up a callback for when we have
@@ -600,6 +607,7 @@ public class MainActivity extends AppCompatActivity {
         View boardView = findViewById(R.id.board);
         for (int i = 0; i < 81; i++) {
             ImageView cellView =
+
                 (ImageView) boardView.findViewWithTag(Integer.toString(i));
             cellView.setBackgroundColor(0xFFD0D0D0);
         }
