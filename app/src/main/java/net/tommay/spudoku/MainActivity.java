@@ -39,7 +39,7 @@ import net.tommay.spudoku.Puzzle;
 import net.tommay.spudoku.PuzzleCreater;
 import net.tommay.spudoku.PuzzleProducer;
 import net.tommay.spudoku.RawPuzzle;
-import net.tommay.util.Consumer;
+import net.tommay.util.Callback;
 import net.tommay.util.Producer;
 
 import net.tommay.spudoku.Hinter;
@@ -494,9 +494,9 @@ public class MainActivity extends AppCompatActivity {
 
         AsyncCreater.<RawPuzzle>create(
             puzzleProducer,
-            new Consumer<RawPuzzle>() {
+            new Callback<RawPuzzle>() {
                 @Override
-                public void accept(RawPuzzle rawPuzzle) {
+                public void call(RawPuzzle rawPuzzle) {
                     _rawPuzzle = rawPuzzle;
                     _puzzle = newPuzzle(_rawPuzzle);
                     showPlaced();

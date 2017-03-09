@@ -2,7 +2,7 @@ package net.tommay.spudoku;
 
 import android.os.AsyncTask;
 
-import net.tommay.util.Consumer;
+import net.tommay.util.Callback;
 import net.tommay.util.Producer;
 import net.tommay.util.ProducerException;
 
@@ -14,7 +14,7 @@ class AsyncCreater<T> {
     }
 
     public static <T> void create(
-        final Producer<T> producer, final Consumer<T> consumer)
+        final Producer<T> producer, final Callback<T> callback)
     {
         new AsyncTask<Void, Void, T>() {
             // Backround thread.
@@ -31,7 +31,7 @@ class AsyncCreater<T> {
             // UI thread.
             @Override
             public void onPostExecute(T result) {
-                consumer.accept(result);
+                callback.call(result);
             }
         }.execute();
     }
