@@ -30,7 +30,6 @@ import android.widget.TextView;
 // Auto-generated from aoo/build.gradle settings.
 import net.tommay.spudoku.BuildConfig;
 
-import net.tommay.spudoku.AOTStateImpl;
 import net.tommay.spudoku.AsyncCreater;
 import net.tommay.spudoku.Heuristic;
 import net.tommay.spudoku.Hint;
@@ -140,13 +139,6 @@ public class MainActivity extends AppCompatActivity {
                 PuzzleProducer puzzleProducer = new PuzzleProducer(
                     puzzleCreater,
                     layoutName,
-                    AOTStateImpl.create(
-                        getSharedPreferences(producerName, 0),
-                        new RawPuzzle(
-                            "----15-4-3-----56-5--6----98-5-436-------" +
-                            "------752-9-47----4--2-51-----7-3-15----",
-                            "67981524331247956858463271982594367194376" +
-                            "1825167528934796384152451296387238157496")),
                     log);
                 _producerMap.put(producerName, puzzleProducer);
             }

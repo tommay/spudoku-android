@@ -4,7 +4,6 @@ import android.os.AsyncTask;
 
 import net.tommay.util.Callback;
 import net.tommay.util.Producer;
-import net.tommay.util.ProducerException;
 
 // https://developer.android.com/reference/android/os/AsyncTask.html
 
@@ -20,12 +19,7 @@ class AsyncCreater<T> {
             // Backround thread.
             @Override
             public T doInBackground(Void[] v) {
-                try {
-                    return producer.get();
-                }
-                catch (ProducerException ex) {
-                    throw new RuntimeException(ex);
-                }
+                return producer.get();
             }
 
             // UI thread.
