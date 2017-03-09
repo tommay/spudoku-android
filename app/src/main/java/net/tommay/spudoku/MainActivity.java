@@ -92,8 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
     private final Map<String, PuzzleProducer> _producerMap = new HashMap();
 
-    // True variables for state.  They are accessed only from the UI
-    // thread.
+    // True variables for state.  They are accessed only fro
 
     private RawPuzzle _rawPuzzle = null;
     private Puzzle _puzzle = null;
@@ -514,13 +513,22 @@ public class MainActivity extends AppCompatActivity {
             },
 
             // When the cancel button is clicked the producer is
-            // interrupted and wraps up and finishes (by throwinh an
-            // Exception), then is called.  The cancel button has
+            // interrupted and wraps up and finishes (by throwing an
+            // Exception), then this is called.  The cancel button has
             // already disabled itself.
             new Callback<Void>() {
                 @Override
                 public void call(Void v) {
                     enableButtons(true);
+                }
+            },
+
+            // Called on timeout.
+            new Callback<Void>() {
+                @Override
+                public void call(Void v) {
+                    enableButtons(true);
+                    setCancelButton(null);
                 }
             });
 

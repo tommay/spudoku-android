@@ -2,6 +2,8 @@ package net.tommay.spudoku;
 
 import android.os.AsyncTask;
 
+import java.util.concurrent.TimeoutException;
+
 import net.tommay.util.Callback;
 import net.tommay.util.Producer;
 
@@ -15,12 +17,13 @@ class AsyncCreater<T> {
     public static <T> Handle create(
         final Producer<T> producer,
         final Callback<T> consumer,
-        final Callback<Void> cancel)
+        final Callback<Void> cancel,
+        final Callback<Void> timeout)
     {
         AsyncTask<Void, Void, T> asyncTask = new AsyncTask<Void, Void, T>() {
             // Backround thread.
             @Override
-            public T doInBackground(Void[] v) {
+            protected T doInBackground(Void[] v) {
                 try {
                     return producer.get();
                 }
@@ -29,17 +32,28 @@ class AsyncCreater<T> {
                     // We were cancelled.  The return value isn't used.
                     return null;
                 }
+                catch (TimeoutException ex) {
+                    // We can't throw a checked Exception so return
+                    // null to indicate timeout.
+                    return null;
+                }
             }
 
             // UI thread.
             @Override
-            public void onPostExecute(T result) {
-                consumer.call(result);
+            protected void onPostExecute(T result) {
+                // result is null on timeout.
+                if (result != null) {
+                    consumer.call(result);
+                }
+                else {
+                    timeout.call(null);
+                }
             }
 
             // UI thread.
             @Override
-            public void onCancelled(T result) {
+            protected void onCancelled(T result) {
                 cancel.call(null);
             }
         };
