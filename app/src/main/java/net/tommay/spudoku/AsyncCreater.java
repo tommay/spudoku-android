@@ -2,10 +2,10 @@ package net.tommay.spudoku;
 
 import android.os.AsyncTask;
 
+import java.util.concurrent.Callable;
 import java.util.concurrent.TimeoutException;
 
 import net.tommay.util.Callback;
-import net.tommay.util.Producer;
 
 // https://developer.android.com/reference/android/os/AsyncTask.html
 
@@ -15,7 +15,7 @@ class AsyncCreater<T> {
     }
 
     public static <T> Handle create(
-        final Producer<T> producer,
+        final Callable<T> producer,
         final Callback<T> consumer,
         final Callback<Void> cancel,
         final Callback<Void> timeout)
@@ -25,7 +25,7 @@ class AsyncCreater<T> {
             @Override
             protected T doInBackground(Void[] v) {
                 try {
-                    return producer.get();
+                    return producer.call();
                 }
                 catch (InterruptedException ex) {
                     android.util.Log.i("Spudoku", "doInBackground interrupted");
@@ -33,9 +33,13 @@ class AsyncCreater<T> {
                     return null;
                 }
                 catch (TimeoutException ex) {
-                    // We can't throw a checked Exception so return
-                    // null to indicate timeout.
+                    // We can't throw a checked Exception from
+                    // doInBackground so return null to indicate
+                    // timeout.
                     return null;
+                }
+                catch (Exception ex) {
+                    throw new RuntimeException("Shouldn't happen: ", ex);
                 }
             }
 

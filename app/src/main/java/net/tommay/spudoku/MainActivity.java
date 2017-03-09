@@ -39,7 +39,6 @@ import net.tommay.spudoku.PuzzleCreater;
 import net.tommay.spudoku.PuzzleProducer;
 import net.tommay.spudoku.RawPuzzle;
 import net.tommay.util.Callback;
-import net.tommay.util.Producer;
 
 import net.tommay.spudoku.Hinter;
 
@@ -500,7 +499,8 @@ public class MainActivity extends AppCompatActivity {
         // Handle to cancel it if we need to.
 
         final AsyncCreater.Handle handle = AsyncCreater.<RawPuzzle>create(
-            puzzleProducer,
+            new WithTimeout(puzzleProducer, 3000L),
+
             new Callback<RawPuzzle>() {
                 @Override
                 public void call(RawPuzzle rawPuzzle) {
