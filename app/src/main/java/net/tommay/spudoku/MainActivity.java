@@ -182,6 +182,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         enableButtons(true);
+        enableCancel(false);
     }
 
     @Override
@@ -442,6 +443,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void enableCancel(boolean enabled) {
+        View view = findViewById(R.id.button_cancel);
+        view.setEnabled(enabled);
+    }
+
     private void highlightButton(int highlightButtonId) {
         int[] buttonIds = {
             R.id.button_setup,
@@ -482,6 +488,10 @@ public class MainActivity extends AppCompatActivity {
 
         enableButtons(false);
 
+        // Enable the cancel button while we're working.
+
+        enableCancel(true);
+
         // Set up a callback for when we have a Puzzle.
 
         AsyncCreater.<RawPuzzle>create(
@@ -493,8 +503,20 @@ public class MainActivity extends AppCompatActivity {
                     _puzzle = newPuzzle(_rawPuzzle);
                     showPlaced();
                     enableButtons(true);
+                    enableCancel(false);
                 }
             });
+    }
+
+    // The cancel button was clicked.  Cancel the puzzle creation in
+    // progress.
+
+    public void clickCancel(View view) {
+        Log.i("Spudoku", "cancel");
+
+        // Disable the cancel button so it isn't clicked again.
+
+        enableCancel(false);
     }
 
     private String getSpinnerItem(int viewId) {
