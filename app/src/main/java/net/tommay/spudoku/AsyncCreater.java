@@ -21,7 +21,14 @@ class AsyncCreater<T> {
             // Backround thread.
             @Override
             public T doInBackground(Void[] v) {
-                return producer.get();
+                try {
+                    return producer.get();
+                }
+                catch (InterruptedException ex) {
+                    android.util.Log.i("Spudoku", "doInBackground interrupted");
+                    // We were cancelled.  The return value isn't used.
+                    return null;
+                }
             }
 
             // UI thread.

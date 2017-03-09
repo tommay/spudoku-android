@@ -4,5 +4,5 @@ public interface Producer<T> {
     /**
      * Returns a T out of nowhere.
      */
-    T get();
+    T get() throws InterruptedException;
 }

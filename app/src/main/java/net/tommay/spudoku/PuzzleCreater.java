@@ -17,44 +17,57 @@ enum PuzzleCreater {
         this.puzzleCreater = puzzleCreater;
     }
 
-    public RawPuzzle create(int seed, String layoutName) {
+    public RawPuzzle create(int seed, String layoutName)
+        throws InterruptedException
+    {
         return puzzleCreater.create(seed, layoutName);
     }
 
     private interface IPuzzleCreater {
-        public RawPuzzle create(int seed, String layoutName);
+        public RawPuzzle create(int seed, String layoutName)
+            throws InterruptedException;
 
         public class EasyPeasy implements IPuzzleCreater {
             @Override
-            public RawPuzzle create(int seed, String layoutName) {
+            public RawPuzzle create(int seed, String layoutName)
+                throws InterruptedException
+            {
                 return Creater.createEasyPeasy(seed, layoutName);
             }
         }
 
         public class Easy implements IPuzzleCreater {
             @Override
-            public RawPuzzle create(int seed, String layoutName) {
+            public RawPuzzle create(int seed, String layoutName)
+                throws InterruptedException
+            {
                 return Creater.createEasy(seed, layoutName);
             }
         }
 
         public class Medium implements IPuzzleCreater {
             @Override
-            public RawPuzzle create(int seed, String layoutName) {
+            public RawPuzzle create(int seed, String layoutName)
+                throws InterruptedException
+            {
                 return Creater.createMedium(seed, layoutName);
             }
         }
 
         public class Vicious implements IPuzzleCreater {
             @Override
-            public RawPuzzle create(int seed, String layoutName) {
+            public RawPuzzle create(int seed, String layoutName)
+                throws InterruptedException
+            {
                 return Creater.createVicious(seed, layoutName);
             }
         }
 
         public class Wicked implements IPuzzleCreater {
             @Override
-            public RawPuzzle create(int seed, String layoutName) {
+            public RawPuzzle create(int seed, String layoutName)
+                throws InterruptedException
+            {
                 return Creater.createWicked(seed, layoutName);
             }
         }

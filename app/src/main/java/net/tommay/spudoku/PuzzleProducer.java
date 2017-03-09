@@ -21,7 +21,9 @@ class PuzzleProducer implements Producer<RawPuzzle> {
     }
 
     @Override
-    public RawPuzzle get () {
+    public RawPuzzle get ()
+        throws InterruptedException
+    {
         long start = System.currentTimeMillis();
         try {
             // If we're logging create times then always

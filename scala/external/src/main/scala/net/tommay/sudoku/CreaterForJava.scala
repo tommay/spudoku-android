@@ -14,6 +14,7 @@ object CreaterForJava {
   // EasyPeasy puzzles can be solved using only Heuristic.EasyPeasy.
   // 0m38.704s
 
+  @throws(classOf[InterruptedException])
   def createEasyPeasy(randomSeed: Int, layoutName: String)
       : (String, String) =
   {
@@ -28,6 +29,7 @@ object CreaterForJava {
   // MissingOne first because it's faster.
   // 0m31.961s
 
+  @throws(classOf[InterruptedException])
   def createEasy(randomSeed: Int, layoutName: String)
       : (String, String) =
   {
@@ -39,6 +41,7 @@ object CreaterForJava {
   // Medium puzzles require Heuristic.Needed.
   // 0m20.618s
 
+  @throws(classOf[InterruptedException])
   def createMedium(randomSeed: Int, layoutName: String)
       : (String, String) =
   {
@@ -58,6 +61,7 @@ object CreaterForJava {
   // Vicious puzzles have Forced cells but no Guessing.
   // 2m11.172s
 
+  @throws(classOf[InterruptedException])
   def createVicious(randomSeed: Int, layoutName: String) : (String, String) = {
     val createOptions = new SolverOptions(
       List(Heuristic.Forced, Heuristic.Needed, Heuristic.Tricky), false, false)
@@ -73,6 +77,7 @@ object CreaterForJava {
   // Wicked puzzles require Guessing, even with all our heuristics.
   // 1m6.223s
 
+  @throws(classOf[InterruptedException])
   def createWicked(randomSeed: Int, layoutName: String) : (String, String) = {
     val createOptions = new SolverOptions(
       List(), false, true)
@@ -82,6 +87,7 @@ object CreaterForJava {
       (puzzle, solution) => !solvableWith(puzzle, solveOptions))
   }
 
+  @throws(classOf[InterruptedException])
   def createFiltered(
     randomSeed: Int,
     layoutName: String,
@@ -96,6 +102,10 @@ object CreaterForJava {
       case Some(layout) =>
         val puzzles = Creater.createStreamWithSolution(rnd, layout, solveFunc)
         val filteredPuzzles = puzzles.filter{case (puzzle, solution) =>
+          if (Thread.interrupted) {
+            println("Spudoku Interrupted in createFiltered")
+            throw new InterruptedException
+          }
           pred(puzzle, solution)}  //.drop(1000) // For testing.  XXX!!!
         val (puzzle, solution) = filteredPuzzles.head
         (puzzle.toString, solution.puzzle.toString)
