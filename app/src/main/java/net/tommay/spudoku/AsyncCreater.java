@@ -12,10 +12,12 @@ class AsyncCreater<T> {
         // No instantiation.
     }
 
-    public static <T> void create(
-        final Producer<T> producer, final Callback<T> callback)
+    public static <T> Handle create(
+        final Producer<T> producer,
+        final Callback<T> consumer,
+        final Callback<Void> cancel)
     {
-        new AsyncTask<Void, Void, T>() {
+        AsyncTask<Void, Void, T> asyncTask = new AsyncTask<Void, Void, T>() {
             // Backround thread.
             @Override
             public T doInBackground(Void[] v) {
@@ -25,8 +27,30 @@ class AsyncCreater<T> {
             // UI thread.
             @Override
             public void onPostExecute(T result) {
-                callback.call(result);
+                consumer.call(result);
             }
-        }.execute();
+
+            // UI thread.
+            @Override
+            public void onCancelled(T result) {
+                cancel.call(null);
+            }
+        };
+
+        asyncTask.execute();
+
+        return new Handle(asyncTask);
+    }
+
+    public static class Handle {
+        private final AsyncTask _asyncTask;
+
+        Handle (AsyncTask asyncTask) {
+            _asyncTask = asyncTask;
+        }
+
+        public void cancel () {
+            _asyncTask.cancel(true);
+        }
     }
 }

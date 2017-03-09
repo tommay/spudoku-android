@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
     private RawPuzzle _rawPuzzle = null;
     private Puzzle _puzzle = null;
     private Showing _showing;
+    private AsyncCreater.Handle _handle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -492,9 +493,10 @@ public class MainActivity extends AppCompatActivity {
 
         enableCancel(true);
 
-        // Set up a callback for when we have a Puzzle.
+        // Set up a callback for when we have a Puzzle, and get a
+        // Handle to cancel it if we need to.
 
-        AsyncCreater.<RawPuzzle>create(
+        _handle = AsyncCreater.<RawPuzzle>create(
             puzzleProducer,
             new Callback<RawPuzzle>() {
                 @Override
@@ -505,6 +507,15 @@ public class MainActivity extends AppCompatActivity {
                     enableButtons(true);
                     enableCancel(false);
                 }
+            },
+
+            // When the cancel button is clicked this is eventually called.
+            // The cancel button has already disabled itself.
+            new Callback<Void>() {
+                @Override
+                public void call(Void v) {
+                    enableButtons(true);
+                }
             });
     }
 
@@ -513,6 +524,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void clickCancel(View view) {
         Log.i("Spudoku", "cancel");
+
+        _handle.cancel();
 
         // Disable the cancel button so it isn't clicked again.
 
