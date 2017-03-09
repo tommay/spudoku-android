@@ -3,6 +3,7 @@ package net.tommay.sudoku
 import scala.util.Random
 
 object Creater {
+  @throws(classOf[InterruptedException])
   def create(
     rnd: Random,
     layout: Iterable[Iterable[Int]],
@@ -12,6 +13,7 @@ object Creater {
     createWithSolution(rnd, layout, solveFunc)._1
   }
 
+  @throws(classOf[InterruptedException])
   def createWithSolution(
     rnd: Random,
     layout: Iterable[Iterable[Int]],
@@ -21,6 +23,7 @@ object Creater {
     createStreamWithSolution(rnd, layout, solveFunc).head
   }
 
+  @throws(classOf[InterruptedException])
   def createStreamWithSolution(
     rnd: Random,
     layout: Iterable[Iterable[Int]],
@@ -39,6 +42,7 @@ object Creater {
   // result in a specific type of layout) which leave a Puzzle which
   // is uniquely solvable by the given solver function.
 
+  @throws(classOf[InterruptedException])
   def createFromSolved(
     puzzle: Puzzle,
     cellNumberLists: Iterable[Iterable[Int]],
@@ -47,6 +51,10 @@ object Creater {
   {
     val initAccum = (puzzle, Solution(puzzle, Iterable.empty))
     cellNumberLists.foldLeft(initAccum) {case (accum, cellNumbers) =>
+      if (Thread.interrupted) {
+        println("Spudoku Interrupted in createFromSolved")
+        throw new InterruptedException
+      }
       // We know accum's puzzle has only one solution.  Remove
       // cellNumbers and check whether that's still true.
       val oldPuzzle = accum._1

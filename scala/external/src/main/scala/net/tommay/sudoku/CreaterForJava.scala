@@ -102,10 +102,6 @@ object CreaterForJava {
       case Some(layout) =>
         val puzzles = Creater.createStreamWithSolution(rnd, layout, solveFunc)
         val filteredPuzzles = puzzles.filter{case (puzzle, solution) =>
-          if (Thread.interrupted) {
-            println("Spudoku Interrupted in createFiltered")
-            throw new InterruptedException
-          }
           pred(puzzle, solution)}  //.drop(1000) // For testing.  XXX!!!
         val (puzzle, solution) = filteredPuzzles.head
         (puzzle.toString, solution.puzzle.toString)
