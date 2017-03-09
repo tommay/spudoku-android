@@ -34,8 +34,7 @@
         android:id="@+id/button_cancel"
         android:text="Cancel"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="clickCancel"/>
+        android:layout_height="wrap_content" />
     <Button
         android:id="@+id/button_setup"
         android:text="Setup"

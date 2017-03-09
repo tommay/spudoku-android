@@ -92,12 +92,12 @@ public class MainActivity extends AppCompatActivity {
 
     private final Map<String, PuzzleProducer> _producerMap = new HashMap();
 
-    // True variables for state.
+    // True variables for state.  They are accessed only from the UI
+    // thread.
 
     private RawPuzzle _rawPuzzle = null;
     private Puzzle _puzzle = null;
     private Showing _showing;
-    private AsyncCreater.Handle _handle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         enableButtons(true);
-        enableCancel(false);
+        setCancelButton(null);
     }
 
     @Override
@@ -444,9 +444,22 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void enableCancel(boolean enabled) {
+   private void setCancelButton(final AsyncCreater.Handle handle) {
         View view = findViewById(R.id.button_cancel);
-        view.setEnabled(enabled);
+        if (handle != null) {
+            view.setEnabled(true);
+            view.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Log.i("Spudoku", "canceling");
+                    handle.cancel();
+                    // Disable the cancel button so it can't be clicked again.
+                    v.setEnabled(false);
+                }
+            });
+        }
+        else {
+            view.setEnabled(false);
+        }
     }
 
     private void highlightButton(int highlightButtonId) {
@@ -484,19 +497,10 @@ public class MainActivity extends AppCompatActivity {
         PuzzleProducer puzzleProducer =
             _producerMap.get(makeProducerName(rating, layoutName));
 
-        // Disable the buttons until we have a puzzle.  They are
-        // re-enabled in the callback.
-
-        enableButtons(false);
-
-        // Enable the cancel button while we're working.
-
-        enableCancel(true);
-
         // Set up a callback for when we have a Puzzle, and get a
         // Handle to cancel it if we need to.
 
-        _handle = AsyncCreater.<RawPuzzle>create(
+        final AsyncCreater.Handle handle = AsyncCreater.<RawPuzzle>create(
             puzzleProducer,
             new Callback<RawPuzzle>() {
                 @Override
@@ -505,31 +509,30 @@ public class MainActivity extends AppCompatActivity {
                     _puzzle = newPuzzle(_rawPuzzle);
                     showPlaced();
                     enableButtons(true);
-                    enableCancel(false);
+                    setCancelButton(null);
                 }
             },
 
-            // When the cancel button is clicked this is eventually called.
-            // The cancel button has already disabled itself.
+            // When the cancel button is clicked the producer is
+            // interrupted and wraps up and finishes (by throwinh an
+            // Exception), then is called.  The cancel button has
+            // already disabled itself.
             new Callback<Void>() {
                 @Override
                 public void call(Void v) {
                     enableButtons(true);
                 }
             });
-    }
 
-    // The cancel button was clicked.  Cancel the puzzle creation in
-    // progress.
+        // Disable the buttons until we have a puzzle.  They are
+        // re-enabled in the callback.
 
-    public void clickCancel(View view) {
-        Log.i("Spudoku", "cancel");
+        enableButtons(false);
 
-        _handle.cancel();
+        // Enable the cancel button until we get a callback, or the
+        // cancel button is pressed.
 
-        // Disable the cancel button so it isn't clicked again.
-
-        enableCancel(false);
+        setCancelButton(handle);
     }
 
     private String getSpinnerItem(int viewId) {
