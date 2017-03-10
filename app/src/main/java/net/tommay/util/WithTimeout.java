@@ -72,11 +72,10 @@ public class WithTimeout<T> implements Callable<T> {
         try {
             return future.get(_timeoutMillis, TimeUnit.MILLISECONDS);
         }
-        catch (TimeoutException|InterruptedException ex) {
-            // This thread was cancelled.  Cancel the worker, too.  Or
-            // we weren't cancelled, but the worker is taking too long
-            // so cancel it.  In either case it will exit and the
-            // return value is unused.
+        catch (TimeoutException ex) {
+            // The worker did not finish withing the allotted time so
+            // cancel it.  It will throw an InterruptedException and
+            // the Future will catch it but it will never be fetched.
             future.cancel(true);
             // Wait for the worker release the Semaphore when it finishes.
             try {
@@ -86,6 +85,20 @@ public class WithTimeout<T> implements Callable<T> {
                 // It's possible to be interrupted during done.acquire
                 // if future.get timed out and then we were cancelled.
                 // So just ignore it.
+            }
+            throw ex;
+        }
+        catch (InterruptedException  ex) {
+            // This thread was cancelled.  Cancel the worker, too.  It
+            // will throw an InterruptedException and the Future will
+            // catch it but it will never be fetched.
+            future.cancel(true);
+            // Wait for the worker release the Semaphore when it finishes.
+            try {
+                done.acquire();
+            }
+            catch (InterruptedException ex2) {
+                throw new RuntimeException("Shouldn't happen: ", ex);
             }
             throw ex;
         }
