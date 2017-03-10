@@ -6,12 +6,12 @@ import java.util.concurrent.Callable;
 
 import net.tommay.spudoku.RawPuzzle;
 
-class PuzzleProducer implements Callable<RawPuzzle> {
+class PuzzleSupplier implements Callable<RawPuzzle> {
     private final PuzzleCreater _puzzleCreater;
     private final String _layoutName;
     private final PrintStream _log;
 
-    public PuzzleProducer (
+    public PuzzleSupplier (
         PuzzleCreater puzzleCreater,
         String layoutName,
         final PrintStream log)

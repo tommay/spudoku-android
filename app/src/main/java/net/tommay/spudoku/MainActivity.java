@@ -36,7 +36,7 @@ import net.tommay.spudoku.Hint;
 import net.tommay.spudoku.LayoutNames;
 import net.tommay.spudoku.Puzzle;
 import net.tommay.spudoku.PuzzleCreater;
-import net.tommay.spudoku.PuzzleProducer;
+import net.tommay.spudoku.PuzzleSupplier;
 import net.tommay.spudoku.RawPuzzle;
 import net.tommay.util.Callback;
 
@@ -86,10 +86,10 @@ public class MainActivity extends AppCompatActivity {
 
     private int _emptyCellColor;
 
-    // Map from ratings + layout names to the PuzzleProducer for that
+    // Map from ratings + layout names to the PuzzleSupplier for that
     // combination.  To fill the Map in we need our Context.
 
-    private final Map<String, PuzzleProducer> _producerMap = new HashMap();
+    private final Map<String, PuzzleSupplier> _supplierMap = new HashMap();
 
     // True variables for state.  They are accessed only fro
 
@@ -127,19 +127,19 @@ public class MainActivity extends AppCompatActivity {
 
         List<String> layoutNames = LayoutNames.getLayoutNames();
 
-        // Initialize Context-dependent _producerMap.
+        // Initialize Context-dependent _supplierMap.
 
         for (Map.Entry<String,PuzzleCreater> entry : _ratingsMap.entrySet()) {
             String rating = entry.getKey();
             PuzzleCreater puzzleCreater = entry.getValue();
             
             for (String layoutName : layoutNames) {
-                String producerName = makeProducerName(rating, layoutName);
-                PuzzleProducer puzzleProducer = new PuzzleProducer(
+                String supplierName = makeSupplierName(rating, layoutName);
+                PuzzleSupplier puzzleSupplier = new PuzzleSupplier(
                     puzzleCreater,
                     layoutName,
                     log);
-                _producerMap.put(producerName, puzzleProducer);
+                _supplierMap.put(supplierName, puzzleSupplier);
             }
         }
 
@@ -488,18 +488,18 @@ public class MainActivity extends AppCompatActivity {
         Log.i("Spudoku", "new");
 
         // Retrieve the select layout from the layout spinner, and get
-        // the corrresponding puzzleProducer.
+        // the corrresponding puzzleSupplier.
 
         String layoutName = getSpinnerItem(R.id.spinner_layout);
         String rating = getSpinnerItem(R.id.spinner_rating);
-        PuzzleProducer puzzleProducer =
-            _producerMap.get(makeProducerName(rating, layoutName));
+        PuzzleSupplier puzzleSupplier =
+            _supplierMap.get(makeSupplierName(rating, layoutName));
 
         // Set up a callback for when we have a Puzzle, and get a
         // Handle to cancel it if we need to.
 
         final AsyncCreater.Handle handle = AsyncCreater.<RawPuzzle>create(
-            new WithTimeout(puzzleProducer, 3000L),
+            new WithTimeout(puzzleSupplier, 3000L),
 
             new Callback<RawPuzzle>() {
                 @Override
@@ -512,7 +512,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             },
 
-            // When the cancel button is clicked the producer is
+            // When the cancel button is clicked the supplier is
             // interrupted and wraps up and finishes (by throwing an
             // Exception), then this is called.  The cancel button has
             // already disabled itself.
@@ -548,7 +548,7 @@ public class MainActivity extends AppCompatActivity {
         return (String) spinner.getSelectedItem();
     }
 
-    private static String makeProducerName(String rating, String layoutName) {
+    private static String makeSupplierName(String rating, String layoutName) {
         return rating + "-" + layoutName;
     }
 
