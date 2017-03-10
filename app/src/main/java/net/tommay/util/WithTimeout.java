@@ -1,4 +1,4 @@
-package net.tommay.spudoku;
+package net.tommay.util;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
@@ -9,18 +9,28 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.TimeUnit;
 
-class WithTimeout<T> implements Callable<T> {
+/**
+ * A Callable wrapper than runs the Callable with a timeout.  The
+ * wrapped Callable will be executed in a worker thread, the timout
+ * code runs in the thread that called WithTimeout#call.  Currently
+ * there is only one worker thread so Callables will be run serially.
+ *
+ * If the Callable exceeds the timeout it is cancelled/interrupted and
+ * waited for then WithTimeout#call throws TimeoutException.  So the Callable
+ * should handle interrupts responsively.
+ *
+ * If WithTimeout#call is cancelled, it will cancel the Callable and wait for
+ * it then throw InterruptedException.
+ */
+public class WithTimeout<T> implements Callable<T> {
     private static final ExecutorService _executorService =
         Executors.newSingleThreadExecutor();
 
-    private final Callable<T> _innerCallable;
+    private final Callable<T> _wrappedCallable;
     private final long _timeoutMillis;
 
-    // callable is executed in a worker and timed out by the current
-    // thread.
-
     public WithTimeout (Callable<T> callable, long timeoutMillis) {
-        _innerCallable = callable;
+        _wrappedCallable = callable;
         _timeoutMillis = timeoutMillis;
     }
 
@@ -42,11 +52,13 @@ class WithTimeout<T> implements Callable<T> {
             @Override
             public T call() throws Exception {
                 try {
-                    return _innerCallable.call();
+                    return _wrappedCallable.call();
                 }
                 catch (InterruptedException ex) {
                     // worker was cancelled and in turn cancelled
-                    // _innerCallable. This return value is unused.
+                    // _wrappedCallable.  This return value is unused
+                    // because WithTimeout#call is going to throw an
+                    // Exception.
                     return null;
                 }
                 finally {

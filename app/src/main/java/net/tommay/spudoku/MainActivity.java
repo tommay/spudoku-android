@@ -39,6 +39,7 @@ import net.tommay.spudoku.PuzzleCreater;
 import net.tommay.spudoku.PuzzleSupplier;
 import net.tommay.spudoku.RawPuzzle;
 import net.tommay.util.Callback;
+import net.tommay.util.WithTimeout;
 
 import net.tommay.spudoku.Hinter;
 
