@@ -15,7 +15,7 @@ class AsyncCreater<T> {
     }
 
     public static <T> Handle create(
-        final Callable<T> producer,
+        final Callable<T> supplier,
         final Callback<T> consumer,
         final Callback<Void> cancel,
         final Callback<Void> timeout)
@@ -25,7 +25,7 @@ class AsyncCreater<T> {
             @Override
             protected T doInBackground(Void[] v) {
                 try {
-                    return producer.call();
+                    return supplier.call();
                 }
                 catch (InterruptedException ex) {
                     android.util.Log.i("Spudoku", "doInBackground interrupted");
