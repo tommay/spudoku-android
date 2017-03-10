@@ -16,12 +16,14 @@ import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v7.app.AppCompatActivity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -182,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         enableButtons(true);
-        setCancelButton(null);
+        enableNewButton();
     }
 
     @Override
@@ -427,7 +429,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void enableButtons(boolean enabled) {
         int[] buttonIds = {
-            R.id.button_new,
             R.id.button_setup,
             R.id.button_solved,
             R.id.button_hint,
@@ -443,22 +444,49 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-   private void setCancelButton(final AsyncCreater.Handle handle) {
-        View view = findViewById(R.id.button_cancel);
-        if (handle != null) {
-            view.setEnabled(true);
-            view.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    Log.i("Spudoku", "canceling");
-                    handle.cancel();
-                    // Disable the cancel button so it can't be clicked again.
-                    v.setEnabled(false);
+    private void enableNewButton() {
+        Button button = (Button) findViewById(R.id.button_new);
+        button.setText("New");
+        button.setEnabled(true);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                clickNew(v);
+            }
+        });
+    }
+
+    private void enableNewButtonAfterDelay() {
+        Button button = (Button) findViewById(R.id.button_new);
+        button.setEnabled(false);
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void[] unused) {
+                try {
+                    Thread.sleep(2000L);
                 }
-            });
-        }
-        else {
-            view.setEnabled(false);
-        }
+                catch (InterruptedException ex) {
+                    throw new RuntimeException("Shouldn't happen:", ex);
+                }
+                return null;
+            }
+            @Override
+            protected void onPostExecute(Void unused) {
+                enableNewButton();
+            }
+        }.execute();
+    }
+
+    private void enableCancelButton(final AsyncCreater.Handle handle) {
+        final Button button = (Button) findViewById(R.id.button_new);
+        button.setText("Cancel");
+        button.setEnabled(true);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.i("Spudoku", "canceling");
+                handle.cancel();
+                button.setEnabled(false);
+            }
+        });
     }
 
     private void highlightButton(int highlightButtonId) {
@@ -500,7 +528,7 @@ public class MainActivity extends AppCompatActivity {
         // Handle to cancel it if we need to.
 
         final AsyncCreater.Handle handle = AsyncCreater.<RawPuzzle>create(
-            new WithTimeout(puzzleSupplier, 3000L),
+            new WithTimeout(puzzleSupplier, 30000L),
 
             new Callback<RawPuzzle>() {
                 @Override
@@ -509,18 +537,18 @@ public class MainActivity extends AppCompatActivity {
                     _puzzle = newPuzzle(_rawPuzzle);
                     showPlaced();
                     enableButtons(true);
-                    setCancelButton(null);
+                    enableNewButtonAfterDelay();
                 }
             },
 
             // When the cancel button is clicked the supplier is
             // interrupted and wraps up and finishes (by throwing an
-            // Exception), then this is called.  The cancel button has
-            // already disabled itself.
+            // Exception), then this is called.
             new Callback<Void>() {
                 @Override
                 public void call(Void v) {
                     enableButtons(true);
+                    enableNewButton();
                 }
             },
 
@@ -529,7 +557,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void call(Void v) {
                     enableButtons(true);
-                    setCancelButton(null);
+                    enableNewButtonAfterDelay();
                 }
             });
 
@@ -541,7 +569,7 @@ public class MainActivity extends AppCompatActivity {
         // Enable the cancel button until we get a callback, or the
         // cancel button is pressed.
 
-        setCancelButton(handle);
+        enableCancelButton(handle);
     }
 
     private String getSpinnerItem(int viewId) {
