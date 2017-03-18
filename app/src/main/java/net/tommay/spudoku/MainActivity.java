@@ -8,6 +8,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.LightingColorFilter;
@@ -15,6 +18,7 @@ import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -556,6 +560,9 @@ public class MainActivity extends AppCompatActivity {
             new Callback<Void>() {
                 @Override
                 public void call(Void v) {
+                    new TimeoutDialogFragment().show(
+                        getSupportFragmentManager(),
+                        "TimeoutDialogFragment");
                     enableButtons(true);
                     enableNewButtonAfterDelay();
                 }
@@ -765,6 +772,38 @@ public class MainActivity extends AppCompatActivity {
               default:
                 return false;   // Ignored or useless.
             }
+        }
+    }
+
+    /**
+     * TimeoutDialogFragment needs to be public static.
+     * From the Fragment documentation:
+     * Every fragment must have an empty constructor, so it can be
+     * instantiated when restoring its activity's state. It is
+     * strongly recommended that subclasses do not have other
+     * constructors with parameters, since these constructors will not
+     * be called when the fragment is re-instantiated; instead,
+     * arguments can be supplied by the caller with
+     * setArguments(Bundle) and later retrieved by the Fragment with
+     * getArguments().
+     *
+     * http://developer.android.com/reference/android/app/Fragment.html#Fragment()
+     */
+    public static class TimeoutDialogFragment extends DialogFragment {
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            AlertDialog.Builder builder =
+                new AlertDialog.Builder(getActivity());
+            builder
+                .setMessage("Puzzle creation has teken too long.  Giving up.")
+                .setPositiveButton("Oh well",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            // Nothing to do.
+                        }
+                    });
+            return builder.create();
         }
     }
 }
