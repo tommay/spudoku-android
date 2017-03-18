@@ -18,7 +18,6 @@ import android.graphics.drawable.GradientDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
@@ -529,7 +528,7 @@ public class MainActivity extends AppCompatActivity {
         // Handle to cancel it if we need to.
 
         final AsyncCreater.Handle handle = AsyncCreater.<RawPuzzle>create(
-            new WithTimeout(puzzleSupplier, 2000L),
+            new WithTimeout(puzzleSupplier, 30000L),
 
             new Callback<RawPuzzle>() {
                 @Override
@@ -557,12 +556,6 @@ public class MainActivity extends AppCompatActivity {
             new Callback<Void>() {
                 @Override
                 public void call(Void v) {
-                    Snackbar
-                    .make(
-                        findViewById(R.id.coordinator_layout),
-                        "Creation is taking too long, giving up.",
-                        Snackbar.LENGTH_INDEFINITE)
-                    .show();
                     enableButtons(true);
                     enableNewButtonAfterDelay();
                 }

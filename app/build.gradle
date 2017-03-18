@@ -60,9 +60,6 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:25.0.0'
-    // This is to get Coodinatorlayout.  It should maybe be 25.3.0
-    // but gradle stalls on Preparing "Install Android Support Repository".
-    compile 'com.android.support:design:23.0.1'
     testCompile 'junit:junit:4.12'
 }
 
