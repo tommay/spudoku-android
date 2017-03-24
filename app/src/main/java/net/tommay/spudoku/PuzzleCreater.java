@@ -6,6 +6,7 @@ enum PuzzleCreater {
     EasyPeasy("EasyPeasy", new IPuzzleCreater.EasyPeasy()),
     Easy("Easy", new IPuzzleCreater.Easy()),
     Medium("Medium", new IPuzzleCreater.Medium()),
+    Tricky("Tricky", new IPuzzleCreater.Tricky()),
     Vicious("Vicious", new IPuzzleCreater.Vicious()),
     Wicked("Wicked", new IPuzzleCreater.Wicked());
 
@@ -51,6 +52,15 @@ enum PuzzleCreater {
                 throws InterruptedException
             {
                 return Creater.createMedium(seed, layoutName);
+            }
+        }
+
+        public class Tricky implements IPuzzleCreater {
+            @Override
+            public RawPuzzle create(int seed, String layoutName)
+                throws InterruptedException
+            {
+                return Creater.createTricky(seed, layoutName);
             }
         }
 

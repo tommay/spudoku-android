@@ -28,6 +28,14 @@ class Creater {
         return new RawPuzzle((String)result._1, (String)result._2);
     }
 
+    public static RawPuzzle createTricky (int seed, String layoutName)
+        throws InterruptedException
+    {
+        scala.Tuple2 result = CreaterForJava.createTricky(
+            seed, layoutName);
+        return new RawPuzzle((String)result._1, (String)result._2);
+    }
+
     public static RawPuzzle createVicious (int seed, String layoutName)
         throws InterruptedException
     {

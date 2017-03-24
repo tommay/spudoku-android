@@ -58,6 +58,23 @@ object CreaterForJava {
         !solvableWith(puzzle, solveOptions))
   }
 
+  // Tricky puzzles are Easy except they require using a TrickySet.
+
+  @throws(classOf[InterruptedException])
+  def createTricky(randomSeed: Int, layoutName: String)
+      : (String, String) =
+  {
+    val createOptions = new SolverOptions(
+      List(Heuristic.Needed, Heuristic.Forced, Heuristic.Tricky),
+      false, false)
+    val solveOptions = new SolverOptions(
+      List(Heuristic.Needed, Heuristic.Forced),
+      false, false)
+    createFiltered(randomSeed, layoutName, createOptions,
+      (puzzle, solution) =>
+      !solvableWith(puzzle, solveOptions))
+  }
+
   // Vicious puzzles have Forced cells but no Guessing.
   // 2m11.172s
 

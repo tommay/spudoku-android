@@ -131,7 +131,7 @@ case class Solver (
             case _ => Stream.Empty
           }
         }
-      case  _ =>
+      case _ =>
         // Multiple possibilities.  Before we guess, see if it's
         // possible to permanently apply a TrickySet to create
         // possibiities for heuristics.
@@ -268,8 +268,7 @@ case class Solver (
   //
   // 1. Find (Digit, TrickySet) pairs where Digit is possible
   //    in common but not rest.
-  // 2. Remove the Digit from the Unknowns in eliminate.
-  // 3. If there is only one Unknown in any checkNeeded list where Digit
+  // 2. If there is only one Unknown in any checkNeeded list where Digit
   //    is possible then we have found a placement.
   //
   // We could also check for new forced digits in the eliminate
@@ -282,7 +281,7 @@ case class Solver (
     // 1:
     val applicableTrickySets = findApplicableTrickySets
     applicableTrickySets.flatMap{case (digit, trickySet) =>
-      // 3:
+      // 2:
       findNeededDigitInTrickySet(digit, trickySet)
     }
   }
@@ -298,25 +297,7 @@ case class Solver (
 
   val allDigits = (1 to 9).toStream
 
-  // 2. Return a new set of Unknowns where Digit has been removed from
-  //    TrickySet.eliminate.
-  //
-  def eliminateWithTrickySet(digit: Int, trickySet: TrickySet)
-      : Stream[Unknown] =
-  {
-    val cellNumbers = trickySet.eliminate
-    unknowns.map{unknown =>
-      if (cellNumbers.contains(unknown.cellNumber)) {
-        unknown.removeDigitFromPossible(digit)
-      }
-      else {
-        unknown
-      }
-    }
-  }
-
-  // 3. Given the set of Unknowns with the TrickySet/Digit eliminated,
-  //    look through the checkNeeded sets to see if any of them now have
+  // 2. Look through the checkNeeded sets to see if any of them now have
   //    exactly one Unknown where the digit is possible, and if so then
   //    include the Unknown in the result.
   //
