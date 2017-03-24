@@ -189,6 +189,7 @@ public class MainActivity
 
         enableButtons(true);
         enableNewButton();
+        hideProgressBar();
     }
 
     @Override
@@ -510,6 +511,16 @@ public class MainActivity
         }
     }
 
+    private void showProgressBar() {
+        View progressBar =findViewById(R.id.progressbar);
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    private void hideProgressBar() {
+        View progressBar =findViewById(R.id.progressbar);
+        progressBar.setVisibility(View.GONE);
+    }
+
     private boolean havePuzzle() {
         return _rawPuzzle != null;
     }
@@ -542,6 +553,7 @@ public class MainActivity
                     showPlaced();
                     enableButtons(true);
                     enableNewButtonAfterDelay();
+                    hideProgressBar();
                 }
             },
 
@@ -553,6 +565,7 @@ public class MainActivity
                 public void call(Void v) {
                     enableButtons(true);
                     enableNewButton();
+                    hideProgressBar();
                 }
             },
 
@@ -577,6 +590,8 @@ public class MainActivity
         // cancel button is pressed.
 
         enableCancelButton(handle);
+
+        showProgressBar();
     }
 
     // interface TimeoutDialogFragment.Listener
@@ -590,6 +605,7 @@ public class MainActivity
     public void giveUp() {
         enableButtons(true);
         enableNewButton();
+        hideProgressBar();
     }
 
     private String getSpinnerItem(int viewId) {

@@ -49,6 +49,20 @@
         android:onClick="clickHint"/>
   </LinearLayout>
 
+  <!-- ProgressBr visible while creating a puzzle, gone otherwise.
+       It's meaningless but makes it look like something is
+       happening. -->
+
+  <ProgressBar
+      android:id="@+id/progressbar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:paddingLeft="30dp"
+      android:paddingRight="30dp"
+      android:indeterminate="true"
+      android:visibility="gone"
+      style="@android:style/Widget.ProgressBar.Horizontal" />
+
   <!-- Puzzle type selection spinners.  -->
 
   <Spinner
@@ -73,7 +87,7 @@
 	 make one and clone the rest in MainActivity.java.
 	 The size here dodesn't matter.  MainActivity#onResume will
          make the all the same size as the board ImageViews.  -->
-    <!-- Padding reduces the size of the circles, margin increase the
+    <!-- Padding reduces the size of the circles, margin increases the
          spacing.  These are tweaked to where I like the look.  -->
     <LinearLayout
         android:id="@+id/bottom_row"
