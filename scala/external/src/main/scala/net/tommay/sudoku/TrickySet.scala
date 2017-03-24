@@ -59,9 +59,9 @@ object TrickySet {
     val getRows = getCellSetsIncluding(rows)(_)
     val getColumns = getCellSetsIncluding(columns)(_)
     val set1 = for (square <- squares; row <- rows) yield
-      createTrickySetsFrom(inverse, square, row, getColumns)
+      createTrickySetsFrom(inverse, square, row, getRows)
     val set2 = for (square <- squares; col <- columns) yield
-      createTrickySetsFrom(inverse, square, col, getRows)
+      createTrickySetsFrom(inverse, square, col, getColumns)
     (set1 ++ set2).flatten
   }
 
