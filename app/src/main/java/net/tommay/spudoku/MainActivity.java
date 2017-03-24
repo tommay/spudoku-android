@@ -678,7 +678,12 @@ public class MainActivity
                 showHint("Easy peasy " + _colorNames[hint.digit - 1]);
             }
             else {
-                showHint(hint.tjpe.toString());
+                if (hint.tjpe == Heuristic.Tricky) {
+                    showHint("Tricky " + _colorNames[hint.digit - 1]);
+                }
+                else {
+                    showHint(hint.tjpe.toString());
+                }
                 View boardView = findViewById(R.id.board);
                 for (int cell : hint.cells) {
                     ImageView cellView = (ImageView)
