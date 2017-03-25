@@ -98,11 +98,21 @@ public class MainActivity
 
     private final Map<String, PuzzleSupplier> _supplierMap = new HashMap();
 
-    // True variables for state.  They are accessed only fro
+    // Views of the color circles.  These are made INVISIBLE/VISIBLE
+    // according to whether th corresponding color count is zero, i.e.,
+    // there are no more of that color to place.
+
+    private final View[] _colorViews = new View[9];
+
+    // True variables for state.  They are accessed only from the UI thread.
 
     private RawPuzzle _rawPuzzle = null;
     private Puzzle _puzzle = null;
     private Showing _showing;
+
+    // Count of the colors remaining to be placed.
+
+    private final int[] _colorCounts = new int[9];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -182,14 +192,31 @@ public class MainActivity
             String solution = savedInstanceState.getString(KEY_SOLUTION);
             if (puzzle != null && solution != null) {
                 Log.i("Spudoku", "restoring from bundle");
-                _rawPuzzle = new RawPuzzle(puzzle, solution);
-                _puzzle = newPuzzle(_rawPuzzle);
+                setPuzzle(new RawPuzzle(puzzle, solution));
             }
         }
 
         enableButtons(true);
         enableNewButton();
         hideProgressBar();
+    }
+
+    private void setPuzzle(RawPuzzle rawPuzzle) {
+        _rawPuzzle = rawPuzzle;
+        _puzzle = newPuzzle(_rawPuzzle);
+
+        // Set _colorCounts to the number of colors remaining, i.e.,
+        // not placed in the puzzle.
+
+        java.util.Arrays.fill(_colorCounts, 9);
+
+        for (int i = 0; i < 81; i++) {
+            Cell cell = _puzzle.getCell(i);
+            Integer digit = cell.getPlacedDigit();
+            if (digit != null) {
+                _colorCounts[digit]--;
+            }
+        }
     }
 
     @Override
@@ -249,10 +276,16 @@ public class MainActivity
 
             layout.requestLayout();
 
+            // Populate _colorViews;
+
+            for (int i = 0; i < _colorViews.length; i++) {
+                _colorViews[i] = layout.getChildAt(i);
+            }
+
             // Set the circle colors.
 
-            for (int i = 0, n = layout.getChildCount(); i < n; i++) {
-                ImageView view = (ImageView) layout.getChildAt(i);
+            for (int i = 0; i < _colorViews.length; i++) {
+                ImageView view = (ImageView) _colorViews[i];
                 setCircleColor(view, _colors[i]);
             }
 
@@ -265,8 +298,8 @@ public class MainActivity
                     new CircleOnDragListener(cellNumber));
             }
 
-            for (int i = 0, n = layout.getChildCount(); i < n; i++) {
-                View view = layout.getChildAt(i);
+            for (int i = 0; i < _colorViews.length; i++) {
+                View view = _colorViews[i];
 
                 final int digit = i;
 
@@ -405,7 +438,7 @@ public class MainActivity
     public void clicked(View cellView) {
         // XXX Would be better to enable this handler only when we
         // have a puzzle.  That would be nicer logic-wise and would
-        // turn off the click.
+        // turn off the click sound.
         if (!havePuzzle()) {
             return;
         }
@@ -415,6 +448,9 @@ public class MainActivity
 
         int n = Integer.parseInt(tag);
         Cell cell = _puzzle.getCell(n);
+
+        Integer digitBefore = cell.getPlacedDigit();
+
         switch (_showing) {
           case PLACED:
             cell.togglePlaced();
@@ -427,6 +463,20 @@ public class MainActivity
           case SOLVED:
             showPlaced();
             break;
+        }
+
+        Integer digitAfter = cell.getPlacedDigit();
+        if (digitBefore == null && digitAfter != null) {
+            _colorCounts[digitAfter]--;
+            if (_colorCounts[digitAfter] == 0) {
+                _colorViews[digitAfter].setVisibility(View.INVISIBLE);
+            }
+        }
+        else if (digitBefore != null && digitAfter == null) {
+            if (_colorCounts[digitBefore] == 0) {
+                _colorViews[digitBefore].setVisibility(View.VISIBLE);
+            }
+            _colorCounts[digitBefore]++;
         }
 
         clearHint();
@@ -548,8 +598,7 @@ public class MainActivity
             new Callback<RawPuzzle>() {
                 @Override
                 public void call(RawPuzzle rawPuzzle) {
-                    _rawPuzzle = rawPuzzle;
-                    _puzzle = newPuzzle(_rawPuzzle);
+                    setPuzzle(rawPuzzle);
                     showPlaced();
                     enableButtons(true);
                     enableNewButtonAfterDelay();
