@@ -1,0 +1,41 @@
+Add "puzzle layout" and "difficulty' labels to thr dropdowns.
+Rename wtf.
+Rename spinny to rotated.
+Other layout names: mirror vertical, mirror diagonal.
+Better hint text.
+Why are the same difficulty puzzles for a particular layout always the same?
+Add counts to the circles at the bottom.
+Make an icon with 9 colored circles in a square.
+
+-----
+
+Old TODO:
+
+Hints should not require solving the puzzle to completion.
+The hint solver should use an rnd.
+Display nice hints.
+
+What is the deal with resume/rotate?
+
+tricky sets
+
+easy medium hard evil vicious wicked deadly ultra
+
+Why am I using my own util.minBy instead of the built-in one?
+Oh, because it's faster.
+
+Find Needed because it's faster then see if it's an EasyPeasy?
+
+Create by removing half the layout at a time.  If there are multiple
+solutions things need to be added in bit by bit.
+
+When creating, terminate the solve stage when the new Unknowns have
+been determined without guessing.
+
+When we're creating a puzzle using heuristica isn't it possible that
+they find only one solution even if there are really multiple
+solutions?  Do we need to use allSolutions when creating then filter
+for puzzles solveable with heuristics?  No . . . if the heuristics
+find a placement, it is the only placement possible for that cell.
+It's when they *don't* find any placements that we have to guess and
+their may be multiple solutions.
