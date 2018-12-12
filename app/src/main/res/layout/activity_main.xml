@@ -31,13 +31,13 @@
         android:layout_height="wrap_content" />
     <Button
         android:id="@+id/button_setup"
-        android:text="Setup"
+        android:text="Puzzle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="clickSetup"/>
     <Button
         android:id="@+id/button_solved"
-        android:text="Solved"
+        android:text="Solution"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="clickSolved"/>
