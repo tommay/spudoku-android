@@ -581,8 +581,8 @@ public class MainActivity
     public void createNewPuzzle() {
         Log.i("Spudoku", "new");
 
-        // Retrieve the select layout from the layout spinner, and get
-        // the corrresponding puzzleSupplier.
+        // Retrieve the selected layout from the layout spinner, and get
+        // the corresponding puzzleSupplier.
 
         String layoutName = getSpinnerItem(R.id.spinner_layout);
         String rating = getSpinnerItem(R.id.spinner_rating);
