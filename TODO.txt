@@ -1,4 +1,5 @@
-Add "puzzle layout" and "difficulty' labels to thr dropdowns.
+Creating a new puzzle needs to make all the color circles visible.
+
 Rename wtf.
 Rename spinny to rotated.
 Other layout names: mirror vertical, mirror diagonal.
