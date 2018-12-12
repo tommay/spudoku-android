@@ -600,6 +600,7 @@ public class MainActivity
                 public void call(RawPuzzle rawPuzzle) {
                     setPuzzle(rawPuzzle);
                     showPlaced();
+                    showColors();
                     enableButtons(true);
                     enableNewButtonAfterDelay();
                     hideProgressBar();
@@ -712,6 +713,13 @@ public class MainActivity
         highlightButton(-1); 
         showBoard();
         clearHint();
+    }
+
+    private void showColors() {
+        for (int i = 0; i < _colorViews.length; i++) {
+            _colorViews[i].setVisibility(
+                _colorCounts[i] != 0 ? View.VISIBLE : View.INVISIBLE);
+        }
     }
 
     public void clickHint(View view) {
