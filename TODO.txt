@@ -3,7 +3,6 @@ Creating a new puzzle needs to make all the color circles visible.
 Rename wtf.
 Rename spinny to rotated.
 Other layout names: mirror vertical, mirror diagonal.
-Better hint text.
 Why are the same difficulty puzzles for a particular layout always the same?
 Add counts to the circles at the bottom.
 Make an icon with 9 colored circles in a square.

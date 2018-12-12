@@ -723,16 +723,35 @@ public class MainActivity
         clearHint();
 
         if (hint != null) {
-            if (hint.tjpe == Heuristic.EasyPeasy) {
-                showHint("Easy peasy " + _colorNames[hint.digit - 1]);
+            switch (hint.tjpe) {
+              case EasyPeasy:
+                showHint("Look for an easy peasy " + _colorNames[hint.digit - 1]);
+                break;
+              case MissingOne:
+                showHint("One color is missing here");
+                break;
+              case MissingTwo:
+                showHint("Two colors are missing here");
+                break;
+              case Needed:
+                showHint("A missing color can go only one place");
+                break;
+              case Forced:
+                showHint("Only one color is possible here");
+                break;
+              case Tricky:
+                showHint("There is a tricky " + _colorNames[hint.digit - 1]);
+                break;
+              case Guess:
+                showHint("You'll have to guess here");
+                break;
+              default:
+                showHint(hint.tjpe.toString() + " (xxx)");
+                break;
             }
-            else {
-                if (hint.tjpe == Heuristic.Tricky) {
-                    showHint("Tricky " + _colorNames[hint.digit - 1]);
-                }
-                else {
-                    showHint(hint.tjpe.toString());
-                }
+            // if we highlight the row/column for easypeasy then it's
+            // too easy, so don't.
+            if (hint.tjpe != Heuristic.EasyPeasy) {
                 View boardView = findViewById(R.id.board);
                 for (int cell : hint.cells) {
                     ImageView cellView = (ImageView)
@@ -742,7 +761,7 @@ public class MainActivity
             }
         }
         else {
-            showHint("Solved!");
+            showHint("The puzzle is solved!");
         }
     }
 
