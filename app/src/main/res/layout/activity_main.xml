@@ -53,6 +53,9 @@
       android:layout_height="wrap_content"
       android:orientation="horizontal"
       android:layout_gravity="center">
+    <!-- The onClickListener for the New button is set in code because
+         it is switched from New to Cancel.  It may be better to use
+         two different buttonts, one visible and the other gone.  -->
     <Button
         android:id="@+id/button_new"
         android:text="New"
