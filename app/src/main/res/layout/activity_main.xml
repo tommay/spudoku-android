@@ -45,14 +45,13 @@
         android:onClick="clickHint"/>
   </LinearLayout>
 
-  <!-- The NEW button on the left, then the two labels stacked in
-       a right-aligned vertical LinearLayout, then the two spinners stacked
-       in a left-aligned vertical LinearLayout.  -->
+  <!-- The NEW button on the left. the spinner labels and spinners on
+       the right.  -->
   <LinearLayout
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:orientation="horizontal"
-      android:layout_gravity="center">
+      android:layout_gravity="center_horizontal">
     <!-- The onClickListener for the New button is set in code because
          it is switched from New to Cancel.  It may be better to use
          two different buttonts, one visible and the other gone.  -->
@@ -62,51 +61,45 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"/>
-    <!-- This LinearLayout contains the two vertically stacked
-         right-aligned labels followed by the twp vertically stacked
-         left-aligned spinners.  -->
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center_vertical">
-      <LinearLayout
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="4dp">
+      <!-- We have to use alignEnd on label_layout instead of on label_rating
+           because label_rating because we have to set the end of the shorter
+           label (label_layout) to the end of the longer label (label_rating).
+           This is fragile to chaning the label text.  And we have to use
+           @+id since this is a forward reference.  -->
+      <TextView
+          android:id="@+id/label_layout"
+          android:layout_height="wrap_content"
+          android:layout_width="wrap_content"
+          android:text="Layout: "
+          android:textColor="#282828"
+          android:layout_alignEnd="@+id/label_rating"/>
+      <Spinner
+          android:id="@+id/spinner_layout"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:orientation="vertical"
-          android:layout_gravity="center_vertical">
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="Layout: "
-            android:textColor="#282828"
-            android:layout_gravity="right"/>
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="Difficulty: "
-            android:textColor="#282828"
-            android:layout_gravity="right"/>
-      </LinearLayout>
-      <LinearLayout
+          android:textSize="40sp"
+          android:layout_toRightOf="@id/label_layout"
+          android:layout_alignBaseline="@id/label_layout"/>
+      <TextView
+          android:id="@id/label_rating"
+          android:layout_height="wrap_content"
+          android:layout_width="wrap_content"
+          android:text="Difficulty: "
+          android:textColor="#282828"
+          android:layout_below="@id/label_layout"/>
+      <Spinner
+          android:id="@+id/spinner_rating"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:orientation="vertical"
-          android:layout_gravity="center_vertical">
-        <Spinner
-            android:id="@+id/spinner_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="40sp"
-            android:layout_gravity="left"/>
-        <Spinner
-            android:id="@+id/spinner_rating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="40sp"
-            android:layout_gravity="left"/>
-      </LinearLayout>
-    </LinearLayout>
+          android:textSize="40sp"
+          android:layout_toRightOf="@id/label_rating"
+          android:layout_alignBaseline="@id/label_rating"/>
+    </RelativeLayout>
   </LinearLayout>
 
   <!-- ProgressBr visible while creating a puzzle, gone otherwise.
