@@ -130,7 +130,7 @@
     <!-- There's no way I'm writing out nine ImageViews here.  So I just
 	 make one and clone the rest in MainActivity.java.
 	 The size here dodesn't matter.  MainActivity#onResume will
-         make the all the same size as the board ImageViews.  -->
+         make them all the same size as the board ImageViews.  -->
     <!-- Padding reduces the size of the circles, margin increases the
          spacing.  These are tweaked to where I like the look.  -->
     <LinearLayout
