@@ -26,11 +26,6 @@
       android:orientation="horizontal"
       android:layout_gravity="center">
     <Button
-        android:id="@+id/button_new"
-        android:text="New"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <Button
         android:id="@+id/button_setup"
         android:text="Puzzle"
         android:layout_width="wrap_content"
@@ -50,6 +45,65 @@
         android:onClick="clickHint"/>
   </LinearLayout>
 
+  <!-- The NEW button on the left with the puzzle layout and
+       difficulty spinners stacked to its right.  The button is in its
+       own vertical LinearLayout so it can be vertically centered with
+       the spinners.  ->
+
+  <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:layout_gravity="center">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+      <Button
+          android:id="@+id/button_new"
+          android:text="New"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Layout: "
+            android:textColor="#282828"/>
+        <Spinner
+            android:id="@+id/spinner_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="40sp"/>
+      </LinearLayout>
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Difficulty: "
+            android:textColor="#282828"/>
+        <Spinner
+            android:id="@+id/spinner_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="40sp"/>
+      </LinearLayout>
+    </LinearLayout>
+  </LinearLayout>
+
   <!-- ProgressBr visible while creating a puzzle, gone otherwise.
        It's meaningless but makes it look like something is
        happening. -->
@@ -63,39 +117,6 @@
       android:indeterminate="true"
       android:visibility="gone"
       style="@android:style/Widget.ProgressBar.Horizontal" />
-
-  <!-- Puzzle type selection spinners.  -->
-
-  <LinearLayout
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:orientation="horizontal">
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="New puzzle layout: "
-        android:textColor="#282828"/>
-    <Spinner
-        android:id="@+id/spinner_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="40sp"/>
-  </LinearLayout>
-  <LinearLayout
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:orientation="horizontal">
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="New puzzle difficulty: "
-        android:textColor="#282828"/>
-    <Spinner
-        android:id="@+id/spinner_rating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="40sp"/>
-  </LinearLayout>
 
   <!-- A row of colored circles, centered horizontally.  -->
 
