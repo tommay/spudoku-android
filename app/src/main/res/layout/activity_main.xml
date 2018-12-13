@@ -45,61 +45,63 @@
         android:onClick="clickHint"/>
   </LinearLayout>
 
-  <!-- The NEW button on the left with the puzzle layout and
-       difficulty spinners stacked to its right.  The button is in its
-       own vertical LinearLayout so it can be vertically centered with
-       the spinners.  ->
-
+  <!-- The NEW button on the left, then the two labels stacked in
+       a right-aligned vertical LinearLayout, then the two spinners stacked
+       in a left-aligned vertical LinearLayout.  -->
   <LinearLayout
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:orientation="horizontal"
       android:layout_gravity="center">
+    <Button
+        android:id="@+id/button_new"
+        android:text="New"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"/>
+    <!-- This LinearLayout contains the two vertically stacked
+         right-aligned labels followed by the twp vertically stacked
+         left-aligned spinners.  -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center">
-      <Button
-          android:id="@+id/button_new"
-          android:text="New"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center">
+        android:orientation="horizontal"
+        android:layout_gravity="center_vertical">
       <LinearLayout
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:orientation="horizontal">
+          android:orientation="vertical"
+          android:layout_gravity="center_vertical">
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:text="Layout: "
-            android:textColor="#282828"/>
-        <Spinner
-            android:id="@+id/spinner_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="40sp"/>
-      </LinearLayout>
-      <LinearLayout
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:orientation="horizontal">
+            android:textColor="#282828"
+            android:layout_gravity="right"/>
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:text="Difficulty: "
-            android:textColor="#282828"/>
+            android:textColor="#282828"
+            android:layout_gravity="right"/>
+      </LinearLayout>
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:layout_gravity="center_vertical">
+        <Spinner
+            android:id="@+id/spinner_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="40sp"
+            android:layout_gravity="left"/>
         <Spinner
             android:id="@+id/spinner_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="40sp"/>
+            android:textSize="40sp"
+            android:layout_gravity="left"/>
       </LinearLayout>
     </LinearLayout>
   </LinearLayout>
