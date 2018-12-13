@@ -733,28 +733,31 @@ public class MainActivity
         if (hint != null) {
             switch (hint.tjpe) {
               case EasyPeasy:
-                showHint("Look for an easy peasy " + _colorNames[hint.digit - 1]);
+                showHint(
+                    "Look for an easy peasy " + _colorNames[hint.digit - 1] +
+                    ".");
                 break;
               case MissingOne:
-                showHint("One color is missing here");
+                showHint("One color is missing here.");
                 break;
               case MissingTwo:
-                showHint("Two colors are missing here");
+                showHint("Two colors are missing here.");
                 break;
               case Needed:
-                showHint("A missing color can go only one place");
+                showHint("A missing color can go only one place.");
                 break;
               case Forced:
-                showHint("Only one color is possible here");
+                showHint("Only one color is possible here.");
                 break;
               case Tricky:
-                showHint("There is a tricky " + _colorNames[hint.digit - 1]);
+                showHint(
+                    "There is a tricky " + _colorNames[hint.digit - 1] + ".");
                 break;
               case Guess:
-                showHint("You'll have to guess here");
+                showHint("You'll have to guess here.");
                 break;
               default:
-                showHint(hint.tjpe.toString() + " (xxx)");
+                showHint(hint.tjpe.toString() + " (XXX).");
                 break;
             }
             // if we highlight the row/column for easypeasy then it's
