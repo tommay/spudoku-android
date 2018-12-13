@@ -3,14 +3,14 @@ package net.tommay.sudoku
 object Layout {
   val layoutList : List[(String, Int => Iterable[Int])] =
     List(
-      "classic" -> classic,
-      "leftRight" -> leftRight,
-      "leftRightUpDown" -> leftRightUpDown,
-      "identicalSquares" -> identicalSquares,
-      "spinny" -> spinny(List.empty),
-      "random" -> random,
+      "classic (half turn)" -> classic,
+      "quarter turn" -> spinny(List.empty),
+      "mirror" -> leftRight,
+      "double mirror" -> leftRightUpDown,
       "diagonal" -> diagonal,
-      "doubleDiagonal" -> doubleDiagonal,
+      "double diagonal" -> doubleDiagonal,
+      "identical squares" -> identicalSquares,
+      "random" -> random,
       "wtf" -> wtf,
       "wtf2" -> wtf
     )
