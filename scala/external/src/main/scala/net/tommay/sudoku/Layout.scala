@@ -4,7 +4,7 @@ object Layout {
   val layoutList : List[(String, Int => Iterable[Int])] =
     List(
       "classic (half turn)" -> classic,
-      "quarter turn" -> spinny(List.empty),
+      "quarter turn" -> quarterTurn,
       "mirror" -> leftRight,
       "double mirror" -> leftRightUpDown,
       "diagonal" -> diagonal,
@@ -47,7 +47,11 @@ object Layout {
     List(0, 3, 6, 27, 30, 33, 54, 57, 60).map(base + _)
   }
 
-  def spinny(result: List[Int])(n: Int) : Iterable[Int] = {
+  def quarterTurn(n: Int) : Iterable[Int] = {
+    spinny(List.empty, n)
+  }
+
+  def spinny(result: List[Int], n: Int) : Iterable[Int] = {
     // Rotate n 90 degrees, cons it, and recurse until we've come back
     // to where we started.
     if (result.contains(n)) {
@@ -57,7 +61,7 @@ object Layout {
       val (row, col) = rowcol(n)
       val rowPrime = col
       val colPrime = 8 - row
-      spinny(n :: result)(rowPrime * 9 + colPrime)
+      spinny(n :: result, rowPrime * 9 + colPrime)
     }
   }
 
