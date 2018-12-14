@@ -50,7 +50,7 @@ object Layout {
   def spinny(result: List[Int])(n: Int) : Iterable[Int] = {
     // Rotate n 90 degrees, cons it, and recurse until we've come back
     // to where we started.
-    if (result.exists(_ == n)) {
+    if (result.contains(n)) {
       result
     }
     else {
