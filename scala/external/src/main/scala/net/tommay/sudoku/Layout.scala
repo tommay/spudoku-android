@@ -1,5 +1,9 @@
 package net.tommay.sudoku
 
+/* The functions in this list take a position from 0 to 81 and return
+   a List (actually an Iterable) of all positions that should have
+   their colors removed together when creating a puzzle.  */
+
 object Layout {
   val layoutList : List[(String, Int => Iterable[Int])] =
     List(
@@ -10,6 +14,7 @@ object Layout {
       "diagonal" -> diagonal,
       "other diagonal" -> otherDiagonal,
       "double diagonal" -> doubleDiagonal,
+      "kaleidoscope" -> kaleidoscope,
       "identical squares" -> identicalSquares,
       "random" -> random,
       "wtf" -> wtf,
@@ -94,6 +99,38 @@ object Layout {
   def doubleDiagonal(n: Int) : Iterable[Int] = {
     val diagonalSets = diagonal(n)
     diagonalSets ++ diagonalSets.map(reflectOtherDiagonally)
+  }
+
+  def kaleidoscope(n: Int) : Iterable[Int] = {
+    val (row, col) = rowcol(n)
+    val bigRow = row / 3
+    val bigCol = col / 3
+
+    if (bigRow == 1 && bigCol == 1) {
+      // Center big square.
+      quarterTurn(n)
+    }
+    if (bigRow == bigCol) {
+      // In one of the three big squares on the NW/SE diagonal
+      kaleid(reflectDiagonally, n)
+    }
+    else if (bigRow + bigCol == 2) {
+      // In one of the three big squares on the SW/BE diagonal
+      kaleid(reflectOtherDiagonally, n)
+    }
+    else if (bigRow == 1) {
+      // Left or right edge.
+      kaleid(reflectUpDown, n)
+    }
+    else {
+      // Top or bottom edge.
+      kaleid(reflectLeftRight, n)
+    }
+  }
+
+  def kaleid(reflectFunc : Int => Int, n : Int) : Iterable[Int] = {
+    val nPrime = reflectFunc(n)
+    quarterTurn(n) ++ quarterTurn(nPrime)
   }
 
   def wtf(n: Int) : Iterable[Int] = {
