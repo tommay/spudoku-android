@@ -8,6 +8,7 @@ object Layout {
       "mirror" -> leftRight,
       "double mirror" -> leftRightUpDown,
       "diagonal" -> diagonal,
+      "other diagonal" -> otherDiagonal,
       "double diagonal" -> doubleDiagonal,
       "identical squares" -> identicalSquares,
       "random" -> random,
@@ -75,16 +76,20 @@ object Layout {
     List(n, reflectDiagonally(n))
   }
 
-  def reflectDiagonallyPrime(n: Int) : Int = {
+  def reflectOtherDiagonally(n: Int) : Int = {
     val (row, col) = rowcol(n)
     val rowPrime = 8 - col
     val colPrime = 8 - row
     rowPrime * 9 + colPrime
   }
 
+  def otherDiagonal(n: Int) : Iterable[Int] = {
+    List(n, reflectOtherDiagonally(n))
+  }
+
   def doubleDiagonal(n: Int) : Iterable[Int] = {
     val diagonalSets = diagonal(n)
-    diagonalSets ++ diagonalSets.map(reflectDiagonallyPrime)
+    diagonalSets ++ diagonalSets.map(reflectOtherDiagonally)
   }
 
   def wtf(n: Int) : Iterable[Int] = {
