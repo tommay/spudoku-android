@@ -77,7 +77,8 @@
           android:layout_width="wrap_content"
           android:text="Layout: "
           android:textColor="#282828"
-          android:layout_alignEnd="@+id/label_rating"/>
+          android:layout_alignEnd="@+id/label_rating"
+          android:layout_below="@id/label_rating"/>
       <Spinner
           android:id="@+id/spinner_layout"
           android:layout_width="wrap_content"
@@ -90,8 +91,7 @@
           android:layout_height="wrap_content"
           android:layout_width="wrap_content"
           android:text="Difficulty: "
-          android:textColor="#282828"
-          android:layout_below="@id/label_layout"/>
+          android:textColor="#282828"/>
       <Spinner
           android:id="@+id/spinner_rating"
           android:layout_width="wrap_content"
