@@ -17,6 +17,7 @@ object Layout {
       "kaleidoscope" -> kaleidoscope,
       "identical squares" -> identicalSquares,
       "tumbler" -> tumbler,
+      "barcode" -> barcode,
       "random" -> random
     )
 
@@ -148,6 +149,12 @@ object Layout {
       List(40)
     )
     tumbled.find(_ . contains(n)).getOrElse(List.empty)
+  }
+
+  def barcode(n: Int) : Iterable[Int] = {
+    val (row, col) = rowcol(n);
+    val row0 = row - (row % 3)
+    List(0, 1, 2).map{n => (row0 + n) * 9 + col}
   }
 
   def getLayout(name: String) : Option[Iterable[Iterable[Int]]] = {
