@@ -78,7 +78,7 @@ public class MainActivity
     // Difficulty ratings for creating puzzles, and associated
     // PuzzleCreater.
 
-    private final Map<String, PuzzleCreater> _ratingsMap =
+    private final Map<String, PuzzleCreater> _difficultyMap =
         new LinkedHashMap(){{
             for (PuzzleCreater puzzleCreater : PuzzleCreater.values()) {
                 put(puzzleCreater.name, puzzleCreater);
@@ -93,7 +93,7 @@ public class MainActivity
 
     private int _emptyCellColor;
 
-    // Map from ratings + layout names to the PuzzleSupplier for that
+    // Map from difficulty + layout names to the PuzzleSupplier for that
     // combination.  To fill the Map in we need our Context.
 
     private final Map<String, PuzzleSupplier> _supplierMap = new HashMap();
@@ -146,12 +146,12 @@ public class MainActivity
 
         // Initialize Context-dependent _supplierMap.
 
-        for (Map.Entry<String,PuzzleCreater> entry : _ratingsMap.entrySet()) {
-            String rating = entry.getKey();
+        for (Map.Entry<String,PuzzleCreater> entry : _difficultyMap.entrySet()) {
+            String difficulty = entry.getKey();
             PuzzleCreater puzzleCreater = entry.getValue();
             
             for (String layoutName : layoutNames) {
-                String supplierName = makeSupplierName(rating, layoutName);
+                String supplierName = makeSupplierName(difficulty, layoutName);
                 PuzzleSupplier puzzleSupplier = new PuzzleSupplier(
                     puzzleCreater,
                     layoutName,
@@ -171,13 +171,13 @@ public class MainActivity
             spinner.setAdapter(adapter);
         }
 
-        // Initialize the rating spinner.
+        // Initialize the difficulty spinner.
 
         {
-            Spinner spinner = (Spinner) findViewById(R.id.spinner_rating);
+            Spinner spinner = (Spinner) findViewById(R.id.spinner_difficulty);
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_item,
-                new ArrayList(_ratingsMap.keySet()));
+                new ArrayList(_difficultyMap.keySet()));
             adapter.setDropDownViewResource(
                 android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(adapter);
@@ -585,9 +585,9 @@ public class MainActivity
         // the corresponding puzzleSupplier.
 
         String layoutName = getSpinnerItem(R.id.spinner_layout);
-        String rating = getSpinnerItem(R.id.spinner_rating);
+        String difficulty = getSpinnerItem(R.id.spinner_difficulty);
         PuzzleSupplier puzzleSupplier =
-            _supplierMap.get(makeSupplierName(rating, layoutName));
+            _supplierMap.get(makeSupplierName(difficulty, layoutName));
 
         // Set up a callback for when we have a Puzzle, and get a
         // Handle to cancel it if we need to.
@@ -663,8 +663,8 @@ public class MainActivity
         return (String) spinner.getSelectedItem();
     }
 
-    private static String makeSupplierName(String rating, String layoutName) {
-        return rating + "-" + layoutName;
+    private static String makeSupplierName(String difficulty, String layoutName) {
+        return difficulty + "-" + layoutName;
     }
 
     // The setup button was clicked.  Show the setup colors.

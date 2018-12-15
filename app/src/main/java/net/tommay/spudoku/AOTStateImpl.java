@@ -9,19 +9,19 @@ import net.tommay.util.AOTState;
  * Persists the state of an AOTProducer in a SharedPReferences.
  * Eventually this should be done with sqlite.  When puzzles have
  * difficulty ratings, we can create a puzzle with a given layout,
- * rate it, put it with the rating, and repeat until we get the
- * right rating.
+ * rate it, put it with the difficulty, and repeat until we get the
+ * right difficulty.
  * This scheme doesn't delete puzzles until a new one is inserted.
  * Actually that may not make sense.  What's the used of allowing N
- * puzzles of a given rating if we always return the first one?
+ * puzzles of a given difficulty if we always return the first one?
  * get:
  *   fetch one row
  *   if no row then return nul
  *   update row set gotten = true
  *   return a RawPuzzle
  * set:
- *   delete where rating = ? and gotten = true
- *   select count(*) where rating = ?
+ *   delete where difficulty = ? and gotten = true
+ *   select count(*) where difficulty = ?
  *   if count < some limit then insert
  */
 class AOTStateImpl implements AOTState<RawPuzzle> {

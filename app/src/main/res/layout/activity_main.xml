@@ -66,19 +66,20 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="4dp">
-      <!-- We have to use alignEnd on label_layout instead of on label_rating
-           because label_rating because we have to set the end of the shorter
-           label (label_layout) to the end of the longer label (label_rating).
-           This is fragile to chaning the label text.  And we have to use
-           @+id since this is a forward reference.  -->
+      <!-- We have to use alignEnd on label_layout instead of on
+           label_difficulty because label_difficulty because we have
+           to set the end of the shorter label (label_layout) to the
+           end of the longer label (label_difficulty).  This is
+           fragile to chaning the label text.  And we have to use @+id
+           since this is a forward reference.  -->
       <TextView
           android:id="@+id/label_layout"
           android:layout_height="wrap_content"
           android:layout_width="wrap_content"
           android:text="Layout: "
           android:textColor="#282828"
-          android:layout_alignEnd="@+id/label_rating"
-          android:layout_below="@id/label_rating"/>
+          android:layout_alignEnd="@+id/label_difficulty"
+          android:layout_below="@id/label_difficulty"/>
       <Spinner
           android:id="@+id/spinner_layout"
           android:layout_width="wrap_content"
@@ -87,18 +88,18 @@
           android:layout_toRightOf="@id/label_layout"
           android:layout_alignBaseline="@id/label_layout"/>
       <TextView
-          android:id="@id/label_rating"
+          android:id="@id/label_difficulty"
           android:layout_height="wrap_content"
           android:layout_width="wrap_content"
           android:text="Difficulty: "
           android:textColor="#282828"/>
       <Spinner
-          android:id="@+id/spinner_rating"
+          android:id="@+id/spinner_difficulty"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:textSize="40sp"
-          android:layout_toRightOf="@id/label_rating"
-          android:layout_alignBaseline="@id/label_rating"/>
+          android:layout_toRightOf="@id/label_difficulty"
+          android:layout_alignBaseline="@id/label_difficulty"/>
     </RelativeLayout>
   </LinearLayout>
 
