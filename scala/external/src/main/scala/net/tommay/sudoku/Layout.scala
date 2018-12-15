@@ -17,9 +17,7 @@ object Layout {
       "kaleidoscope" -> kaleidoscope,
       "identical squares" -> identicalSquares,
       "tumbler" -> tumbler,
-      "random" -> random,
-      "wtf" -> wtf,
-      "wtf2" -> wtf
+      "random" -> random
     )
 
   def classic(n: Int) : Iterable[Int] = {
@@ -150,20 +148,6 @@ object Layout {
       List(40)
     )
     tumbled.find(_ . contains(n)).getOrElse(List.empty)
-  }
-
-  def wtf(n: Int) : Iterable[Int] = {
-    val (row, col) = rowcol(n)
-    val rowPrime = 8 - col
-    val colPrime = row
-    List(n, rowPrime * 9 + colPrime)
-  }
-
-  def wtf2(n: Int) : Iterable[Int] = {
-    val (row, col) = rowcol(80 - n)
-    val rowPrime = col
-    val colPrime = row
-    List(n, rowPrime * 9 + colPrime)
   }
 
   def getLayout(name: String) : Option[Iterable[Iterable[Int]]] = {
