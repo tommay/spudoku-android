@@ -16,6 +16,7 @@ object Layout {
       "double diagonal" -> doubleDiagonal,
       "kaleidoscope" -> kaleidoscope,
       "identical squares" -> identicalSquares,
+      "tumbler" -> tumbler,
       "random" -> random,
       "wtf" -> wtf,
       "wtf2" -> wtf
@@ -131,6 +132,24 @@ object Layout {
   def kaleid(reflectFunc : Int => Int, n : Int) : Iterable[Int] = {
     val nPrime = reflectFunc(n)
     quarterTurn(n) ++ quarterTurn(nPrime)
+  }
+
+  def tumbler(n: Int) : Iterable[Int] = {
+    val tumbled = List(
+      List(0, 5, 26, 51, 60, 59, 74, 45),
+      List(1, 14, 25, 42, 61, 68, 73, 36),
+      List(2, 23, 24, 33, 62, 77, 72, 27),
+      List(9, 4, 17, 52, 69, 58, 65, 46),
+      List(10, 13, 16, 43, 70, 67, 64, 37),
+      List(11, 22, 15, 34, 71, 76, 63, 28),
+      List(18, 3, 8, 53, 78, 57, 56, 47),
+      List(19, 12, 7, 44, 79, 66, 55, 38),
+      List(20, 21, 6, 35, 80, 75, 54, 29),
+      List(30, 32, 50, 48),
+      List(31, 41, 49, 39),
+      List(40)
+    )
+    tumbled.find(_ . contains(n)).getOrElse(List.empty)
   }
 
   def wtf(n: Int) : Iterable[Int] = {
