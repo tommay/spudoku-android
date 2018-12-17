@@ -102,35 +102,7 @@ object Layout {
   }
 
   def kaleidoscope(n: Int) : Iterable[Int] = {
-    val (row, col) = rowcol(n)
-    val bigRow = row / 3
-    val bigCol = col / 3
-
-    if (bigRow == 1 && bigCol == 1) {
-      // Center big square.
-      quarterTurn(n)
-    }
-    if (bigRow == bigCol) {
-      // In one of the three big squares on the NW/SE diagonal
-      kaleid(reflectDiagonally, n)
-    }
-    else if (bigRow + bigCol == 2) {
-      // In one of the three big squares on the SW/BE diagonal
-      kaleid(reflectOtherDiagonally, n)
-    }
-    else if (bigRow == 1) {
-      // Left or right edge.
-      kaleid(reflectUpDown, n)
-    }
-    else {
-      // Top or bottom edge.
-      kaleid(reflectLeftRight, n)
-    }
-  }
-
-  def kaleid(reflectFunc : Int => Int, n : Int) : Iterable[Int] = {
-    val nPrime = reflectFunc(n)
-    quarterTurn(n) ++ quarterTurn(nPrime)
+    quarterTurn(n) ++ quarterTurn(reflectLeftRight(n))
   }
 
   def tumbler(n: Int) : Iterable[Int] = {
