@@ -130,12 +130,10 @@ object Layout {
   }
 
   def getLayout(name: String) : Option[Iterable[Set[Int]]] = {
-    val layoutMap = layoutList
-      .map{case (name, func) => (name.toLowerCase, func)}
-      .toMap
-    layoutMap.get(name.toLowerCase) match {
+    val nameLower = name.toLowerCase
+    layoutList.find(_._1.toLowerCase == name) match {
       case None => None
-      case Some(func) =>
+      case Some((_, func)) =>
         val sets = (0 to 80).map(func(_))
         Some(uniqBy(sets, {x:Set[Int] => x.min}))
     }
