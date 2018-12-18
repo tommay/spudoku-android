@@ -4,18 +4,28 @@ package net.tommay.sudoku
 
 // XXX this should be private, all construction via Puzzle.methods.
 
+// All a Puzzle has is a Map from cellNumbers to the Digit placed at
+// that cellNumber.
+
 case class Puzzle(
   placed : Map[Int, Int] = Map.empty)
 {
   type Digit = Int
 
+  // For when we need to iterate over all cellNumber/Digits.
+
   def each: Iterable[(Int, Digit)] = {
     placed
   }
 
+  // Adds a new Digit to the puzzle at the given cellNumber.
+
   def place(cellNumber: Int, digit: Digit) : Puzzle = {
     this.copy(placed = placed + (cellNumber -> digit))
   }
+
+  // Given an Iterable of cellNumbers, removes the Digits from those
+  // cellNumbers.
 
   def remove(cellNumbers: Iterable[Int]) : Puzzle = {
     val remaining = cellNumbers.foldLeft(placed) {
