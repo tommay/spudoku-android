@@ -1,7 +1,6 @@
 Why are the same difficulty puzzles for a particular layout always the same?
 Add counts to the circles at the bottom.  This can possibly be done by using
   a FrameLayout with a centered text digit stacked on top of a centered circle.
-Make an icon with 9 colored circles in a square.
 
 -----
 

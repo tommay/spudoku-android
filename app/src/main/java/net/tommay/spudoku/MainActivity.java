@@ -311,7 +311,8 @@ public class MainActivity
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
                         Log.i("Spudoku", "view: " + v + " digit: " + digit);
-                        if (event.getActionMasked() == MotionEvent.ACTION_DOWN)
+                        if (havePuzzle() &&
+                            event.getActionMasked() == MotionEvent.ACTION_DOWN)
                         {
                             // Just pass the digit via the local state.
                             // XXX This method was deprecated in API
