@@ -434,12 +434,15 @@ public class MainActivity
 
     // clicked is called from the circle images in
     // main/res/layout/board.xml.  When a circle is clicked, we toggle
-    // its cell between its solved and setup colors.
+    // its cell between its setup/solved and placed colors.
+    // This is actually no longer true.  Clicked is called when a color
+    // is dragged from the bottom row.  So it will now be called only
+    // to place a color, not to toggle.  Nevertheless, I'm leaving in
+    // the toggle logic.
 
     public void clicked(View cellView) {
         // XXX Would be better to enable this handler only when we
-        // have a puzzle.  That would be nicer logic-wise and would
-        // turn off the click sound.
+        // have a puzzle.
         if (!havePuzzle()) {
             return;
         }

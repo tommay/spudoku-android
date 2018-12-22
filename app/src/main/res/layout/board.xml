@@ -1,162 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout android:layout_height='match_parent' android:layout_weight='1' android:layout_width='match_parent' android:orientation='vertical' android:weightSum='3' xmlns:android='http://schemas.android.com/apk/res/android'>
-  <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
-    <LinearLayout android:background='#D0D0D0' android:layout_height='match_parent' android:layout_margin='2dp' android:layout_weight='1' android:layout_width='0dp' android:orientation='vertical' android:padding='2dp' android:weightSum='3'>
-      <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='0'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='1'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='2'></ImageView>
-      </LinearLayout>
-      <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='9'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='10'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='11'></ImageView>
-      </LinearLayout>
-      <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='18'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='19'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='20'></ImageView>
-      </LinearLayout>
-    </LinearLayout>
-    <LinearLayout android:background='#D0D0D0' android:layout_height='match_parent' android:layout_margin='2dp' android:layout_weight='1' android:layout_width='0dp' android:orientation='vertical' android:padding='2dp' android:weightSum='3'>
-      <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='3'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='4'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='5'></ImageView>
-      </LinearLayout>
-      <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='12'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='13'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='14'></ImageView>
-      </LinearLayout>
-      <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='21'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='22'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='23'></ImageView>
-      </LinearLayout>
-    </LinearLayout>
-    <LinearLayout android:background='#D0D0D0' android:layout_height='match_parent' android:layout_margin='2dp' android:layout_weight='1' android:layout_width='0dp' android:orientation='vertical' android:padding='2dp' android:weightSum='3'>
-      <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='6'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='7'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='8'></ImageView>
-      </LinearLayout>
-      <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='15'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='16'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='17'></ImageView>
-      </LinearLayout>
-      <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='24'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='25'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='26'></ImageView>
-      </LinearLayout>
-    </LinearLayout>
-  </LinearLayout>
-  <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
-    <LinearLayout android:background='#D0D0D0' android:layout_height='match_parent' android:layout_margin='2dp' android:layout_weight='1' android:layout_width='0dp' android:orientation='vertical' android:padding='2dp' android:weightSum='3'>
-      <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='27'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='28'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='29'></ImageView>
-      </LinearLayout>
-      <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='36'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='37'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='38'></ImageView>
-      </LinearLayout>
-      <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='45'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='46'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='47'></ImageView>
-      </LinearLayout>
-    </LinearLayout>
-    <LinearLayout android:background='#D0D0D0' android:layout_height='match_parent' android:layout_margin='2dp' android:layout_weight='1' android:layout_width='0dp' android:orientation='vertical' android:padding='2dp' android:weightSum='3'>
-      <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='30'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='31'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='32'></ImageView>
-      </LinearLayout>
-      <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='39'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='40'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='41'></ImageView>
-      </LinearLayout>
-      <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='48'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='49'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='50'></ImageView>
-      </LinearLayout>
-    </LinearLayout>
-    <LinearLayout android:background='#D0D0D0' android:layout_height='match_parent' android:layout_margin='2dp' android:layout_weight='1' android:layout_width='0dp' android:orientation='vertical' android:padding='2dp' android:weightSum='3'>
-      <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='33'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='34'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='35'></ImageView>
-      </LinearLayout>
-      <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='42'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='43'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='44'></ImageView>
-      </LinearLayout>
-      <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='51'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='52'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='53'></ImageView>
-      </LinearLayout>
-    </LinearLayout>
-  </LinearLayout>
-  <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
-    <LinearLayout android:background='#D0D0D0' android:layout_height='match_parent' android:layout_margin='2dp' android:layout_weight='1' android:layout_width='0dp' android:orientation='vertical' android:padding='2dp' android:weightSum='3'>
-      <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='54'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='55'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='56'></ImageView>
-      </LinearLayout>
-      <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='63'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='64'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='65'></ImageView>
-      </LinearLayout>
-      <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='72'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='73'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='74'></ImageView>
-      </LinearLayout>
-    </LinearLayout>
-    <LinearLayout android:background='#D0D0D0' android:layout_height='match_parent' android:layout_margin='2dp' android:layout_weight='1' android:layout_width='0dp' android:orientation='vertical' android:padding='2dp' android:weightSum='3'>
-      <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='57'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='58'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='59'></ImageView>
-      </LinearLayout>
-      <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='66'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='67'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='68'></ImageView>
-      </LinearLayout>
-      <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='75'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='76'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='77'></ImageView>
-      </LinearLayout>
-    </LinearLayout>
-    <LinearLayout android:background='#D0D0D0' android:layout_height='match_parent' android:layout_margin='2dp' android:layout_weight='1' android:layout_width='0dp' android:orientation='vertical' android:padding='2dp' android:weightSum='3'>
-      <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='60'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='61'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='62'></ImageView>
-      </LinearLayout>
-      <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='69'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='70'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='71'></ImageView>
-      </LinearLayout>
-      <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='78'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='79'></ImageView>
-        <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:onClick='clicked' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='80'></ImageView>
-      </LinearLayout>
-    </LinearLayout>
-  </LinearLayout>
+<LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+<LinearLayout android:background='#D0D0D0' android:layout_height='match_parent' android:layout_margin='2dp' android:layout_weight='1' android:layout_width='0dp' android:orientation='vertical' android:padding='2dp' android:weightSum='3'>
+<LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='0'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='1'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='2'></ImageView>
+</LinearLayout>
+<LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='9'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='10'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='11'></ImageView>
+</LinearLayout>
+<LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='18'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='19'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='20'></ImageView>
+</LinearLayout>
+</LinearLayout>
+<LinearLayout android:background='#D0D0D0' android:layout_height='match_parent' android:layout_margin='2dp' android:layout_weight='1' android:layout_width='0dp' android:orientation='vertical' android:padding='2dp' android:weightSum='3'>
+<LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='3'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='4'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='5'></ImageView>
+</LinearLayout>
+<LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='12'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='13'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='14'></ImageView>
+</LinearLayout>
+<LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='21'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='22'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='23'></ImageView>
+</LinearLayout>
+</LinearLayout>
+<LinearLayout android:background='#D0D0D0' android:layout_height='match_parent' android:layout_margin='2dp' android:layout_weight='1' android:layout_width='0dp' android:orientation='vertical' android:padding='2dp' android:weightSum='3'>
+<LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='6'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='7'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='8'></ImageView>
+</LinearLayout>
+<LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='15'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='16'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='17'></ImageView>
+</LinearLayout>
+<LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='24'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='25'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='26'></ImageView>
+</LinearLayout>
+</LinearLayout>
+</LinearLayout>
+<LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+<LinearLayout android:background='#D0D0D0' android:layout_height='match_parent' android:layout_margin='2dp' android:layout_weight='1' android:layout_width='0dp' android:orientation='vertical' android:padding='2dp' android:weightSum='3'>
+<LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='27'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='28'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='29'></ImageView>
+</LinearLayout>
+<LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='36'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='37'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='38'></ImageView>
+</LinearLayout>
+<LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='45'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='46'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='47'></ImageView>
+</LinearLayout>
+</LinearLayout>
+<LinearLayout android:background='#D0D0D0' android:layout_height='match_parent' android:layout_margin='2dp' android:layout_weight='1' android:layout_width='0dp' android:orientation='vertical' android:padding='2dp' android:weightSum='3'>
+<LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='30'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='31'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='32'></ImageView>
+</LinearLayout>
+<LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='39'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='40'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='41'></ImageView>
+</LinearLayout>
+<LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='48'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='49'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='50'></ImageView>
+</LinearLayout>
+</LinearLayout>
+<LinearLayout android:background='#D0D0D0' android:layout_height='match_parent' android:layout_margin='2dp' android:layout_weight='1' android:layout_width='0dp' android:orientation='vertical' android:padding='2dp' android:weightSum='3'>
+<LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='33'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='34'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='35'></ImageView>
+</LinearLayout>
+<LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='42'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='43'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='44'></ImageView>
+</LinearLayout>
+<LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='51'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='52'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='53'></ImageView>
+</LinearLayout>
+</LinearLayout>
+</LinearLayout>
+<LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+<LinearLayout android:background='#D0D0D0' android:layout_height='match_parent' android:layout_margin='2dp' android:layout_weight='1' android:layout_width='0dp' android:orientation='vertical' android:padding='2dp' android:weightSum='3'>
+<LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='54'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='55'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='56'></ImageView>
+</LinearLayout>
+<LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='63'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='64'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='65'></ImageView>
+</LinearLayout>
+<LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='72'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='73'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='74'></ImageView>
+</LinearLayout>
+</LinearLayout>
+<LinearLayout android:background='#D0D0D0' android:layout_height='match_parent' android:layout_margin='2dp' android:layout_weight='1' android:layout_width='0dp' android:orientation='vertical' android:padding='2dp' android:weightSum='3'>
+<LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='57'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='58'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='59'></ImageView>
+</LinearLayout>
+<LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='66'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='67'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='68'></ImageView>
+</LinearLayout>
+<LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='75'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='76'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='77'></ImageView>
+</LinearLayout>
+</LinearLayout>
+<LinearLayout android:background='#D0D0D0' android:layout_height='match_parent' android:layout_margin='2dp' android:layout_weight='1' android:layout_width='0dp' android:orientation='vertical' android:padding='2dp' android:weightSum='3'>
+<LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='60'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='61'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='62'></ImageView>
+</LinearLayout>
+<LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='69'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='70'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='71'></ImageView>
+</LinearLayout>
+<LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='78'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='79'></ImageView>
+<ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='80'></ImageView>
+</LinearLayout>
+</LinearLayout>
+</LinearLayout>
 </LinearLayout>
