@@ -264,6 +264,7 @@ public class MainActivity
         Log.i("Spudoku", "circle is " + width + " x " + height);
     }
 
+    @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         Log.i("Spudoku", "onWindowFocusChanged");
@@ -545,6 +546,7 @@ public class MainActivity
         button.setText("New");
         button.setEnabled(true);
         button.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 createNewPuzzle();
             }
@@ -577,6 +579,7 @@ public class MainActivity
         button.setText("Cancel");
         button.setEnabled(true);
         button.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 Log.i("Spudoku", "canceling");
                 handle.cancel();
