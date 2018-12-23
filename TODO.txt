@@ -1,6 +1,10 @@
 Why are the same difficulty puzzles for a particular layout always the same?
 Add counts to the circles at the bottom.  This can possibly be done by using
   a FrameLayout with a centered text digit stacked on top of a centered circle.
+When switching from multiwindow to singkewindow the widget layout becomes
+  horked -- the labels don't have the same baseline as the spinners.
+  Pressing "New" aligns them, but the New button isn't correctly aligned
+  vertically.  The layout doesn't work in multiwindow anyway.
 
 -----
 
