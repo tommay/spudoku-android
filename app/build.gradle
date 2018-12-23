@@ -7,11 +7,18 @@ repositories {
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.0"
+
+    // If buildConfigField CREATE_LOG is non-null then puzzle creation times
+    // will be logged to /data/data/net.tommay.spudoku/files/<CREATE_LOG>,
+    // and PuzzleSupplier.java will use the same random number seed so times
+    // will be consistent.
+
     defaultConfig {
         // These go into fields in the generated  BuildConfig java class:
         applicationId "net.tommay.spudoku"
         versionCode 1
         versionName "1.0"
+
         buildConfigField "String", "CREATE_LOG", "null"
 
         minSdkVersion 15
