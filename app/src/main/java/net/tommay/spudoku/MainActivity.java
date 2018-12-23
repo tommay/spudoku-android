@@ -412,6 +412,14 @@ public class MainActivity
         Log.i("Spudoku", "onDestroy");
     }
 
+    @Override
+    public void onBackPressed () {
+        Log.i("Spudoku", "onBackPressed");
+        // Don't do anything.  The default is to exit the app, but then
+        // the puzzle gets lost.
+        // XXX It would be better to put up a "Do you want to exit?" dialog.
+    }
+
     private void showBoard () {
         View boardView = findViewById(R.id.board);
         for (int i = 0; i < 81; i++) {
