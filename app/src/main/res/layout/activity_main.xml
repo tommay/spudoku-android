@@ -123,17 +123,11 @@
        circles.  -->
 
   <LinearLayout
+      android:id="@+id/bottom_row"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:orientation="horizontal"
-      android:layout_gravity="center">
-    <LinearLayout
-        android:id="@+id/bottom_row"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-    </LinearLayout>
-  </LinearLayout>
+      android:layout_gravity="center"/>
 
   <!-- The hint.  -->
 
