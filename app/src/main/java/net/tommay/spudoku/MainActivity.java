@@ -201,6 +201,12 @@ public class MainActivity
         hideProgressBar();
     }
 
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState)  {
+        super.onPostCreate(savedInstanceState);
+        Log.i("Spudoku", "onPostCreate");
+    }
+
     private void setPuzzle(RawPuzzle rawPuzzle) {
         _rawPuzzle = rawPuzzle;
         _puzzle = newPuzzle(_rawPuzzle);
@@ -235,30 +241,61 @@ public class MainActivity
     protected void onResume() {
         super.onResume();
         Log.i("Spudoku", "onResume");
+        logCircleSize();
 
         showBoard();
         clearHint();
+        maybeCreateBottomRow();
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        Log.i("Spudoku", "onPostResume");
+        logCircleSize();
+    }
+
+    private void logCircleSize() {
+        View boardView = findViewById(R.id.board);
+        ImageView firstCellView =
+            (ImageView) boardView.findViewWithTag("0");
+        int width = firstCellView.getWidth();
+        int height = firstCellView.getHeight();
+        Log.i("Spudoku", "circle is " + width + " x " + height);
     }
 
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
+        Log.i("Spudoku", "onWindowFocusChanged");
+        logCircleSize();
+        maybeCreateBottomRow();
+    }
 
+    private void maybeCreateBottomRow () {
         // If we haven't yet created the circles in the bottom row, do
-        // it now.  We wait until onWindowFocusChanged because that's
-        // when we know the initial layout has been done and we can
-        // get the size of things.
+        // it now.  But only create it if we're called at a time when
+        // the board's view has been layed out do its circles' size is
+        // non-zero.  Usually this is when we're called from
+        // onWindowFocusChanged, but when switching from multi-window
+        // to single window it is when we're called from onResume.
+        // XXX Should probably use OnGlobalLayoutListener to do this right:
+        // https://stackoverflow.com/questions/8170915/getheight-returns-0-for-all-android-ui-objects
+
+        // Get the size of the first circle on the board.
+
+        View boardView = findViewById(R.id.board);
+        ImageView firstCellView =
+            (ImageView) boardView.findViewWithTag("0");
+        int width = firstCellView.getWidth();
+        int height = firstCellView.getHeight();
+
+        // Add the circles tp the bottom_row layout if we haven't
+        // already and if the board has been laid out so we get a
+        // valid circle width.
 
         LinearLayout layout = (LinearLayout) findViewById(R.id.bottom_row);
 
-        if (layout.getChildCount() == 1) {
-            // Get the size of the first circle on the board.
-
-            View boardView = findViewById(R.id.board);
-            ImageView firstCellView =
-                (ImageView) boardView.findViewWithTag("0");
-            int width = firstCellView.getWidth();
-            int height = firstCellView.getHeight();
-
+        if (layout.getChildCount() == 1 && width != 0) {
             // Get the first/only circle in the row and set its size.
 
             ImageView iv = (ImageView) layout.getChildAt(0);
@@ -308,29 +345,29 @@ public class MainActivity
 
                 View.OnTouchListener listener =
                     new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        Log.i("Spudoku", "view: " + v + " digit: " + digit);
-                        if (havePuzzle() &&
-                            event.getActionMasked() == MotionEvent.ACTION_DOWN)
-                        {
-                            // Just pass the digit via the local state.
-                            // XXX This method was deprecated in API
-                            // level 24.  Use startDragAndDrop() for
-                            // newer platform versions.
-                            v.startDrag(
-                                null, // data
-                                new CircleDragShadowBuilder(
-                                    (ImageView)v, _colors[digit]),
-                                new Integer(digit),
-                                0); // flags
-                            return true;
+                        @Override
+                        public boolean onTouch(View v, MotionEvent event) {
+                            Log.i("Spudoku", "view: " + v + " digit: " + digit);
+                            if (havePuzzle() &&
+                                event.getActionMasked() == MotionEvent.ACTION_DOWN)
+                                {
+                                    // Just pass the digit via the local state.
+                                    // XXX This method was deprecated in API
+                                    // level 24.  Use startDragAndDrop() for
+                                    // newer platform versions.
+                                    v.startDrag(
+                                        null, // data
+                                        new CircleDragShadowBuilder(
+                                            (ImageView)v, _colors[digit]),
+                                        new Integer(digit),
+                                        0); // flags
+                                    return true;
+                                }
+                            else {
+                                return false;
+                            }
                         }
-                        else {
-                            return false;
-                        }
-                    }
-                };
+                    };
 
                 view.setOnTouchListener(listener);
             }
