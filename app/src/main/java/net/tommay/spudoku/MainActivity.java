@@ -296,20 +296,18 @@ public class MainActivity
 
         LinearLayout layout = (LinearLayout) findViewById(R.id.bottom_row);
 
-        if (layout.getChildCount() == 1 && width != 0) {
-            // Get the first/only circle in the row and set its size.
+        if (layout.getChildCount() == 0 && width != 0) {
+            // Add a circle for each color by inflating a circle
+            // layout and setting its size to match he circles on the
+            // board.
 
-            ImageView iv = (ImageView) layout.getChildAt(0);
-            LinearLayout.LayoutParams layoutParams =
-                (LinearLayout.LayoutParams) iv.getLayoutParams();
-            layoutParams.width = width;
-            layoutParams.height = height;
-
-            // Add a circle for each color.
-
-            for (int i = 1; i < _colors.length; i++) {
-                ImageView newIv = copyImageView(iv);
-                layout.addView(newIv);
+            for (int i = 0; i < _colors.length; i++) {
+                ImageView iv = (ImageView)
+                    getLayoutInflater().inflate(R.layout.circles, null);
+                LinearLayout.LayoutParams layoutParams =
+                    new LinearLayout.LayoutParams(width, height);
+                iv.setLayoutParams(layoutParams);
+                layout.addView(iv);
             }
 
             layout.requestLayout();
@@ -373,25 +371,6 @@ public class MainActivity
                 view.setOnTouchListener(listener);
             }
         }
-    }
-
-    private ImageView copyImageView(ImageView iv) {
-        // ImageView isn't cloneable, so the android platform
-        // developers have put the burden on us to copy the relevant
-        // stuff.  Hopefully this is correct, now and in the future.
-        // Thanks Android platform developers.
-
-        ImageView newIv = new ImageView(iv.getContext());
-        // Need this incantation to get a new Drawable so the color
-        // can be changed without changing all the other circles.
-        newIv.setImageDrawable(
-             iv.getDrawable().getConstantState().newDrawable());
-        newIv.setScaleType(iv.getScaleType());
-        newIv.setPadding(iv.getPaddingLeft(), iv.getPaddingTop(),
-            iv.getPaddingRight(), iv.getPaddingBottom());
-        newIv.setLayoutParams(iv.getLayoutParams());
-
-        return newIv;
     }
 
     // Called before onStop, either before or after onPause.

@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!-- This ImageView is inflated and nine copies, one for each color,
+     are added to bottom_row in maybeCreateBottomRow().  The size here
+     dodesn't matter; maybeCreateBottomRow will make them all the
+     same size as the board ImageViews.  -->
+<!-- Padding reduces the size of the circles, margin increases the
+     spacing.  These are tweaked to where I like the look.  -->
+
 <ImageView
     xmlns:android='http://schemas.android.com/apk/res/android'
     android:layout_width="wrap_content"

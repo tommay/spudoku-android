@@ -117,25 +117,21 @@
       android:visibility="gone"
       style="@android:style/Widget.ProgressBar.Horizontal" />
 
-  <!-- A row of colored circles, centered horizontally.  -->
+  <!-- A row of colored circles, centered horizontally.  The circles
+       are added by maybeCreateBottomRow which inflates them from
+       layout/circles.xml and sets their size to match the board
+       circles.  -->
 
   <LinearLayout
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:orientation="horizontal"
       android:layout_gravity="center">
-    <!-- There's no way I'm writing out nine ImageViews here.  So I just
-	 make one and clone the rest in MainActivity.java.
-	 The size here dodesn't matter.  MainActivity#onResume will
-         make them all the same size as the board ImageViews.  -->
-    <!-- Padding reduces the size of the circles, margin increases the
-         spacing.  These are tweaked to where I like the look.  -->
     <LinearLayout
         android:id="@+id/bottom_row"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-      <include layout="@layout/circles"/>
     </LinearLayout>
   </LinearLayout>
 
