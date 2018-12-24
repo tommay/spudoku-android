@@ -87,11 +87,12 @@ public class MainActivity
 
     // Context-dependent "constants".
 
-    // This comes from main/res/values/colors.xml.  We have to wait to
-    // get it until this object has been constructed to give us a
-    // Context for accessing resources.
+    // Colors are defined in main/res/values/colors.xml.  We have to
+    // wait to get them until this object has been constructed to give
+    // us a Context for accessing resources.
 
     private int _emptyCellColor;
+    private int _noPuzzleCellColor;
 
     // Map from difficulty + layout names to the PuzzleSupplier for that
     // combination.  To fill the Map in we need our Context.
@@ -121,10 +122,11 @@ public class MainActivity
 
         setContentView(R.layout.activity_main);
 
-        // Initialize Context-dependent _emptyCellColor.
+        // Get Context-dependent colors resources.
 
         Resources res = getResources();
-        _emptyCellColor = res.getColor(R.color.emptyCell);
+        _emptyCellColor = res.getColor(R.color.empty_cell);
+        _noPuzzleCellColor = res.getColor(R.color.no_puzzle_cell);
 
         // If configured in build.gradle, log puzzle create times to
         // /data/data/net.tommay.spudoku/files/<CREATE_LOG>.
@@ -411,12 +413,22 @@ public class MainActivity
     }
 
     private void showBoard () {
-        if (_puzzle != null) {
-            View boardView = findViewById(R.id.board);
-            for (int i = 0; i < 81; i++) {
-                ImageView cellView =
-                    (ImageView)boardView.findViewWithTag(Integer.toString(i));
+        View boardView = findViewById(R.id.board);
+        for (int i = 0; i < 81; i++) {
+            ImageView cellView =
+                (ImageView)boardView.findViewWithTag(Integer.toString(i));
+            if (_puzzle != null) {
                 showCell(cellView, _puzzle.getCell(i));
+            }
+            else {
+                // The circles never initialize to the correct color.
+                // They are either all gray or, especially when the
+                // app is exited and onDestroy is called then the app
+                // is restarted within about five seconds, they are
+                // all the same color llike red, blue, purple, etc.
+                // So if we don't have a puzzle then explicitly use
+                // _noPuzzleCellColor.
+                setCircleColor(cellView, _noPuzzleCellColor);
             }
         }
     }

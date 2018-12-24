@@ -3,5 +3,11 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="emptyCell">#FFFFFF</color>
+
+    <!-- Empty puzzle cells (not placed) use this color.  -->
+    <color name="empty_cell">#FFFFFF</color>
+
+    <!-- When there is no puzzle (i.e., New has not been clicked) the
+	 puzzle cells use this color.  -->
+    <color name="no_puzzle_cell">#C0C0C0</color>
 </resources>

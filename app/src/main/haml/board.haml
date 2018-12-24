@@ -17,15 +17,17 @@
         android:orientation="horizontal"      |
         android:weightSum="3")                |
       - 3.times do |col|
-        %LinearLayout(                             |
-            android:background="#D0D0D0"           |
-            android:layout_width="0dp"             |
-            android:layout_height="match_parent"   |
-            android:layout_weight="1"              |
-            android:layout_margin="2dp"            |
-            android:padding="2dp"                  |
-            android:orientation="vertical"         |
-            android:weightSum="3")                 |
+        -# It doesn't actually work to set the color here. so it is set
+        -# in onCreate().
+        %LinearLayout(                                 |
+            android:background="@color/no_puzzle_cell" |
+            android:layout_width="0dp"                 |
+            android:layout_height="match_parent"       |
+            android:layout_weight="1"                  |
+            android:layout_margin="2dp"                |
+            android:padding="2dp"                      |
+            android:orientation="vertical"             |
+            android:weightSum="3")                     |
           - 3.times do |sub_row|
             %LinearLayout(                           |
                 android:layout_width="match_parent"  |
