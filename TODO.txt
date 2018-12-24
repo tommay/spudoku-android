@@ -7,7 +7,6 @@ When switching from multiwindow to singkewindow the widget layout becomes
   vertically.  The layout doesn't work in multiwindow anyway.
 Pressing the back button and reselecting the app doesn't restore the
   puzzle, and often colors the board circles the same color.
-When the back button is pressed put up a "Do you want to exit?" dialog.
 
 -----
 

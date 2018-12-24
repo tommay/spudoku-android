@@ -8,6 +8,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.LightingColorFilter;
@@ -415,9 +417,35 @@ public class MainActivity
     @Override
     public void onBackPressed () {
         Log.i("Spudoku", "onBackPressed");
-        // Don't do anything.  The default is to exit the app, but then
-        // the puzzle gets lost.
-        // XXX It would be better to put up a "Do you want to exit?" dialog.
+
+        if (!havePuzzle()) {
+            // There is no puzzle to worry about losing so just bail.
+            super.onBackPressed();
+            return;
+        }
+
+        String appName = getResources().getString(R.string.app_name);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder
+            .setMessage("Do you want to exit " + appName + "?\n" +
+                "This puzzle will be lost forever.")
+            .setNegativeButton("Definitely not",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        // Don't do anything, ignore the back press.
+                    }
+                })
+            .setPositiveButton("Yes, exit",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        MainActivity.super.onBackPressed();
+                    }
+                })
+            .show();
     }
 
     private void showBoard () {
