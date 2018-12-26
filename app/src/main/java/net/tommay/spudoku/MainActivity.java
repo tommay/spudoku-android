@@ -113,6 +113,11 @@ public class MainActivity
     private Puzzle _puzzle = null;
     private Showing _showing;
 
+    // Count of the colors placed.  Thsi is used to decide whether to display
+    // a confirmation dialog when New is clicked.
+
+    private int _placedCount;
+
     // Count of the colors remaining to be placed.
 
     private final int[] _colorCounts = new int[9];
@@ -214,6 +219,8 @@ public class MainActivity
     private void setPuzzle(RawPuzzle rawPuzzle) {
         _rawPuzzle = rawPuzzle;
         _puzzle = newPuzzle(_rawPuzzle);
+
+        _placedCount = 0;
 
         // Set _colorCounts to the number of colors remaining, i.e.,
         // not placed in the puzzle.
@@ -536,6 +543,7 @@ public class MainActivity
 
         Integer digitAfter = cell.getPlacedDigit();
         if (digitBefore == null && digitAfter != null) {
+            _placedCount++;
             _colorCounts[digitAfter]--;
             if (_colorCounts[digitAfter] == 0) {
                 _colorViews[digitAfter].setVisibility(View.INVISIBLE);
@@ -545,6 +553,7 @@ public class MainActivity
             if (_colorCounts[digitBefore] == 0) {
                 _colorViews[digitBefore].setVisibility(View.VISIBLE);
             }
+            _placedCount--;
             _colorCounts[digitBefore]++;
         }
 
@@ -575,9 +584,42 @@ public class MainActivity
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createNewPuzzle();
+                newWasClicked();
             }
         });
+    }
+
+    private void newWasClicked() {
+        if (_placedCount == 0) {
+            // Nothing is placed, no partially solved puzzle to
+            // abandon, just go ahead and make a new one.
+            createNewPuzzle();
+            return;
+        }
+
+        // There is a partially completed puzzle.  Put up a confirm
+        // dialog.
+            
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder
+            .setMessage("Do you want to abandon this puzzle and create" +
+                " a new one?")
+            .setNegativeButton("No, keep this one",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        // Don't do anything, ignore this press.
+                    }
+                })
+            .setPositiveButton("Yes, create a new one",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        createNewPuzzle();
+                    }
+                })
+            .show();
     }
 
     private void enableNewButtonAfterDelay() {
