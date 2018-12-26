@@ -427,9 +427,7 @@ public class MainActivity
 
         String appName = getResources().getString(R.string.app_name);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        builder
+        new AlertDialog.Builder(this)
             .setMessage("Do you want to exit " + appName + "?\n" +
                 "This puzzle will be lost forever.")
             .setNegativeButton("Definitely not",
@@ -582,9 +580,7 @@ public class MainActivity
         // There is a partially completed puzzle.  Put up a confirm
         // dialog.
             
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        builder
+        new AlertDialog.Builder(this)
             .setMessage("Do you want to abandon this puzzle and create" +
                 " a new one?")
             .setNegativeButton("No, keep this one",

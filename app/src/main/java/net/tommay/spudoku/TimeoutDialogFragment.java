@@ -30,15 +30,13 @@ public class TimeoutDialogFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder =
-            new AlertDialog.Builder(getActivity());
-        builder
+        return new AlertDialog.Builder(getActivity())
             .setMessage("Puzzle creation is taking a long time.")
             .setNegativeButton("Keep going",
                 (DialogInterface dialog, int id) -> _listener.keepGoing())
             .setPositiveButton("Give up",
-                (DialogInterface dialog, int id) -> _listener.giveUp());
-        return builder.create();
+                (DialogInterface dialog, int id) -> _listener.giveUp())
+            .create();
     }
 
     // Override the Fragment.onAttach() method to set _listener.
