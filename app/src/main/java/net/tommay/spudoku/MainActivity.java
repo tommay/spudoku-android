@@ -353,33 +353,27 @@ public class MainActivity
                 // Use a touch listener instead of a long click listener
                 // to make the drag shadow appear immediately.
 
-                View.OnTouchListener listener =
-                    new View.OnTouchListener() {
-                        @Override
-                        public boolean onTouch(View v, MotionEvent event) {
-                            Log.i("Spudoku", "view: " + v + " digit: " + digit);
-                            if (havePuzzle() &&
-                                event.getActionMasked() == MotionEvent.ACTION_DOWN)
-                                {
-                                    // Just pass the digit via the local state.
-                                    // XXX This method was deprecated in API
-                                    // level 24.  Use startDragAndDrop() for
-                                    // newer platform versions.
-                                    v.startDrag(
-                                        null, // data
-                                        new CircleDragShadowBuilder(
-                                            (ImageView)v, _colors[digit]),
-                                        new Integer(digit),
-                                        0); // flags
-                                    return true;
-                                }
-                            else {
-                                return false;
-                            }
+                view.setOnTouchListener((View v, MotionEvent event) -> {
+                    Log.i("Spudoku", "view: " + v + " digit: " + digit);
+                    if (havePuzzle() &&
+                        event.getActionMasked() == MotionEvent.ACTION_DOWN)
+                        {
+                            // Just pass the digit via the local state.
+                            // XXX This method was deprecated in API
+                            // level 24.  Use startDragAndDrop() for
+                            // newer platform versions.
+                            v.startDrag(
+                                null, // data
+                                new CircleDragShadowBuilder(
+                                    (ImageView)v, _colors[digit]),
+                                new Integer(digit),
+                                0); // flags
+                            return true;
                         }
-                    };
-
-                view.setOnTouchListener(listener);
+                    else {
+                        return false;
+                    }
+                });
             }
         }
     }
@@ -439,19 +433,12 @@ public class MainActivity
             .setMessage("Do you want to exit " + appName + "?\n" +
                 "This puzzle will be lost forever.")
             .setNegativeButton("Definitely not",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        // Don't do anything, ignore the back press.
-                    }
+                (DialogInterface dialog, int id) -> {
+                    /* Just ignore the back press. */
                 })
             .setPositiveButton("Yes, exit",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        MainActivity.super.onBackPressed();
-                    }
-                })
+                (DialogInterface dialog, int id) ->
+                    MainActivity.super.onBackPressed())
             .show();
     }
 
@@ -581,12 +568,7 @@ public class MainActivity
         Button button = (Button) findViewById(R.id.button_new);
         button.setText("New");
         button.setEnabled(true);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                newWasClicked();
-            }
-        });
+        button.setOnClickListener((View v) -> newWasClicked());
     }
 
     private void newWasClicked() {
@@ -606,19 +588,9 @@ public class MainActivity
             .setMessage("Do you want to abandon this puzzle and create" +
                 " a new one?")
             .setNegativeButton("No, keep this one",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        // Don't do anything, ignore this press.
-                    }
-                })
+                (DialogInterface dialog, int id) -> {/* Ignore this press. */})
             .setPositiveButton("Yes, create a new one",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        createNewPuzzle();
-                    }
-                })
+                (DialogInterface dialog, int id) -> createNewPuzzle())
             .show();
     }
 
@@ -647,13 +619,10 @@ public class MainActivity
         final Button button = (Button) findViewById(R.id.button_new);
         button.setText("Cancel");
         button.setEnabled(true);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i("Spudoku", "canceling");
-                handle.cancel();
-                button.setEnabled(false);
-            }
+        button.setOnClickListener((View v) -> {
+            Log.i("Spudoku", "canceling");
+            handle.cancel();
+            button.setEnabled(false);
         });
     }
 
@@ -708,40 +677,31 @@ public class MainActivity
         final AsyncCreater.Handle handle = AsyncCreater.<RawPuzzle>create(
             new WithTimeout(puzzleSupplier, 30000L),
 
-            new Callback<RawPuzzle>() {
-                @Override
-                public void call(RawPuzzle rawPuzzle) {
-                    setPuzzle(rawPuzzle);
-                    showPlaced();
-                    showColors();
-                    enableButtons(true);
-                    enableNewButtonAfterDelay();
-                    hideProgressBar();
-                }
+            (RawPuzzle rawPuzzle) -> {
+                setPuzzle(rawPuzzle);
+                showPlaced();
+                showColors();
+                enableButtons(true);
+                enableNewButtonAfterDelay();
+                hideProgressBar();
             },
 
             // When the cancel button is clicked the supplier is
             // interrupted and wraps up and finishes (by throwing an
             // Exception), then this is called.
-            new Callback<Void>() {
-                @Override
-                public void call(Void v) {
-                    enableButtons(true);
-                    enableNewButton();
-                    hideProgressBar();
-                }
+            (Void v) -> {
+                enableButtons(true);
+                enableNewButton();
+                hideProgressBar();
             },
 
             // Called on timeout.
-            new Callback<Void>() {
-                @Override
-                public void call(Void v) {
-                    // The dialog calls actions on this Activity via
-                    // the TimeoutDialogFragment.Listener interfacee.
-                    new TimeoutDialogFragment().show(
-                        getSupportFragmentManager(),
-                        "TimeoutDialogFragment");
-                }
+            (Void v) -> {
+                // The dialog calls actions on this Activity via
+                // the TimeoutDialogFragment.Listener interfacee.
+                new TimeoutDialogFragment().show(
+                    getSupportFragmentManager(),
+                    "TimeoutDialogFragment");
             });
 
         // Disable the buttons until we have a puzzle.  They are

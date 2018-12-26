@@ -35,19 +35,9 @@ public class TimeoutDialogFragment extends DialogFragment {
         builder
             .setMessage("Puzzle creation is taking a long time.")
             .setNegativeButton("Keep going",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        _listener.keepGoing();
-                    }
-                })
+                (DialogInterface dialog, int id) -> _listener.keepGoing())
             .setPositiveButton("Give up",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        _listener.giveUp();
-                    }
-                });
+                (DialogInterface dialog, int id) -> _listener.giveUp());
         return builder.create();
     }
 

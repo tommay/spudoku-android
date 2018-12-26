@@ -3,12 +3,18 @@ package net.tommay.spudoku;
 import net.tommay.spudoku.Creater;
 
 enum PuzzleCreater {
-    EasyPeasy("EasyPeasy", new IPuzzleCreater.EasyPeasy()),
-    Easy("Easy", new IPuzzleCreater.Easy()),
-    Medium("Medium", new IPuzzleCreater.Medium()),
-    Tricky("Tricky", new IPuzzleCreater.Tricky()),
-    Vicious("Vicious", new IPuzzleCreater.Vicious()),
-    Wicked("Wicked", new IPuzzleCreater.Wicked());
+    EasyPeasy("EasyPeasy", (int seed, String layoutName) ->
+        { return Creater.createEasyPeasy(seed, layoutName); }),
+    Easy("Easy", (int seed, String layoutName) ->
+        { return Creater.createEasy(seed, layoutName); }),
+    Medium("Medium", (int seed, String layoutName) ->
+        { return Creater.createMedium(seed, layoutName); }),
+    Tricky("Tricky", (int seed, String layoutName) ->
+        { return Creater.createTricky(seed, layoutName); }),
+    Vicious("Vicious", (int seed, String layoutName) ->
+        { return Creater.createVicious(seed, layoutName); }),
+    Wicked("Wicked", (int seed, String layoutName) ->
+        { return Creater.createWicked(seed, layoutName); });
 
     final String name;
     private final IPuzzleCreater puzzleCreater;
@@ -27,59 +33,5 @@ enum PuzzleCreater {
     private interface IPuzzleCreater {
         public RawPuzzle create(int seed, String layoutName)
             throws InterruptedException;
-
-        public class EasyPeasy implements IPuzzleCreater {
-            @Override
-            public RawPuzzle create(int seed, String layoutName)
-                throws InterruptedException
-            {
-                return Creater.createEasyPeasy(seed, layoutName);
-            }
-        }
-
-        public class Easy implements IPuzzleCreater {
-            @Override
-            public RawPuzzle create(int seed, String layoutName)
-                throws InterruptedException
-            {
-                return Creater.createEasy(seed, layoutName);
-            }
-        }
-
-        public class Medium implements IPuzzleCreater {
-            @Override
-            public RawPuzzle create(int seed, String layoutName)
-                throws InterruptedException
-            {
-                return Creater.createMedium(seed, layoutName);
-            }
-        }
-
-        public class Tricky implements IPuzzleCreater {
-            @Override
-            public RawPuzzle create(int seed, String layoutName)
-                throws InterruptedException
-            {
-                return Creater.createTricky(seed, layoutName);
-            }
-        }
-
-        public class Vicious implements IPuzzleCreater {
-            @Override
-            public RawPuzzle create(int seed, String layoutName)
-                throws InterruptedException
-            {
-                return Creater.createVicious(seed, layoutName);
-            }
-        }
-
-        public class Wicked implements IPuzzleCreater {
-            @Override
-            public RawPuzzle create(int seed, String layoutName)
-                throws InterruptedException
-            {
-                return Creater.createWicked(seed, layoutName);
-            }
-        }
     }
 }
