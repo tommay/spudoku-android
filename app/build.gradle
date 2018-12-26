@@ -7,7 +7,9 @@ repositories {
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "25.0.0"
+    // This is no longer necessary.  Each version of the Android Gradle
+    // Plugin now has a default version of the build tools.
+    // buildToolsVersion "25.0.0"
 
     // If buildConfigField CREATE_LOG is non-null then puzzle creation times
     // will be logged to /data/data/net.tommay.spudoku/files/<CREATE_LOG>,
