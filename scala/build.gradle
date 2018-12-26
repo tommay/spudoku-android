@@ -7,8 +7,13 @@ repositories {
     jcenter()
 }
 
+// I updated scala from 2.11.8 to 2.11.12 (the latest 2.11, from 12/2017)
+// and everything built and worked fine.  Updating to 2.12.8 built fine
+// but got a java veriier error at runtime.  2.13.0-M5 (from 8/2018) had
+// ProGuard errors I couldn't get rid of.  So 2.11.12 is staying.
+
 dependencies {
-    compile 'org.scala-lang:scala-library:2.11.8'
+    compile 'org.scala-lang:scala-library:2.11.12'
 }
 
 compileScala {
