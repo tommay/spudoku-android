@@ -35,15 +35,15 @@ case "$target" in
       -digestalg SHA1 \
       -keystore $KEYSTORE \
       -storepass android \
-      app/build/outputs/apk/app-dev-unsigned.apk \
+      app/build/outputs/apk/dev/app-dev-unsigned.apk \
       androiddebugkey &&
     adb install -r \
-      app/build/outputs/apk/app-dev-unsigned.apk
+      app/build/outputs/apk/dev/app-dev-unsigned.apk
     ;;
   debug)
     gradle assembleDebug &&
     adb install -r \
-      app/build/outputs/apk/app-debug.apk
+      app/build/outputs/apk/debug/app-debug.apk
     ;;
   *)
     echo "usage: $0 dev|debug"
