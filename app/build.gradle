@@ -2,10 +2,11 @@ apply plugin: 'com.android.application'
 
 repositories {
    jcenter()
+   google()
 }
 
 android {
-    compileSdkVersion 25
+    compileSdkVersion 26
     buildToolsVersion "25.0.0"
 
     // If buildConfigField CREATE_LOG is non-null then puzzle creation times
@@ -22,7 +23,7 @@ android {
         buildConfigField "String", "CREATE_LOG", "null"
 
         minSdkVersion 15
-        targetSdkVersion 25
+        targetSdkVersion 26
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
