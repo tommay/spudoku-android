@@ -14,6 +14,7 @@ PATH=~/android-studio/jre/bin:"$PATH"
 
 if [ "$1" ]; then
   target="$1"
+  shift
 else
   target=debug
 fi
@@ -29,7 +30,7 @@ case "$target" in
         -dname "CN=Android Debug,O=Android,C=US"
     fi
 
-    gradle assembleDev &&
+    gradle "$@" assembleDev &&
     jarsigner \
       -sigalg SHA1withRSA \
       -digestalg SHA1 \
@@ -41,7 +42,7 @@ case "$target" in
       app/build/outputs/apk/dev/app-dev-unsigned.apk
     ;;
   debug)
-    gradle assembleDebug &&
+    gradle "$@" assembleDebug &&
     adb install -r \
       app/build/outputs/apk/debug/app-debug.apk
     ;;
