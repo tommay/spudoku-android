@@ -27,7 +27,8 @@ case "$target" in
       keytool -genkey -v -keystore $KEYSTORE \
         -alias androiddebugkey -storepass android -keypass android \
         -keyalg RSA -keysize 2048 -validity 10000 \
-        -dname "CN=Android Debug,O=Android,C=US"
+        -dname "CN=Android Debug,O=Android,C=US" \
+        -deststoretype pkcs12
     fi
 
     gradle "$@" assembleDev &&
