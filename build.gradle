@@ -6,6 +6,10 @@ buildscript {
         google()
     }
     dependencies {
+        // Find the latest Android gradle plugin info at
+        // https://developer.android.com/studio/releases/gradle-plugin.
+	// And
+        // https://mvnrepository.com/artifact/com.android.tools.build/gradle?repo=google
         classpath 'com.android.tools.build:gradle:3.2.1'
 
         // NOTE: Do not place your application dependencies here; they belong
