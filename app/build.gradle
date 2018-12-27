@@ -1,10 +1,5 @@
 apply plugin: 'com.android.application'
 
-repositories {
-   jcenter()
-   google()
-}
-
 android {
     compileSdkVersion 26
     // This is no longer necessary.  Each version of the Android Gradle
