@@ -30,18 +30,18 @@ android {
         // minifyEnabled method isn't available there.
         dev {
             minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro', 'scala.pro'
         }
         debug {
             // Create puzzles with a consistent seed and log create times to
             // /data/data/net.tommay.spudoku/files/create.log.
             buildConfigField "String", "CREATE_LOG", '"create.log"'
             minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro', 'scala.pro'
         }
         release {
             minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro', 'scala.pro'
         }
     }
 
