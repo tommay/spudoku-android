@@ -52,6 +52,15 @@ public class MainActivity
     extends AppCompatActivity
     implements TimeoutDialogFragment.Listener
 {
+    // The release buid for publishing should not have log statements.
+    // They can be removed by ProGuard, ut that requires optimization
+    // to be turned on which breaks things.  So ise the low-tech
+    // approach and check a boolean when logging.  The code is uglier,
+    // but it always works.
+
+    private static final boolean LOG = net.tommay.spudoku.Log.LOG;
+    private static final String TAG = net.tommay.spudoku.Log.TAG;
+
     private enum Showing {
         SETUP, SOLVED, PLACED,
     };
@@ -125,7 +134,7 @@ public class MainActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i("Spudoku", "onCreate");
+        if (LOG) Log.i(TAG, "onCreate");
 
         setContentView(R.layout.activity_main);
 
@@ -200,7 +209,7 @@ public class MainActivity
             String puzzle = savedInstanceState.getString(KEY_PUZZLE);
             String solution = savedInstanceState.getString(KEY_SOLUTION);
             if (puzzle != null && solution != null) {
-                Log.i("Spudoku", "restoring from bundle");
+                if (LOG) Log.i(TAG, "restoring from bundle");
                 setPuzzle(new RawPuzzle(puzzle, solution));
             }
         }
@@ -213,7 +222,7 @@ public class MainActivity
     @Override
     protected void onPostCreate(Bundle savedInstanceState)  {
         super.onPostCreate(savedInstanceState);
-        Log.i("Spudoku", "onPostCreate");
+        if (LOG) Log.i(TAG, "onPostCreate");
     }
 
     private void setPuzzle(RawPuzzle rawPuzzle) {
@@ -239,19 +248,19 @@ public class MainActivity
     @Override
     protected void onStart() {
         super.onStart();
-        Log.i("Spudoku", "onStart");
+        if (LOG) Log.i(TAG, "onStart");
     }
 
     @Override
     protected void onRestoreInstanceState (Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        Log.i("Spudoku", "onRestoreInstanceState");
+        if (LOG) Log.i(TAG, "onRestoreInstanceState");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.i("Spudoku", "onResume");
+        if (LOG) Log.i(TAG, "onResume");
         logCircleSize();
 
         showBoard();
@@ -262,7 +271,7 @@ public class MainActivity
     @Override
     protected void onPostResume() {
         super.onPostResume();
-        Log.i("Spudoku", "onPostResume");
+        if (LOG) Log.i(TAG, "onPostResume");
         logCircleSize();
     }
 
@@ -272,13 +281,13 @@ public class MainActivity
             (ImageView) boardView.findViewWithTag("0");
         int width = firstCellView.getWidth();
         int height = firstCellView.getHeight();
-        Log.i("Spudoku", "circle is " + width + " x " + height);
+        if (LOG) Log.i(TAG, "circle is " + width + " x " + height);
     }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        Log.i("Spudoku", "onWindowFocusChanged");
+        if (LOG) Log.i(TAG, "onWindowFocusChanged");
         logCircleSize();
         maybeCreateBottomRow();
     }
@@ -354,7 +363,7 @@ public class MainActivity
                 // to make the drag shadow appear immediately.
 
                 view.setOnTouchListener((View v, MotionEvent event) -> {
-                    Log.i("Spudoku", "view: " + v + " digit: " + digit);
+                    if (LOG) Log.i(TAG, "view: " + v + " digit: " + digit);
                     if (havePuzzle() &&
                         event.getActionMasked() == MotionEvent.ACTION_DOWN)
                         {
@@ -382,9 +391,9 @@ public class MainActivity
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        Log.i("Spudoku", "onSaveInstanceState");
+        if (LOG) Log.i(TAG, "onSaveInstanceState");
         if (_rawPuzzle != null) {
-            Log.i("Spudoku", "saving state to bundle");
+            if (LOG) Log.i(TAG, "saving state to bundle");
             outState.putString(KEY_PUZZLE, _rawPuzzle.puzzle);
             outState.putString(KEY_SOLUTION, _rawPuzzle.solution);
         }
@@ -393,31 +402,31 @@ public class MainActivity
     @Override
     protected void onPause () {
         super.onPause();
-        Log.i("Spudoku", "onPause");
+        if (LOG) Log.i(TAG, "onPause");
     }
 
     @Override
     protected void onStop () {
         super.onStop();
-        Log.i("Spudoku", "onStop");
+        if (LOG) Log.i(TAG, "onStop");
     }
 
     // Called betweeb onStop and onStart.
     @Override
     protected void onRestart () {
         super.onRestart();
-        Log.i("Spudoku", "onRestart");
+        if (LOG) Log.i(TAG, "onRestart");
     }
 
     @Override
     protected void onDestroy () {
         super.onDestroy();
-        Log.i("Spudoku", "onDestroy");
+        if (LOG) Log.i(TAG, "onDestroy");
     }
 
     @Override
     public void onBackPressed () {
-        Log.i("Spudoku", "onBackPressed");
+        if (LOG) Log.i(TAG, "onBackPressed");
 
         if (!havePuzzle()) {
             // There is no puzzle to worry about losing so just bail.
@@ -505,7 +514,7 @@ public class MainActivity
         }
 
         String tag = (String)cellView.getTag();
-        Log.i("Spudoku", "clicked " + tag);
+        if (LOG) Log.i(TAG, "clicked " + tag);
 
         int n = Integer.parseInt(tag);
         Cell cell = _puzzle.getCell(n);
@@ -616,7 +625,7 @@ public class MainActivity
         button.setText("Cancel");
         button.setEnabled(true);
         button.setOnClickListener((View v) -> {
-            Log.i("Spudoku", "canceling");
+            if (LOG) Log.i(TAG, "canceling");
             handle.cancel();
             button.setEnabled(false);
         });
@@ -657,7 +666,7 @@ public class MainActivity
     // TimeoutDialogFragment.
 
     public void createNewPuzzle() {
-        Log.i("Spudoku", "new");
+        if (LOG) Log.i(TAG, "new");
 
         // Retrieve the selected layout from the layout spinner, and get
         // the corresponding puzzleSupplier.
@@ -739,7 +748,7 @@ public class MainActivity
     // The setup button was clicked.  Show the setup colors.
 
     public void clickSetup(View view) {
-        Log.i("Spudoku", "setup");
+        if (LOG) Log.i(TAG, "setup");
 
         if (_showing != Showing.SETUP) {
             showSetup();
@@ -753,7 +762,7 @@ public class MainActivity
     // and the solved state.
 
     public void clickSolved(View view) {
-        Log.i("Spudoku", "solved");
+        if (LOG) Log.i(TAG, "solved");
 
         if (_showing != Showing.SOLVED) {
             showSolved();
@@ -898,12 +907,12 @@ public class MainActivity
             // Make the Drawable scale up to the size we want.
             drawable.setBounds(0, 0, width, height);
             setCircleColor((GradientDrawable)drawable, color);
-            Log.i("Spudoku", "width: " + width + " height: " + height);
+            if (LOG) Log.i(TAG, "width: " + width + " height: " + height);
         }
 
         @Override
         public void onProvideShadowMetrics (Point size, Point touch) {
-            Log.i("Spudoku", "onProvideShadowMetrics");
+            if (LOG) Log.i(TAG, "onProvideShadowMetrics");
             size.set(width, height);
             touch.set(width / 2, height * 5 / 8);
         }
@@ -913,7 +922,7 @@ public class MainActivity
         // onProvideShadowMetrics().
         @Override
         public void onDrawShadow(Canvas canvas) {
-            Log.i("Spudoku", "onDrawShadow");
+            if (LOG) Log.i(TAG, "onDrawShadow");
             drawable.draw(canvas);
         }
     }
@@ -938,14 +947,14 @@ public class MainActivity
               case DragEvent.ACTION_DROP:
                 int digit = (Integer)event.getLocalState();
                 int solvedDigit = _puzzle.getCell(cellNumber).getSolvedDigit();
-                Log.i("Spudoku", cellNumber + " got " + digit);
+                if (LOG) Log.i(TAG, cellNumber + " got " + digit);
                 if (digit == solvedDigit) {
-                    Log.i("Spudoku", cellNumber + " got " + digit + ", ok");
+                    if (LOG) Log.i(TAG, cellNumber + " got " + digit + ", ok");
                     clicked(v);
                     return true;    // Success, not that it matters.
                 }
                 else {
-                    Log.i("Spudoku", cellNumber + " got " + digit +
+                    if (LOG) Log.i(TAG, cellNumber + " got " + digit +
                         " not " + solvedDigit);
                     return false;
                 }

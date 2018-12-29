@@ -6,6 +6,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.TimeoutException;
 
 import net.tommay.util.Callback;
+import net.tommay.spudoku.Log;
 
 // https://developer.android.com/reference/android/os/AsyncTask.html
 
@@ -28,7 +29,10 @@ class AsyncCreater<T> {
                     return supplier.call();
                 }
                 catch (InterruptedException ex) {
-                    android.util.Log.i("Spudoku", "doInBackground interrupted");
+                    if (Log.LOG) {
+                        android.util.Log.i(Log.TAG,
+                            "doInBackground interrupted");
+                    }
                     // We were cancelled.  The return value isn't used.
                     return null;
                 }
