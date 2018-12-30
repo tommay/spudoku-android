@@ -22,12 +22,14 @@ android {
         versionCode 1
         versionName "1.0"
 
-        buildConfigField "String", "CREATE_LOG", "null"
+	// These are automagically put into AndroidManifest.xml.
 
         minSdkVersion 15
         targetSdkVersion 26
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "CREATE_LOG", "null"
     }
     buildTypes {
         // These things become gradle tasks "assembleDev", etc.
