@@ -109,6 +109,8 @@ dependencies {
 }
 
 // The sudoku Puzzle create etc code is a separate scala or frege project.
+// Build the frege version with "gradle -Pfrege ...".  scala is the default.
+// The frege build is quite broken.
 
 dependencies {
     if (project.hasProperty("frege")) {
