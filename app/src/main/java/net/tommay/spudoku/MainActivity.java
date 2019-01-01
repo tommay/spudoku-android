@@ -104,6 +104,7 @@ public class MainActivity
 
     private int _emptyCellColor;
     private int _noPuzzleCellColor;
+    private int _hintHighlightColor;
 
     // Map from difficulty + layout names to the PuzzleSupplier for that
     // combination.  To fill the Map in we need our Context.
@@ -143,6 +144,7 @@ public class MainActivity
         Resources res = getResources();
         _emptyCellColor = res.getColor(R.color.empty_cell);
         _noPuzzleCellColor = res.getColor(R.color.no_puzzle_cell);
+        _hintHighlightColor = res.getColor(R.color.hint_highlight);
 
         // If configured in build.gradle, log puzzle create times to
         // /data/data/net.tommay.spudoku/files/<CREATE_LOG>.
@@ -838,14 +840,15 @@ public class MainActivity
                 showHint(hint.tjpe.toString() + " (XXX).");
                 break;
             }
-            // if we highlight the row/column for easypeasy then it's
+            // If we highlight the row/column for easypeasy then it's
             // too easy, so don't.
             if (hint.tjpe != Heuristic.EasyPeasy) {
                 View boardView = findViewById(R.id.board);
                 for (int cell : hint.cells) {
                     ImageView cellView = (ImageView)
                         boardView.findViewWithTag(Integer.toString(cell));
-                    cellView.setBackgroundColor(0xFF989898);
+                    cellView.setBackgroundColor(
+                        0xFF008000 | _hintHighlightColor);
                 }
             }
         }

@@ -10,4 +10,7 @@
   <!-- When there is no puzzle (i.e., New has not been clicked) the
        puzzle cells use this color.  -->
   <color name="no_puzzle_cell">#C0C0C0</color>
+
+  <!-- Color used to highlight the hint area on the board.  -->
+  <color name="hint_highlight">#989898</color>
 </resources>
