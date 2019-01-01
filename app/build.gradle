@@ -1,5 +1,14 @@
 apply plugin: 'com.android.application'
 
+// The keystore creds for signing the release apk are kept in
+// keystore.properties which is not in version control.  Load
+// the creds into keystoreProperties.  See
+// https://developer.android.com/studio/publish/app-signing#secure-key
+
+def keystoreProperties = new Properties()
+keystoreProperties.load(
+  new FileInputStream(rootProject.file("keystore.properties")))
+
 android {
     compileSdkVersion 26
     // This is no longer necessary.  Each version of the Android Gradle
@@ -31,6 +40,17 @@ android {
 
         buildConfigField "String", "CREATE_LOG", "null"
     }
+
+    signingConfigs {
+        release {
+            // Use the values loaded from secure file "keystore.properties".
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+        }
+    }
+
     buildTypes {
         // These things become gradle tasks "assembleDev", etc.
         // The minify stuff can't go in defaultConfig because the
@@ -47,6 +67,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro', 'scala.pro'
         }
         release {
+            signingConfig signingConfigs.release
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro', 'scala.pro'
         }
