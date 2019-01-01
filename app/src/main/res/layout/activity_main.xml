@@ -59,13 +59,13 @@
         android:id="@+id/button_new"
         android:text="New"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginRight="3dp"
         android:layout_gravity="center_vertical"/>
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="4dp">
+        android:layout_gravity="center">
       <!-- We have to use alignEnd on label_layout instead of on
            label_difficulty because label_difficulty because we have
            to set the end of the shorter label (label_layout) to the
@@ -92,6 +92,8 @@
           android:layout_height="wrap_content"
           android:layout_width="wrap_content"
           android:text="Difficulty: "
+          android:layout_marginTop="2dp"
+          android:layout_marginBottom="1.5dp"
           android:textColor="#282828"/>
       <Spinner
           android:id="@+id/spinner_difficulty"
@@ -126,6 +128,7 @@
       android:id="@+id/bottom_row"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:layout_marginTop="2dp"
       android:orientation="horizontal"
       android:layout_gravity="center"/>
 
@@ -135,6 +138,7 @@
       android:id="@+id/hint_text"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:layout_marginTop="-5dp"
       android:textSize="20sp"
       android:layout_marginLeft="6dp"/>
 
