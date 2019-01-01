@@ -1,3 +1,10 @@
+// Useful build commands:
+//   gradle installDebug
+//   gradle assenbleDebug (build only, no install)
+//   gradle -Pconsistent installDebug
+//   gradle uninstallDebug
+//   gradle installRelease
+
 apply plugin: 'com.android.application'
 
 // The keystore creds for signing the release apk are kept in
@@ -55,14 +62,12 @@ android {
         // These things become gradle tasks "assembleDev", etc.
         // The minify stuff can't go in defaultConfig because the
         // minifyEnabled method isn't available there.
-        dev {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro', 'scala.pro'
-        }
         debug {
-            // Create puzzles with a consistent seed and log create times to
-            // /data/data/net.tommay.spudoku/files/create.log.
-            buildConfigField "String", "CREATE_LOG", '"create.log"'
+            if (project.hasProperty("consistent")) {
+              // Create puzzles with a consistent seed and log create times to
+              // /data/data/net.tommay.spudoku/files/create.log.
+              buildConfigField "String", "CREATE_LOG", '"create.log"'
+            }
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro', 'scala.pro'
         }
