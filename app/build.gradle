@@ -69,11 +69,13 @@ android {
               buildConfigField "String", "CREATE_LOG", '"create.log"'
             }
             minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro', 'scala.pro'
         }
         release {
             signingConfig signingConfigs.release
             minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro', 'scala.pro'
         }
     }
