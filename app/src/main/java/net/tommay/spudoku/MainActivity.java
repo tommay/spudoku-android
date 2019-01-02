@@ -834,7 +834,7 @@ public class MainActivity
                     "There is a tricky " + _colorNames[hint.digit - 1] + ".");
                 break;
               case Guess:
-                showHint("You'll have to guess here.");
+                showHint("I can only guess here.");
                 break;
               default:
                 showHint(hint.tjpe.toString() + " (XXX).");
