@@ -9,3 +9,4 @@
 .externalNativeBuild
 /scala/build
 /frege/build
+keystore.properties
