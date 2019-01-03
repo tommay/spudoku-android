@@ -46,7 +46,9 @@ task compileOne (type: ScalaCompile) {
     source = sourceSets.main.scala.srcDirs
     include 'net/tommay/sudoku/Heuristic.scala'
     classpath = sourceSets.main.compileClasspath
-    destinationDir = sourceSets.main.output.classesDir
+    // gradle 5.0 doesn't seem to have classesDir.  It has classesDirs,
+    // but gradle is too much of an opaque hairball for me to mess with this.
+    // destinationDir = sourceSets.main.output.classesDir
 }
 
 compileOne.options.compilerArgs = ["-sourcepath", "$projectDir/src/main/scala"]
