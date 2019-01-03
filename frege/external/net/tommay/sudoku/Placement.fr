@@ -1,5 +1,0 @@
-module net.tommay.sudoku.Placement where
-
-import net.tommay.sudoku.Digit (Digit)
-
-data Placement = Placement Int Digit

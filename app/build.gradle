@@ -80,20 +80,11 @@ android {
         }
     }
 
-    // Build either the scala glue code or the frege glue code that provides
-    // the java code a uniform API to the scala/frege code.  This is the
-    // only way I could figure out how to do this, by putting it in its own
-    // directory tree and coditionally adding the tree to the main java
-    // sourceSet.
+    // Build the glue code to the scala project.
 
     sourceSets {
         main {
-            if (project.hasProperty("frege")) {
-                java.srcDirs += "glue/frege"
-            }
-            else {
-                java.srcDirs += "glue/scala"
-            }
+            java.srcDirs += "glue/scala"
         }
     }
 
@@ -115,15 +106,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 }
 
-// The sudoku Puzzle create etc code is a separate scala or frege project.
-// Build the frege version with "gradle -Pfrege ...".  scala is the default.
-// The frege build is quite broken.
+// The sudoku Puzzle create etc code is a separate scala project.
 
 dependencies {
-    if (project.hasProperty("frege")) {
-        implementation project(':frege')
-    }
-    else {
-        implementation project(':scala')
-    }
+    implementation project(':scala')
 }
