@@ -367,6 +367,7 @@ public class MainActivity
                 view.setOnTouchListener((View v, MotionEvent event) -> {
                     if (LOG) Log.i(TAG, "view: " + v + " digit: " + digit);
                     if (havePuzzle() &&
+                        _showing == Showing.PLACED &&
                         event.getActionMasked() == MotionEvent.ACTION_DOWN)
                     {
                         // Just pass the digit via the local state.
