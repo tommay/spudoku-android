@@ -32,10 +32,4 @@ class Cell {
             _isPlaced = true;
         }
     }
-
-    void togglePlaced() {
-        if (!_isSetup) {
-            _isPlaced = !_isPlaced;
-        }
-    }
 }

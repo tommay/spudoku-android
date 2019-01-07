@@ -500,57 +500,24 @@ public class MainActivity
         drawable.setColor(0xFF000000 | color);
     }
 
-    // clicked is called from the circle images in
-    // main/res/layout/board.xml.  When a circle is clicked, we toggle
-    // its cell between its setup/solved and placed colors.
-    // This is actually no longer true.  Clicked is called when a color
-    // is dragged from the bottom row.  So it will now be called only
-    // to place a color, not to toggle.  Nevertheless, I'm leaving in
-    // the toggle logic.
+    // place is called when a color clircle is drag/dropped onto this
+    // board circle.
 
-    public void clicked(View cellView) {
-        // XXX Would be better to enable this handler only when we
-        // have a puzzle.
-        if (!havePuzzle()) {
-            return;
-        }
-
+    public void place(View cellView) {
         String tag = (String)cellView.getTag();
-        if (LOG) Log.i(TAG, "clicked " + tag);
+        if (LOG) Log.i(TAG, "place " + tag);
 
         int n = Integer.parseInt(tag);
         Cell cell = _puzzle.getCell(n);
 
-        Integer digitBefore = cell.getPlacedDigit();
+        cell.setPlaced();
+        showCell((ImageView)cellView, cell);
 
-        switch (_showing) {
-          case PLACED:
-            cell.togglePlaced();
-            showCell((ImageView)cellView, cell);
-            break;
-          case SETUP:
-            cell.setPlaced();
-            showPlaced();
-            break;
-          case SOLVED:
-            showPlaced();
-            break;
-        }
+        int digit = cell.getPlacedDigit();
 
-        Integer digitAfter = cell.getPlacedDigit();
-        if (digitBefore == null && digitAfter != null) {
-            _placedCount++;
-            _colorCounts[digitAfter]--;
-            if (_colorCounts[digitAfter] == 0) {
-                _colorViews[digitAfter].setVisibility(View.INVISIBLE);
-            }
-        }
-        else if (digitBefore != null && digitAfter == null) {
-            if (_colorCounts[digitBefore] == 0) {
-                _colorViews[digitBefore].setVisibility(View.VISIBLE);
-            }
-            _placedCount--;
-            _colorCounts[digitBefore]++;
+        _colorCounts[digit]--;
+        if (_colorCounts[digit] == 0) {
+            _colorViews[digit].setVisibility(View.INVISIBLE);
         }
 
         clearHint();
@@ -953,7 +920,7 @@ public class MainActivity
                 if (LOG) Log.i(TAG, cellNumber + " got " + digit);
                 if (digit == solvedDigit) {
                     if (LOG) Log.i(TAG, cellNumber + " got " + digit + ", ok");
-                    clicked(v);
+                    place(v);
                     return true;    // Success, not that it matters.
                 }
                 else {
