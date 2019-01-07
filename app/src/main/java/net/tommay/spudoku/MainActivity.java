@@ -910,25 +910,17 @@ public class MainActivity
             switch (event.getAction()) {
               case DragEvent.ACTION_DRAG_STARTED:
                 // Accept all drags in this Activity, if this cell is
-                // not placed.
-                return !_puzzle.getCell(cellNumber).isPlaced();
+                // not placed and the correct digit/color is being dragged.
+                int digit = (Integer)event.getLocalState();
+                Cell cell = _puzzle.getCell(cellNumber);
+                return !cell.isPlaced() && digit == cell.getSolvedDigit();
               case DragEvent.ACTION_DRAG_ENTERED:
               case DragEvent.ACTION_DRAG_EXITED:
                 return true;    // Ignored.
               case DragEvent.ACTION_DROP:
-                int digit = (Integer)event.getLocalState();
-                int solvedDigit = _puzzle.getCell(cellNumber).getSolvedDigit();
-                if (LOG) Log.i(TAG, cellNumber + " got " + digit);
-                if (digit == solvedDigit) {
-                    if (LOG) Log.i(TAG, cellNumber + " got " + digit + ", ok");
-                    place(v);
-                    return true;    // Success, not that it matters.
-                }
-                else {
-                    if (LOG) Log.i(TAG, cellNumber + " got " + digit +
-                        " not " + solvedDigit);
-                    return false;
-                }
+                if (LOG) Log.i(TAG, cellNumber + " dropped onto");
+                place(v);
+                return true;    // Success, not that it matters.
               case DragEvent.ACTION_DRAG_ENDED:
                 return true;
               default:
