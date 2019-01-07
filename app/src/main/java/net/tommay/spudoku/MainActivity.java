@@ -368,19 +368,19 @@ public class MainActivity
                     if (LOG) Log.i(TAG, "view: " + v + " digit: " + digit);
                     if (havePuzzle() &&
                         event.getActionMasked() == MotionEvent.ACTION_DOWN)
-                        {
-                            // Just pass the digit via the local state.
-                            // XXX This method was deprecated in API
-                            // level 24.  Use startDragAndDrop() for
-                            // newer platform versions.
-                            v.startDrag(
-                                null, // data
-                                new CircleDragShadowBuilder(
-                                    (ImageView)v, _colors[digit]),
-                                new Integer(digit),
-                                0); // flags
-                            return true;
-                        }
+                    {
+                        // Just pass the digit via the local state.
+                        // XXX This method was deprecated in API
+                        // level 24.  Use startDragAndDrop() for
+                        // newer platform versions.
+                        v.startDrag(
+                            null, // data
+                            new CircleDragShadowBuilder(
+                                (ImageView)v, _colors[digit]),
+                            new Integer(digit),
+                            0); // flags
+                        return true;
+                    }
                     else {
                         return false;
                     }
