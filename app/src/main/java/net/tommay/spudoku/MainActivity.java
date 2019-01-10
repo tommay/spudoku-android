@@ -522,6 +522,8 @@ public class MainActivity
         }
 
         clearHint();
+
+        _placedCount++;
     }
 
     private void enableButtons(boolean enabled) {
