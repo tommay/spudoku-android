@@ -637,7 +637,7 @@ public class MainActivity
     // The new button was clicked, or "Try Again" from the
     // TimeoutDialogFragment.
 
-    public void createNewPuzzle() {
+    private void createNewPuzzle() {
         if (LOG) Log.i(TAG, "new");
 
         // Retrieve the selected layout from the layout spinner, and get
