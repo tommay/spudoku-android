@@ -504,7 +504,7 @@ public class MainActivity
     // place is called when a color clircle is drag/dropped onto this
     // board circle.
 
-    public void place(View cellView) {
+    private void place(View cellView) {
         String tag = (String)cellView.getTag();
         if (LOG) Log.i(TAG, "place " + tag);
 
