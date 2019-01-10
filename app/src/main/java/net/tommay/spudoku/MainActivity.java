@@ -514,7 +514,8 @@ public class MainActivity
 
         ViewGroup parent = (ViewGroup) cellView.getParent();
         TextView tv = (TextView) parent.findViewWithTag("guess");
-        tv.setVisibility(cell.isGuess() ? View.VISIBLE : View.INVISIBLE);
+        boolean showGuess = _showing == Showing.PLACED && cell.isGuess();
+        tv.setVisibility(showGuess ? View.VISIBLE : View.INVISIBLE);
         tv.setTextColor(0xFF000000 | _guessColors[cell.getSolvedDigit()]);
     }
 
