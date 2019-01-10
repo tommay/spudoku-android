@@ -5,43 +5,43 @@
 <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='0'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='1'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='2'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 </LinearLayout>
 <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='9'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='10'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='11'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 </LinearLayout>
 <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='18'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='19'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='20'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 </LinearLayout>
 </LinearLayout>
@@ -49,43 +49,43 @@
 <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='3'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='4'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='5'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 </LinearLayout>
 <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='12'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='13'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='14'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 </LinearLayout>
 <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='21'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='22'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='23'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 </LinearLayout>
 </LinearLayout>
@@ -93,43 +93,43 @@
 <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='6'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='7'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='8'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 </LinearLayout>
 <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='15'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='16'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='17'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 </LinearLayout>
 <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='24'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='25'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='26'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 </LinearLayout>
 </LinearLayout>
@@ -139,43 +139,43 @@
 <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='27'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='28'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='29'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 </LinearLayout>
 <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='36'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='37'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='38'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 </LinearLayout>
 <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='45'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='46'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='47'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 </LinearLayout>
 </LinearLayout>
@@ -183,43 +183,43 @@
 <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='30'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='31'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='32'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 </LinearLayout>
 <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='39'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='40'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='41'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 </LinearLayout>
 <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='48'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='49'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='50'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 </LinearLayout>
 </LinearLayout>
@@ -227,43 +227,43 @@
 <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='33'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='34'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='35'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 </LinearLayout>
 <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='42'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='43'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='44'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 </LinearLayout>
 <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='51'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='52'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='53'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 </LinearLayout>
 </LinearLayout>
@@ -273,43 +273,43 @@
 <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='54'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='55'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='56'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 </LinearLayout>
 <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='63'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='64'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='65'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 </LinearLayout>
 <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='72'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='73'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='74'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 </LinearLayout>
 </LinearLayout>
@@ -317,43 +317,43 @@
 <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='57'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='58'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='59'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 </LinearLayout>
 <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='66'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='67'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='68'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 </LinearLayout>
 <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='75'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='76'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='77'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 </LinearLayout>
 </LinearLayout>
@@ -361,43 +361,43 @@
 <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='60'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='61'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='62'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 </LinearLayout>
 <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='69'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='70'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='71'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 </LinearLayout>
 <LinearLayout android:layout_height='0dp' android:layout_weight='1' android:layout_width='match_parent' android:orientation='horizontal' android:weightSum='3'>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='78'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='79'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 <FrameLayout android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_weight='1' android:layout_width='0dp' android:scaleType='fitCenter'>
 <ImageView android:adjustViewBounds='true' android:layout_height='match_parent' android:layout_margin='1dp' android:layout_width='match_parent' android:onClick='toggleGuess' android:scaleType='fitCenter' android:src='@drawable/circle' android:tag='80'></ImageView>
-<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:visibility='invisible'></TextView>
+<TextView android:gravity='center' android:layout_height='match_parent' android:layout_width='match_parent' android:tag='guess' android:text='?' android:textColor='#444444' android:visibility='invisible'></TextView>
 </FrameLayout>
 </LinearLayout>
 </LinearLayout>

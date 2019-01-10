@@ -87,6 +87,22 @@ public class MainActivity
         "dark blue", "light blue", "lavender", "purple"
     };
 
+    // _guessColors is used for the question mark displayed on
+    // guesses.  it should be a reasonably contrasting color with the
+    // circle color.
+
+    private static final int[] _guessColors = new int[] {
+        0xcccccc,               // red
+        0x444444,               // orange
+        0x444444,               // yellow
+        0x444444,               // light green
+        0xcccccc,               // dark green
+        0xcccccc,               // dark blue
+        0x444444,               // light blue
+        0x444444,               // lavender
+        0xcccccc,               // purple
+    };
+
     // Difficulty ratings for creating puzzles, and associated
     // PuzzleCreater.
 
@@ -492,12 +508,14 @@ public class MainActivity
         int color = digit != null ? _colors[digit] : _emptyCellColor;
         setCircleColor(cellView, color);
 
-        // Find the sibling (Text)View and make it visible if this cell
-        // is a guess.
+        // Find the sibling TextView and make it visible if this cell
+        // is a guess.  And set its text to a somewhat contrasting
+        // color.
 
         ViewGroup parent = (ViewGroup) cellView.getParent();
-        View v = parent.findViewWithTag("guess");
-        v.setVisibility(cell.isGuess() ? View.VISIBLE : View.INVISIBLE);
+        TextView tv = (TextView) parent.findViewWithTag("guess");
+        tv.setVisibility(cell.isGuess() ? View.VISIBLE : View.INVISIBLE);
+        tv.setTextColor(0xFF000000 | _guessColors[cell.getSolvedDigit()]);
     }
 
     private static void setCircleColor(ImageView cellView, int color) {
