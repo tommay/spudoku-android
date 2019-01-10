@@ -50,11 +50,13 @@
                       android:scaleType="fitCenter"        |
                       android:adjustViewBounds="true"      |
                       android:layout_margin="1dp"          |
-                      android:src="@drawable/circle")      |
-                  -# Separate continuation line sections
+                      android:src="@drawable/circle"       |
+                      android:onClick="toggleGuess")       |
+                  -# This is visible if the board circle color is a guess.
                   %TextView(                               |
-                      android:text="?"                     |
+                      android:tag="guess"                  |
                       android:layout_width="match_parent"  |
                       android:layout_height="match_parent" |
+                      android:text="?"                     |
+                      android:visibility="invisible"       |
                       android:gravity="center")            |
-

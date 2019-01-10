@@ -24,6 +24,7 @@ import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -490,6 +491,13 @@ public class MainActivity
         }
         int color = digit != null ? _colors[digit] : _emptyCellColor;
         setCircleColor(cellView, color);
+
+        // Find the sibling (Text)View and make it visible if this cell
+        // is a guess.
+
+        ViewGroup parent = (ViewGroup) cellView.getParent();
+        View v = parent.findViewWithTag("guess");
+        v.setVisibility(cell.isGuess() ? View.VISIBLE : View.INVISIBLE);
     }
 
     private static void setCircleColor(ImageView cellView, int color) {
@@ -855,6 +863,20 @@ public class MainActivity
 
                 (ImageView) boardView.findViewWithTag(Integer.toString(i));
             cellView.setBackgroundColor(0xFFD0D0D0);
+        }
+    }
+
+    // Called when a board circle is clicked.
+
+    public void toggleGuess(View cellView) {
+        String tag = (String)cellView.getTag();
+        if (LOG) Log.i(TAG, "clickBoardCircle " + tag);
+
+        int n = Integer.parseInt(tag);
+        Cell cell = _puzzle.getCell(n);
+        if (!cell.isSetup() && cell.isPlaced()) {
+            cell.toggleGuess();
+            showCell((ImageView)cellView, cell);
         }
     }
 
