@@ -305,9 +305,11 @@ public class MainActivity
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        if (LOG) Log.i(TAG, "onWindowFocusChanged");
-        logCircleSize();
-        maybeCreateBottomRow();
+        if (LOG) Log.i(TAG, "onWindowFocusChanged: " + hasFocus);
+        if (hasFocus) {
+            logCircleSize();
+            maybeCreateBottomRow();
+        }
     }
 
     private void maybeCreateBottomRow () {
