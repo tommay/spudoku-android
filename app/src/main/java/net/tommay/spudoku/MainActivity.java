@@ -43,7 +43,6 @@ import net.tommay.spudoku.Puzzle;
 import net.tommay.spudoku.PuzzleCreater;
 import net.tommay.spudoku.PuzzleSupplier;
 import net.tommay.spudoku.RawPuzzle;
-import net.tommay.spudoku.TimeoutDialogFragment;
 import net.tommay.util.Callback;
 import net.tommay.util.WithTimeout;
 
@@ -51,7 +50,6 @@ import net.tommay.spudoku.Hinter;
 
 public class MainActivity
     extends AppCompatActivity
-    implements TimeoutDialogFragment.Listener
 {
     // The release buid for publishing should not have log statements.
     // They can be removed by ProGuard, ut that requires optimization
@@ -661,7 +659,7 @@ public class MainActivity
     }
 
     // The new button was clicked, or "Try Again" from the
-    // TimeoutDialogFragment.
+    // timeout dialog.
 
     private void createNewPuzzle() {
         if (LOG) Log.i(TAG, "new");
@@ -676,6 +674,16 @@ public class MainActivity
 
         // Set up a callback for when we have a Puzzle, and get a
         // Handle to cancel it if we need to.
+
+        // But first make a Runnable/lambda to run when the user
+        // chooses to give up or presses the back button when we time
+        // out.
+
+        Runnable giveUp = () -> {
+            enableButtons(true);
+            enableNewButton();
+            hideProgressBar();
+        };
 
         final AsyncCreater.Handle handle = AsyncCreater.<RawPuzzle>create(
             new WithTimeout(puzzleSupplier, 30000L),
@@ -692,19 +700,19 @@ public class MainActivity
             // When the cancel button is clicked the supplier is
             // interrupted and wraps up and finishes (by throwing an
             // Exception), then this is called.
-            (Void v) -> {
-                enableButtons(true);
-                enableNewButton();
-                hideProgressBar();
-            },
+            (Void v) -> giveUp.run(),
 
             // Called on timeout.
             (Void v) -> {
-                // The dialog calls actions on this Activity via
-                // the TimeoutDialogFragment.Listener interfacee.
-                new TimeoutDialogFragment().show(
-                    getSupportFragmentManager(),
-                    "TimeoutDialogFragment");
+                new AlertDialog.Builder(this)
+                    .setMessage("Puzzle creation is taking a long time.")
+                    .setNegativeButton("Keep going",
+                        (DialogInterface dialog, int id) -> createNewPuzzle())
+                    .setPositiveButton("Give up",
+                        (DialogInterface dialog, int id) -> giveUp.run())
+                    .setOnCancelListener(
+                        (DialogInterface dialog) -> giveUp.run())
+                    .show();
             });
 
         // Disable the buttons until we have a puzzle.  They are
@@ -718,20 +726,6 @@ public class MainActivity
         enableCancelButton(handle);
 
         showProgressBar();
-    }
-
-    // interface TimeoutDialogFragment.Listener
-
-    @Override
-    public void keepGoing() {
-        createNewPuzzle();
-    }
-
-    @Override
-    public void giveUp() {
-        enableButtons(true);
-        enableNewButton();
-        hideProgressBar();
     }
 
     private String getSpinnerItem(int viewId) {
