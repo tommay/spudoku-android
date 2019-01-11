@@ -387,12 +387,10 @@ public class MainActivity
                         _showing == Showing.PLACED &&
                         event.getActionMasked() == MotionEvent.ACTION_DOWN)
                     {
-                        // Just pass the digit via the local state.
-                        // XXX This method was deprecated in API
-                        // level 24.  Use startDragAndDrop() for
-                        // newer platform versions.
-                        v.startDrag(
-                            null, // data
+                        // Just pass the digit via the local state.  It's
+                        // more straightforward than passing it as ClipData.
+                        v.startDragAndDrop(
+                            null, // ClipDate
                             new CircleDragShadowBuilder(
                                 (ImageView)v, _colors[digit]),
                             new Integer(digit),
