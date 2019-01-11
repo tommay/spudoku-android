@@ -11,15 +11,15 @@ import java.util.Map;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.graphics.LightingColorFilter;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
@@ -158,10 +158,11 @@ public class MainActivity
 
         // Get Context-dependent colors resources.
 
-        Resources res = getResources();
-        _emptyCellColor = res.getColor(R.color.empty_cell);
-        _noPuzzleCellColor = res.getColor(R.color.no_puzzle_cell);
-        _hintHighlightColor = res.getColor(R.color.hint_highlight);
+        _emptyCellColor = ContextCompat.getColor(this, R.color.empty_cell);
+        _noPuzzleCellColor =
+            ContextCompat.getColor(this, R.color.no_puzzle_cell);
+        _hintHighlightColor =
+            ContextCompat.getColor(this, R.color.hint_highlight);
 
         // If configured in build.gradle, log puzzle create times to
         // /data/data/net.tommay.spudoku/files/<CREATE_LOG>.
