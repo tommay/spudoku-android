@@ -33,18 +33,16 @@ class Cell {
         return _isPlaced;
     }
 
-    void setPlaced() {
-        if (!_isSetup) {
-            _isPlaced = true;
-        }
+    void setPlaced(boolean placed) {
+        _isPlaced = placed;
     }
 
     boolean isGuess() {
         return _isGuess;
     }
 
-    void setGuess() {
-        _isGuess = true;
+    void setGuess(boolean guess) {
+        _isGuess = guess;
     }
 
     void toggleGuess() {

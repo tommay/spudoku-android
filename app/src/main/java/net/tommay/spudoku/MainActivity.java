@@ -26,6 +26,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
+import android.view.GestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -218,6 +219,40 @@ public class MainActivity
             adapter.setDropDownViewResource(
                 android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(adapter);
+        }
+
+        // Set up the touch/gesture listeners for the board circles.
+
+        {
+            View boardView = findViewById(R.id.board);
+
+            for (int i = 0; i < 81; i++) {
+                final ImageView cellView =
+                    (ImageView)boardView.findViewWithTag(Integer.toString(i));
+
+                // Each CellView needs its own
+                // GestureDetector/OnGestureListener because the View
+                // is not passed in to the listener so it needs to be
+                // baked in.
+
+                GestureDetector.OnGestureListener onGestureListener =
+                    new GestureDetector.SimpleOnGestureListener() {
+                        @Override
+                        public boolean onFling(
+                            MotionEvent e1, MotionEvent e2,
+                            float velocityX, float velocityY)
+                        {
+                            unPlace(cellView);
+                            return true;
+                        }
+                    };
+
+                GestureDetector gestureDetector = new GestureDetector(
+                    this, onGestureListener);
+
+                cellView.setOnTouchListener((View v, MotionEvent event) ->
+                    gestureDetector.onTouchEvent(event));
+            }
         }
 
         _showing = Showing.PLACED;
@@ -537,7 +572,7 @@ public class MainActivity
         int n = Integer.parseInt(tag);
         Cell cell = _puzzle.getCell(n);
 
-        cell.setPlaced();
+        cell.setPlaced(true);
         showCell((ImageView)cellView, cell);
 
         int digit = cell.getPlacedDigit();
@@ -550,6 +585,35 @@ public class MainActivity
         clearHint();
 
         _placedCount++;
+    }
+
+    // unPlace is called when we detect a fling gesture on a board
+    // cell view.
+
+    private void unPlace(View cellView) {
+        String tag = (String)cellView.getTag();
+        if (LOG) Log.i(TAG, "unPlace " + tag);
+
+        int n = Integer.parseInt(tag);
+        Cell cell = _puzzle.getCell(n);
+
+        if (cell.isPlaced()) {
+            int digit = cell.getPlacedDigit();
+
+            cell.setPlaced(false);
+            cell.setGuess(false);
+            showCell((ImageView)cellView, cell);
+
+            _colorCounts[digit]++;
+            if (_colorCounts[digit] == 1) {
+                _colorViews[digit].setVisibility(View.VISIBLE);
+            }
+
+
+            clearHint();
+
+            _placedCount--;
+        }
     }
 
     private void enableButtons(boolean enabled) {
@@ -1065,12 +1129,8 @@ public class MainActivity
             boolean isGuess = readBoolean(in);
 
             Cell cell = new Cell(digit, isSetup);
-            if (isPlaced) {
-                cell.setPlaced();
-            }
-            if (isGuess) {
-                cell.toggleGuess();
-            }
+            cell.setPlaced(isPlaced);
+            cell.setGuess(isGuess);
 
             return cell;
         }
