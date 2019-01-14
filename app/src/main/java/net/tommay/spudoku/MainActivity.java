@@ -413,7 +413,7 @@ public class MainActivity
         if (LOG) Log.i(TAG, "onSaveInstanceState");
         if (_rawPuzzle != null) {
             if (LOG) Log.i(TAG, "saving state to bundle");
-            outState.putString(KEY_PUZZLE, _rawPuzzle.puzzle);
+            outState.putString(KEY_PUZZLE, getPuzzleString());
             outState.putString(KEY_SOLUTION, _rawPuzzle.solution);
         }
     }
