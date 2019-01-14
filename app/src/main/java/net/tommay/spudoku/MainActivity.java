@@ -840,7 +840,7 @@ public class MainActivity
                     ImageView cellView = (ImageView)
                         boardView.findViewWithTag(Integer.toString(cell));
                     cellView.setBackgroundColor(
-                        0xFF008000 | _hintHighlightColor);
+                        0xFF000000 | _hintHighlightColor);
                 }
             }
         }
