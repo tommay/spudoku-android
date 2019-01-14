@@ -2,6 +2,7 @@ package net.tommay.spudoku;
 
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -18,6 +19,8 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -67,7 +70,6 @@ public class MainActivity
     // Keys for Bundle values.
 
     private static final String KEY_PUZZLE = "puzzle";
-    private static final String KEY_SOLUTION = "solution";
 
     private static final int[] _colors = new int[] {
         0xee0000,               // red
@@ -134,7 +136,6 @@ public class MainActivity
 
     // True variables for state.  They are accessed only from the UI thread.
 
-    private RawPuzzle _rawPuzzle = null;
     private Puzzle _puzzle = null;
     private Showing _showing;
 
@@ -224,11 +225,10 @@ public class MainActivity
         // Restore stuff from savedInstanceState.
 
         if (savedInstanceState != null) {
-            String puzzle = savedInstanceState.getString(KEY_PUZZLE);
-            String solution = savedInstanceState.getString(KEY_SOLUTION);
-            if (puzzle != null && solution != null) {
-                if (LOG) Log.i(TAG, "restoring from bundle");
-                setPuzzle(new RawPuzzle(puzzle, solution));
+            PuzzleParcelable puzzleParcelable =
+                savedInstanceState.getParcelable(KEY_PUZZLE);
+            if (puzzleParcelable != null) {
+                setPuzzle(puzzleParcelable.getPuzzle());
             }
         }
 
@@ -243,9 +243,10 @@ public class MainActivity
         if (LOG) Log.i(TAG, "onPostCreate");
     }
 
-    private void setPuzzle(RawPuzzle rawPuzzle) {
-        _rawPuzzle = rawPuzzle;
-        _puzzle = newPuzzle(_rawPuzzle);
+    // Set puzzle as our work-in-progress and set up the UI for it.
+
+    private void setPuzzle(Puzzle puzzle) {
+        _puzzle = puzzle;
 
         _placedCount = 0;
 
@@ -411,10 +412,9 @@ public class MainActivity
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         if (LOG) Log.i(TAG, "onSaveInstanceState");
-        if (_rawPuzzle != null) {
+        if (_puzzle != null) {
             if (LOG) Log.i(TAG, "saving state to bundle");
-            outState.putString(KEY_PUZZLE, getPuzzleString());
-            outState.putString(KEY_SOLUTION, _rawPuzzle.solution);
+            outState.putParcelable(KEY_PUZZLE, new PuzzleParcelable(_puzzle));
         }
     }
 
@@ -657,7 +657,7 @@ public class MainActivity
     }
 
     private boolean havePuzzle() {
-        return _rawPuzzle != null;
+        return _puzzle != null;
     }
 
     // The new button was clicked, or "Try Again" from the
@@ -691,7 +691,7 @@ public class MainActivity
             new WithTimeout(puzzleSupplier, 30000L),
 
             (RawPuzzle rawPuzzle) -> {
-                setPuzzle(rawPuzzle);
+                setPuzzle(toPuzzle(rawPuzzle));
                 showPlaced();
                 showColors();
                 enableButtons(true);
@@ -897,7 +897,7 @@ public class MainActivity
     // Create a Puzzle from a RawPuzzle.  This is the only code that
     // knows about both classes.
 
-    private static Puzzle newPuzzle(RawPuzzle rawPuzzle) {
+    private static Puzzle toPuzzle(RawPuzzle rawPuzzle) {
         return new Puzzle(rawPuzzle.puzzle, rawPuzzle.solution);
     }
 
@@ -966,4 +966,122 @@ public class MainActivity
             }
         }
     }
+
+    // PuzzleParcelable and CellParcelable are wrappers that make
+    // Puzzle and cell Parcelable so we can put the Puzzle in a Bundle
+    // for onSaveInstanceState.  What we really want to put in the
+    // Bundle is just a CellParcelable[] but it can only be put in a
+    // Parcel not a Bundle.  So PuzzleParcelable is just a container
+    // for the CellParcellable[] we really want in the Bundle.
+
+    private static class PuzzleParcelable implements Parcelable {
+        private final Puzzle _puzzle;
+
+        PuzzleParcelable(Puzzle puzzle) {
+            _puzzle = puzzle;
+        }
+
+        Puzzle getPuzzle() {
+            return _puzzle;
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        public static final Parcelable.Creator<PuzzleParcelable> CREATOR =
+            new Parcelable.Creator<PuzzleParcelable>() {
+                public PuzzleParcelable createFromParcel(Parcel in) {
+                    return new PuzzleParcelable(readPuzzle(in));
+                }
+
+                @Override
+                public PuzzleParcelable[] newArray(int size) {
+                    return new PuzzleParcelable[size];
+                }
+            };
+     
+        @Override
+        public void writeToParcel(Parcel out, int flags) {
+            CellParcelable[] cellParcelables =
+                Arrays.stream(_puzzle.getCells())
+                .map(CellParcelable::new)
+                .toArray(CellParcelable[]::new);
+            out.writeTypedArray(cellParcelables, 0);
+        }
+
+        private static Puzzle readPuzzle(Parcel in) {
+            CellParcelable[] cellParcelables =
+                in.createTypedArray(CellParcelable.CREATOR);
+            Cell[] cells =
+                Arrays.stream(cellParcelables)
+                .map(CellParcelable::getCell)
+                .toArray(Cell[]::new);
+            return new Puzzle(cells);
+        }
+    }
+
+    private static class CellParcelable implements Parcelable {
+        private final Cell _cell;
+
+        CellParcelable (Cell cell) {
+            _cell = cell;
+        }
+
+        Cell getCell() {
+            return _cell;
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        public static final Parcelable.Creator<CellParcelable> CREATOR =
+            new Parcelable.Creator<CellParcelable>() {
+                public CellParcelable createFromParcel(Parcel in) {
+                    return new CellParcelable(readCell(in));
+                }
+
+                @Override
+                public CellParcelable[] newArray(int size) {
+                    return new CellParcelable[size];
+                }
+            };
+     
+        @Override
+        public void writeToParcel(Parcel out, int flags) {
+            out.writeInt(_cell.getSolvedDigit());
+            writeBoolean(out, _cell.isSetup());
+            writeBoolean(out, _cell.isPlaced());
+            writeBoolean(out, _cell.isGuess());
+        }
+
+        private static Cell readCell(Parcel in) {
+            int digit = in.readInt();
+            boolean isSetup = readBoolean(in);
+            boolean isPlaced = readBoolean(in);
+            boolean isGuess = readBoolean(in);
+
+            Cell cell = new Cell(digit, isSetup);
+            if (isPlaced) {
+                cell.setPlaced();
+            }
+            if (isGuess) {
+                cell.toggleGuess();
+            }
+
+            return cell;
+        }
+
+        private static void writeBoolean(Parcel out, boolean b) {
+            out.writeInt(b ? 1 : 0);
+        }
+
+        private static boolean readBoolean(Parcel in) {
+            return in.readInt() == 1;
+        }
+    }
 }
+

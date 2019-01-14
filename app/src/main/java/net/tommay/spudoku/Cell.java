@@ -43,6 +43,10 @@ class Cell {
         return _isGuess;
     }
 
+    void setGuess() {
+        _isGuess = true;
+    }
+
     void toggleGuess() {
         _isGuess = !_isGuess;
     }
