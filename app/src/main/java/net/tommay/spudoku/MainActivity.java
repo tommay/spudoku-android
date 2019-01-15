@@ -291,8 +291,7 @@ public class MainActivity
 
         java.util.Arrays.fill(_colorCounts, 9);
 
-        for (int i = 0; i < 81; i++) {
-            Cell cell = _puzzle.getCell(i);
+        for (Cell cell : _puzzle.getCells()) {
             Integer digit = cell.getPlacedDigit();
             if (digit != null) {
                 _colorCounts[digit]--;
@@ -918,8 +917,7 @@ public class MainActivity
 
     private String getPuzzleString() {
         StringBuilder sb = new StringBuilder(81);
-        for (int i = 0; i < 81; i++) {
-            Cell cell = _puzzle.getCell(i);
+        for (Cell cell : _puzzle.getCells()) {
             Integer digit = cell.getPlacedDigit();
             if (digit != null) {
                 sb.append(digit + 1);
