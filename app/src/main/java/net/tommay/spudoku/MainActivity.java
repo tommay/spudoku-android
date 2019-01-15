@@ -395,11 +395,13 @@ public class MainActivity
                 _colorViews[i] = layout.getChildAt(i);
             }
 
-            // Set the circle colors.
+            // Set the circle colors and visibility.
 
             for (int i = 0; i < _colorViews.length; i++) {
                 ImageView view = (ImageView) _colorViews[i];
                 setCircleColor(view, _colors[i]);
+                view.setVisibility(_colorCounts[i] == 0 ?
+                    View.INVISIBLE : View.VISIBLE);
             }
 
             // Set up drag stuff.
