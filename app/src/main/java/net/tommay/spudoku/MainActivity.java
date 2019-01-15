@@ -283,7 +283,8 @@ public class MainActivity
     private void setPuzzle(Puzzle puzzle) {
         _puzzle = puzzle;
 
-        _placedCount = 0;
+        _placedCount = (int) Arrays.stream(_puzzle.getCells())
+            .filter(c -> !c.isSetup() && c.isPlaced()).count();
 
         // Set _colorCounts to the number of colors remaining, i.e.,
         // not placed in the puzzle.
