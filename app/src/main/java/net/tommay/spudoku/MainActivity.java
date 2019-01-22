@@ -939,7 +939,6 @@ public class MainActivity
         View boardView = findViewById(R.id.board);
         for (int i = 0; i < 81; i++) {
             ImageView cellView =
-
                 (ImageView) boardView.findViewWithTag(Integer.toString(i));
             cellView.setBackgroundColor(0xFFD0D0D0);
         }
