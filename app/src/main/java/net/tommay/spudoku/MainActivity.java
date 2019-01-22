@@ -1067,7 +1067,7 @@ public class MainActivity
         public static final Parcelable.Creator<PuzzleParcelable> CREATOR =
             new Parcelable.Creator<PuzzleParcelable>() {
                 public PuzzleParcelable createFromParcel(Parcel in) {
-                    return new PuzzleParcelable(readPuzzle(in));
+                    return new PuzzleParcelable(readFromParcel(in));
                 }
 
                 @Override
@@ -1085,7 +1085,7 @@ public class MainActivity
             out.writeTypedArray(cellParcelables, 0);
         }
 
-        private static Puzzle readPuzzle(Parcel in) {
+        private static Puzzle readFromParcel(Parcel in) {
             CellParcelable[] cellParcelables =
                 in.createTypedArray(CellParcelable.CREATOR);
             Cell[] cells =
@@ -1115,7 +1115,7 @@ public class MainActivity
         public static final Parcelable.Creator<CellParcelable> CREATOR =
             new Parcelable.Creator<CellParcelable>() {
                 public CellParcelable createFromParcel(Parcel in) {
-                    return new CellParcelable(readCell(in));
+                    return new CellParcelable(readFromParcel(in));
                 }
 
                 @Override
@@ -1132,7 +1132,7 @@ public class MainActivity
             writeBoolean(out, _cell.isGuess());
         }
 
-        private static Cell readCell(Parcel in) {
+        private static Cell readFromParcel(Parcel in) {
             int digit = in.readInt();
             boolean isSetup = readBoolean(in);
             boolean isPlaced = readBoolean(in);
@@ -1154,4 +1154,3 @@ public class MainActivity
         }
     }
 }
-
