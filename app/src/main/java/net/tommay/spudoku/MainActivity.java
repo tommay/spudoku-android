@@ -734,7 +734,7 @@ public class MainActivity
     // timeout dialog.
 
     private void createNewPuzzle() {
-        if (LOG) Log.i(TAG, "new");
+        if (LOG) Log.i(TAG, "createNewPuzzle");
 
         // Retrieve the selected layout from the layout spinner, and get
         // the corresponding puzzleSupplier.
@@ -812,7 +812,7 @@ public class MainActivity
     // The setup button was clicked.  Show the setup colors.
 
     public void clickSetup(View view) {
-        if (LOG) Log.i(TAG, "setup");
+        if (LOG) Log.i(TAG, "clickSetup");
 
         if (_showing != Showing.SETUP) {
             showSetup();
@@ -826,7 +826,7 @@ public class MainActivity
     // and the solved state.
 
     public void clickSolved(View view) {
-        if (LOG) Log.i(TAG, "solved");
+        if (LOG) Log.i(TAG, "clickSolved");
 
         if (_showing != Showing.SOLVED) {
             showSolved();
@@ -865,6 +865,8 @@ public class MainActivity
     }
 
     public void clickHint(View view) {
+        if (LOG) Log.i(TAG, "clickSolved");
+
         int seed = (int) System.currentTimeMillis();
         String puzzleString = getPuzzleString();
         Hint hint = Hinter.getHint(seed, puzzleString);
