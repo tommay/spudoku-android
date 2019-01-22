@@ -571,8 +571,7 @@ public class MainActivity
         String tag = (String)cellView.getTag();
         if (LOG) Log.i(TAG, "place " + tag);
 
-        int n = Integer.parseInt(tag);
-        Cell cell = _puzzle.getCell(n);
+        Cell cell = getCellForCellView(cellView);
 
         cell.setPlaced(true);
         showCell((ImageView)cellView, cell);
@@ -596,8 +595,7 @@ public class MainActivity
         String tag = (String)cellView.getTag();
         if (LOG) Log.i(TAG, "unPlace " + tag);
 
-        int n = Integer.parseInt(tag);
-        Cell cell = _puzzle.getCell(n);
+        Cell cell = getCellForCellView(cellView);
 
         if (cell.isPlaced()) {
             int digit = cell.getPlacedDigit();
@@ -950,8 +948,8 @@ public class MainActivity
         String tag = (String)cellView.getTag();
         if (LOG) Log.i(TAG, "clickBoardCircle " + tag);
 
-        int n = Integer.parseInt(tag);
-        Cell cell = _puzzle.getCell(n);
+        Cell cell = getCellForCellView(cellView);
+
         if (!cell.isSetup() && cell.isPlaced()) {
             cell.toggleGuess();
             showCell((ImageView)cellView, cell);
@@ -963,6 +961,12 @@ public class MainActivity
 
     private static Puzzle toPuzzle(RawPuzzle rawPuzzle) {
         return new Puzzle(rawPuzzle.puzzle, rawPuzzle.solution);
+    }
+
+    private Cell getCellForCellView(View cellView) {
+        String tag = (String)cellView.getTag();
+        int n = Integer.parseInt(tag);
+        return _puzzle.getCell(n);
     }
 
     private static class CircleDragShadowBuilder
