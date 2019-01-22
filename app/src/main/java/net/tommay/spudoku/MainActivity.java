@@ -260,10 +260,16 @@ public class MainActivity
         // Restore stuff from savedInstanceState.
 
         if (savedInstanceState != null) {
+            if (LOG) Log.i(TAG, "restoring state from Bundle");
+            
             PuzzleParcelable puzzleParcelable =
                 savedInstanceState.getParcelable(KEY_PUZZLE);
             if (puzzleParcelable != null) {
+                if (LOG) Log.i(TAG, "  restoring puzzle from Bundle");
                 setPuzzle(puzzleParcelable.getPuzzle());
+            }
+            else {
+                if (LOG) Log.i(TAG, "  Bundle has no puzzle to restore (ok)");
             }
         }
 
