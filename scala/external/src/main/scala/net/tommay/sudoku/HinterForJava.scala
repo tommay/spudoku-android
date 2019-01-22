@@ -1,6 +1,6 @@
 package net.tommay.sudoku
 
-// Provide a "getHintEasy" function intended to be called from Java
+// Provide a "getHint" function intended to be called from Java
 // that does all the heavy lifting like Random creation and dredging
 // information out of the Solution in Scala.
 
