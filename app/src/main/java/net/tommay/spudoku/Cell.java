@@ -3,13 +3,15 @@ package net.tommay.spudoku;
 class Cell {
     private final int _digit;
     private final boolean _isSetup;
-    private boolean _isPlaced;
+    private Integer _placedDigit;
     private boolean _isGuess;
 
     Cell (int digit, boolean isSetup) {
         _digit = digit;
         _isSetup = isSetup;
-        _isPlaced = isSetup;
+        if (isSetup) {
+            _placedDigit = _digit;
+        }
         _isGuess = false;
     }
 
@@ -26,15 +28,21 @@ class Cell {
     }
 
     Integer getPlacedDigit() {
-        return _isPlaced ? _digit : null;
+        return _placedDigit;
     }
 
     boolean isPlaced() {
-        return _isPlaced;
+        return _placedDigit != null;
     }
 
-    void setPlaced(boolean placed) {
-        _isPlaced = placed;
+    void place(int digit) {
+        _placedDigit = digit;
+        setGuess(false);
+    }
+
+    void unplace() {
+        _placedDigit = null;
+        setGuess(false);
     }
 
     boolean isGuess() {

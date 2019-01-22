@@ -139,6 +139,7 @@ public class MainActivity
 
     private Puzzle _puzzle = null;
     private Showing _showing;
+    private boolean _allowGuesses = true;
 
     // Count of the colors placed.  Thsi is used to decide whether to display
     // a confirmation dialog when New is clicked.
@@ -557,8 +558,13 @@ public class MainActivity
         ViewGroup parent = (ViewGroup) cellView.getParent();
         TextView tv = (TextView) parent.findViewWithTag("guess");
         boolean showGuess = _showing == Showing.PLACED && cell.isGuess();
-        tv.setVisibility(showGuess ? View.VISIBLE : View.INVISIBLE);
-        tv.setTextColor(0xFF000000 | _guessColors[cell.getSolvedDigit()]);
+        if (showGuess) {
+            tv.setVisibility(View.VISIBLE);
+            tv.setTextColor(0xFF000000 | _guessColors[cell.getPlacedDigit()]);
+        }
+        else {
+            tv.setVisibility(View.INVISIBLE);
+        }
     }
 
     private static void setCircleColor(ImageView cellView, int color) {
@@ -573,16 +579,14 @@ public class MainActivity
     // place is called when a color clircle is drag/dropped onto this
     // board circle.
 
-    private void place(View cellView) {
+    private void place(View cellView, int digit) {
         String tag = (String)cellView.getTag();
-        if (LOG) Log.i(TAG, "place " + tag);
+        if (LOG) Log.i(TAG, "place " + digit + " in " + tag);
 
         Cell cell = getCellForCellView(cellView);
 
-        cell.setPlaced(true);
+        cell.place(digit);
         showCell((ImageView)cellView, cell);
-
-        int digit = cell.getPlacedDigit();
 
         _colorCounts[digit]--;
         if (_colorCounts[digit] == 0) {
@@ -606,8 +610,7 @@ public class MainActivity
         if (cell.isPlaced()) {
             int digit = cell.getPlacedDigit();
 
-            cell.setPlaced(false);
-            cell.setGuess(false);
+            cell.unplace();
             showCell((ImageView)cellView, cell);
 
             _colorCounts[digit]++;
@@ -956,11 +959,12 @@ public class MainActivity
         String tag = (String)cellView.getTag();
         if (LOG) Log.i(TAG, "clickBoardCircle " + tag);
 
-        Cell cell = getCellForCellView(cellView);
-
-        if (!cell.isSetup() && cell.isPlaced()) {
-            cell.toggleGuess();
-            showCell((ImageView)cellView, cell);
+        if (_allowGuesses) {
+            Cell cell = getCellForCellView(cellView);
+            if (!cell.isSetup() && cell.isPlaced()) {
+                cell.toggleGuess();
+                showCell((ImageView)cellView, cell);
+            }
         }
     }
 
@@ -1022,19 +1026,24 @@ public class MainActivity
         @Override
         public boolean onDrag(View v, DragEvent event) {
             switch (event.getAction()) {
-              case DragEvent.ACTION_DRAG_STARTED:
-                // Accept all drags in this Activity, if this cell is
-                // not placed and the correct digit/color is being dragged.
-                int digit = (Integer)event.getLocalState();
-                Cell cell = _puzzle.getCell(cellNumber);
-                return !cell.isPlaced() && digit == cell.getSolvedDigit();
+              case DragEvent.ACTION_DRAG_STARTED: {
+                  // Accept drags in this Activity, if this cell is
+                  // not placed, and it's ok to drop the color/digit
+                  // in this cell.
+                  int digit = (Integer)event.getLocalState();
+                  Cell cell = _puzzle.getCell(cellNumber);
+                  return !cell.isPlaced() &&
+                      (_allowGuesses || digit == cell.getSolvedDigit());
+              }
               case DragEvent.ACTION_DRAG_ENTERED:
               case DragEvent.ACTION_DRAG_EXITED:
                 return true;    // Ignored.
-              case DragEvent.ACTION_DROP:
-                if (LOG) Log.i(TAG, cellNumber + " dropped onto");
-                place(v);
-                return true;    // Success, not that it matters.
+              case DragEvent.ACTION_DROP: {
+                  int digit = (Integer)event.getLocalState();
+                  if (LOG) Log.i(TAG, digit + " dropped onto " + cellNumber);
+                  place(v, digit);
+                  return true;    // Success, not that it matters.
+              }
               case DragEvent.ACTION_DRAG_ENDED:
                 return true;
               default:
@@ -1131,18 +1140,24 @@ public class MainActivity
             out.writeInt(_cell.getSolvedDigit());
             writeBoolean(out, _cell.isSetup());
             writeBoolean(out, _cell.isPlaced());
-            writeBoolean(out, _cell.isGuess());
+            if (_cell.isPlaced()) {
+                out.writeInt(_cell.getPlacedDigit());
+                writeBoolean(out, _cell.isGuess());
+            }
         }
 
         private static Cell readFromParcel(Parcel in) {
             int digit = in.readInt();
             boolean isSetup = readBoolean(in);
-            boolean isPlaced = readBoolean(in);
-            boolean isGuess = readBoolean(in);
-
             Cell cell = new Cell(digit, isSetup);
-            cell.setPlaced(isPlaced);
-            cell.setGuess(isGuess);
+
+            boolean isPlaced = readBoolean(in);
+            if (isPlaced) {
+                int placedDigit = in.readInt();
+                boolean isGuess = readBoolean(in);
+                cell.place(placedDigit);
+                cell.setGuess(isGuess);
+            }
 
             return cell;
         }
