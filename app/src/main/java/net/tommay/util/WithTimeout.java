@@ -10,8 +10,8 @@ import java.util.concurrent.TimeoutException;
 import java.util.concurrent.TimeUnit;
 
 /**
- * A Callable wrapper than runs the Callable with a timeout.  The
- * wrapped Callable will be executed in a worker thread, the timout
+ * A Callable wrapper that runs the Callable with a timeout.  The
+ * wrapped Callable will be executed in a worker thread.  The timeout
  * code runs in the thread that called WithTimeout#call.  Currently
  * there is only one worker thread so Callables will be run serially.
  *
@@ -73,11 +73,14 @@ public class WithTimeout<T> implements Callable<T> {
             return future.get(_timeoutMillis, TimeUnit.MILLISECONDS);
         }
         catch (TimeoutException ex) {
-            // The worker did not finish withing the allotted time so
+            // The worker did not finish within the allotted time so
             // cancel it.  It will throw an InterruptedException and
             // the Future will catch it but it will never be fetched.
+
             future.cancel(true);
-            // Wait for the worker release the Semaphore when it finishes.
+
+            // Wait for the worker to release the Semaphore when it finishes.
+
             try {
                 done.acquire();
             }
@@ -92,8 +95,11 @@ public class WithTimeout<T> implements Callable<T> {
             // This thread was cancelled.  Cancel the worker, too.  It
             // will throw an InterruptedException and the Future will
             // catch it but it will never be fetched.
+
             future.cancel(true);
-            // Wait for the worker release the Semaphore when it finishes.
+
+            // Wait for the worker to release the Semaphore when it finishes.
+
             try {
                 done.acquire();
             }
