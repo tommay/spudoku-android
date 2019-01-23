@@ -596,6 +596,10 @@ public class MainActivity
         clearHint();
 
         _placedCount++;
+
+        if (isPuzzleSolved()) {
+            showPuzzleIsSolvedMessage();
+        }
     }
 
     // unPlace is called when we detect a fling gesture on a board
@@ -979,6 +983,20 @@ public class MainActivity
         String tag = (String)cellView.getTag();
         int n = Integer.parseInt(tag);
         return _puzzle.getCell(n);
+    }
+
+    private boolean isPuzzleSolved() {
+        return Arrays.stream(_puzzle.getCells()).allMatch(cell ->
+            cell.isPlaced() &&
+            cell.getPlacedDigit().equals(cell.getSolvedDigit()));
+    }
+
+    private void showPuzzleIsSolvedMessage() {
+        new AlertDialog.Builder(this)
+            .setMessage("You got it!")
+            .setPositiveButton("Yes, I know",
+                (DialogInterface dialog, int id) -> {})
+            .show();
     }
 
     private static class CircleDragShadowBuilder
