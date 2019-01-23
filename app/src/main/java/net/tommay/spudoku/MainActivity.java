@@ -872,7 +872,12 @@ public class MainActivity
     }
 
     public void clickHint(View view) {
-        if (LOG) Log.i(TAG, "clickSolved");
+        if (LOG) Log.i(TAG, "clickHint");
+
+        if (isPuzzleSolved()) {
+            showHint("The puzzle is solved!");
+            return;
+        }
 
         int seed = (int) System.currentTimeMillis();
         String puzzleString = getPuzzleString();
@@ -924,7 +929,7 @@ public class MainActivity
             }
         }
         else {
-            showHint("The puzzle is solved!");
+            showHint("Look for a problem somewhere.");
         }
     }
 
