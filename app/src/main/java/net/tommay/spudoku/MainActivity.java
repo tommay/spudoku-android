@@ -607,7 +607,7 @@ public class MainActivity
 
         Cell cell = getCellForCellView(cellView);
 
-        if (cell.isPlaced()) {
+        if (!cell.isSetup() && cell.isPlaced()) {
             int digit = cell.getPlacedDigit();
 
             cell.unplace();
