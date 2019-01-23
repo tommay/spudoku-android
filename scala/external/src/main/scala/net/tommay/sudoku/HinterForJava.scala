@@ -19,11 +19,19 @@ object HinterForJava {
       false, true, false)
     val rnd = new scala.util.Random(randomSeed)
     val puzzle = Puzzle.fromString(puzzleString)
-    val solution = Solver.randomSolutions(options, rnd)(puzzle).head
-    val stepsWithPlacement = solution.steps.filter(_.placementOption.isDefined)
-    stepsWithPlacement match {
-      case (step :: _) =>
-        Some(Hint(step.tjpe, step.placementOption.get, step.cells))
+    val solutions = Solver.randomSolutions(options, rnd)(puzzle)
+    solutions match {
+      case (solution #:: _) =>
+        val stepsWithPlacement =
+          solution.steps.filter(_.placementOption.isDefined)
+        stepsWithPlacement match {
+          case (step :: _) =>
+            Some(Hint(step.tjpe, step.placementOption.get, step.cells))
+          // This should only happen if the puzzle is solved, in which case
+          // getHint won't be called.
+          case _ => None
+        }
+      // There are no solutions, they've made a mistake.
       case _ => None
     }
   }
