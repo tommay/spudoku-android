@@ -222,6 +222,19 @@ public class MainActivity
             spinner.setAdapter(adapter);
         }
 
+        // Set up long click on the puzzle/setup button to ask whether
+        // to reset the puzzle.
+
+        {
+            View buttonSetup = findViewById(R.id.button_setup);
+            buttonSetup.setOnLongClickListener((View v) -> {
+                Log.i(TAG, "longClick on puzzle");
+                askResetPuzzle();
+                return true;
+            });
+        }
+
+
         // Set up the touch/gesture listeners for the board circles.
 
         {
@@ -304,6 +317,29 @@ public class MainActivity
                 _colorCounts[digit]--;
             }
         }
+    }
+
+    // The puzzle button was long-clicked.  Ask whether to reset the puzzle.
+
+    private void askResetPuzzle() {
+        // Don't bother if nothing has been placed yet.
+
+        if (_placedCount == 0) {
+            return;
+        }
+
+        new AlertDialog.Builder(this)
+            .setMessage("Do you want to reset the puzzle and start over?")
+            .setNegativeButton("No",
+                (DialogInterface dialog, int id) -> {
+                    // Just ignore the click.
+                })
+            .setPositiveButton("Yes, reset",
+                (DialogInterface dialog, int id) -> {
+                    // XXX
+                })
+            .show();
+
     }
 
     @Override
