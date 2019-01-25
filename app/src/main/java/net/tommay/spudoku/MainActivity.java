@@ -992,8 +992,7 @@ public class MainActivity
 
     private boolean isPuzzleSolved() {
         return Arrays.stream(_puzzle.getCells()).allMatch(cell ->
-            cell.isPlaced() &&
-            cell.getPlacedDigit().equals(cell.getSolvedDigit()));
+            cell.getSolvedDigit().equals(cell.getPlacedDigit()));
     }
 
     private void showPuzzleIsSolvedMessage() {
