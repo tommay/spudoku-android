@@ -336,10 +336,16 @@ public class MainActivity
                 })
             .setPositiveButton("Yes, reset",
                 (DialogInterface dialog, int id) -> {
-                    // XXX
+                    for (Cell cell : _puzzle.getCells()) {
+                        if (!cell.isSetup()) {
+                            cell.unplace();
+                        }
+                    }
+                    setPuzzle(_puzzle);
+                    showPlaced();
+                    showColors();
                 })
             .show();
-
     }
 
     @Override
