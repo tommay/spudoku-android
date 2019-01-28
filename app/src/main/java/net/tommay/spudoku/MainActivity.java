@@ -882,10 +882,10 @@ public class MainActivity
                     ".");
                 break;
               case MissingOne:
-                showHint("One color is missing here.");
+                showHint("One space is empty here.");
                 break;
               case MissingTwo:
-                showHint("Two colors are missing here.");
+                showHint("Two spaces are empty here.");
                 break;
               case Needed:
                 showHint("A missing color can go only one place.");
