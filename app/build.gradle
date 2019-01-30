@@ -17,7 +17,8 @@ keystoreProperties.load(
   new FileInputStream(rootProject.file("keystore.properties")))
 
 android {
-    compileSdkVersion 26
+    // This has to match appcompat-v7:28 below.
+    compileSdkVersion 28
     // This is no longer necessary.  Each version of the Android Gradle
     // Plugin now has a default version of the build tools.
     // buildToolsVersion "25.0.0"
@@ -102,7 +103,8 @@ dependencies {
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation 'com.android.support:appcompat-v7:25.0.0'
+    // This has to match compileSdkVersion above.
+    implementation 'com.android.support:appcompat-v7:28.0.0'
     testImplementation 'junit:junit:4.12'
 }
 
