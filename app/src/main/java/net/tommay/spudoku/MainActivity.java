@@ -639,8 +639,13 @@ public class MainActivity
 
         _placedCount++;
 
-        if (isPuzzleSolved()) {
-            showPuzzleIsSolvedMessage();
+        if (areAllCellsPlaced()) {
+            if (isPuzzleSolved()) {
+                showPuzzleIsSolvedMessage();
+            }
+            else {
+                showPuzzleIsWrongMessage();
+            }
         }
     }
 
@@ -1032,6 +1037,10 @@ public class MainActivity
         return _puzzle.getCell(n);
     }
 
+    private boolean areAllCellsPlaced() {
+        return Arrays.stream(_puzzle.getCells()).allMatch(Cell::isPlaced);
+    }
+
     private boolean isPuzzleSolved() {
         return Arrays.stream(_puzzle.getCells()).allMatch(cell ->
             cell.getSolvedDigit().equals(cell.getPlacedDigit()));
@@ -1041,6 +1050,14 @@ public class MainActivity
         new AlertDialog.Builder(this)
             .setMessage("You got it!")
             .setPositiveButton("Yes, I know",
+                (DialogInterface dialog, int id) -> {})
+            .show();
+    }
+
+    private void showPuzzleIsWrongMessage() {
+        new AlertDialog.Builder(this)
+            .setMessage("Oops, that's not it.  Keep going.")
+            .setPositiveButton("Oh no",
                 (DialogInterface dialog, int id) -> {})
             .show();
     }
