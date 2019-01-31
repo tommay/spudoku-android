@@ -275,10 +275,16 @@ public class MainActivity
         _showing = Showing.PLACED;
 
         {
+            // Set up to pop up a verify dialog and/or disable
+            // switch_guess when its state changes to true.  This has
+            // to use OnCheckedChangeListener and not OnClicklistener
+            // because the uder can slide the switch instead of
+            // clicking to change the state.
+
             Switch sw = (Switch) findViewById(R.id.switch_guess);
-            sw.setOnClickListener(
-                (View view) -> {
-                    switchGuessClicked((Switch) view);
+            sw.setOnCheckedChangeListener(
+                (CompoundButton button, boolean isChecked) -> {
+                    switchGuessChanged((Switch) button, isChecked);
                 });
         }
 
@@ -1082,11 +1088,16 @@ public class MainActivity
     // any time.  But once it is enabled it can only be changed if
     // nothing has been placed.
 
-    private void switchGuessClicked(Switch sw) {
+    private boolean _ignoreSwitchGuessChanged = false;
+
+    private void switchGuessChanged(Switch sw, boolean isChecked) {
+        if (_ignoreSwitchGuessChanged) {
+            return;
+        }
+
         if (_placedCount == 0) {
-            // Puzzle is reset, just toggle guessing state.
-            _allowGuesses = !_allowGuesses;
-            sw.setChecked(_allowGuesses);
+            // Puzzle is reset, just use whatever the switch is now set to.
+            _allowGuesses = isChecked;
             return;
         }
         
@@ -1097,10 +1108,11 @@ public class MainActivity
         // The switch will be toggled on already.  Turn it back off
         // before we put up the dialog and only turn it on if the user
         // verifies.  XXX Sadly the user may see it briefly turned on.
-        // This could perhaps be fixed with an OnTouchListener, but
-        // I'm not going to bother right now.
+        // It's probably not easy to stop that.
 
+        _ignoreSwitchGuessChanged = true;
         sw.setChecked(false);
+        _ignoreSwitchGuessChanged = false;
 
         new AlertDialog.Builder(this)
             .setMessage("Allow guessing?  Guessing will not be able" +
@@ -1108,13 +1120,15 @@ public class MainActivity
             .setPositiveButton("Yes",
                 (DialogInterface dialog, int id) -> {
                     _allowGuesses = true;
+                    _ignoreSwitchGuessChanged = true;
                     sw.setChecked(_allowGuesses);
+                    _ignoreSwitchGuessChanged = false;
                     setSwitchGuessEnabled();
             })
             .setNegativeButton("No",
                 (DialogInterface dialog, int id) -> {
-                    sw.setChecked(_allowGuesses);
-            })
+                    // Nothing to do.
+                })
             .show();
     }
 
