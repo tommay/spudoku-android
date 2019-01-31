@@ -31,9 +31,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Switch;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 // Auto-generated from aoo/build.gradle settings.
@@ -139,7 +142,7 @@ public class MainActivity
 
     private Puzzle _puzzle = null;
     private Showing _showing;
-    private boolean _allowGuesses = true;
+    private boolean _allowGuesses = false;
 
     // Count of the colors placed.  Thsi is used to decide whether to display
     // a confirmation dialog when New is clicked.
@@ -271,6 +274,14 @@ public class MainActivity
 
         _showing = Showing.PLACED;
 
+        {
+            Switch sw = (Switch) findViewById(R.id.switch_guess);
+            sw.setOnClickListener(
+                (View view) -> {
+                    switchGuessClicked((Switch) view);
+                });
+        }
+
         // Restore stuff from savedInstanceState.
 
         if (savedInstanceState != null) {
@@ -289,6 +300,7 @@ public class MainActivity
 
         enableButtons(true);
         enableNewButton();
+        setSwitchGuessEnabled();
         hideProgressBar();
     }
 
@@ -344,6 +356,7 @@ public class MainActivity
                     setPuzzle(_puzzle);
                     showPlaced();
                     showColors();
+                    setSwitchGuessEnabled();
                 })
             .show();
     }
@@ -638,6 +651,7 @@ public class MainActivity
         clearHint();
 
         _placedCount++;
+        setSwitchGuessEnabled();
 
         if (areAllCellsPlaced()) {
             if (isPuzzleSolved()) {
@@ -673,6 +687,7 @@ public class MainActivity
             clearHint();
 
             _placedCount--;
+            setSwitchGuessEnabled();
         }
     }
 
@@ -1060,6 +1075,51 @@ public class MainActivity
             .setPositiveButton("Oh no",
                 (DialogInterface dialog, int id) -> {})
             .show();
+    }
+
+    // Initially guessing is not allowed.  Guessing can be enabled at
+    // any time.  But once it is enabled it can only be changed if
+    // nothing has been placed.
+
+    private void switchGuessClicked(Switch sw) {
+        if (_placedCount == 0) {
+            // Puzzle is reset, just toggle guessing state.
+            _allowGuesses = !_allowGuesses;
+            sw.setChecked(_allowGuesses);
+            return;
+        }
+        
+        // If this is called when _placedCount != 0 then it must be to
+        // enable guessing otherwise this button would be disabled.
+        // Verify with the user.
+
+        // The switch will be toggled on already.  Turn it back off
+        // before we put up the dialog and only turn it on if the user
+        // verifies.  XXX Sadly the user may see it briefly turned on.
+        // This could perhaps be fixed with an OnTouchListener, but
+        // I'm not going to bother right now.
+
+        sw.setChecked(false);
+
+        new AlertDialog.Builder(this)
+            .setMessage("Allow guessing?  Guessing will not be able" +
+                " to be turned off again unless the puzzle is reset.")
+            .setPositiveButton("Yes",
+                (DialogInterface dialog, int id) -> {
+                    _allowGuesses = true;
+                    sw.setChecked(_allowGuesses);
+                    setSwitchGuessEnabled();
+            })
+            .setNegativeButton("No",
+                (DialogInterface dialog, int id) -> {
+                    sw.setChecked(_allowGuesses);
+            })
+            .show();
+    }
+
+    private void setSwitchGuessEnabled() {
+        Switch sw = (Switch) findViewById(R.id.switch_guess);
+        sw.setEnabled(!_allowGuesses || _placedCount == 0);
     }
 
     private static class CircleDragShadowBuilder

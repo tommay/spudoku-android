@@ -142,4 +142,11 @@
       android:textSize="20sp"
       android:layout_marginLeft="6dp"/>
 
+  <Switch
+      android:id="@+id/switch_guess"
+      android:text="Allow guessing"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="right"/>
+
 </LinearLayout>
