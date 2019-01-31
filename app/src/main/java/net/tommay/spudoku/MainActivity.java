@@ -835,6 +835,7 @@ public class MainActivity
                 showColors();
                 enableButtons(true);
                 enableNewButtonAfterDelay();
+                setSwitchGuessEnabled();
                 hideProgressBar();
             },
 
