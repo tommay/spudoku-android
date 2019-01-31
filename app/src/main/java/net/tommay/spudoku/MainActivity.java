@@ -117,6 +117,13 @@ public class MainActivity
             }
         }};
 
+    // Various UI settings (spinners, allow guessing) are persisted to
+    // _sharedPreferences so they stay the same between app runs.
+
+    private SharedPreferences _sharedPreferences;
+
+    private final String PREF_ALLOW_GUESSES = "allow_guesses";
+
     // Context-dependent "constants".
 
     // Colors are defined in main/res/values/colors.xml.  We have to
@@ -142,7 +149,7 @@ public class MainActivity
 
     private Puzzle _puzzle = null;
     private Showing _showing;
-    private boolean _allowGuesses = false;
+    private boolean _allowGuesses;
 
     // Count of the colors placed.  Thsi is used to decide whether to display
     // a confirmation dialog when New is clicked.
@@ -159,6 +166,16 @@ public class MainActivity
         if (LOG) Log.i(TAG, "onCreate");
 
         setContentView(R.layout.activity_main);
+
+        _sharedPreferences = getPreferences(MODE_PRIVATE);
+
+        _allowGuesses = _sharedPreferences.getBoolean(
+            PREF_ALLOW_GUESSES, false);
+
+        {
+            Switch sw = (Switch) findViewById(R.id.switch_guess);
+            sw.setChecked(_allowGuesses);
+        }
 
         // Get Context-dependent colors resources.
 
@@ -1097,7 +1114,7 @@ public class MainActivity
 
         if (_placedCount == 0) {
             // Puzzle is reset, just use whatever the switch is now set to.
-            _allowGuesses = isChecked;
+            setAllowGuesses(isChecked);
             return;
         }
         
@@ -1119,7 +1136,7 @@ public class MainActivity
                 " to be turned off again unless the puzzle is reset.")
             .setPositiveButton("Yes",
                 (DialogInterface dialog, int id) -> {
-                    _allowGuesses = true;
+                    setAllowGuesses(true);
                     _ignoreSwitchGuessChanged = true;
                     sw.setChecked(_allowGuesses);
                     _ignoreSwitchGuessChanged = false;
@@ -1135,6 +1152,13 @@ public class MainActivity
     private void setSwitchGuessEnabled() {
         Switch sw = (Switch) findViewById(R.id.switch_guess);
         sw.setEnabled(!_allowGuesses || _placedCount == 0);
+    }
+
+    private void setAllowGuesses(boolean allowGuesses) {
+        _allowGuesses = allowGuesses;
+        _sharedPreferences.edit()
+            .putBoolean(PREF_ALLOW_GUESSES, _allowGuesses)
+            .apply();
     }
 
     private static class CircleDragShadowBuilder
