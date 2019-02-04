@@ -3,6 +3,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tommay="http://schemas.android.com/apk/res/net.tommay.spudoku"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -80,13 +81,14 @@
           android:textColor="#282828"
           android:layout_alignEnd="@+id/label_difficulty"
           android:layout_below="@id/label_difficulty"/>
-      <Spinner
+      <net.tommay.spudoku.PersistentSpinner
           android:id="@+id/spinner_layout"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:textSize="40sp"
           android:layout_toRightOf="@id/label_layout"
-          android:layout_alignBaseline="@id/label_layout"/>
+          android:layout_alignBaseline="@id/label_layout"
+          tommay:name="spinner_layout"/>
       <TextView
           android:id="@id/label_difficulty"
           android:layout_height="wrap_content"
@@ -95,13 +97,14 @@
           android:layout_marginTop="2dp"
           android:layout_marginBottom="1.5dp"
           android:textColor="#282828"/>
-      <Spinner
+      <net.tommay.spudoku.PersistentSpinner
           android:id="@+id/spinner_difficulty"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:textSize="40sp"
           android:layout_toRightOf="@id/label_difficulty"
-          android:layout_alignBaseline="@id/label_difficulty"/>
+          android:layout_alignBaseline="@id/label_difficulty"
+          tommay:name="spinner_difficulty"/>
     </RelativeLayout>
   </LinearLayout>
 
