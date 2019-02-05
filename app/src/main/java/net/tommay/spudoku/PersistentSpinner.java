@@ -39,7 +39,7 @@ public class PersistentSpinner
         _sharedPreferences = context.getSharedPreferences(
             this.getClass().getName(), Context.MODE_PRIVATE);
 
-        // Call the superclas method because we want to set the actual
+        // Call the superclass method because we want to set the actual
         // listener, not the listener we forward to.
 
         super.setOnItemSelectedListener(
