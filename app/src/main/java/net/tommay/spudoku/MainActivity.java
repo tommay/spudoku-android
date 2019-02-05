@@ -11,7 +11,6 @@ import java.util.Map;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.graphics.LightingColorFilter;
 import android.graphics.Canvas;
 import android.graphics.Point;
@@ -117,13 +116,6 @@ public class MainActivity
             }
         }};
 
-    // Various UI settings (spinners, allow guessing) are persisted to
-    // _sharedPreferences so they stay the same between app runs.
-
-    private SharedPreferences _sharedPreferences;
-
-    private final String PREF_ALLOW_GUESSES = "allow_guesses";
-
     // Context-dependent "constants".
 
     // Colors are defined in main/res/values/colors.xml.  We have to
@@ -166,16 +158,6 @@ public class MainActivity
         if (LOG) Log.i(TAG, "onCreate");
 
         setContentView(R.layout.activity_main);
-
-        _sharedPreferences = getPreferences(MODE_PRIVATE);
-
-        _allowGuesses = _sharedPreferences.getBoolean(
-            PREF_ALLOW_GUESSES, false);
-
-        {
-            Switch sw = (Switch) findViewById(R.id.switch_guess);
-            sw.setChecked(_allowGuesses);
-        }
 
         // Get Context-dependent colors resources.
 
@@ -303,6 +285,10 @@ public class MainActivity
                 (CompoundButton button, boolean isChecked) -> {
                     switchGuessChanged((Switch) button, isChecked);
                 });
+
+            // And get the current state of the switch.
+
+            _allowGuesses = sw.isChecked();
         }
 
         // Restore stuff from savedInstanceState.
@@ -1123,7 +1109,7 @@ public class MainActivity
 
         if (_placedCount == 0) {
             // Puzzle is reset, just use whatever the switch is now set to.
-            setAllowGuesses(isChecked);
+            _allowGuesses = isChecked;
             return;
         }
         
@@ -1146,7 +1132,7 @@ public class MainActivity
                 " to be turned off again unless the puzzle is reset.")
             .setPositiveButton("Yes",
                 (DialogInterface dialog, int id) -> {
-                    setAllowGuesses(true);
+                    _allowGuesses = true;
                     setSwitchGuessEnabled();
             })
             .setNegativeButton("No",
@@ -1158,13 +1144,6 @@ public class MainActivity
     private void setSwitchGuessEnabled() {
         Switch sw = (Switch) findViewById(R.id.switch_guess);
         sw.setEnabled(!_allowGuesses || _placedCount == 0);
-    }
-
-    private void setAllowGuesses(boolean allowGuesses) {
-        _allowGuesses = allowGuesses;
-        _sharedPreferences.edit()
-            .putBoolean(PREF_ALLOW_GUESSES, _allowGuesses)
-            .apply();
     }
 
     private static class CircleDragShadowBuilder

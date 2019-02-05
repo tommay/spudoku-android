@@ -142,7 +142,7 @@
       android:textSize="20sp"
       android:layout_marginLeft="6dp"/>
 
-  <Switch
+  <net.tommay.spudoku.PersistentSwitch
       android:id="@+id/switch_guess"
       android:text="Allow guessing"
       android:layout_width="wrap_content"
