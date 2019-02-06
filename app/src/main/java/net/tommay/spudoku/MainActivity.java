@@ -25,8 +25,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.DragEvent;
-import android.view.MotionEvent;
 import android.view.GestureDetector;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -327,6 +329,27 @@ public class MainActivity
     protected void onPostCreate(Bundle savedInstanceState)  {
         super.onPostCreate(savedInstanceState);
         if (LOG) Log.i(TAG, "onPostCreate");
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if (LOG) Log.i(TAG, "onCreateOptionsMenu");
+        // Inflating the menu addds the items to the app bar menu.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle app bar item clicks.
+
+        switch(item.getItemId()) {
+          case R.id.action_help:
+            if (LOG) Log.i(TAG, "Menu help clicked");
+            return true;
+          default:
+            return super.onOptionsItemSelected(item);
+        }
     }
 
     // Set puzzle as our work-in-progress and set up the UI for it.
