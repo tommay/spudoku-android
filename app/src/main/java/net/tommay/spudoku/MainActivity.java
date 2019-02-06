@@ -1073,8 +1073,8 @@ public class MainActivity
 
     private void showPuzzleIsSolvedMessage() {
         new AlertDialog.Builder(this)
-            .setMessage("You got it!")
-            .setPositiveButton("Yes, I know",
+            .setMessage("You got it!  Well done.")
+            .setPositiveButton("Thank you",
                 (DialogInterface dialog, int id) -> {})
             .show();
     }
