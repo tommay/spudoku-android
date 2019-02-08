@@ -14,5 +14,11 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
+    <activity android:name=".HelpActivity">
+      <intent-filter>
+        <action android:name="net.tommay.spudoku.HELP_ACTIVITY" />
+        <category android:name="android.intent.category.DEFAULT" />
+      </intent-filter>
+    </activity>
   </application>
 </manifest>

@@ -11,6 +11,7 @@ import java.util.Map;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.LightingColorFilter;
 import android.graphics.Canvas;
 import android.graphics.Point;
@@ -1048,6 +1049,7 @@ public class MainActivity
 
     public void onHelpClick(View view) {
         if (LOG) Log.i(TAG, "onHelpClick");
+        startActivity(new Intent(this, HelpActivity.class));
     }
 
     // Called when a board circle is clicked.
