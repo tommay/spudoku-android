@@ -238,7 +238,7 @@ public class MainActivity
         {
             View buttonSetup = findViewById(R.id.button_setup);
             buttonSetup.setOnLongClickListener((View v) -> {
-                Log.i(TAG, "longClick on puzzle");
+                if (LOG) Log.i(TAG, "longClick on puzzle");
                 askResetPuzzle();
                 return true;
             });
