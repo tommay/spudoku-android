@@ -1,4 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="help">This is the help text.</string>
+  <string name="help">
+    <![CDATA[
+<h2>&nbsp;What&apos;s Spudoku?</h2>
+<p>
+Spudoku is sudoku with colors.
+</p>
+<p>
+You can use Spudoku to create puzzles (with solutions) that you can
+solve on a ColorKu board from Mad Cave Bird Games.  Or you can solve
+the puzzles right here on your device.
+</p>
+
+<h2>&nbsp;Create a puzzle</h2>
+<p>
+Use the spinners to select a <i>difficulty</i> and a <i>layout</i>,
+which is the arrangement of colors that are already set as part of the puzzle.
+</p>
+<p>
+Then touch the <i>New</i> button and Spudoku will make you a puzzle never
+before seen&mdash;by anyone!
+</p>
+<p>
+Some combinations of difficulty and layout may be imposssible to
+create a puzzle for, such as a <i>Wicked</i> puzzle with the
+<i>Identical Squares</i> layout.  If puzzle creation is taking too
+long just press the <i>Cancel</i> button and ask it to make something
+more possible.
+</p>
+
+<h2>&nbsp;Use the buttons</h2>
+<p>
+Touch the <i>Puzzle</i> button to temporarily remove any colors
+you&apos;ve placed and show only the original puzzle colors.
+</p>
+<p>
+Touch the <i>Solution</i> button to show the solution.
+</p>
+<p>
+Touch either button again to return to your work-in-progress.
+</p>
+<p>
+Hold the <i>Puzzle</i> button to reset the puzzle to its original state.
+</p>
+
+<h2>&nbsp;Solve the puzzle</h2>
+<p>
+Place colors by dragging them from the row of colored circles and
+dropping them into place on the board.
+</p>
+<p>
+Remove them by flicking them off the board.
+</p>
+<p>
+If you&apos;ve placed a color you&apos;re not sure about, tap it to mark it
+with a question mark as a reminder you&apos;re not sure about it.  Tap it again
+to remove the question mark.
+</p>
+
+<h2>&nbsp;Get hints</h2>
+<p>
+Got stuck somewhere?  Touch the <i>Hint</i> button and Spudoku will
+give you a hint to help you place the next color.
+</p>
+
+<h2>&nbsp;Training wheels</h2>
+<p>
+Turn on <i>Training wheels</i> to prevent you from putting a color in
+the wrong place.  If you drag a color to a place it doesn&apos;t belong
+it will just go back to the row of colors.
+</p>
+<p>
+You can turn off <i>training wheels</i> at any time but you can only
+turn them on if you haven&apos;t placed any colors on the puzzle yet
+because they may be wrong.
+</p>
+
+<h2>&nbsp;How do you pronounce Spudoku?</h2>
+<p>
+The same way you do.
+</p>
+    ]]>
+  </string>
 </resources>
