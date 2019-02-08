@@ -14,7 +14,18 @@
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+      <ImageView
+          android:id="@+id/help_icon"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:src="@drawable/baseline_help_outline_black_48"
+          android:onClick="onHelpClick"
+          android:paddingTop="10dp"
+          android:paddingBottom="10dp"
+          android:layout_marginRight="8dp"
+          android:layout_gravity="right"/>
+    </android.support.v7.widget.Toolbar>
 
   <!-- The game board.  -->
 

@@ -1044,6 +1044,12 @@ public class MainActivity
         }
     }
 
+    // Called when help icon is clicked.
+
+    public void onHelpClick(View view) {
+        if (LOG) Log.i(TAG, "onHelpClick");
+    }
+
     // Called when a board circle is clicked.
 
     public void toggleGuess(View cellView) {
