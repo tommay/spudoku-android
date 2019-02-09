@@ -258,7 +258,9 @@ public class MainActivity
                             MotionEvent e1, MotionEvent e2,
                             float velocityX, float velocityY)
                         {
-                            unPlace(cellView);
+                            if (_puzzle != null) {
+                                unPlace(cellView);
+                            }
                             return true;
                         }
                     };
