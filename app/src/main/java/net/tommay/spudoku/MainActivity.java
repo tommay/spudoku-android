@@ -732,10 +732,10 @@ public class MainActivity
         Button button = (Button) findViewById(R.id.button_new);
         button.setText("New");
         button.setEnabled(true);
-        button.setOnClickListener((View v) -> newWasClicked());
+        button.setOnClickListener((View v) -> onClickNew());
     }
 
-    private void newWasClicked() {
+    private void onClickNew() {
         if (_placedCount == 0) {
             // Nothing is placed, no partially solved puzzle to
             // abandon, just go ahead and make a new one.
@@ -901,8 +901,8 @@ public class MainActivity
 
     // The setup button was clicked.  Show the setup colors.
 
-    public void clickSetup(View view) {
-        if (LOG) Log.i(TAG, "clickSetup");
+    public void onClickSetup(View view) {
+        if (LOG) Log.i(TAG, "onClickSetup");
 
         if (_showing != Showing.SETUP) {
             showSetup();
@@ -915,8 +915,8 @@ public class MainActivity
     // The solved button was clicked.  Toggle between the user state
     // and the solved state.
 
-    public void clickSolved(View view) {
-        if (LOG) Log.i(TAG, "clickSolved");
+    public void onClickSolved(View view) {
+        if (LOG) Log.i(TAG, "onClickSolved");
 
         if (_showing != Showing.SOLVED) {
             showSolved();
@@ -954,8 +954,8 @@ public class MainActivity
         }
     }
 
-    public void clickHint(View view) {
-        if (LOG) Log.i(TAG, "clickHint");
+    public void onClickHint(View view) {
+        if (LOG) Log.i(TAG, "onClickHint");
 
         if (isPuzzleSolved()) {
             showHint("The puzzle is solved!");
@@ -1047,16 +1047,16 @@ public class MainActivity
 
     // Called when help icon is clicked.
 
-    public void onHelpClick(View view) {
-        if (LOG) Log.i(TAG, "onHelpClick");
+    public void onClickHelp(View view) {
+        if (LOG) Log.i(TAG, "onClickHelp");
         startActivity(new Intent(this, HelpActivity.class));
     }
 
     // Called when a board circle is clicked.
 
-    public void toggleGuess(View cellView) {
+    public void onClickCell(View cellView) {
         String tag = (String)cellView.getTag();
-        if (LOG) Log.i(TAG, "clickBoardCircle " + tag);
+        if (LOG) Log.i(TAG, "onClickCell " + tag);
 
         if (!_trainingWheels) {
             Cell cell = getCellForCellView(cellView);

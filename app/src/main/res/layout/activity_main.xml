@@ -20,7 +20,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:src="@drawable/baseline_help_outline_black_48"
-          android:onClick="onHelpClick"
+          android:onClick="onClickHelp"
           android:paddingTop="10dp"
           android:paddingBottom="10dp"
           android:layout_marginRight="8dp"
@@ -50,19 +50,19 @@
         android:text="Puzzle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="clickSetup"/>
+        android:onClick="onClickSetup"/>
     <Button
         android:id="@+id/button_solved"
         android:text="Solution"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="clickSolved"/>
+        android:onClick="onClickSolved"/>
     <Button
         android:id="@+id/button_hint"
         android:text="Hint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="clickHint"/>
+        android:onClick="onClickHint"/>
   </LinearLayout>
 
   <!-- The NEW button on the left. the spinner labels and spinners on
