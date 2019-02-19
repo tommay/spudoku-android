@@ -163,8 +163,9 @@
       android:layout_marginLeft="6dp"/>
 
   <net.tommay.spudoku.PersistentSwitch
-      android:id="@+id/switch_guess"
-      android:text="Allow guessing"
+      android:id="@+id/switch_training_wheels"
+      android:text="Training wheels on"
+      android:textSize="15sp"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_gravity="right"/>

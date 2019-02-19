@@ -143,7 +143,7 @@ public class MainActivity
 
     private Puzzle _puzzle = null;
     private Showing _showing;
-    private boolean _allowGuesses;
+    private boolean _trainingWheels;
 
     // Count of the colors placed.  Thsi is used to decide whether to display
     // a confirmation dialog when New is clicked.
@@ -285,21 +285,21 @@ public class MainActivity
         _showing = Showing.PLACED;
 
         {
-            // Set up to pop up a verify dialog and/or disable
-            // switch_guess when its state changes to true.  This has
-            // to use OnCheckedChangeListener and not OnClicklistener
-            // because the user can slide the switch instead of
-            // clicking to change the state.
+            // Set up to pop up a confirm dialog and/or disable
+            // switch_training_wheels when its state changes to false.
+            // This has to use OnCheckedChangeListener and not
+            // OnClicklistener because the user can slide the switch
+            // instead of clicking to change the state.
 
-            Switch sw = (Switch) findViewById(R.id.switch_guess);
+            Switch sw = (Switch) findViewById(R.id.switch_training_wheels);
             sw.setOnCheckedChangeListener(
                 (CompoundButton button, boolean isChecked) -> {
-                    switchGuessChanged((Switch) button, isChecked);
+                    switchTrainingWheelsChanged((Switch) button, isChecked);
                 });
 
             // And get the current state of the switch.
 
-            _allowGuesses = sw.isChecked();
+            _trainingWheels = sw.isChecked();
         }
 
         // Restore stuff from savedInstanceState.
@@ -320,7 +320,7 @@ public class MainActivity
 
         enableButtons(true);
         enableNewButton();
-        setSwitchGuessEnabled();
+        setSwitchTrainingWheelsEnabled();
         hideProgressBar();
     }
 
@@ -376,7 +376,7 @@ public class MainActivity
                     setPuzzle(_puzzle);
                     showPlaced();
                     showColors();
-                    setSwitchGuessEnabled();
+                    setSwitchTrainingWheelsEnabled();
                 })
             .show();
     }
@@ -671,7 +671,7 @@ public class MainActivity
         clearHint();
 
         _placedCount++;
-        setSwitchGuessEnabled();
+        setSwitchTrainingWheelsEnabled();
 
         if (areAllCellsPlaced()) {
             if (isPuzzleSolved()) {
@@ -707,7 +707,7 @@ public class MainActivity
             clearHint();
 
             _placedCount--;
-            setSwitchGuessEnabled();
+            setSwitchTrainingWheelsEnabled();
         }
     }
 
@@ -855,7 +855,7 @@ public class MainActivity
                 showColors();
                 enableButtons(true);
                 enableNewButtonAfterDelay();
-                setSwitchGuessEnabled();
+                setSwitchTrainingWheelsEnabled();
                 hideProgressBar();
             },
 
@@ -1058,7 +1058,7 @@ public class MainActivity
         String tag = (String)cellView.getTag();
         if (LOG) Log.i(TAG, "clickBoardCircle " + tag);
 
-        if (_allowGuesses) {
+        if (!_trainingWheels) {
             Cell cell = getCellForCellView(cellView);
             if (!cell.isSetup() && cell.isPlaced()) {
                 cell.toggleGuess();
@@ -1105,53 +1105,53 @@ public class MainActivity
             .show();
     }
 
-    // Initially guessing is not allowed.  Guessing can be enabled at
-    // any time.  But once it is enabled it can only be changed if
+    // Initially training wheels are enabled.  They can be removed at
+    // any time.  But once they are removed they can only be enabled if
     // nothing has been placed.
 
-    // _ignoreSwitchGuessChanged is a hack to prevent
-    // switchGuessChanged from being called again when
-    // sw.setChecked(false) is called when the user declines to
-    // actually enable guessing.  A similar hack is used in the
+    // _ignoreSwitchTrainingWheelsChanged is a hack to prevent
+    // switchTrainingWheelsChanged from being called again when
+    // sw.setChecked(true) is called when the user declines to
+    // actually disable them.  A similar hack is used in the
     // CompoundButton/Switch code itself to prevent direct recursion
     // when an OnCheckedChangeListener called setChecked() but we need
     // one here because we call setChecked() in a dialog callback and
     // not with direct recursion.
 
-    private boolean _ignoreSwitchGuessChanged = false;
+    private boolean _ignoreSwitchTrainingWheelsChanged = false;
 
-    private void switchGuessChanged(Switch sw, boolean isChecked) {
-        if (_ignoreSwitchGuessChanged) {
+    private void switchTrainingWheelsChanged(Switch sw, boolean isChecked) {
+        if (_ignoreSwitchTrainingWheelsChanged) {
             return;
         }
 
         if (_placedCount == 0) {
             // Puzzle is reset, just use whatever the switch is now set to.
-            _allowGuesses = isChecked;
+            _trainingWheels = isChecked;
             return;
         }
         
         // If this is called when _placedCount != 0 then it must be to
-        // enable guessing otherwise this button would be disabled.
-        // Verify with the user.
-
-        // Verify with the user.
+        // disable training wheels otherwise this switch would be
+        // disabled.  Confirm with the user.
 
         Runnable noRunnable = () -> {
-            // The user has exited the dialog without confirming that
-            // guessing should be allowed.  Turn the switch back off.
-            _ignoreSwitchGuessChanged = true;
-            sw.setChecked(false);
-            _ignoreSwitchGuessChanged = false;
+            // The user has declined to actually remove training
+            // wheels or has exited the dialog without confirming that
+            // training wheels should be removed.  Turn the switch
+            // back on.
+            _ignoreSwitchTrainingWheelsChanged = true;
+            sw.setChecked(true);
+            _ignoreSwitchTrainingWheelsChanged = false;
         };
 
         new AlertDialog.Builder(this)
-            .setMessage("Allow guessing?  Guessing will not be able" +
-                " to be turned off again unless the puzzle is reset.")
+            .setMessage("Remove training wheels?  They can't be put back " +
+                "on unless the puzzle is reset.")
             .setPositiveButton("Yes",
                 (DialogInterface dialog, int id) -> {
-                    _allowGuesses = true;
-                    setSwitchGuessEnabled();
+                    _trainingWheels = false;
+                    setSwitchTrainingWheelsEnabled();
             })
             .setNegativeButton("No",
                 (DialogInterface dialog, int id) -> noRunnable.run())
@@ -1159,9 +1159,9 @@ public class MainActivity
             .show();
     }
 
-    private void setSwitchGuessEnabled() {
-        Switch sw = (Switch) findViewById(R.id.switch_guess);
-        sw.setEnabled(!_allowGuesses || _placedCount == 0);
+    private void setSwitchTrainingWheelsEnabled() {
+        Switch sw = (Switch) findViewById(R.id.switch_training_wheels);
+        sw.setEnabled(_trainingWheels || _placedCount == 0);
     }
 
     private static class CircleDragShadowBuilder
@@ -1216,7 +1216,7 @@ public class MainActivity
                   int digit = (Integer)event.getLocalState();
                   Cell cell = _puzzle.getCell(cellNumber);
                   return !cell.isPlaced() &&
-                      (_allowGuesses || digit == cell.getSolvedDigit());
+                      (!_trainingWheels || digit == cell.getSolvedDigit());
               }
               case DragEvent.ACTION_DRAG_ENTERED:
               case DragEvent.ACTION_DRAG_EXITED:
