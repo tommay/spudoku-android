@@ -7,6 +7,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <!-- For some reason the background can be and is set directly
+         here, but the titleTextColor only works if it's set via the
+         style.  -->
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"

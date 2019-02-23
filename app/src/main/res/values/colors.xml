@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <!-- These colors are used indirectly via style.xml.  It's not at all clear
+       how they actually get used becaus for example the Toolbar has
+       a titleTextColor attribute but setting it on the <toolbar> element
+       does nothing, it only works when it's set in the style.  -->
+
+  <!-- Toolbar background color.  -->
   <color name="colorPrimary">#3F51B5</color>
+
+  <!-- Toolbar title text color.  -->
+  <color name="titleTextColor">#00ffff</color>
+
+  <!-- Not sure what if anything uses this.  -->
   <color name="colorPrimaryDark">#303F9F</color>
+
+  <!-- The Switch thumb and AlertDialog button text colors.  -->
   <color name="colorAccent">#FF4081</color>
+
+  <!-- These colors are fetched and used by code.  -->
 
   <!-- Empty puzzle cells (not placed) use this color.  -->
   <color name="empty_cell">#FFFFFF</color>
@@ -13,4 +28,8 @@
 
   <!-- Color used to highlight the hint area on the board.  -->
   <color name="hint_highlight">#909090</color>
+
+  <!-- Color used to set the Toolbar totle color in code since using
+       xml atttrinutes seem to do nothing.  -->
+  <color name="title_text_color">#ffff00</color>
 </resources>
