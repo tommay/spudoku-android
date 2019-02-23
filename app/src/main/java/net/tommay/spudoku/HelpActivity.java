@@ -28,7 +28,7 @@ public class HelpActivity
 
         TextView tv = (TextView) findViewById(R.id.help_view);
 
-        tv.setMovementMethod(new ScrollingMovementMethod());
+        tv.setMovementMethod(ScrollingMovementMethod.getInstance());
 
         tv.setText(fromHtml(getString(R.string.help)));
     }
