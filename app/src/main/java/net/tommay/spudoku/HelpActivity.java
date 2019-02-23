@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.Spanned;
-import android.text.method.ScrollingMovementMethod;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -28,7 +28,11 @@ public class HelpActivity
 
         TextView tv = (TextView) findViewById(R.id.help_view);
 
-        tv.setMovementMethod(ScrollingMovementMethod.getInstance());
+        // LinkMovementMethod is a subclass of ScrollingMovementMethod
+        // that makes the TextView scrollable *and* makes links work.
+        // Weird.
+
+        tv.setMovementMethod(LinkMovementMethod.getInstance());
 
         tv.setText(fromHtml(getString(R.string.help)));
     }
