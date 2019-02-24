@@ -26,6 +26,7 @@ public class HelpActivity
 
         setContentView(R.layout.activity_help);
 
+/*
         TextView tv = (TextView) findViewById(R.id.help_view);
 
         // LinkMovementMethod is a subclass of ScrollingMovementMethod
@@ -35,6 +36,7 @@ public class HelpActivity
         tv.setMovementMethod(LinkMovementMethod.getInstance());
 
         tv.setText(fromHtml(getString(R.string.help)));
+*/
     }
 
     public void onClickOk(View cellView) {
