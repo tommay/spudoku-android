@@ -102,7 +102,6 @@
       - text.scan(/#[^#]*/).each do |section|
         - heading, paragraphs = section.split(/\n+/, 2)
         - heading = heading.sub(/^# */, "")
-        - paragraphs = paragraphs.strip
         %TextView(                                  |
             android:layout_width="match_parent"     |
             android:layout_height="wrap_content"    |
@@ -113,6 +112,7 @@
             android:textSize="20sp"                 |
             android:textStyle="bold"                |
             android:text=heading)                   |
+        - paragraphs = paragraphs.strip
         - paragraphs.split(/\n\n+/).each do |paragraph|
           - paragraph = paragraph.gsub(/\s+/, " ")
           - paragraph = paragraph.gsub(/\. /, ".  ")
