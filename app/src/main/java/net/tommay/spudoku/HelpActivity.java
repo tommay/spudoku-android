@@ -35,21 +35,10 @@ public class HelpActivity
                 TextView tv = (TextView)child;
                 String text = tv.getText().toString();
                 tv.setText(fromHtml(text));
+                tv.setMovementMethod(LinkMovementMethod.getInstance());
             }
         }
 
-
-/*
-        TextView tv = (TextView) findViewById(R.id.help_view);
-
-        // LinkMovementMethod is a subclass of ScrollingMovementMethod
-        // that makes the TextView scrollable *and* makes links work.
-        // Weird.
-
-        tv.setMovementMethod(LinkMovementMethod.getInstance());
-
-        tv.setText(fromHtml(getString(R.string.help)));
-*/
     }
 
     public void onClickOk(View cellView) {
