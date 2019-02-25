@@ -6,16 +6,16 @@
        does nothing, it only works when it's set in the style.  -->
 
   <!-- Toolbar background color.  -->
-  <color name="colorPrimary">#3F51B5</color>
+  <color name="colorPrimary">#4757e0</color>
 
   <!-- Toolbar title text color.  -->
-  <color name="titleTextColor">#00ffff</color>
+  <color name="titleTextColor">#ffffff</color>
 
-  <!-- Not sure what if anything uses this.  -->
-  <color name="colorPrimaryDark">#303F9F</color>
+  <!-- Notification/status bar background color.  -->
+  <color name="colorPrimaryDark">#333d9b</color>
 
-  <!-- The Switch thumb and AlertDialog button text colors.  -->
-  <color name="colorAccent">#FF4081</color>
+  <!-- Switch thumb and AlertDialog button text colors.  -->
+  <color name="colorAccent">#4757e0</color>
 
   <!-- These colors are fetched and used by code.  -->
 
