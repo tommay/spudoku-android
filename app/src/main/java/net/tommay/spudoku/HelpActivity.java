@@ -8,6 +8,7 @@ import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 // Auto-generated from aoo/build.gradle settings.
@@ -25,6 +26,18 @@ public class HelpActivity
         if (LOG) Log.i(TAG, "HelpActivity#onCreate");
 
         setContentView(R.layout.activity_help);
+
+        ViewGroup vg = findViewById(R.id.help_text);
+
+        for (int i = 0, n = vg.getChildCount(); i < n; i++) {
+            View child = vg.getChildAt(i);
+            if (child instanceof TextView) {
+                TextView tv = (TextView)child;
+                String text = tv.getText().toString();
+                tv.setText(fromHtml(text));
+            }
+        }
+
 
 /*
         TextView tv = (TextView) findViewById(R.id.help_view);
