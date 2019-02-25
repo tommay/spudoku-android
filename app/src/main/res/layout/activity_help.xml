@@ -29,5 +29,5 @@
 <Space android:layout_height='36sp' android:layout_width='match_parent'></Space>
 </LinearLayout>
 </ScrollView>
-<Button android:layout_height='wrap_content' android:layout_width='wrap_content' android:onClick='onClickOk' android:text='Ok let&#39;s go!' android:textColor='#ff0000' app:layout_constraintBottom_toBottomOf='parent' app:layout_constraintRight_toRightOf='parent'></Button>
+<Button android:layout_height='wrap_content' android:layout_width='wrap_content' android:onClick='onClickOk' android:text='Ok let&#39;s go!' android:textColor='@color/colorAccent' app:layout_constraintBottom_toBottomOf='parent' app:layout_constraintRight_toRightOf='parent'></Button>
 </android.support.constraint.ConstraintLayout>
