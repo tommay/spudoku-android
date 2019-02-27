@@ -1,5 +1,23 @@
 package net.tommay.spudoku;
 
+/* Ideally this could be moved to net.tommay.util.PersistentSpinner.
+   But custom attriutes with declare-styleable always end up
+   associated with the app's package (from the manifes?) and this
+   class shouldn't know or care about the app's packagge.  I.e.,
+   attributes end up in net.tommay.spudoku.R, and trying to use them
+   with
+     <net.tommay.util.PersistentSpinner
+       xmlns:util="http://schemas.android.com/apk/res/net.tommay.util"
+       util:name="whatever"/>
+   or
+     <net.tommay.util.PersistentSpinner
+       xmlns:util="http://schemas.android.com/apk/res/res-auto"
+       util:name="whatever"/>
+   fails at compile time because the attributes aren't associated the
+   class in net.tommay.util.
+
+   So this seemingly has to live in net.tommay.spudoku.  */
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.AttributeSet;
