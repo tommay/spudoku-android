@@ -16,10 +16,19 @@
 -->
 
 <resources>
+  <!-- In order to have attributes with the same name for different elements,
+       firt have to declare and type them.  -->
+
+  <attr name="name" format="string"/>
+
   <declare-styleable name="PersistentSpinner">
-      <!-- Name is required.  If it isn't given then the PersistentSpinner
-           constructor will throw a RuntimeException.  There is no way to make
-           it required in the xml.  -->
-      <attr name="name" format="string"/>
+    <!-- Name is required.  If it isn't given then the PersistentSpinner
+         constructor will throw a RuntimeException.  There is no way to make
+         it required in the xml.  -->
+    <attr name="name"/>
+  </declare-styleable>
+
+  <declare-styleable name="PersistentSwitch">
+    <attr name="name"/>
   </declare-styleable>
 </resources>
