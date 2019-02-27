@@ -77,6 +77,7 @@ public class PersistentSpinner
         // that was saved to preferences.
 
         String selected = _sharedPreferences.getString(_name, null);
+        Log.i(TAG, "Selected is " + selected + " for " + _name);
         for (int i = 0, n = getCount(); i < n; i++) {
             String item = (String) getItemAtPosition(i);
             Log.i(TAG, "Item " + i + ": " + item);
