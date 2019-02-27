@@ -68,8 +68,8 @@ public class PersistentSwitch
                     .putBoolean(_name, isChecked)
                     .apply();
 
-                Log.i(TAG, "saved " + isChecked + " to preferences for " +
-                    _name);
+                if (LOG) Log.i(TAG,
+                    "saved " + isChecked + " to preferences for " + _name);
             });
     }
 

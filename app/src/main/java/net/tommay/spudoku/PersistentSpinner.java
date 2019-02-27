@@ -85,8 +85,8 @@ public class PersistentSpinner
                         .edit()
                         .putString(_name, selected)
                         .apply();
-                    Log.i(TAG, "saved " + selected + " to preferences for " +
-                        _name);
+                    if (LOG) Log.i(TAG,
+                        "saved " + selected + " to preferences for " + _name);
                 }
 
                 @Override
@@ -105,12 +105,12 @@ public class PersistentSpinner
         // that was saved to preferences.
 
         String selected = _sharedPreferences.getString(_name, null);
-        Log.i(TAG, "Selected is " + selected + " for " + _name);
+        if (LOG) Log.i(TAG, "Selected is " + selected + " for " + _name);
         for (int i = 0, n = getCount(); i < n; i++) {
             String item = (String) getItemAtPosition(i);
-            Log.i(TAG, "Item " + i + ": " + item);
+            if (LOG) Log.i(TAG, "Item " + i + ": " + item);
             if (item.equals(selected)) {
-                Log.i(TAG, "found selected at position " + i);
+                if (LOG) Log.i(TAG, "found selected at position " + i);
                 setSelection(i);
             }
         }
