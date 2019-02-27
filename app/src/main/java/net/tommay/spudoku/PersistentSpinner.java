@@ -2,6 +2,7 @@ package net.tommay.spudoku;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -9,8 +10,6 @@ import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
-
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * A Spinner that uses SharedPreferences to persist the selection
@@ -22,10 +21,8 @@ public class PersistentSpinner
     private static final boolean LOG = net.tommay.spudoku.Log.LOG;
     private static final String TAG = net.tommay.spudoku.Log.TAG;
 
-    private static final AtomicInteger _count = new AtomicInteger(0);
-
     private final SharedPreferences _sharedPreferences;
-    private final String _name = Integer.toString(_count.incrementAndGet());
+    private final String _name;
 
     // We use our own OnItemSelectedListener to persist the selected
     // item when it is selected, so keep a copy of the real listener
@@ -35,6 +32,24 @@ public class PersistentSpinner
 
     public PersistentSpinner (Context context, AttributeSet attrs) {
         super(context, attrs);
+
+        TypedArray a = context.getTheme().obtainStyledAttributes(
+            attrs,
+            R.styleable.PersistentSpinner,
+            0, 0);
+
+        try {
+            _name = a.getString(R.styleable.PersistentSpinner_name);
+            // Sadly there is no way to enforce required xml
+            // attributes so they can be caught at build time.
+            if (_name == null) {
+                throw new RuntimeException(
+                    "PersistentSpinner requires an xml name attribute");
+            }
+        }
+        finally {
+            a.recycle();
+        }
 
         _sharedPreferences = context.getSharedPreferences(
             this.getClass().getName(), Context.MODE_PRIVATE);

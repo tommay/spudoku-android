@@ -3,6 +3,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tommay="http://schemas.android.com/apk/res/net.tommay.spudoku"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -108,7 +109,8 @@
           android:layout_height="wrap_content"
           android:textSize="40sp"
           android:layout_toRightOf="@id/label_layout"
-          android:layout_alignBaseline="@id/label_layout"/>
+          android:layout_alignBaseline="@id/label_layout"
+          tommay:name="spinner_layout"/>
       <TextView
           android:id="@id/label_difficulty"
           android:layout_height="wrap_content"
@@ -123,7 +125,8 @@
           android:layout_height="wrap_content"
           android:textSize="40sp"
           android:layout_toRightOf="@id/label_difficulty"
-          android:layout_alignBaseline="@id/label_difficulty"/>
+          android:layout_alignBaseline="@id/label_difficulty"
+          tommay:name="spinner_difficulty"/>
     </RelativeLayout>
   </LinearLayout>
 
