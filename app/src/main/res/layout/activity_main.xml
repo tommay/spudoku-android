@@ -15,7 +15,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="25sp"
         android:background="?attr/colorPrimary"
         android:elevation="4dp">
       <ImageView
@@ -24,8 +24,8 @@
           android:layout_height="wrap_content"
           android:src="@drawable/baseline_help_outline_white_48"
           android:onClick="onClickHelp"
-          android:paddingTop="10dp"
-          android:paddingBottom="10dp"
+          android:paddingTop="3dp"
+          android:paddingBottom="3dp"
           android:layout_marginRight="8dp"
           android:layout_gravity="right"/>
     </android.support.v7.widget.Toolbar>
