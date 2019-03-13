@@ -51,20 +51,24 @@
     <Button
         android:id="@+id/button_setup"
         android:text="Puzzle"
+        android:textSize="18dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:onClick="onClickSetup"/>
     <Button
         android:id="@+id/button_solved"
         android:text="Solution"
+        android:textSize="18dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:onClick="onClickSolved"/>
     <Button
         android:id="@+id/button_hint"
         android:text="Hint"
+        android:textSize="18dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:gravity="top"
         android:onClick="onClickHint"/>
   </LinearLayout>
 
