@@ -36,8 +36,8 @@ android {
         // See https://developer.android.com/studio/publish/versioning.
 
         applicationId "net.tommay.spudoku"
-        versionCode 2
-        versionName "1.0.1"
+        versionCode 3
+        versionName "1.0.3"
 
 	// These are automagically put into AndroidManifest.xml.
 
