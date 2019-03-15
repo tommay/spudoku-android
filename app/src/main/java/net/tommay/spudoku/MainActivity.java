@@ -23,7 +23,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
@@ -160,13 +159,6 @@ public class MainActivity
         if (LOG) Log.i(TAG, "onCreate");
 
         setContentView(R.layout.activity_main);
-
-        // Set the toolbar as the app bar for this Activity.
-
-        {
-            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
-        }
 
         // Get Context-dependent colors resources.
 
