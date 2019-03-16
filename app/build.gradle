@@ -19,6 +19,7 @@ keystoreProperties.load(
 android {
     // This has to match appcompat-v7:28 below.
     compileSdkVersion 28
+
     // This is no longer necessary.  Each version of the Android Gradle
     // Plugin now has a default version of the build tools.
     // buildToolsVersion "25.0.0"
@@ -41,7 +42,21 @@ android {
 
 	// These are automagically put into AndroidManifest.xml.
 
-        minSdkVersion 15
+	// minSdkVersion was 15 (Ice Cream Sandwich Android 4.0.3 - 4.0.4)
+        // but I had to increase it to 24 (Nougat Android 7.0 8/2016) necause
+        // that's when java.util.Arrays.Stream was added.  It's not really
+        // necessary, just makes a few small functions nicer.
+
+        minSdkVersion 24
+
+        // targetSdkVersion is 26 because that's what's on my phone,
+        // Android 8.0.
+
+        // https://developer.android.com/distribute/best-practices/develop/target-sdk
+        // Starting August 1, 2019, Google Play requires that new apps
+        // target at least Android 9.0 (API level 28), and that app
+        // updates target Android 9.0 from November 1, 2019.
+
         targetSdkVersion 26
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
