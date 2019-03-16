@@ -327,8 +327,12 @@ public class MainActivity
     private void setPuzzle(Puzzle puzzle) {
         _puzzle = puzzle;
 
-        _placedCount = (int) Arrays.stream(_puzzle.getCells())
-            .filter(c -> !c.isSetup() && c.isPlaced()).count();
+        _placedCount = 0;
+        for (Cell cell : _puzzle.getCells()) {
+            if (!cell.isSetup() && cell.isPlaced()) {
+                _placedCount++;
+            }
+        }
 
         // Set _colorCounts to the number of colors remaining, i.e.,
         // not placed in the puzzle.
@@ -1073,12 +1077,21 @@ public class MainActivity
     }
 
     private boolean areAllCellsPlaced() {
-        return Arrays.stream(_puzzle.getCells()).allMatch(Cell::isPlaced);
+        for (Cell cell : _puzzle.getCells()) {
+            if (!cell.isPlaced()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private boolean isPuzzleSolved() {
-        return Arrays.stream(_puzzle.getCells()).allMatch(cell ->
-            cell.getSolvedDigit().equals(cell.getPlacedDigit()));
+        for (Cell cell : _puzzle.getCells()) {
+            if (!cell.getSolvedDigit().equals(cell.getPlacedDigit())) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private void showPuzzleIsSolvedMessage() {
@@ -1264,20 +1277,21 @@ public class MainActivity
      
         @Override
         public void writeToParcel(Parcel out, int flags) {
-            CellParcelable[] cellParcelables =
-                Arrays.stream(_puzzle.getCells())
-                .map(CellParcelable::new)
-                .toArray(CellParcelable[]::new);
+            Cell[] cells = _puzzle.getCells();
+            CellParcelable[] cellParcelables = new CellParcelable[cells.length];
+            for (int i = 0; i < cells.length; i++) {
+                cellParcelables[i] = new CellParcelable(cells[i]);
+            }
             out.writeTypedArray(cellParcelables, 0);
         }
 
         private static Puzzle readFromParcel(Parcel in) {
             CellParcelable[] cellParcelables =
                 in.createTypedArray(CellParcelable.CREATOR);
-            Cell[] cells =
-                Arrays.stream(cellParcelables)
-                .map(CellParcelable::getCell)
-                .toArray(Cell[]::new);
+            Cell[] cells = new Cell[cellParcelables.length];
+            for (int i = 0; i < cellParcelables.length; i++) {
+                cells[i] = cellParcelables[i].getCell();
+            }
             return new Puzzle(cells);
         }
     }
