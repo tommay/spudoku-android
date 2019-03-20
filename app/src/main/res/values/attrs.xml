@@ -4,7 +4,7 @@
   This file is somehow semi-automagically found and used to provide
   custom attributes to PersistentSpinner by declaring a namespace in
   activity_main.xml:
-    xmlns:tommay="http://schemas.android.com/apk/res/net.tommay.spudoku"
+    xmlns:tommay="http://schemas.android.com/apk/res-auto"
   then used:
     <net.tommay.spudoku.PersistentSpinner
         ...
