@@ -1,6 +1,6 @@
 // Useful build commands:
 //   gradle installDebug
-//   gradle assenbleDebug (build only, no install)
+//   gradle assembleDebug (build only, no install)
 //   gradle -Pconsistent installDebug
 //   gradle uninstallDebug
 //   gradle installRelease
@@ -17,7 +17,9 @@ keystoreProperties.load(
   new FileInputStream(rootProject.file("keystore.properties")))
 
 android {
-    // This has to match appcompat-v7:28 below.
+    // This has to match appcompat-v7:28 below and should be a recent
+    // version.  See also minSdkVersion and targetSdkVersion which are
+    // set for each build flavor.
     compileSdkVersion 28
 
     // This is no longer necessary.  Each version of the Android Gradle
@@ -25,18 +27,37 @@ android {
     // buildToolsVersion "25.0.0"
 
     // If buildConfigField CREATE_LOG is non-null then puzzle creation times
-    // will be logged to /data/data/net.tommay.spudoku/files/<CREATE_LOG>,
+    // will be logged to /data/data/$applicationId/files/<CREATE_LOG>,
     // and PuzzleSupplier.java will use the same random number seed so times
-    // will be consistent.
+    // will be consistent.  Enable with gradle -Pconsistent ....
+    // adb shell / run-as $applicationId will cd to the correct forectory.
 
     defaultConfig {
+        // applicationId is the globally unique identifier for the app on
+        // the device and Google Play.  The applicationId and the signing
+        // never change.
+        // Except note that the unique identifier is actually the package
+        // name in the APK's binary AndroidManifest.xml file.  It is set
+        // from applicationId after the original value has neen used for
+        // the build process as the name for the generated R.java file
+        // and to resolve nsmes like ".MainActivity" in AmdroidManifest.xml.
+        // See https://developer.android.com/studio/build/application-id.html.
+
+        // Originally this was "net.tommay.spudoku" but when I published
+        // on Google Play I opted in to Google App Signing not realizing
+        // that would lock me into releasing through Google Play since I
+        // didn't have the app signing key to release anywhere else.  So
+        // I had to create a new app without using Google App Signing
+        // which required using a new applicationId.
+
+        applicationId "net.tommay.spudoku.publish"
+
         // These are automagically put into fields in the generated
 	// BuildConfig.java and in AndroidManifest.xml.  versionCode is
         // a monotonically increasing integer for system use, versionName
         // is what users see.
         // See https://developer.android.com/studio/publish/versioning.
 
-        applicationId "net.tommay.spudoku"
         versionCode 5
         versionName "1.0.5"
 
@@ -70,7 +91,7 @@ android {
     }
 
     buildTypes {
-        // These things become gradle tasks "assembleDev", etc.
+        // These things become gradle tasks "assembleDebug", etc.
         // The minify stuff can't go in defaultConfig because the
         // minifyEnabled method isn't available there.
         debug {
