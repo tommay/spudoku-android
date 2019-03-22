@@ -1054,6 +1054,10 @@ public class MainActivity
         String tag = (String)cellView.getTag();
         if (LOG) Log.i(TAG, "onClickCell " + tag);
 
+        if (!havePuzzle()) {
+            return;
+        }
+
         if (!_trainingWheels) {
             Cell cell = getCellForCellView(cellView);
             if (!cell.isSetup() && cell.isPlaced()) {
