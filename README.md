@@ -182,3 +182,10 @@ you're doing and have at it.
 Also, these instructions are for Arch Linux running in VirtualBox
 because that's *my* build system and I figure I'm the one most likely
 to be following these instructions to set up a new build some day.
+
+### No, really
+
+I really do have build instructions written up.  Otherwise I wouldn't be
+able to build this.
+
+I just have to get them copied and formatted into this README.
