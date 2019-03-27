@@ -58,8 +58,8 @@ android {
         // is what users see.
         // See https://developer.android.com/studio/publish/versioning.
 
-        versionCode 7
-        versionName "1.0.7"
+        versionCode 8
+        versionName "1.0.8"
 
 	// These are automagically put into AndroidManifest.xml.
 
