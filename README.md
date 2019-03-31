@@ -32,30 +32,37 @@ My favorite is Kaleidoscope.
 I was just getting to the good part.  If you get stuck on a puzzle and
 don't know what to do, Spudoku can give you a hint.
 
+## That's amazing!
+
+I know right?
+
 # Some history
 
 ### The old days.
 
 The code was originally written in Haskell which is an amazingly
-expressive and compact language I should have learned a long time ago,
-especially since I've been a user of functional-style programming and
-immutable data for decades.  My Haskell code had a text file
-interface, meaning it could create and solve puzzles that were
-rendered as text files.  Nothing interactive.  As a web service coder,
-that was in my comfort zone.
+expressive and compact language.  I should have learned Haskell a long
+time ago, especially since I've been a proponent of functional-style
+programming and immutable data for decades.
+
+My Haskell code had a text file interface, meaning it could create and
+solve puzzles that were rendered as text files.  Nothing interactive.
+As a web service coder, that was in my comfort zone.
 
 ## But then what?
 
-That was cool, but wouldnt it be cooler if it ran on my phone and used
-real colors instead of digits in text files and would let you solve
-puzzles interactively?  Of course it would.
+That was cool, but wouldn't it be cooler if it ran on my phone and
+used real colors instead of digits in text files and would let you
+solve puzzles interactively?  Of course it would.
 
 ## But what about...
 
 Are you wondering what about Android not supporting Haskell?  You're
 right, it doesn't.  That's why my original thought was to redo the
-logic in Java, which is pretty much Android's native language<sup>*</sup>,
-and a language I'd been using a lot since the mid-90s.
+logic in Java, which is pretty much Android's native
+language<sup>*</sup>, and a language I'd been using a lot since the
+mid-90s.  Although it's been getting a bit long in the tooth for most
+of that time.
 
 <sup>*</sup> Now Google is pushing Kotlin but I started this project in
 2016.
@@ -80,12 +87,12 @@ JVM.
 ## So you used Frege?
 
 I did.  I made some minor tweaks to my Haskell code so the Frege
-compiler wouuld be happy with it, and I wrote some code to glue it
-into the UI code which was written in Java which is after all
-Android's native language, with lots of documentation and things I
-could crib off of stackoverflow.  And I did all the gradle voodoo to
-get the project building and voila, it was running on Android using a
-colorku back end written in Frege.
+compiler would be happy with it, and I wrote some code to glue it into
+the UI code which was written in Java which is after all Android's
+native language (Kotlin notwithstanding), with lots of documentation
+and things I could crib off of stackoverflow.  Then I did all the
+gradle voodoo to get the project building and voila, it was running on
+Android using a colorku back end written in Frege.
 
 ## And you were done.
 
@@ -99,7 +106,7 @@ was taking too long without having to close the app.
 And either I'm not a good enough functional programmer, with the
 monads and all, or I'm too lazy to figure it out, but I just didn't
 want to go down the path of getting Frege to cancel puzzle creation at
-an arbitray user-initiated time and return a Nothing.  Although I
+an arbitrary user-initiated time and return a Nothing.  Although I
 probably would have learned something useful if I'd tried.
 
 ## So what did you do?
@@ -121,7 +128,7 @@ with.  Scala had a lot of things going for it:
 Because it had suitable counterparts for all the Haskell features I
 was using, it was straightforward to do a Scala rewrite.  And because
 it's not a pure functional language it was easy for me to cancel
-puzzle creation at an arbitray user-initiated time.
+puzzle creation at an arbitrary user-initiated time.
 
 These days I have more experience with monads and could likely do it
 all in Frege.
@@ -152,8 +159,8 @@ but it updated a bunch of stuff in my project that broke the build.
 If you're a happy Android Studio user that's fine, I still like you,
 it just doesn't work for *me*.
 
-## Is that why your build instructions say how to set up and build with
-   command line tools?
+## Is that why your build instructions say how to set up and build
+with command line tools?
 
 That's why.
 
@@ -163,13 +170,28 @@ Yes, it can.  That's how it gives hints.  It finds the simplest way to
 solve the next step of a puzzle then gives you a hint about how to do
 it.
 
+## How does it create puzzles?
+
 In fact, solving puzzles is actually how it creates them.  It starts
-with a completely blank puzzle and solves it, which gives a Stream of
-all possible sudoku solutions in a random order.  Then it takes the
-first one.  Next it removes colors from the solution in sets of
-positions that will leave the requested layout.  Each time it removes
-a set it solves the resulting puzzle and if there is still exactly one
-solution it iterates to try removing more colors.
+with a completely blank puzzle and solves it, which gives a nearly
+infinite Stream of all possible solved sudoku puzzles in a random
+order.  Then it takes the first one.  Since the Stream is lazy, only
+the first one ever actually gets computed.
+
+Next it removes colors from the solution in sets of positions that
+will leave the requested layout.  Each time it removes a set it solves
+the resulting puzzle and if there is still exactly one solution it
+iterates to try removing more colors.
+
+To make puzzles of a particular difficulty it tries to solve the
+resulting puzzle with a particular set of heuristics.  If the puzzle
+can be solved, it is done.  Otherwise it moves on to the next solved
+puzzle in the nearly infinite Stream and the whole thing starts over.
+
+Except what is really happening is that it takes the Stream of created
+puzzles, filters it for puzzles that can be solved with a particular
+set of heuristics, and returns the first one.  Lazy functional
+programming is cool.
 
 I'm not describing that very well.
 
@@ -185,7 +207,7 @@ to be following these instructions to set up a new build some day.
 
 ### No, really
 
-I really do have build instructions written up.  Otherwise I wouldn't be
-able to build this.
+I really do have build instructions written up.  Otherwise I wouldn't
+be able to build this myself on a new system.
 
 I just have to get them copied and formatted into this README.
