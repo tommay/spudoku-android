@@ -2,8 +2,8 @@
 
 ## What is it?
 
-Spudoku is an Android app that creates Colorku puzzles of various
-difficulties and lets you solve them.
+Spudoku is an Android app that creates [ColorKu](http://colorku.com) puzzles
+of various difficulties and lets you solve them.
 
 ## ColorKu?  What's that?
 
