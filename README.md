@@ -159,8 +159,7 @@ but it updated a bunch of stuff in my project that broke the build.
 If you're a happy Android Studio user that's fine, I still like you,
 it just doesn't work for *me*.
 
-## Is that why your build instructions say how to set up and build
-with command line tools?
+## Is that why your build instructions say how to set up and build with command line tools?
 
 That's why.
 
