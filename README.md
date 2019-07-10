@@ -88,7 +88,7 @@ JVM.
 
 I did.  I made some minor tweaks to my Haskell code so the Frege
 compiler would be happy with it, and I wrote some code to glue it into
-the UI code which was written in Java which is after all Android's
+the UI code which I wrote in Java which is after all Android's
 native language (Kotlin notwithstanding), with lots of documentation
 and things I could crib off of stackoverflow.  Then I did all the
 gradle voodoo to get the project building and voila, it was running on
