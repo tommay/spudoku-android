@@ -3,7 +3,7 @@
 ## What is it?
 
 Spudoku is an Android app that creates [ColorKu](http://colorku.com) puzzles
-of various difficulties and lets you solve them.
+of selectable difficulty and lets you solve them.
 
 ## ColorKu?  What's that?
 
@@ -16,8 +16,8 @@ nine colors.
 
 If you say so.  But Spudoku can make puzzles of various difficulties,
 anywhere from EasyPeasy which is even easier than Easy up to Wicked
-which is so hard that not even Spudoku knows how to solve them without
-guessing.  But maybe you're smarter than Spudoku.
+which is so hard that not even Spudoku itself knows how to solve them
+without guessing.  But maybe you're smarter than Spudoku.
 
 ## Is that all?
 
@@ -71,8 +71,9 @@ of that time.
 
 No.  I got bogged down trying to figure out all the correct
 incantations for typing things with generics to keep the compiler
-happy.  Trying to make the compiler happy made me unhappy.  My code's
-logic was getting buried in verbose (and useless) type declarations.
+happy.  Trying to make the compiler happy made *me* unhappy.  My
+code's logic was getting buried in verbose (and useless) type
+declarations.
 
 I forgot to mention that Haskell has type inference which makes things
 pretty breezy.  Using Java was like going back to the stone age of
@@ -101,7 +102,7 @@ see, it's possible to ask Spudoku to create puzzles with certain
 combinations of difficulty level and layout symmetry that may be
 impossible to create.  Which would take a very long time, like
 forever.  I needed a way for the user to cancel puzzle creation that
-was taking too long without having to close the app.
+was taking too long without having to close the app to do it.
 
 And either I'm not a good enough functional programmer, with the
 monads and all, or I'm too lazy to figure it out, but I just didn't
@@ -123,7 +124,7 @@ with.  Scala had a lot of things going for it:
     pattern matching and fold functions and even currying.
   * It has type inference!  I'd be totally off the hook for
     puzzling out type declarations because the compiler can figure
-	them out better than I can.
+    out types better than I can.
   
 Because it had suitable counterparts for all the Haskell features I
 was using, it was straightforward to do a Scala rewrite.  And because
@@ -165,9 +166,9 @@ That's why.
 
 ## Did you say the code can solve puzzles in addition to creating them?
 
-Yes, it can.  That's how it gives hints.  It finds the simplest way to
-solve the next step of a puzzle then gives you a hint about how to do
-it.
+Yes, it can.  That's how it gives hints.  It finds its easiest
+technique to solve the next step of a puzzle then gives you a hint
+about how to do it.
 
 ## How does it create puzzles?
 
@@ -180,7 +181,9 @@ the first one ever actually gets computed.
 Next it removes colors from the solution in sets of positions that
 will leave the requested layout.  Each time it removes a set it solves
 the resulting puzzle and if there is still exactly one solution it
-iterates to try removing more colors.
+iterates to try removing more colors.  It does this until it reaches a
+point where removing any more colors would create a puzzle with
+multiple solutions.
 
 To make puzzles of a particular difficulty it tries to solve the
 resulting puzzle with a particular set of heuristics.  If the puzzle
