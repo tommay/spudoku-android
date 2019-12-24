@@ -73,7 +73,7 @@ android {
         // target at least Android 9.0 (API level 28), and that app
         // updates target Android 9.0 from November 1, 2019.
 
-        targetSdkVersion 26
+        targetSdkVersion 28
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
