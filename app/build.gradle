@@ -3,7 +3,9 @@
 //   gradle assembleDebug (build only, no install)
 //   gradle -Pconsistent installDebug
 //   gradle uninstallDebug
-//   gradle installRelease
+//   gradle installRelease (and assembleRelease, and uninstallRelease)
+//   gradle uninstallAll
+//   gradle clean
 
 apply plugin: 'com.android.application'
 
